@@ -5,17 +5,18 @@ import java.util.Objects;
 public class matchs {
 
     private int id_match;
-    private String date_matche;
+    private String date_match;
     private String duree_match;
 
-    public matchs(String date_matche, String duree_match) {
-        this.date_matche = date_matche;
+
+    public matchs(String date_match, String duree_match) {
+        this.date_match = date_match;
         this.duree_match = duree_match;
     }
 
-    public matchs(int id_match, String date_matche, String duree_match) {
+    public matchs(int id_match, String date_match, String duree_match) {
         this.id_match = id_match;
-        this.date_matche = date_matche;
+        this.date_match = date_match;
         this.duree_match = duree_match;
     }
 
@@ -27,12 +28,12 @@ public class matchs {
         this.id_match = id_match;
     }
 
-    public String getDate_matche() {
-        return date_matche;
+    public String getDate_match() {
+        return date_match;
     }
 
-    public void setDate_matche(String date_matche) {
-        this.date_matche = date_matche;
+    public void setDate_match(String date_match) {
+        this.date_match = date_match;
     }
 
     public String getDuree_match() {
@@ -48,19 +49,19 @@ public class matchs {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         matchs matchs = (matchs) o;
-        return id_match == matchs.id_match && Objects.equals(date_matche, matchs.date_matche) && Objects.equals(duree_match, matchs.duree_match);
+        return id_match == matchs.id_match && Objects.equals(date_match, matchs.date_match) && Objects.equals(duree_match, matchs.duree_match);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_match, date_matche, duree_match);
+        return Objects.hash(id_match, date_match, duree_match);
     }
 
     @Override
     public String toString() {
         return "matchs{" +
                 "id_match=" + id_match +
-                ", date_matche='" + date_matche + '\'' +
+                ", date_matche='" + date_match + '\'' +
                 ", duree_match='" + duree_match + '\'' +
                 '}';
     }

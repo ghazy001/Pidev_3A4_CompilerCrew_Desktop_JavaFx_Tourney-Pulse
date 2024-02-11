@@ -15,7 +15,7 @@ public class DataSource {
     private DataSource() {
         try {
             this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/esprit", "root", "");
-            System.out.println("Connection etablie avec Succ");
+            System.out.println("Connection etablie avec Succee");
         } catch (SQLException var2) {
             System.out.println(var2.getMessage());
         }
