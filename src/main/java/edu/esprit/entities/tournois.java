@@ -10,6 +10,9 @@ public class tournois {
     private String date_debut;
     private String date_fin;
 
+    public tournois() {
+    }
+
     public tournois(String nom_tournois, String address_tournois, int nombre_match, String date_debut, String date_fin) {
         this.nom_tournois = nom_tournois;
         this.address_tournois = address_tournois;
