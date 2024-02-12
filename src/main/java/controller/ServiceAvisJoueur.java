@@ -16,25 +16,43 @@ public class ServiceAvisJoueur implements InterfaceServices<AvisJoueur> {
     Connection connection;
     @Override
     public void ajouter(AvisJoueur avisJoueur) {
-
-
         try {
             connection = MyDB.getInsatnce().getConnection();
-            String sql = "INSERT INTO AvisJoueur (commaintre, note, idJoueur, nom_joueur) VALUES (?, ?, (SELECT id_joueur FROM joueur WHERE nom = ?), ?)";
 
-            prepare = connection.prepareStatement(sql);
-            prepare.setString(1, avisJoueur.getCommentaire());
-            prepare.setFloat(2, avisJoueur.getNote());
-            prepare.setString(3, avisJoueur.getNom_joueur());
-            prepare.setString(4, avisJoueur.getNom_joueur());
 
-            prepare.executeUpdate();
+            String selectJoueurSql = "SELECT id_joueur, nom FROM joueur WHERE id_joueur = ?";
 
+            try (PreparedStatement selectJoueurStatement = connection.prepareStatement(selectJoueurSql)) {
+                selectJoueurStatement.setInt(1, avisJoueur.getIdJoueur());
+
+                try (ResultSet joueurResultSet = selectJoueurStatement.executeQuery()) {
+                    if (joueurResultSet.next()) {
+                        int idJoueur = joueurResultSet.getInt("id_joueur");
+                        String nomJoueur = joueurResultSet.getString("nom");
+
+
+                        String insertAvisSql = "INSERT INTO AvisJoueur (idJoueur, nom_joueur, note, commaintre) VALUES (?, ?, ?, ?)";
+
+                        try (PreparedStatement insertAvisStatement = connection.prepareStatement(insertAvisSql)) {
+                            insertAvisStatement.setInt(1, idJoueur);
+                            insertAvisStatement.setString(2, nomJoueur);
+                            insertAvisStatement.setFloat(3, avisJoueur.getNote());
+                            insertAvisStatement.setString(4, avisJoueur.getCommentaire());
+
+                            insertAvisStatement.executeUpdate();
+
+                            System.out.println("Avis ajouté avec succès.");
+                        }
+                    } else {
+                        System.out.println("Aucun joueur trouvé avec le nom " + avisJoueur.getNom_joueur());
+                    }
+                }
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
     }
+
 
     @Override
     public void modifier(int id, AvisJoueur avisJoueur) {

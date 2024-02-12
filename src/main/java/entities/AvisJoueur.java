@@ -24,6 +24,12 @@ public class AvisJoueur {
         this.nom_joueur = nom_joueur;
     }
 
+    public AvisJoueur(int idJoueur, String commentaire, float note) {
+        this.idJoueur = idJoueur;
+        this.commentaire = commentaire;
+        this.note = note;
+    }
+
     public int getIdAvis() {
         return idAvis;
     }

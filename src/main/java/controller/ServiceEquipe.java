@@ -22,7 +22,7 @@ public class ServiceEquipe implements InterfaceServices<equipe> {
         connection = MyDB.getInsatnce().getConnection();
 
 
-        String sql = "INSERT INTO `equipe` ( `nom_equipe`, `nom_joueur1`, `id_joueur`) VALUES (?, ?, (SELECT id_joueur FROM joueur WHERE nom = ?));";
+        String sql = "INSERT INTO `equipe` ( `nom_equipe`, `nom_joueur`, `id_joueur`) VALUES (?, ?, (SELECT id_joueur FROM joueur WHERE nom = ?));";
         try {
             prepare = connection.prepareStatement(sql);
 
@@ -104,7 +104,7 @@ public class ServiceEquipe implements InterfaceServices<equipe> {
                 // Retrieve and print equipe information
                 System.out.println("ID: " + resultSet.getInt("id_equipe"));
                 System.out.println("Nom Equipe: " + resultSet.getString("nom_equipe"));
-                System.out.println("Nom Joueur1: " + resultSet.getString("nom_joueur1"));
+                System.out.println("Nom Joueur1: " + resultSet.getString("nom_joueur"));
                 System.out.println("ID Joueur: " + resultSet.getInt("id_joueur"));
                 System.out.println("-------------------------");
             }
