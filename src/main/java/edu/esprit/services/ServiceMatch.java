@@ -42,10 +42,10 @@ public class ServiceMatch implements InterfaceService<matchs> {
 
                 prepare.setString(1, matchs.getDate_match());
                 prepare.setString(2, matchs.getDuree_match());
+                prepare.setInt(3, id);
 
                 prepare.executeUpdate();
 
-                prepare.setInt(1, id);
 
                 int rowsAffected = prepare.executeUpdate();
 

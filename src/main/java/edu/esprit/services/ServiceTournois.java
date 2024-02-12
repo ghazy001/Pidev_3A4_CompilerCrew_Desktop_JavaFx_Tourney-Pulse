@@ -38,7 +38,7 @@ public class ServiceTournois implements InterfaceService<tournois> {
     public void modifier(int id, tournois tournois) {
         connection = DataSource.getInsatnce().getConnection();
 
-        String sql = "UPDATE `tournois` SET `nom_tournois` = ?, `address_tournois` = ?, `nombre_match` = ?, `date_debut` = ?, `date_fin` = ?, WHERE `id_tournois` = ?";
+        String sql = "UPDATE `tournois` SET nom_tournois = ?, address_tournois = ?, nombre_match = ?, date_debut = ?, date_fin = ? WHERE id_tournois = ?";
 
         try {
              prepare = connection.prepareStatement(sql);
@@ -48,10 +48,10 @@ public class ServiceTournois implements InterfaceService<tournois> {
             prepare.setInt(3, tournois.getNombre_match());
             prepare.setString(4, tournois.getDate_debut());
             prepare.setString(5, tournois.getDate_fin());
+            prepare.setInt(6, id);
 
             prepare.executeUpdate();
 
-            prepare.setInt(1, id);
 
             int rowsAffected = prepare.executeUpdate();
 
