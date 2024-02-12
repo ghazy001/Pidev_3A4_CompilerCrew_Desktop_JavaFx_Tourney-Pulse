@@ -71,7 +71,7 @@ public class ServiceTournois implements InterfaceService<tournois> {
     public void supprimer(int id) {
         connection = DataSource.getInsatnce().getConnection();
 
-        String sql = "DELETE FROM `matchs` WHERE `id_tournois` = ? ";
+        String sql = "DELETE FROM `tournois` WHERE `id_tournois` = ? ";
 
         try {
             prepare = connection.prepareStatement(sql);
@@ -96,7 +96,7 @@ public class ServiceTournois implements InterfaceService<tournois> {
     public void afficher() {
         connection = DataSource.getInsatnce().getConnection();
 
-        String sql = "SELECT * FROM `matchs`";
+        String sql = "SELECT * FROM `tournois`";
 
         try {
             prepare = connection.prepareStatement(sql);
@@ -106,11 +106,11 @@ public class ServiceTournois implements InterfaceService<tournois> {
 
             while (resultSet.next()) {
                 System.out.println("ID: " + resultSet.getInt("id_tournois"));
-                System.out.println("Date Match: " + resultSet.getString("nom_tournois"));
-                System.out.println("Duree Match: " + resultSet.getString("address_tournois"));
-                System.out.println("Duree Match: " + resultSet.getString("nombre_match"));
-                System.out.println("Duree Match: " + resultSet.getString("date_debut"));
-                System.out.println("Duree Match: " + resultSet.getString("date_fin"));
+                System.out.println("Nom Tournois : " + resultSet.getString("nom_tournois"));
+                System.out.println("Address Tournois: " + resultSet.getString("address_tournois"));
+                System.out.println("Nombre Match: " + resultSet.getInt("nombre_match"));
+                System.out.println("Date Debut: " + resultSet.getString("date_debut"));
+                System.out.println("Date Fin: " + resultSet.getString("date_fin"));
             }
 
         } catch (SQLException ex) {
