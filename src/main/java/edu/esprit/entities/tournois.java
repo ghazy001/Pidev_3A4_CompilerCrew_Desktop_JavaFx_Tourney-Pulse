@@ -1,5 +1,6 @@
 package edu.esprit.entities;
 
+import java.util.Date;
 import java.util.Objects;
 
 public class tournois {
@@ -7,13 +8,13 @@ public class tournois {
     private String nom_tournois;
     private String address_tournois;
     private int nombre_match;
-    private String date_debut;
-    private String date_fin;
+    private Date date_debut;
+    private Date date_fin;
 
     public tournois() {
     }
 
-    public tournois(String nom_tournois, String address_tournois, int nombre_match, String date_debut, String date_fin) {
+    public tournois(String nom_tournois, String address_tournois, int nombre_match, Date date_debut, Date date_fin) {
         this.nom_tournois = nom_tournois;
         this.address_tournois = address_tournois;
         this.nombre_match = nombre_match;
@@ -21,7 +22,7 @@ public class tournois {
         this.date_fin = date_fin;
     }
 
-    public tournois(int id_tournois, String nom_tournois, String address_tournois, int nombre_match, String date_debut, String date_fin) {
+    public tournois(int id_tournois, String nom_tournois, String address_tournois, int nombre_match, Date date_debut, Date date_fin) {
         this.id_tournois = id_tournois;
         this.nom_tournois = nom_tournois;
         this.address_tournois = address_tournois;
@@ -62,19 +63,19 @@ public class tournois {
         this.nombre_match = nombre_match;
     }
 
-    public String getDate_debut() {
+    public Date getDate_debut() {
         return date_debut;
     }
 
-    public void setDate_debut(String date_debut) {
+    public void setDate_debut(Date date_debut) {
         this.date_debut = date_debut;
     }
 
-    public String getDate_fin() {
+    public Date getDate_fin() {
         return date_fin;
     }
 
-    public void setDate_fin(String date_fin) {
+    public void setDate_fin(Date date_fin) {
         this.date_fin = date_fin;
     }
 

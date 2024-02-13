@@ -21,7 +21,7 @@ public class ServiceMatch implements InterfaceService<matchs> {
             prepare = connection.prepareStatement(sql);
 
             prepare.setString(1, matchs.getNom_match());
-            prepare.setString(2, matchs.getDate_match());
+            prepare.setDate(2, (Date) matchs.getDate_match());
             prepare.setString(3, matchs.getDuree_match());
             prepare.setInt(4, matchs.getId_tournois().getId_tournois());
 
@@ -42,7 +42,7 @@ public class ServiceMatch implements InterfaceService<matchs> {
             prepare = connection.prepareStatement(sql);
 
             prepare.setString(1, matchs.getNom_match());
-            prepare.setString(2, matchs.getDate_match());
+            prepare.setDate(2, (Date) matchs.getDate_match());
             prepare.setString(3, matchs.getDuree_match());
             prepare.setInt(4, matchs.getId_tournois().getId_tournois());
             prepare.setInt(5, id);
@@ -107,7 +107,7 @@ public class ServiceMatch implements InterfaceService<matchs> {
             while (resultSet.next()) {
                 System.out.println("ID: " + resultSet.getInt("id_match"));
                 System.out.println("Nom Match: " + resultSet.getString("nom_match"));
-                System.out.println("Date Match: " + resultSet.getString("date_match"));
+                System.out.println("Date Match: " + resultSet.getDate("date_match"));
                 System.out.println("Duree Match: " + resultSet.getString("duree_match"));
                 System.out.println("Nom Tournois: " + resultSet.getString("nom_tournois"));
             }

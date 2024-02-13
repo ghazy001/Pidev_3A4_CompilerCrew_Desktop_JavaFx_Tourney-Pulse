@@ -1,25 +1,25 @@
 package edu.esprit.entities;
 
+import java.util.Date;
 import java.util.Objects;
-import edu.esprit.entities.tournois;
 
 public class matchs {
 
     private int id_match;
     private String nom_match;
-    private String date_match;
+    private Date date_match;
     private String duree_match;
     private tournois id_tournois;
 
 
-    public matchs(String nom_match, String date_match, String duree_match, tournois id_tournois) {
+    public matchs(String nom_match, Date date_match, String duree_match, tournois id_tournois) {
         this.nom_match = nom_match;
         this.date_match = date_match;
         this.duree_match = duree_match;
         this.id_tournois = id_tournois;
     }
 
-    public matchs(int id_match, String nom_match, String date_match, String duree_match, tournois id_tournois) {
+    public matchs(int id_match, String nom_match, Date date_match, String duree_match, tournois id_tournois) {
         this.id_match = id_match;
         this.nom_match = nom_match;
         this.date_match = date_match;
@@ -43,11 +43,11 @@ public class matchs {
         this.nom_match = nom_match;
     }
 
-    public String getDate_match() {
+    public Date getDate_match() {
         return date_match;
     }
 
-    public void setDate_match(String date_match) {
+    public void setDate_match(Date date_match) {
         this.date_match = date_match;
     }
 

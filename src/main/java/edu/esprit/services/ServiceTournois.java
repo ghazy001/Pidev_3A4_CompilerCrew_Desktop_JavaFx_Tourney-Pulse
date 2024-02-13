@@ -4,10 +4,7 @@ import edu.esprit.entities.tournois;
 import edu.esprit.utils.DataSource;
 import edu.esprit.services.InterfaceService;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class ServiceTournois implements InterfaceService<tournois> {
 
@@ -24,8 +21,8 @@ public class ServiceTournois implements InterfaceService<tournois> {
             prepare.setString(1, tournois.getNom_tournois());
             prepare.setString(2, tournois.getAddress_tournois());
             prepare.setInt(3, tournois.getNombre_match());
-            prepare.setString(4, tournois.getDate_debut());
-            prepare.setString(5, tournois.getDate_fin());
+            prepare.setDate(4, (Date) tournois.getDate_debut());
+            prepare.setDate(5, (Date) tournois.getDate_fin());
 
             prepare.executeUpdate();
 
@@ -46,8 +43,8 @@ public class ServiceTournois implements InterfaceService<tournois> {
             prepare.setString(1, tournois.getNom_tournois());
             prepare.setString(2, tournois.getAddress_tournois());
             prepare.setInt(3, tournois.getNombre_match());
-            prepare.setString(4, tournois.getDate_debut());
-            prepare.setString(5, tournois.getDate_fin());
+            prepare.setDate(4, (Date) tournois.getDate_debut());
+            prepare.setDate(5, (Date) tournois.getDate_fin());
             prepare.setInt(6, id);
 
             prepare.executeUpdate();
@@ -109,8 +106,8 @@ public class ServiceTournois implements InterfaceService<tournois> {
                 System.out.println("Nom Tournois : " + resultSet.getString("nom_tournois"));
                 System.out.println("Address Tournois: " + resultSet.getString("address_tournois"));
                 System.out.println("Nombre Match: " + resultSet.getInt("nombre_match"));
-                System.out.println("Date Debut: " + resultSet.getString("date_debut"));
-                System.out.println("Date Fin: " + resultSet.getString("date_fin"));
+                System.out.println("Date Debut: " + resultSet.getDate("date_debut"));
+                System.out.println("Date Fin: " + resultSet.getDate("date_fin"));
             }
 
         } catch (SQLException ex) {
