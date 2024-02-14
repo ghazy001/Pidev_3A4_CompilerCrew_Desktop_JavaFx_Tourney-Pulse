@@ -3,57 +3,153 @@ package org.example;
 import controller.ServiceAvisJoueur;
 import controller.ServiceEquipe;
 import entities.AvisJoueur;
-import entities.equipe;
-import esprit.project.tools.MyDB;
+import entities.Equipe;
+import entities.User;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
+        ServiceAvisJoueur serviceAvis= ServiceAvisJoueur.getInstance();
+        ServiceEquipe serviceEquipe= ServiceEquipe.getInstance();
 
-       // MyDB.getInsatnce().getConnection();
 
-        //------------ Les equipes --------------------
 
-              equipe e = new equipe("real",6);
-             equipe e1 = new equipe("barca",8);
-              ServiceEquipe serviceEquipe = new ServiceEquipe();
-              serviceEquipe.ajouter(e);
-              serviceEquipe.modifier(132,e1);
-              serviceEquipe.supprimer(132);
-              serviceEquipe.afficher();
 
-        // ---------------- Avis Joueur --------------------
+            AvisJoueur nouvelAvis = new AvisJoueur();
+             Equipe  equipe = new Equipe();
+              User user = new User();
+
+
+
 /*
-        System.out.println("---------- Les Avis sur les joueurs -------------");
-        AvisJoueur avisJoueur = new AvisJoueur(2,"goodplayer",7);
-        AvisJoueur review = new AvisJoueur(6,"goodplayer",7);
-        AvisJoueur avisJoueur1 = new AvisJoueur(8,"goodplayer",7);
-        AvisJoueur LMBADEL = new AvisJoueur(2,"WELDEK MUSH TAA KOORA YE MADAME !",2);
-        AvisJoueur LMBADEL2 = new AvisJoueur(6,"WELDEK MUSH TAA KOORA YE MADAME !",8);
-        AvisJoueur var = new AvisJoueur(2,"goodplayer",10);
-        AvisJoueur newavis = new AvisJoueur(6,"wuv_u",3);
+//-------------------------------------------Test Ajouter Avis----------------------------------------------------------------
+           nouvelAvis.setCommentaire("Madrid Rojla " );
+        nouvelAvis.setNote(3.9f);
+           user.setId(1);
+           try {
 
-        ServiceAvisJoueur serviceAvisJoueur;
-        serviceAvisJoueur = new ServiceAvisJoueur();
-        serviceAvisJoueur.ajouter(avisJoueur1);
-        serviceAvisJoueur.ajouter(review);
-        serviceAvisJoueur.afficher();
-        serviceAvisJoueur.supprimer(3);
-        serviceAvisJoueur.modifier(51,LMBADEL);
-        serviceAvisJoueur.supprimer(53);
-        serviceAvisJoueur.ajouter(var);
-        serviceAvisJoueur.ajouter(newavis);
-        serviceAvisJoueur.afficher();
+               serviceAvis.ajouter(nouvelAvis,user);
+
+                System.out.println("Avis ajouté avec succès ! L'ID généré est : " + nouvelAvis.getIdAvis());
+
+          System.out.println("/////////////////////////////////////////////////////////////////////////////////////////\n");
+
+          System.out.println("Liste des avis pour le restaurant " + user.getId() + ":");
+           } catch (SQLException e) {
+               System.err.println("Erreur lors de l'ajout de l'avis : " + e.getMessage());
+          }
 
 
- */
+      }*/
+        ////////////////////////////////////////
+
+
+//-------------------------------------------Test supprimer Avis----------------------------------------------------------------
+
+
+        //serviceAvis.supprimer(1);
+        //
+        //
+        //
+
+
+        // ////////////
+
+        //-------------------------------------------Test Modifier Avis----------------------------------------------------------------
+
+       /* AvisJoueur avisModifie = new AvisJoueur();
+        avisModifie.setCommentaire("Modified Comment");
+        avisModifie.setNote(4.5f);
+        serviceAvis.modifier(80, avisModifie, 5);*/
+        //-------------------------------------------Test recuperer Avis----------------------------------------------------------------
+   /*     try {
+
+
+
+            List<AvisJoueur> avisList = serviceAvis.recuperer();
+            System.out.println("Tous Les Avis:");
+            displayAvisJoueurList(avisList);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void displayAvisJoueurList(List<AvisJoueur> avisList) {
+        for (AvisJoueur avis : avisList) {
+            System.out.println("Avis ID: " + avis.getIdAvis());
+            System.out.println("Commentaire: " + avis.getCommentaire());
+            System.out.println("Note: " + avis.getNote());
+            System.out.println("User ID: " + avis.getUser().getId());
+            System.out.println("User Name: " + avis.getUser().getName());
+            System.out.println("----------§§§§§§§§§§§§§§§§§");
+        }*/
 
 
 
 
+        //-------------------------------------------Test Ajouter Equipe----------------------------------------------------------------
 
+        equipe.setNom("EspritUnited" );
+        equipe.setImage("PNG");
+        user.setId(1);
+        try {
+
+            serviceEquipe.ajouter(equipe,user);
+
+            System.out.println("Equipe ajouté avec succès ! L'ID généré est : " + equipe.getId());
+
+            System.out.println("/////////////////////////////////////////////////////////////////////////////////////////\n");
+
+            System.out.println(" equipes pour le user " + user.getId() + ":");
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de l'ajout d'un equipe : " + e.getMessage());
+        }
+
+
+        //-------------------------------------------Test Modifier Equipe----------------------------------------------------------------
+
+        /*equipe.setNom("Hala Comment");
+        equipe.setImage("Image");
+        serviceEquipe.modifier(144,equipe, 1);
+
+*/
+        //-------------------------------------------Test supprimer Avis----------------------------------------------------------------
+
+
+        //serviceEquipe.supprimer(143);
+        //-------------------------------------------Test recuperer Avis----------------------------------------------------------------
+
+     /*
+      try {
+
+
+
+            List<Equipe> avisList = serviceEquipe.recuperer();
+            System.out.println("Tous Les Equipe:");
+            displayAvisJoueurList(avisList);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void displayAvisJoueurList(List<Equipe> avisList) {
+        for (Equipe avis : avisList) {
+            System.out.println("Equipe ID: " + avis.getId());
+            System.out.println("Image Logo: " + avis.getImage());
+            System.out.println("User ID: " + avis.getUser().getId());
+            System.out.println("User Name: " + avis.getUser().getName());
+            System.out.println("----------§§§§§§§§§§§§§§§§§");
+        }*/
+
+
+    }
 
 
 
     }
-}

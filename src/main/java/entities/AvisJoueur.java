@@ -1,32 +1,24 @@
 package entities;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
-
 public class AvisJoueur {
     private int idAvis;
-    private int idJoueur;
+    private User user;
     private String commentaire;
+    private Date dateAvis;
+
     private float note;
 
-    private String nom_joueur;
+    public AvisJoueur() {
+    }
 
-    public AvisJoueur(int idAvis, int idJoueur, String commentaire, float note, String nom_joueur) {
+    public AvisJoueur(int idAvis, User user, String commentaire, Date dateAvis, float note) {
         this.idAvis = idAvis;
-        this.idJoueur = idJoueur;
+        this.user = user;
         this.commentaire = commentaire;
-        this.note = note;
-        this.nom_joueur = nom_joueur;
-    }
-
-    public AvisJoueur(String commentaire, float note, String nom_joueur) {
-        this.commentaire = commentaire;
-        this.note = note;
-        this.nom_joueur = nom_joueur;
-    }
-
-    public AvisJoueur(int idJoueur, String commentaire, float note) {
-        this.idJoueur = idJoueur;
-        this.commentaire = commentaire;
+        this.dateAvis = dateAvis;
         this.note = note;
     }
 
@@ -34,63 +26,43 @@ public class AvisJoueur {
         return idAvis;
     }
 
-    public void setIdAvis(int idAvis) {
-        this.idAvis = idAvis;
-    }
-
-    public int getIdJoueur() {
-        return idJoueur;
-    }
-
-    public void setIdJoueur(int idJoueur) {
-        this.idJoueur = idJoueur;
+    public User getUser() {
+        return user;
     }
 
     public String getCommentaire() {
         return commentaire;
     }
 
-    public void setCommentaire(String commentaire) {
-        this.commentaire = commentaire;
+    public Date getDateAvis() {
+        return dateAvis;
     }
 
     public float getNote() {
         return note;
     }
 
+    public void setIdAvis(int idAvis) {
+        this.idAvis = idAvis;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire;
+    }
+
+    public void setDateAvis(Date dateAvis) {
+        this.dateAvis = dateAvis;
+    }
+
     public void setNote(float note) {
         this.note = note;
     }
 
-    public String getNom_joueur() {
-        return nom_joueur;
-    }
-
-    public void setNom_joueur(String nom_joueur) {
-        this.nom_joueur = nom_joueur;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AvisJoueur that = (AvisJoueur) o;
-        return idAvis == that.idAvis && idJoueur == that.idJoueur && Float.compare(note, that.note) == 0 && Objects.equals(commentaire, that.commentaire) && Objects.equals(nom_joueur, that.nom_joueur);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idAvis, idJoueur, commentaire, note, nom_joueur);
-    }
-
     @Override
     public String toString() {
-        return "AvisJoueur{" +
-                "idAvis=" + idAvis +
-                ", idJoueur=" + idJoueur +
-                ", commentaire='" + commentaire + '\'' +
-                ", note=" + note +
-                ", nom_joueur='" + nom_joueur + '\'' +
-                '}';
-    }
-}
+        return "AvisJoueur{" + "idAvis=" + idAvis + ", user=" + user + ", commentaire=" + commentaire + ", dateAvis=" + dateAvis + ", note=" + note + '}';
+    }}
