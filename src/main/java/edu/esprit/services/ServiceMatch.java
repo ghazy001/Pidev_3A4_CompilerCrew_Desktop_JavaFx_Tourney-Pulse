@@ -16,7 +16,7 @@ public class ServiceMatch implements InterfaceService<matchs> {
         connection = DataSource.getInsatnce().getConnection();
 
 
-        String sql = "INSERT INTO `matchs` ( `nom_match`, `date_match`, `duree_match`, `id_tournois`) VALUES (?, ?, ?, ?);";
+        String sql = "INSERT INTO `match` ( `nom_match`, `date_match`, `duree_match`, `id_tournois`) VALUES (?, ?, ?, ?);";
         try {
             prepare = connection.prepareStatement(sql);
 
@@ -36,7 +36,7 @@ public class ServiceMatch implements InterfaceService<matchs> {
     public void modifier(int id, matchs matchs) {
             connection = DataSource.getInsatnce().getConnection();
 
-        String sql = "UPDATE `matchs` SET `nom_match` = ?, `date_match` = ?, `duree_match` = ?, `id_tournois` = ? WHERE `id_match` = ?";
+        String sql = "UPDATE `match` SET `nom_match` = ?, `date_match` = ?, `duree_match` = ?, `id_tournois` = ? WHERE `id_match` = ?";
 
         try {
             prepare = connection.prepareStatement(sql);
@@ -70,7 +70,7 @@ public class ServiceMatch implements InterfaceService<matchs> {
     public void supprimer(int id) {
             connection = DataSource.getInsatnce().getConnection();
 
-            String sql = "DELETE FROM `matchs` WHERE `id_match` = ? ";
+            String sql = "DELETE FROM `match` WHERE `id_match` = ? ";
 
             try {
                 prepare = connection.prepareStatement(sql);
@@ -97,7 +97,7 @@ public class ServiceMatch implements InterfaceService<matchs> {
     public void afficher() {
             connection = DataSource.getInsatnce().getConnection();
 
-        String sql = "SELECT m.*, t.nom_tournois FROM `matchs` m JOIN `tournois` t ON m.id_tournois = t.id_tournois";
+        String sql = "SELECT m.*, t.nom_tournois FROM `match` m JOIN `tournois` t ON m.id_tournois = t.id_tournois";
 
         try {
             prepare = connection.prepareStatement(sql);
