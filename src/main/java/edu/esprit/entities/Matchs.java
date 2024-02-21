@@ -9,7 +9,7 @@ public class Matchs {
     private String nom_match;
     private Date date_match;
     private String duree_match;
-    private Tournois tournois;
+    private Tournois id_tournois;
 
 
     public Matchs() {
@@ -19,7 +19,7 @@ public class Matchs {
         this.nom_match = nom_match;
         this.date_match = date_match;
         this.duree_match = duree_match;
-        this.tournois = id_tournois;
+        this.id_tournois = id_tournois;
     }
 
     public Matchs(int id_match, String nom_match, Date date_match, String duree_match, Tournois id_tournois) {
@@ -27,7 +27,7 @@ public class Matchs {
         this.nom_match = nom_match;
         this.date_match = date_match;
         this.duree_match = duree_match;
-        this.tournois = id_tournois;
+        this.id_tournois = id_tournois;
     }
 
     public int getId_match() {
@@ -62,12 +62,12 @@ public class Matchs {
         this.duree_match = duree_match;
     }
 
-    public Tournois getTournois() {
-        return tournois;
+    public Tournois getId_tournois() {
+        return id_tournois;
     }
 
-    public void setTournois(Tournois tournois) {
-        this.tournois = tournois;
+    public void setId_tournois(Tournois id_tournois) {
+        this.id_tournois = id_tournois;
     }
 
     @Override
@@ -75,12 +75,12 @@ public class Matchs {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Matchs matchs = (Matchs) o;
-        return id_match == matchs.id_match && Objects.equals(nom_match, matchs.nom_match) && Objects.equals(date_match, matchs.date_match) && Objects.equals(duree_match, matchs.duree_match) && Objects.equals(tournois, matchs.tournois);
+        return id_match == matchs.id_match && Objects.equals(nom_match, matchs.nom_match) && Objects.equals(date_match, matchs.date_match) && Objects.equals(duree_match, matchs.duree_match) && Objects.equals(id_tournois, matchs.id_tournois);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_match, nom_match, date_match, duree_match, tournois);
+        return Objects.hash(id_match, nom_match, date_match, duree_match, id_tournois);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class Matchs {
                 ", nom_match='" + nom_match + '\'' +
                 ", date_match='" + date_match + '\'' +
                 ", duree_match='" + duree_match + '\'' +
-                ", tournois=" + tournois +
+                ", id_tournois=" + id_tournois +
                 '}';
     }
 }

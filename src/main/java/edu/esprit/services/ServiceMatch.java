@@ -3,13 +3,11 @@ package edu.esprit.services;
 import edu.esprit.entities.Matchs;
 import edu.esprit.entities.Tournois;
 import edu.esprit.utils.DataSource;
-import edu.esprit.services.ServiceTournois;
 import javafx.scene.control.Alert;
 
-
 import java.sql.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServiceMatch implements InterfaceService<Matchs> {
     PreparedStatement prepare;
@@ -27,7 +25,7 @@ public class ServiceMatch implements InterfaceService<Matchs> {
             prepare.setString(1, matchs.getNom_match());
             prepare.setDate(2, (Date) matchs.getDate_match());
             prepare.setString(3, matchs.getDuree_match());
-            prepare.setInt(4, matchs.getTournois().getId_tournois());
+            prepare.setInt(4, matchs.getId_tournois().getId_tournois());
 
             prepare.executeUpdate();
 
@@ -37,7 +35,7 @@ public class ServiceMatch implements InterfaceService<Matchs> {
     }
 
     @Override
-    public void modifier(int id, Matchs matchs) {
+    public void modifier(Matchs matchs) {
             connection = DataSource.getInsatnce().getConnection();
 
         String sql = "UPDATE `match` SET `nom_match` = ?, `date_match` = ?, `duree_match` = ?, `id_tournois` = ? WHERE `id_match` = ?";
@@ -48,8 +46,8 @@ public class ServiceMatch implements InterfaceService<Matchs> {
             prepare.setString(1, matchs.getNom_match());
             prepare.setDate(2, (Date) matchs.getDate_match());
             prepare.setString(3, matchs.getDuree_match());
-            prepare.setInt(4, matchs.getTournois().getId_tournois());
-            prepare.setInt(5, id);
+            prepare.setInt(4, matchs.getId_tournois().getId_tournois());
+
 
             prepare.executeUpdate();
 
@@ -119,43 +117,48 @@ public class ServiceMatch implements InterfaceService<Matchs> {
         }
 
     @Override
-    public Matchs getOneById(int id) throws SQLException {
+    public Matchs getOneById(int id)  {
         return null;
     }
 
     @Override
-    public Set<Matchs> getAll() throws SQLException {
-        Set<Matchs> match = new HashSet<>();
+    public List<Matchs> getAll()  {
+        List<Matchs> matchsList = new ArrayList<>();
         connection = DataSource.getInsatnce().getConnection();
 
-        String sql = "SELECT m.*, t.nom_tournois FROM `match` m JOIN `tournois` t ON m.tournois = t.id_tournois";
+        String sql = "SELECT m.*, t.nom_tournois FROM `match` m JOIN `tournois` t ON m.id_tournois = t.id_tournois";
 
         try {
-            prepare = connection.prepareStatement(sql);
 
-            ResultSet resultSet = prepare.executeQuery();
 
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 int id = resultSet.getInt("id_match");
                 String nomMatch = resultSet.getString("nom_match");
                 Date dateMatch = resultSet.getDate("date_match");
                 String dureeMatch = resultSet.getString("duree_match");
+                int idTournois = resultSet.getInt("nom_tournois");
                 String nomTournois = resultSet.getString("nom_tournois");
+
                 Matchs m = new Matchs();
                 m.setId_match(id);
                 m.setNom_match(nomMatch);
                 m.setDate_match(dateMatch);
                 m.setDuree_match(dureeMatch);
+
                 Tournois tour = new Tournois();
+                tour.setId_tournois(idTournois);
                 tour.setNom_tournoi(nomTournois);
-                m.setTournois(tour);
-                match.add(m);
+                m.setId_tournois(tour);
+
+                matchsList.add(m);
             }
 
-        } catch (SQLException ex) {
-            System.out.print(ex.getMessage());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-        return null;
+        return matchsList;
     }
 
 

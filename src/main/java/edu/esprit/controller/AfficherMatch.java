@@ -1,135 +1,188 @@
 package edu.esprit.controller;
 
 import edu.esprit.entities.Matchs;
-import edu.esprit.services.ServiceMatch;
 import edu.esprit.entities.Tournois;
-import edu.esprit.utils.DataSource;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import edu.esprit.services.ServiceMatch;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
-import java.sql.*;
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
+import java.util.List;
 import java.util.ResourceBundle;
 
-public class AfficherMatch implements Initializable{
+public class AfficherMatch implements Initializable {
 
-    @FXML
-    private TableColumn<Matchs, Date> CDatem;
+        @FXML
+        private Button Bmodm;
 
-    @FXML
-    private TableColumn<Matchs, String> CDureem;
+        @FXML
+        private Button Bnavigatem;
 
-    @FXML
-    private TableColumn<Matchs, Integer> CIDm;
+        @FXML
+        private Button Bsuppm;
 
-    @FXML
-    private TableColumn<Matchs, String> CNomm;
+        @FXML
+        private DatePicker TFdatem;
 
-    @FXML
-    private TableColumn<Matchs, Integer> CNomt;
+        @FXML
+        private TextField TFdureem;
 
-    @FXML
-    private DatePicker TFdatem;
+        @FXML
+        private TextField TFnomm;
 
-    @FXML
-    private TextField TFdureem;
+        @FXML
+        private TextField TFidt;
 
-    @FXML
-    private TextField TFnomm;
+        @FXML
+        private VBox Vboxx;
 
-    @FXML
-    private TextField TFnomt;
+        ServiceMatch serviceMatch = new ServiceMatch();
 
-    @FXML
-    private TableView<Matchs> tablem;
+        private String selectedIdm;
+        private String selectedNomm;
+        private String selectedDate;
+        private String selectedDuree;
+        private String selectedIdt;
 
-    PreparedStatement prepare;
-    Connection connection;
-
+    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Bnavigatem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("/AfficherTournois.fxml"));
 
-        tablee();
-    }
+                    // Create a Scene with custom dimensions
+                    Scene scene = new Scene(root, 800, 600); // Adjust width and height as needed
 
-    public void tablee() {
-        ObservableList<Matchs> match = FXCollections.observableArrayList();
-        connection = DataSource.getInsatnce().getConnection();
+                    // Get the current stage
+                    Stage stage = (Stage) TFnomm.getScene().getWindow();
 
-        String sql = "SELECT * FROM `match`";
+                    // Set the new scene to the stage
+                    stage.setScene(scene);
 
-        try {
-            prepare = connection.prepareStatement(sql);
-            ResultSet resultSet = prepare.executeQuery();
 
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id_match");
-                String nomMatchs = resultSet.getString("nom_match");
-                java.sql.Date dateMatchs = resultSet.getDate("date_debut");
-                String dureeMatchs = resultSet.getString("duree_match");
-                int idTournois = resultSet.getInt("id_tournois");
-                Matchs m = new Matchs();
-                m.setId_match(id);
-                m.setNom_match(nomMatchs);
-                m.setDate_match(dateMatchs);
-                m.setDuree_match(dureeMatchs);
-                Tournois tour = new Tournois();
-                tour.setId_tournois(idTournois);
-                m.setTournois(tour);
-                match.add(m);
+                } catch (IOException var4) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText("Sorry");
+                    alert.setTitle("Error");
+                    alert.show();
+                }
+
             }
+        });
 
-            CIDm.setCellValueFactory(f -> new SimpleIntegerProperty(f.getValue().getId_match()).asObject());
-            CNomm.setCellValueFactory(f -> new SimpleStringProperty(f.getValue().getNom_match()));
-            CDatem.setCellValueFactory(f -> new SimpleObjectProperty<>((Date) f.getValue().getDate_match()));
-            CDureem.setCellValueFactory(f -> new SimpleStringProperty(f.getValue().getDuree_match()));
-            CNomt.setCellValueFactory(f -> new SimpleIntegerProperty(f.getValue().getTournois().getId_tournois()).asObject());
+        List<Matchs> matchsList = serviceMatch.getAll();
+        System.out.println("Match List: " + matchsList); // Print the list
 
-            tablem.setItems(match);
+        for (Matchs matchs : matchsList) {
+            System.out.println("Adding match to TitledPane: " + matchs);
+            // Create layout for each reclamation
+            Label idmLabel = new Label("ID: " + matchs.getId_match());
+            Label nommLabel = new Label("Nom: " + matchs.getNom_match());
+            Label dateLabel = new Label("Date: " + matchs.getDate_match());
+            Label dureeLabel = new Label("Duree: " + matchs.getDuree_match());
+            Label idtLabel = new Label("Nom Tournois: " + matchs.getId_tournois());
 
-        } catch (SQLException ex) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Erreur lors du chargement de la table des matchs !");
-            alert.show();
-        }
-        tablem.setRowFactory( tv -> {
-            TableRow<Matchs> myRow = new TableRow<>();
-            myRow.setOnMouseClicked (event ->
-            {
-                if (event.getClickCount() == 1 && (!myRow.isEmpty()))
-                {
-                    int myIndex = tablem.getSelectionModel().getSelectedIndex();
-                    int id = Integer.parseInt(String.valueOf(tablem.getItems().get(myIndex).getId_match()));
-                    TFnomm.setText(tablem.getItems().get(myIndex).getNom_match());
-                    java.sql.Date dateDebutSQL = (java.sql.Date) tablem.getItems().get(myIndex).getDate_match();
-                    Instant instant = dateDebutSQL.toLocalDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
-                    LocalDate dateDebut = instant.atZone(ZoneId.systemDefault()).toLocalDate();
-                    TFdatem.setValue(dateDebut);
-                    TFdureem.setText(tablem.getItems().get(myIndex).getDuree_match());
-                    TFnomt.setText(String.valueOf(tablem.getItems().get(myIndex).getTournois()));
+            GridPane gridPane = new GridPane();
+            gridPane.add(idmLabel, 0, 0);
+            gridPane.add(nommLabel, 0, 1);
+            gridPane.add(dateLabel, 0, 2);
+            gridPane.add(dureeLabel, 0, 3);
+            gridPane.add(idtLabel, 0, 4);
+
+            TitledPane titledPane = new TitledPane("Tournois " + matchs.getId_tournois(), gridPane);
 
 
+            titledPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    selectedIdm = "" + matchs.getId_match();
+                    selectedNomm = matchs.getNom_match();
+                    selectedDate = String.valueOf(matchs.getDate_match());
+                    selectedDuree = matchs.getDuree_match();
+                    selectedIdt = String.valueOf(matchs.getId_tournois());
+
+                    // Perform any action with the selected values
+                    System.out.println("Selected ID: " + selectedIdm);
+                    System.out.println("Selected Nom: " + selectedNomm);
+                    System.out.println("Selected Date: " + selectedDate);
+                    System.out.println("Selected Duree: " + selectedDuree);
+                    System.out.println("Selected ID Tournois: " + selectedIdt);
+
+                    TFnomm.setText(selectedNomm);
+                    LocalDate dateMatch = Date.valueOf(selectedDate).toLocalDate();
+                    TFdatem.setValue(dateMatch);
+                    TFdureem.setText(selectedDuree);
+                    TFidt.setText(selectedIdt);
 
                 }
             });
-            return myRow;
+
+
+            Vboxx.getChildren().add(titledPane);
+        }
+        loadData1();
+
+        Bsuppm.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                if (selectedIdm != null) {
+                    serviceMatch.supprimer(Integer.parseInt(selectedIdm));
+                    loadData1();
+                }
+            }
+
         });
+
+        Bmodm.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                if (selectedIdm != null) {
+                    String idTourText = TFidt.getText();
+                    int idTour;
+                    String dateMText = String.valueOf(TFdatem.getValue());
+                    java.util.Date dateM;
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    try {
+                        idTour = Integer.parseInt(idTourText);
+                        dateM = sdf.parse(dateMText);
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    Tournois tournois = new Tournois();
+                    tournois.setId_tournois(idTour);
+                    Date sqlDateM = new Date(dateM.getTime());
+                    serviceMatch.modifier(new Matchs(TFnomm.getText(), sqlDateM, TFdureem.getText(), tournois));
+                    loadData1();
+                }
+            }
+
+
+        });
+
     }
 
     @FXML
     void ajouterMatchsAction(ActionEvent event) {
-        String nomTourText = TFnomt.getText();
+        String nomTourText = TFidt.getText();
         int idTour;
         String dateMText = String.valueOf(TFdatem.getValue());
         java.util.Date dateM;
@@ -141,7 +194,7 @@ public class AfficherMatch implements Initializable{
             ServiceMatch sm = new ServiceMatch();
 
 
-            if (!TFnomm.getText().isEmpty() || !TFdureem.getText().isEmpty() || !TFnomt.getText().isEmpty()) {
+            if (!TFnomm.getText().isEmpty() || !TFdureem.getText().isEmpty() || !TFidt.getText().isEmpty()) {
                 idTour = Integer.parseInt(nomTourText);
                 Tournois tournois = new Tournois();
                 tournois.setId_tournois(idTour);
@@ -150,13 +203,13 @@ public class AfficherMatch implements Initializable{
                 alert.setTitle("Success");
                 alert.setContentText("Match ajouter!");
                 alert.show();
-                tablee();
+                loadData1();
 
                 LocalDate t = null;
                 TFnomm.setText("");
                 TFdatem.setValue(t);
                 TFdureem.setText("");
-                TFnomt.setText("");
+                TFidt.setText("");
                 TFnomm.requestFocus();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -173,70 +226,57 @@ public class AfficherMatch implements Initializable{
 
     }
 
-    @FXML
-    void modifierMatchsAction(ActionEvent event) {
-        String nomTourText = TFnomt.getText();
-        int idTour;
-        String dateMText = String.valueOf(TFdatem.getValue());
-        java.util.Date dateM;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            dateM = sdf.parse(dateMText);
-            Date sqlDateM = new Date(dateM.getTime());
+    private void loadData1() {
+        Vboxx.getChildren().clear(); // Clear existing display
+        List<Matchs> matchsList = serviceMatch.getAll();
+        System.out.println("Match List: " + matchsList); // Print the list
 
-            ServiceMatch sm = new ServiceMatch();
-            int myIndex = tablem.getSelectionModel().getSelectedIndex();
+        for (Matchs matchs : matchsList) {
+            System.out.println("Adding match to TitledPane: " + matchs);
+            // Create layout for each reclamation
+            Label idmLabel = new Label("ID: " + matchs.getId_match());
+            Label nommLabel = new Label("Nom: " + matchs.getNom_match());
+            Label dateLabel = new Label("Date: " + matchs.getDate_match());
+            Label dureeLabel = new Label("Duree: " + matchs.getDuree_match());
+            Label idtLabel = new Label("Nom Tournois: " + matchs.getId_tournois());
 
-            int id = Integer.parseInt(String.valueOf(tablem.getItems().get(myIndex).getId_match()));
+            GridPane gridPane = new GridPane();
+            gridPane.add(idmLabel, 0, 0);
+            gridPane.add(nommLabel, 0, 1);
+            gridPane.add(dateLabel, 0, 2);
+            gridPane.add(dureeLabel, 0, 3);
+            gridPane.add(idtLabel, 0, 4);
+
+            TitledPane titledPane = new TitledPane("Tournois " + matchs.getId_tournois(), gridPane);
 
 
-            if (!TFnomm.getText().isEmpty() || !TFdureem.getText().isEmpty() || !TFnomt.getText().isEmpty()) {
-                idTour = Integer.parseInt(nomTourText);
-                Tournois tournois = new Tournois();
-                tournois.setId_tournois(idTour);
-                sm.modifier(id, new Matchs(TFnomm.getText(), sqlDateM, TFdureem.getText(), tournois));
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success");
-                alert.setContentText("Match ajouter!");
-                alert.show();
-                tablee();
+            titledPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    selectedIdm = "" + matchs.getId_match();
+                    selectedNomm = matchs.getNom_match();
+                    selectedDate = String.valueOf(matchs.getDate_match());
+                    selectedDuree = matchs.getDuree_match();
+                    selectedIdt = String.valueOf(matchs.getId_tournois());
 
-                LocalDate t = null;
-                TFnomm.setText("");
-                TFdatem.setValue(t);
-                TFdureem.setText("");
-                TFnomt.setText("");
-                TFnomm.requestFocus();
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Information manquante!");
-                alert.setContentText("Veuillez completez les champs manquant pour le match");
-                alert.show();
-            }
-        } catch (ParseException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Parse Exception");
-            alert.setContentText("Error parsing date: " + e.getMessage());
-            alert.showAndWait();
+                    // Perform any action with the selected values
+                    System.out.println("Selected ID: " + selectedIdm);
+                    System.out.println("Selected Nom: " + selectedNomm);
+                    System.out.println("Selected Date: " + selectedDate);
+                    System.out.println("Selected Duree: " + selectedDuree);
+                    System.out.println("Selected ID Tournois: " + selectedIdt);
+
+                    TFnomm.setText(selectedNomm);
+                    LocalDate dateMatch = Date.valueOf(selectedDate).toLocalDate();
+                    TFdatem.setValue(dateMatch);
+                    TFdureem.setText(selectedDuree);
+                    TFidt.setText(selectedIdt);
+
+                }
+            });
+
+
+            Vboxx.getChildren().add(titledPane);
         }
-
     }
-
-    @FXML
-    void supprimerMatchsAction(ActionEvent event) {
-        int myIndex = tablem.getSelectionModel().getSelectedIndex();
-
-        int id = Integer.parseInt(String.valueOf(tablem.getItems().get(myIndex).getId_match()));
-        ServiceMatch sm = new ServiceMatch();
-        sm.supprimer(id);
-        tablee();
-        LocalDate t = null;
-        TFnomm.setText("");
-        TFdatem.setValue(t);
-        TFdureem.setText("");
-        TFnomt.setText("");
-        TFnomm.requestFocus();
-
-    }
-
 }

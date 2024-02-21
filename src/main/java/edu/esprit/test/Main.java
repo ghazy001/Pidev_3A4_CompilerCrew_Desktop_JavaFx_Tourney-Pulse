@@ -39,7 +39,7 @@ public class Main {
         java.sql.Date sqlDateF1 = new java.sql.Date(dateF1.getTime());
 
         Tournois t1 = new Tournois("Champions","Ariana", 20, sqlDateD1, sqlDateF1);
-        servicee.modifier(1,t1);
+        servicee.modifier(t1);
         servicee.afficher();
 
         System.out.println("*********** Les Matchs ******************");
@@ -63,7 +63,7 @@ public class Main {
         tournoisForMatch1.setId_tournois(2);
 
         Matchs m1 = new Matchs("Final",sqlDateM1,"90 min",tournoisForMatch1);
-        service.modifier(2, m1);
+        service.modifier(m1);
         service.afficher();
 
     }

@@ -1,13 +1,12 @@
 package edu.esprit.services;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud;
 import edu.esprit.entities.Tournois;
 import edu.esprit.utils.DataSource;
 import javafx.scene.control.Alert;
 
 import java.sql.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServiceTournois implements InterfaceService<Tournois> {
 
@@ -35,10 +34,10 @@ public class ServiceTournois implements InterfaceService<Tournois> {
     }
 
     @Override
-    public void modifier(int id, Tournois tournois) {
+    public void modifier(Tournois tournois) {
         connection = DataSource.getInsatnce().getConnection();
 
-        String sql = "UPDATE `tournois` SET nom_tournois = ?, address_tournois = ?, nombre_match = ?, date_debut = ?, date_fin = ? WHERE id_tournois = ?";
+        String sql = "UPDATE `tournois` SET nom_tournois = ?, address_tournois = ?, nombre_match = ?, date_debut = ?, date_fin = ? ";
 
         try {
              prepare = connection.prepareStatement(sql);
@@ -48,7 +47,6 @@ public class ServiceTournois implements InterfaceService<Tournois> {
             prepare.setInt(3, tournois.getNombre_match());
             prepare.setDate(4, (Date) tournois.getDate_debut());
             prepare.setDate(5, (Date) tournois.getDate_fin());
-            prepare.setInt(6, id);
 
             prepare.executeUpdate();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -118,13 +116,13 @@ public class ServiceTournois implements InterfaceService<Tournois> {
     }
 
     @Override
-    public Tournois getOneById(int id) throws SQLException {
+    public Tournois getOneById(int id)  {
         return null;
     }
 
     @Override
-    public Set<Tournois> getAll() throws SQLException {
-        Set<Tournois> tournois = new HashSet<>();
+    public List<Tournois> getAll(){
+        List<Tournois> tournoisList = new ArrayList<>();
         connection = DataSource.getInsatnce().getConnection();
 
         String sql = "SELECT * FROM `tournois`";
@@ -149,13 +147,13 @@ public class ServiceTournois implements InterfaceService<Tournois> {
                 t.setNombre_match(nombreMatch);
                 t.setDate_debut(dateDebut);
                 t.setDate_fin(dateFin);
-                tournois.add(t);
+                tournoisList.add(t);
             }
 
         } catch (SQLException ex) {
             System.out.print(ex.getMessage());
         }
-        return tournois;
+        return tournoisList;
     }
 
 
