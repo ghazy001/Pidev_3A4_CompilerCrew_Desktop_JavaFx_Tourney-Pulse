@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #C3CFB6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Stade_BackController">
+   <children>
+      <StackPane layoutX="269.0" prefHeight="802.0" prefWidth="930.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <Pane fx:id="pnAddUpdateStade" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+               <children>
+                  <Label fx:id="lbAddStade" layoutX="56.0" layoutY="62.0" prefHeight="56.0" prefWidth="397.0" text="Add Stade : " textFill="#1f3d1c">
+                     <font>
+                        <Font size="40.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbUpdateStade" layoutX="61.0" layoutY="61.0" prefHeight="56.0" prefWidth="397.0" text="Update Stade : " textFill="#1f3d1c" visible="false">
+                     <font>
+                        <Font size="40.0" />
+                     </font>
+                  </Label>
+                  <HBox layoutX="55.0" layoutY="174.0" prefHeight="434.0" prefWidth="517.0">
+                     <children>
+                        <VBox prefHeight="434.0" prefWidth="253.0" spacing="20.0">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="65.0" prefWidth="251.0" text="Name">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="66.0" prefWidth="251.0" text="Place">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="56.0" prefHeight="71.0" prefWidth="251.0" text="Capacity">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="103.0" prefHeight="68.0" prefWidth="251.0" text="Numero">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="149.0" prefHeight="65.0" prefWidth="251.0" text="Images">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="10.0" layoutY="10.0" prefHeight="434.0" prefWidth="266.0" spacing="40.0">
+                           <children>
+                              <TextField fx:id="tfNameStadeAdd" prefHeight="49.0" prefWidth="266.0" />
+                              <TextField fx:id="tfPlaceStadeAdd" layoutX="10.0" layoutY="20.0" prefHeight="49.0" prefWidth="266.0" />
+                              <TextField fx:id="tfCapacityStadeAdd" layoutX="10.0" layoutY="80.0" prefHeight="49.0" prefWidth="266.0" />
+                              <TextField fx:id="tfNumeroStadeAdd" layoutX="10.0" layoutY="140.0" prefHeight="49.0" prefWidth="266.0" />
+                              <Button fx:id="btnSelectImage" mnemonicParsing="false" onAction="#fnSelectImage" prefHeight="36.0" prefWidth="266.0" style="-fx-background-color: #688A38;" text="Select Image" textFill="WHITE">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox fx:id="vbBoxAddStade" layoutX="634.0" layoutY="456.0" prefHeight="200.0" prefWidth="255.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="160.0" prefWidth="263.0">
+                           <children>
+                              <Button fx:id="btnPreviousStadeAdd" mnemonicParsing="false" onAction="#fnPreviousStadeAdd" text="&lt;" />
+                              <ImageView fx:id="ImgViewStadeAdd" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                              <Button fx:id="btnNextStadeAdd" mnemonicParsing="false" onAction="#fnNextAdd" text="&gt;" />
+                           </children>
+                        </HBox>
+                        <Button fx:id="btnDeleteImageStade" mnemonicParsing="false" onAction="#fnDeleteImageStade" prefHeight="36.0" prefWidth="266.0" style="-fx-background-color: #688A38;" text="Delete" textFill="WHITE">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <Button fx:id="btnConfirmAddStade" layoutX="340.0" layoutY="669.0" mnemonicParsing="false" onAction="#fnConfirmAddStade" prefHeight="60.0" prefWidth="202.0" style="-fx-background-color: #688A38;" text="Add" textFill="WHITE">
+                     <font>
+                        <Font name="Wingdings" size="31.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="41.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../java/images/plus.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnConfirmUpdateStade" layoutX="340.0" layoutY="669.0" mnemonicParsing="false" onAction="#fnConfirmUpdateStade" prefHeight="60.0" prefWidth="202.0" style="-fx-background-color: #688A38;" text="Update" textFill="WHITE" visible="false">
+                     <font>
+                        <Font name="Wingdings" size="31.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="41.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../java/images/editer.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </Pane>
+            <Pane fx:id="pnGestionStade" prefHeight="802.0" prefWidth="903.0" style="-fx-background-color: #ffffff;">
+               <children>
+                  <VBox layoutX="75.0" layoutY="120.0" prefHeight="441.0" prefWidth="458.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="56.0" prefWidth="450.0" spacing="10.0">
+                           <children>
+                              <TextField fx:id="tfSearchStade" onAction="#fnSearchStade" prefHeight="25.0" prefWidth="152.0" promptText="Search" />
+                              <Label prefHeight="35.0" prefWidth="95.0" text="State : ">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="cbLieuStade" prefHeight="25.0" prefWidth="109.0" />
+                              <Button fx:id="btnAppliquer" mnemonicParsing="false" onAction="#fnAppliquer" text="Appliquer" />
+                           </children>
+                        </HBox>
+                        <TableView fx:id="tvStade" onMouseClicked="#fnSelectedStade" prefHeight="387.0" prefWidth="458.0">
+                           <columns>
+                            <TableColumn fx:id="colNomStade" prefWidth="204.26666259765625" text="Nom" />
+                            <TableColumn fx:id="colLieuStade" prefWidth="249.3333740234375" text="Lieu" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="hbDetailsStade" layoutX="546.0" layoutY="129.0" prefHeight="349.0" prefWidth="379.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="btnPreviousStade" mnemonicParsing="false" onAction="#fnPreviousStade" text="&lt;" />
+                                 
+                              <ImageView fx:id="ImgViewStade" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                              <Button fx:id="btnNextStade" mnemonicParsing="false" onAction="#fnNext" text="&gt;" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_CENTER" prefHeight="356.0" prefWidth="370.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="356.0" prefWidth="194.0" spacing="5.0">
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="190.0" text="Nom">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="46.0" prefWidth="190.0" text="Lieu">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="56.0" prefHeight="46.0" prefWidth="190.0" text="Capacity">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="103.0" prefHeight="46.0" prefWidth="190.0" text="Numero">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox alignment="CENTER" layoutX="108.0" layoutY="10.0" prefHeight="356.0" prefWidth="195.0" spacing="5.0">
+                                 <children>
+                                    <Label fx:id="lbNomStade" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="190.0">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbLieuStade" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="46.0" prefWidth="190.0">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbCapacityStade" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="56.0" prefHeight="46.0" prefWidth="190.0">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbNumeroStade" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="103.0" prefHeight="46.0" prefWidth="190.0">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Label layoutX="80.0" layoutY="38.0" prefHeight="56.0" prefWidth="397.0" text="Gestion Stade : " textFill="#1f3d1c">
+                     <font>
+                        <Font size="40.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" layoutX="75.0" layoutY="581.0" prefHeight="100.0" prefWidth="809.0" spacing="20.0">
+                     <children>
+                        <Button fx:id="btnAddStade" mnemonicParsing="false" onAction="#fnAddStade" prefHeight="60.0" prefWidth="202.0" style="-fx-background-color: #688A38;" text="Add" textFill="WHITE">
+                           <font>
+                              <Font name="Wingdings" size="31.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="41.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../java/images/plus.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnUpdateStade" layoutX="313.0" layoutY="30.0" mnemonicParsing="false" onAction="#fnUpdateStade" prefHeight="60.0" prefWidth="202.0" style="-fx-background-color: #688A38;" text="Update" textFill="WHITE">
+                           <font>
+                              <Font name="Wingdings" size="31.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="41.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../java/images/editer.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnDeleteStade" layoutX="415.0" layoutY="30.0" mnemonicParsing="false" onAction="#fnDeleteStade" prefHeight="60.0" prefWidth="202.0" style="-fx-background-color: #688A38;" text="Delete" textFill="WHITE">
+                           <font>
+                              <Font name="Wingdings" size="31.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="41.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../java/images/poubelle-de-recyclage.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+            <Pane fx:id="pnReservation" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+               <children>
+                  <TableView fx:id="tvReservation" layoutX="93.0" layoutY="183.0" onMouseClicked="#fnReservationSelected" prefHeight="474.0" prefWidth="662.0">
+                    <columns>
+                      <TableColumn fx:id="colIdReservation" prefWidth="75.0" text="id" />
+                      <TableColumn fx:id="colStadeReservation" prefWidth="75.0" text="Stade" />
+                        <TableColumn fx:id="colIdPreEqReservation" prefWidth="120.0" text="id_Premier_Equipe" />
+                        <TableColumn fx:id="colDeuEqReservation" prefWidth="130.0" text="id_Deuxieme_Equipe" />
+                        <TableColumn fx:id="colDateReservation" prefWidth="130.0" text="Date" />
+                        <TableColumn fx:id="colIdOrgaReservation" prefWidth="130.0" text="Id_Organisateur" />
+                    </columns>
+                  </TableView>
+                  <TextField fx:id="tfSearchReservation" layoutX="93.0" layoutY="137.0" prefHeight="25.0" prefWidth="325.0" promptText="Rechercher" />
+                  <Label layoutX="93.0" layoutY="35.0" prefHeight="56.0" prefWidth="397.0" text="Reservations : " textFill="#1f3d1c">
+                     <font>
+                        <Font size="40.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btnDeleteReservation" layoutX="93.0" layoutY="699.0" mnemonicParsing="false" onAction="#fnDeleteReservation" prefHeight="60.0" prefWidth="202.0" style="-fx-background-color: #688A38;" text="Delete" textFill="WHITE">
+                     <font>
+                        <Font name="Wingdings" size="31.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="41.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../java/images/poubelle-de-recyclage.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </Pane>
+         </children>
+      </StackPane>
+      <VBox alignment="TOP_CENTER" layoutX="1.0" layoutY="1.0" prefHeight="685.0" prefWidth="258.0" spacing="20.0">
+         <children>
+            <ImageView fitHeight="194.0" fitWidth="255.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="btnStadeList" mnemonicParsing="false" onAction="#fnStadeList" prefHeight="70.0" prefWidth="236.0" style="-fx-background-color: #688A38;" text="Stade" textFill="#1f3d1c">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <font>
+                  <Font name="Wingdings" size="31.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnReservationList" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#fnReservationList" prefHeight="75.0" prefWidth="234.0" style="-fx-background-color: #688A38;" text="Reservations" textFill="#1f3d1c">
+               <font>
+                  <Font name="Wingdings" size="31.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <Button fx:id="btn_logOut" layoutX="13.0" layoutY="697.0" mnemonicParsing="false" onAction="#fnLogOut" prefHeight="56.0" prefWidth="230.0" style="-fx-background-color: #688A38;" text="Log out" textFill="#1f3d1c">
+         <font>
+            <Font name="Wingdings" size="31.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

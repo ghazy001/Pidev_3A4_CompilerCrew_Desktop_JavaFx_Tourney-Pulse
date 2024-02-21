@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #C3CFB6;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Stade_FrontController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="685.0" prefWidth="258.0" spacing="20.0">
+         <children>
+            <ImageView fitHeight="194.0" fitWidth="255.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="btnStadeList" mnemonicParsing="false" onAction="#fnStadeList" prefHeight="70.0" prefWidth="236.0" style="-fx-background-color: #688A38;" text="Stade" textFill="#1f3d1c">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <font>
+                  <Font name="Wingdings" size="31.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnReservationList" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#fnReservationList" prefHeight="75.0" prefWidth="234.0" style="-fx-background-color: #688A38;" text="Mes Reservations" textFill="#1f3d1c">
+               <font>
+                  <Font name="Wingdings" size="25.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <Button fx:id="btn_logOut" layoutX="25.0" layoutY="704.0" mnemonicParsing="false" onAction="#fnLogOut" prefHeight="56.0" prefWidth="230.0" style="-fx-background-color: #688A38;" text="Log out" textFill="#1f3d1c">
+         <font>
+            <Font name="Wingdings" size="31.0" />
+         </font>
+      </Button>
+      <StackPane layoutX="274.0" layoutY="3.0" prefHeight="797.0" prefWidth="927.0">
+         <children>
+            <Pane fx:id="pnMesReservation" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+               <children>
+                  <TableView fx:id="tvReservation" layoutX="69.0" layoutY="212.0" onMouseClicked="#fnReservationSelected" prefHeight="474.0" prefWidth="458.0">
+                     <columns>
+                        <TableColumn fx:id="colStadeReservation" prefWidth="75.0" text="Stade" />
+                        <TableColumn fx:id="colIdPreEqReservation" prefWidth="120.0" text="id_Premier_Equipe" />
+                        <TableColumn fx:id="colDeuEqReservation" prefWidth="130.0" text="id_Deuxieme_Equipe" />
+                        <TableColumn fx:id="colDateReservation" prefWidth="130.0" text="Date" />
+                     </columns>
+                  </TableView>
+                  <VBox fx:id="hbDetailsStade" layoutX="537.0" layoutY="213.0" prefHeight="349.0" prefWidth="379.0" visible="false">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="btnPreviousStade" mnemonicParsing="false" onAction="#fnPreviousStade" text="&lt;" />
+                              <ImageView fx:id="ImgViewStade" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                              <Button fx:id="btnNextStade" mnemonicParsing="false" onAction="#fnNext" text="&gt;" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_CENTER" prefHeight="356.0" prefWidth="370.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="356.0" prefWidth="194.0" spacing="5.0">
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="190.0" text="Nom">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="46.0" prefWidth="190.0" text="Lieu">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="56.0" prefHeight="46.0" prefWidth="190.0" text="Capacity">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="103.0" prefHeight="46.0" prefWidth="190.0" text="Numero">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox alignment="CENTER" layoutX="108.0" layoutY="10.0" prefHeight="356.0" prefWidth="195.0" spacing="5.0">
+                                 <children>
+                                    <Label fx:id="lbNomStade" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="190.0">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbLieuStade" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="46.0" prefWidth="190.0">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbCapacityStade" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="56.0" prefHeight="46.0" prefWidth="190.0">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbNumeroStade" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="103.0" prefHeight="46.0" prefWidth="190.0">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Button fx:id="btnModifierReservation" layoutX="543.0" layoutY="618.0" mnemonicParsing="false" onAction="#fnModifier" prefHeight="59.0" prefWidth="177.0" style="-fx-background-color: #688A38;" text="Modifier" textFill="WHITE" visible="false">
+                     <font>
+                        <Font name="Wingdings" size="31.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnSupprimerReservation" layoutX="728.0" layoutY="618.0" mnemonicParsing="false" onAction="#fnSupprimer" prefHeight="59.0" prefWidth="185.0" style="-fx-background-color: #688A38;" text="Supprimer" textFill="WHITE" visible="false">
+                     <font>
+                        <Font name="Wingdings" size="31.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="67.0" layoutY="69.0" prefHeight="56.0" prefWidth="397.0" text="Mes Reservations :" textFill="#1f3d1c">
+                     <font>
+                        <Font size="40.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="pnModifierReservation" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+               <children>
+                  <VBox fx:id="hbDetailsStadeUpdate" layoutX="540.0" layoutY="183.0" prefHeight="349.0" prefWidth="379.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="btnPreviousStadeUpdate" mnemonicParsing="false" onAction="#fnPreviousStadeUpdate" text="&lt;" />
+                              <ImageView fx:id="ImgViewStadeUpdate" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                              <Button fx:id="btnNextStadeUpdate" mnemonicParsing="false" onAction="#fnNextUpdate" text="&gt;" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_CENTER" prefHeight="356.0" prefWidth="370.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="356.0" prefWidth="194.0" spacing="5.0">
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="190.0" text="Nom">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="46.0" prefWidth="190.0" text="Lieu">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="56.0" prefHeight="46.0" prefWidth="190.0" text="Capacity">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="103.0" prefHeight="46.0" prefWidth="190.0" text="Numero">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox alignment="CENTER" layoutX="108.0" layoutY="10.0" prefHeight="356.0" prefWidth="195.0" spacing="5.0">
+                                 <children>
+                                    <Label fx:id="lbNomStadeUpdate" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="190.0">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbLieuStadeUpdate" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="46.0" prefWidth="190.0">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbCapacityStadeUpdate" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="56.0" prefHeight="46.0" prefWidth="190.0">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbNumeroStadeUpdate" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="103.0" prefHeight="46.0" prefWidth="190.0">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" layoutX="95.0" layoutY="221.0" prefHeight="367.0" prefWidth="397.0">
+                     <children>
+                        <HBox prefHeight="314.0" prefWidth="397.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="308.0" prefWidth="200.0" spacing="80.0">
+                                 <children>
+                                    <Label prefHeight="36.0" prefWidth="199.0" text="Stade :">
+                                       <font>
+                                          <Font size="33.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="10.0" prefHeight="58.0" prefWidth="199.0" text="Date :">
+                                       <font>
+                                          <Font size="33.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="308.0" prefWidth="200.0" spacing="100.0">
+                                 <children>
+                                    <ComboBox fx:id="cbStade" onAction="#fnChangeStade" prefHeight="45.0" prefWidth="201.0" />
+                                    <DatePicker fx:id="tfDateModifier" prefHeight="49.0" prefWidth="210.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <Button fx:id="btnModifierConfirmer" mnemonicParsing="false" onAction="#fnConfirmerUpdate" prefHeight="56.0" prefWidth="230.0" style="-fx-background-color: #688A38;" text="Modifier" textFill="WHITE">
+                           <font>
+                              <Font name="Wingdings" size="31.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <Label layoutX="79.0" layoutY="76.0" prefHeight="56.0" prefWidth="397.0" text="Modifier Reservation :" textFill="#1f3d1c">
+                     <font>
+                        <Font size="40.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="pnStade" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+               <children>
+                  <ScrollPane fx:id="scrollPaneStade" layoutX="14.0" layoutY="125.0" prefHeight="337.0" prefWidth="884.0" />
+                  <Label layoutX="19.0" layoutY="35.0" prefHeight="56.0" prefWidth="397.0" text="Stades :" textFill="#1f3d1c">
+                     <font>
+                        <Font size="40.0" />
+                     </font>
+                  </Label>
+                  <VBox fx:id="vbReserverStade" alignment="CENTER" layoutX="144.0" layoutY="548.0" prefHeight="216.0" prefWidth="596.0" visible="false">
+                     <children>
+                        <HBox prefHeight="165.0" prefWidth="596.0" spacing="30.0">
+                           <children>
+                              <VBox prefHeight="157.0" prefWidth="277.0">
+                                 <children>
+                                    <Label prefHeight="56.0" prefWidth="293.0" text="Premiere Equipe">
+                                       <font>
+                                          <Font name="Wingdings" size="29.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="10.0" prefHeight="56.0" prefWidth="293.0" text="Deuxieme Equipe">
+                                       <font>
+                                          <Font name="Wingdings" size="29.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="66.0" prefHeight="56.0" prefWidth="293.0" text="Date">
+                                       <font>
+                                          <Font name="Wingdings" size="29.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox layoutX="10.0" layoutY="10.0" prefHeight="157.0" prefWidth="290.0">
+                                 <children>
+                                    <TextField fx:id="tfPremierEquipe" prefHeight="50.0" prefWidth="290.0" />
+                                    <TextField fx:id="tfDeusiemeEquipe" layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="290.0" />
+                                    <DatePicker fx:id="tfDateReservation" prefHeight="57.0" prefWidth="293.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <Button fx:id="btnReserver" mnemonicParsing="false" onAction="#fnReserver" prefHeight="56.0" prefWidth="230.0" style="-fx-background-color: #688A38;" text="Reserver" textFill="WHITE">
+                           <font>
+                              <Font name="Wingdings" size="31.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <Label fx:id="lbIdstade" layoutX="510.0" layoutY="76.0" visible="false" />
+               </children></Pane>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>
