@@ -3,7 +3,7 @@ package edu.esprit.entities;
 import java.util.Date;
 import java.util.Objects;
 
-public class tournois {
+public class Tournois {
     private int id_tournois;
     private String nom_tournois;
     private String address_tournois;
@@ -11,10 +11,10 @@ public class tournois {
     private Date date_debut;
     private Date date_fin;
 
-    public tournois() {
+    public Tournois() {
     }
 
-    public tournois(String nom_tournois, String address_tournois, int nombre_match, Date date_debut, Date date_fin) {
+    public Tournois(String nom_tournois, String address_tournois, int nombre_match, Date date_debut, Date date_fin) {
         this.nom_tournois = nom_tournois;
         this.address_tournois = address_tournois;
         this.nombre_match = nombre_match;
@@ -22,7 +22,7 @@ public class tournois {
         this.date_fin = date_fin;
     }
 
-    public tournois(int id_tournois, String nom_tournois, String address_tournois, int nombre_match, Date date_debut, Date date_fin) {
+    public Tournois(int id_tournois, String nom_tournois, String address_tournois, int nombre_match, Date date_debut, Date date_fin) {
         this.id_tournois = id_tournois;
         this.nom_tournois = nom_tournois;
         this.address_tournois = address_tournois;
@@ -83,7 +83,7 @@ public class tournois {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        tournois tournois = (tournois) o;
+        Tournois tournois = (Tournois) o;
         return id_tournois == tournois.id_tournois && Objects.equals(nom_tournois, tournois.nom_tournois) && Objects.equals(address_tournois, tournois.address_tournois) && Objects.equals(nombre_match, tournois.nombre_match) && Objects.equals(date_debut, tournois.date_debut) && Objects.equals(date_fin, tournois.date_fin);
     }
 

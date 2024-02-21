@@ -3,28 +3,31 @@ package edu.esprit.entities;
 import java.util.Date;
 import java.util.Objects;
 
-public class matchs {
+public class Matchs {
 
     private int id_match;
     private String nom_match;
     private Date date_match;
     private String duree_match;
-    private tournois id_tournois;
+    private Tournois tournois;
 
 
-    public matchs(String nom_match, Date date_match, String duree_match, tournois id_tournois) {
+    public Matchs() {
+    }
+
+    public Matchs(String nom_match, Date date_match, String duree_match, Tournois id_tournois) {
         this.nom_match = nom_match;
         this.date_match = date_match;
         this.duree_match = duree_match;
-        this.id_tournois = id_tournois;
+        this.tournois = id_tournois;
     }
 
-    public matchs(int id_match, String nom_match, Date date_match, String duree_match, tournois id_tournois) {
+    public Matchs(int id_match, String nom_match, Date date_match, String duree_match, Tournois id_tournois) {
         this.id_match = id_match;
         this.nom_match = nom_match;
         this.date_match = date_match;
         this.duree_match = duree_match;
-        this.id_tournois = id_tournois;
+        this.tournois = id_tournois;
     }
 
     public int getId_match() {
@@ -59,25 +62,25 @@ public class matchs {
         this.duree_match = duree_match;
     }
 
-    public tournois getId_tournois() {
-        return id_tournois;
+    public Tournois getTournois() {
+        return tournois;
     }
 
-    public void setId_tournois(tournois id_tournois) {
-        this.id_tournois = id_tournois;
+    public void setTournois(Tournois tournois) {
+        this.tournois = tournois;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        matchs matchs = (matchs) o;
-        return id_match == matchs.id_match && Objects.equals(nom_match, matchs.nom_match) && Objects.equals(date_match, matchs.date_match) && Objects.equals(duree_match, matchs.duree_match) && Objects.equals(id_tournois, matchs.id_tournois);
+        Matchs matchs = (Matchs) o;
+        return id_match == matchs.id_match && Objects.equals(nom_match, matchs.nom_match) && Objects.equals(date_match, matchs.date_match) && Objects.equals(duree_match, matchs.duree_match) && Objects.equals(tournois, matchs.tournois);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_match, nom_match, date_match, duree_match, id_tournois);
+        return Objects.hash(id_match, nom_match, date_match, duree_match, tournois);
     }
 
     @Override
@@ -87,7 +90,7 @@ public class matchs {
                 ", nom_match='" + nom_match + '\'' +
                 ", date_match='" + date_match + '\'' +
                 ", duree_match='" + duree_match + '\'' +
-                ", id_tournois=" + id_tournois +
+                ", tournois=" + tournois +
                 '}';
     }
 }

@@ -1,17 +1,20 @@
 package edu.esprit.services;
 
-import edu.esprit.entities.tournois;
+import com.mysql.cj.x.protobuf.MysqlxCrud;
+import edu.esprit.entities.Tournois;
 import edu.esprit.utils.DataSource;
-import edu.esprit.services.InterfaceService;
+import javafx.scene.control.Alert;
 
 import java.sql.*;
+import java.util.HashSet;
+import java.util.Set;
 
-public class ServiceTournois implements InterfaceService<tournois> {
+public class ServiceTournois implements InterfaceService<Tournois> {
 
     PreparedStatement prepare;
     Connection connection;
     @Override
-    public void ajouter(tournois tournois) {
+    public void ajouter(Tournois tournois) {
         connection = DataSource.getInsatnce().getConnection();
 
 
@@ -32,7 +35,7 @@ public class ServiceTournois implements InterfaceService<tournois> {
     }
 
     @Override
-    public void modifier(int id, tournois tournois) {
+    public void modifier(int id, Tournois tournois) {
         connection = DataSource.getInsatnce().getConnection();
 
         String sql = "UPDATE `tournois` SET nom_tournois = ?, address_tournois = ?, nombre_match = ?, date_debut = ?, date_fin = ? WHERE id_tournois = ?";
@@ -48,15 +51,13 @@ public class ServiceTournois implements InterfaceService<tournois> {
             prepare.setInt(6, id);
 
             prepare.executeUpdate();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Gestion Des Tournois");
 
+            alert.setHeaderText("Gestion Des Tournois");
+            alert.setContentText("Tournois Modifier!");
+            alert.showAndWait();
 
-            int rowsAffected = prepare.executeUpdate();
-
-            if (rowsAffected > 0) {
-                System.out.println("Tournois with ID " + id + " modified successfully.");
-            } else {
-                System.out.println("Tournois with ID " + id + " not found or failed to modify.");
-            }
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -75,13 +76,14 @@ public class ServiceTournois implements InterfaceService<tournois> {
 
             prepare.setInt(1, id);
 
-            int rowsAffected = prepare.executeUpdate();
+            prepare.executeUpdate();
 
-            if (rowsAffected > 0) {
-                System.out.println("Tournois with ID " + id + " deleted successfully.");
-            } else {
-                System.out.println("Tournois with ID " + id + " not found or failed to delete.");
-            }
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Gestion Des Tournois");
+
+            alert.setHeaderText("Gestion Des Tournois");
+            alert.setContentText("Tournois supprimer!");
+            alert.showAndWait();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -115,5 +117,47 @@ public class ServiceTournois implements InterfaceService<tournois> {
         }
     }
 
+    @Override
+    public Tournois getOneById(int id) throws SQLException {
+        return null;
     }
+
+    @Override
+    public Set<Tournois> getAll() throws SQLException {
+        Set<Tournois> tournois = new HashSet<>();
+        connection = DataSource.getInsatnce().getConnection();
+
+        String sql = "SELECT * FROM `tournois`";
+
+        try {
+            Statement prepare = connection.createStatement();
+
+
+            ResultSet resultSet = prepare.executeQuery(sql);
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id_tournois");
+                String nomTournois = resultSet.getString("nom_tournois");
+                String addressTournois = resultSet.getString("address_tournois");
+                int nombreMatch =resultSet.getInt("nombre_match");
+                Date dateDebut = resultSet.getDate("date_debut");
+                Date dateFin = resultSet.getDate("date_fin");
+                Tournois t = new Tournois();
+                t.setId_tournois(id);
+                t.setNom_tournoi(nomTournois);
+                t.setAddress_tournois(addressTournois);
+                t.setNombre_match(nombreMatch);
+                t.setDate_debut(dateDebut);
+                t.setDate_fin(dateFin);
+                tournois.add(t);
+            }
+
+        } catch (SQLException ex) {
+            System.out.print(ex.getMessage());
+        }
+        return tournois;
+    }
+
+
+}
 

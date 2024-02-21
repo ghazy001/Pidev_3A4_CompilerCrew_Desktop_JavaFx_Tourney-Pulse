@@ -1,7 +1,7 @@
 package edu.esprit.test;
 
-import edu.esprit.entities.matchs;
-import edu.esprit.entities.tournois;
+import edu.esprit.entities.Matchs;
+import edu.esprit.entities.Tournois;
 import edu.esprit.services.ServiceMatch;
 import edu.esprit.services.ServiceTournois;
 import edu.esprit.utils.DataSource;
@@ -26,7 +26,7 @@ public class Main {
         Date dateF = sdf.parse("2024-05-20");
         java.sql.Date sqlDateF = new java.sql.Date(dateF.getTime());
 
-        tournois t = new tournois("La Ligua","Tunis Rue Habib Borguiba", 16, sqlDateD, sqlDateF);
+        Tournois t = new Tournois("La Ligua","Tunis Rue Habib Borguiba", 16, sqlDateD, sqlDateF);
         ServiceTournois servicee = new ServiceTournois();
 
         servicee.ajouter(t);
@@ -38,8 +38,8 @@ public class Main {
         Date dateF1 = sdf.parse("2024-05-20");
         java.sql.Date sqlDateF1 = new java.sql.Date(dateF1.getTime());
 
-        tournois t1 = new tournois("Champions","Ariana", 20, sqlDateD1, sqlDateF1);
-        servicee.modifier(3,t1);
+        Tournois t1 = new Tournois("Champions","Ariana", 20, sqlDateD1, sqlDateF1);
+        servicee.modifier(1,t1);
         servicee.afficher();
 
         System.out.println("*********** Les Matchs ******************");
@@ -47,10 +47,10 @@ public class Main {
         Date dateM = sdf.parse("2024-10-10");
         java.sql.Date sqlDateM = new java.sql.Date(dateM.getTime());
 
-        tournois tournoisForMatch = new tournois();
+        Tournois tournoisForMatch = new Tournois();
         tournoisForMatch.setId_tournois(1);
 
-        matchs m = new matchs("Demi Final",sqlDateM,"90 min",tournoisForMatch);
+        Matchs m = new Matchs("Demi Final",sqlDateM,"90 min",tournoisForMatch);
         ServiceMatch service = new ServiceMatch();
 
         service.ajouter(m);
@@ -59,11 +59,11 @@ public class Main {
         Date dateM1 = sdf.parse("2024-08-03");
         java.sql.Date sqlDateM1 = new java.sql.Date(dateM1.getTime());
 
-        tournois tournoisForMatch1 = new tournois();
+        Tournois tournoisForMatch1 = new Tournois();
         tournoisForMatch1.setId_tournois(2);
 
-        matchs m1 = new matchs("Final",sqlDateM1,"90 min",tournoisForMatch1);
-        service.modifier(3,m1);
+        Matchs m1 = new Matchs("Final",sqlDateM1,"90 min",tournoisForMatch1);
+        service.modifier(2, m1);
         service.afficher();
 
     }
