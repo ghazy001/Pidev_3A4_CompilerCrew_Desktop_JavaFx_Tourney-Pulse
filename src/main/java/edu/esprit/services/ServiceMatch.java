@@ -38,7 +38,7 @@ public class ServiceMatch implements InterfaceService<Matchs> {
     public void modifier(Matchs matchs) {
             connection = DataSource.getInsatnce().getConnection();
 
-        String sql = "UPDATE `match` SET `nom_match` = ?, `date_match` = ?, `duree_match` = ?, `id_tournois` = ? WHERE `id_match` = ?";
+        String sql = "UPDATE `match` SET `nom_match` = ?, `date_match` = ?, `duree_match` = ?, `id_tournois` = ?";
 
         try {
             prepare = connection.prepareStatement(sql);
@@ -76,6 +76,8 @@ public class ServiceMatch implements InterfaceService<Matchs> {
                 prepare = connection.prepareStatement(sql);
 
                 prepare.setInt(1, id);
+
+                prepare.executeUpdate();
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Gestion Des Matchs");
@@ -138,7 +140,7 @@ public class ServiceMatch implements InterfaceService<Matchs> {
                 String nomMatch = resultSet.getString("nom_match");
                 Date dateMatch = resultSet.getDate("date_match");
                 String dureeMatch = resultSet.getString("duree_match");
-                int idTournois = resultSet.getInt("nom_tournois");
+                int idTournois = resultSet.getInt("id_tournois");
                 String nomTournois = resultSet.getString("nom_tournois");
 
                 Matchs m = new Matchs();

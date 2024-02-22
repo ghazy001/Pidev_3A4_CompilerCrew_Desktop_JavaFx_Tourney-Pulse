@@ -25,7 +25,7 @@
             <Font name="Wingdings" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="91.0" layoutY="456.0" prefHeight="30.0" prefWidth="142.0" text="Nom Tournois" textFill="#456e41">
+      <Label layoutX="91.0" layoutY="456.0" prefHeight="30.0" prefWidth="142.0" text="ID Tournois" textFill="#456e41">
          <font>
             <Font name="Wingdings" size="23.0" />
          </font>

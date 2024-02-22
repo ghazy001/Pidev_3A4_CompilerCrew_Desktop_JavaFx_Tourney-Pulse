@@ -68,7 +68,7 @@ public class AfficherMatch implements Initializable {
                     Parent root = FXMLLoader.load(getClass().getResource("/AfficherTournois.fxml"));
 
                     // Create a Scene with custom dimensions
-                    Scene scene = new Scene(root, 800, 600); // Adjust width and height as needed
+                    Scene scene = new Scene(root); // Adjust width and height as needed
 
                     // Get the current stage
                     Stage stage = (Stage) TFnomm.getScene().getWindow();
@@ -97,7 +97,7 @@ public class AfficherMatch implements Initializable {
             Label nommLabel = new Label("Nom: " + matchs.getNom_match());
             Label dateLabel = new Label("Date: " + matchs.getDate_match());
             Label dureeLabel = new Label("Duree: " + matchs.getDuree_match());
-            Label idtLabel = new Label("Nom Tournois: " + matchs.getId_tournois());
+            Label idtLabel = new Label("Nom Tournois: " + matchs.getId_tournois().getNom_tournois());
 
             GridPane gridPane = new GridPane();
             gridPane.add(idmLabel, 0, 0);
@@ -106,7 +106,7 @@ public class AfficherMatch implements Initializable {
             gridPane.add(dureeLabel, 0, 3);
             gridPane.add(idtLabel, 0, 4);
 
-            TitledPane titledPane = new TitledPane("Tournois " + matchs.getId_tournois(), gridPane);
+            TitledPane titledPane = new TitledPane("Tournois " + matchs.getId_match(), gridPane);
 
 
             titledPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -116,7 +116,7 @@ public class AfficherMatch implements Initializable {
                     selectedNomm = matchs.getNom_match();
                     selectedDate = String.valueOf(matchs.getDate_match());
                     selectedDuree = matchs.getDuree_match();
-                    selectedIdt = String.valueOf(matchs.getId_tournois());
+                    selectedIdt = matchs.getId_tournois().getNom_tournois();
 
                     // Perform any action with the selected values
                     System.out.println("Selected ID: " + selectedIdm);
@@ -137,14 +137,14 @@ public class AfficherMatch implements Initializable {
 
             Vboxx.getChildren().add(titledPane);
         }
-        loadData1();
+        loadData();
 
         Bsuppm.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 if (selectedIdm != null) {
                     serviceMatch.supprimer(Integer.parseInt(selectedIdm));
-                    loadData1();
+                    loadData();
                 }
             }
 
@@ -171,7 +171,7 @@ public class AfficherMatch implements Initializable {
                     tournois.setId_tournois(idTour);
                     Date sqlDateM = new Date(dateM.getTime());
                     serviceMatch.modifier(new Matchs(TFnomm.getText(), sqlDateM, TFdureem.getText(), tournois));
-                    loadData1();
+                    loadData();
                 }
             }
 
@@ -203,7 +203,7 @@ public class AfficherMatch implements Initializable {
                 alert.setTitle("Success");
                 alert.setContentText("Match ajouter!");
                 alert.show();
-                loadData1();
+                loadData();
 
                 LocalDate t = null;
                 TFnomm.setText("");
@@ -226,7 +226,7 @@ public class AfficherMatch implements Initializable {
 
     }
 
-    private void loadData1() {
+    private void loadData() {
         Vboxx.getChildren().clear(); // Clear existing display
         List<Matchs> matchsList = serviceMatch.getAll();
         System.out.println("Match List: " + matchsList); // Print the list
@@ -238,7 +238,7 @@ public class AfficherMatch implements Initializable {
             Label nommLabel = new Label("Nom: " + matchs.getNom_match());
             Label dateLabel = new Label("Date: " + matchs.getDate_match());
             Label dureeLabel = new Label("Duree: " + matchs.getDuree_match());
-            Label idtLabel = new Label("Nom Tournois: " + matchs.getId_tournois());
+            Label idtLabel = new Label("Nom Tournois: " + matchs.getId_tournois().getNom_tournois());
 
             GridPane gridPane = new GridPane();
             gridPane.add(idmLabel, 0, 0);
@@ -247,7 +247,7 @@ public class AfficherMatch implements Initializable {
             gridPane.add(dureeLabel, 0, 3);
             gridPane.add(idtLabel, 0, 4);
 
-            TitledPane titledPane = new TitledPane("Tournois " + matchs.getId_tournois(), gridPane);
+            TitledPane titledPane = new TitledPane("Match " + matchs.getId_match(), gridPane);
 
 
             titledPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -257,14 +257,14 @@ public class AfficherMatch implements Initializable {
                     selectedNomm = matchs.getNom_match();
                     selectedDate = String.valueOf(matchs.getDate_match());
                     selectedDuree = matchs.getDuree_match();
-                    selectedIdt = String.valueOf(matchs.getId_tournois());
+                    selectedIdt = matchs.getId_tournois().getNom_tournois();
 
                     // Perform any action with the selected values
                     System.out.println("Selected ID: " + selectedIdm);
                     System.out.println("Selected Nom: " + selectedNomm);
                     System.out.println("Selected Date: " + selectedDate);
                     System.out.println("Selected Duree: " + selectedDuree);
-                    System.out.println("Selected ID Tournois: " + selectedIdt);
+                    System.out.println("Selected Nom Tournois: " + selectedIdt);
 
                     TFnomm.setText(selectedNomm);
                     LocalDate dateMatch = Date.valueOf(selectedDate).toLocalDate();

@@ -71,7 +71,7 @@ public class AfficherTournois implements Initializable {
                                         Parent root = FXMLLoader.load(getClass().getResource("/AfficherMatch.fxml"));
 
                                         // Create a Scene with custom dimensions
-                                        Scene scene = new Scene(root, 800, 600); // Adjust width and height as needed
+                                        Scene scene = new Scene(root); // Adjust width and height as needed
 
                                         // Get the current stage
                                         Stage stage = (Stage) TFnom.getScene().getWindow();
@@ -118,7 +118,7 @@ public class AfficherTournois implements Initializable {
                                         @Override
                                         public void handle(MouseEvent mouseEvent) {
                                                 selectedIdt = "" + tournois.getId_tournois();
-                                                selectedNomt = "" + tournois.getNom_tournois();
+                                                selectedNomt = tournois.getNom_tournois();
                                                 selectedAddress = tournois.getAddress_tournois();
                                                 selectedNombrem = String.valueOf(tournois.getNombre_match());
                                                 selectedDated = String.valueOf(tournois.getDate_debut());
