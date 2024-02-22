@@ -46,6 +46,9 @@ public class AfficherTournois implements Initializable {
         private DatePicker TFdatef;
 
         @FXML
+        private TextField TFid;
+
+        @FXML
         private TextField TFnbrmatch;
 
         @FXML
@@ -132,6 +135,7 @@ public class AfficherTournois implements Initializable {
                                                 System.out.println("Selected Date Debut: " + selectedDated);
                                                 System.out.println("Selected Date Fin: " + selectedDatef);
 
+                                                TFid.setText(selectedIdt);
                                                 TFnom.setText(selectedNomt);
                                                 TFaddress.setText(selectedAddress);
                                                 TFnbrmatch.setText(selectedNombrem);
@@ -154,6 +158,14 @@ public class AfficherTournois implements Initializable {
                                         if (selectedIdt != null) {
                                                 serviceTournois.supprimer(Integer.parseInt(selectedIdt));
                                                 loadData();
+                                                LocalDate t = null;
+                                                TFid.setText("");
+                                                TFnom.setText("");
+                                                TFaddress.setText("");
+                                                TFnbrmatch.setText("");
+                                                TFdated.setValue(t);
+                                                TFdatef.setValue(t);
+                                                TFnom.requestFocus();
                                         }
                                 }
 
@@ -180,8 +192,16 @@ public class AfficherTournois implements Initializable {
                                                 }
                                                 Date sqlDateD = new Date(dateD.getTime());
                                                 Date sqlDateF = new Date(dateF.getTime());
-                                                serviceTournois.modifier(new Tournois(TFnom.getText(), TFaddress.getText(), nbrMatch, sqlDateD, sqlDateF));
+                                                serviceTournois.modifier(new Tournois(Integer.parseInt(TFid.getText()),TFnom.getText(), TFaddress.getText(), nbrMatch, sqlDateD, sqlDateF));
                                                 loadData();
+                                                LocalDate t = null;
+                                                TFid.setText("");
+                                                TFnom.setText("");
+                                                TFaddress.setText("");
+                                                TFnbrmatch.setText("");
+                                                TFdated.setValue(t);
+                                                TFdatef.setValue(t);
+                                                TFnom.requestFocus();
                                         }
                                 }
 
@@ -272,7 +292,7 @@ public class AfficherTournois implements Initializable {
                                 @Override
                                 public void handle(MouseEvent mouseEvent) {
                                         selectedIdt = "" + tournois.getId_tournois();
-                                        selectedNomt = "" + tournois.getNom_tournois();
+                                        selectedNomt = tournois.getNom_tournois();
                                         selectedAddress = tournois.getAddress_tournois();
                                         selectedNombrem = String.valueOf(tournois.getNombre_match());
                                         selectedDated = String.valueOf(tournois.getDate_debut());
@@ -286,6 +306,7 @@ public class AfficherTournois implements Initializable {
                                         System.out.println("Selected Date Debut: " + selectedDated);
                                         System.out.println("Selected Date Fin: " + selectedDatef);
 
+                                        TFid.setText(selectedIdt);
                                         TFnom.setText(selectedNomt);
                                         TFaddress.setText(selectedAddress);
                                         TFnbrmatch.setText(selectedNombrem);

@@ -43,6 +43,9 @@ public class AfficherMatch implements Initializable {
         private TextField TFdureem;
 
         @FXML
+        private TextField TFidm;
+
+        @FXML
         private TextField TFnomm;
 
         @FXML
@@ -116,7 +119,7 @@ public class AfficherMatch implements Initializable {
                     selectedNomm = matchs.getNom_match();
                     selectedDate = String.valueOf(matchs.getDate_match());
                     selectedDuree = matchs.getDuree_match();
-                    selectedIdt = matchs.getId_tournois().getNom_tournois();
+                    selectedIdt = String.valueOf(matchs.getId_tournois().getId_tournois());
 
                     // Perform any action with the selected values
                     System.out.println("Selected ID: " + selectedIdm);
@@ -125,6 +128,8 @@ public class AfficherMatch implements Initializable {
                     System.out.println("Selected Duree: " + selectedDuree);
                     System.out.println("Selected ID Tournois: " + selectedIdt);
 
+
+                    TFidm.setText(selectedIdm);
                     TFnomm.setText(selectedNomm);
                     LocalDate dateMatch = Date.valueOf(selectedDate).toLocalDate();
                     TFdatem.setValue(dateMatch);
@@ -145,6 +150,13 @@ public class AfficherMatch implements Initializable {
                 if (selectedIdm != null) {
                     serviceMatch.supprimer(Integer.parseInt(selectedIdm));
                     loadData();
+                    LocalDate t = null;
+                    TFidm.setText("");
+                    TFnomm.setText("");
+                    TFdatem.setValue(t);
+                    TFdureem.setText("");
+                    TFidt.setText("");
+                    TFnomm.requestFocus();
                 }
             }
 
@@ -155,23 +167,29 @@ public class AfficherMatch implements Initializable {
             public void handle(ActionEvent actionEvent) {
 
                 if (selectedIdm != null) {
-                    String idTourText = TFidt.getText();
-                    int idTour;
+                    int idTourText;
                     String dateMText = String.valueOf(TFdatem.getValue());
                     java.util.Date dateM;
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     try {
-                        idTour = Integer.parseInt(idTourText);
+                        idTourText = Integer.parseInt(TFidt.getText());
                         dateM = sdf.parse(dateMText);
                     } catch (ParseException e) {
                         throw new RuntimeException(e);
                     }
 
                     Tournois tournois = new Tournois();
-                    tournois.setId_tournois(idTour);
+                    tournois.setId_tournois(idTourText);
                     Date sqlDateM = new Date(dateM.getTime());
-                    serviceMatch.modifier(new Matchs(TFnomm.getText(), sqlDateM, TFdureem.getText(), tournois));
+                    serviceMatch.modifier(new Matchs(Integer.parseInt(TFidm.getText()),TFnomm.getText(), sqlDateM, TFdureem.getText(), tournois));
                     loadData();
+                    LocalDate t = null;
+                    TFidm.setText("");
+                    TFnomm.setText("");
+                    TFdatem.setValue(t);
+                    TFdureem.setText("");
+                    TFidt.setText("");
+                    TFnomm.requestFocus();
                 }
             }
 
@@ -257,7 +275,7 @@ public class AfficherMatch implements Initializable {
                     selectedNomm = matchs.getNom_match();
                     selectedDate = String.valueOf(matchs.getDate_match());
                     selectedDuree = matchs.getDuree_match();
-                    selectedIdt = matchs.getId_tournois().getNom_tournois();
+                    selectedIdt = String.valueOf(matchs.getId_tournois().getId_tournois());
 
                     // Perform any action with the selected values
                     System.out.println("Selected ID: " + selectedIdm);
@@ -266,6 +284,7 @@ public class AfficherMatch implements Initializable {
                     System.out.println("Selected Duree: " + selectedDuree);
                     System.out.println("Selected Nom Tournois: " + selectedIdt);
 
+                    TFidm.setText(selectedIdm);
                     TFnomm.setText(selectedNomm);
                     LocalDate dateMatch = Date.valueOf(selectedDate).toLocalDate();
                     TFdatem.setValue(dateMatch);

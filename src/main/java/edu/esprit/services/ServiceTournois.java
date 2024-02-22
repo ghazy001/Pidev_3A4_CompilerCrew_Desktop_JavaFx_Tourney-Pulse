@@ -37,7 +37,7 @@ public class ServiceTournois implements InterfaceService<Tournois> {
     public void modifier(Tournois tournois) {
         connection = DataSource.getInsatnce().getConnection();
 
-        String sql = "UPDATE `tournois` SET nom_tournois = ?, address_tournois = ?, nombre_match = ?, date_debut = ?, date_fin = ? ";
+        String sql = "UPDATE `tournois` SET nom_tournois = ?, address_tournois = ?, nombre_match = ?, date_debut = ?, date_fin = ? WHERE `id_tournois` = ? ";
 
         try {
              prepare = connection.prepareStatement(sql);
@@ -47,6 +47,7 @@ public class ServiceTournois implements InterfaceService<Tournois> {
             prepare.setInt(3, tournois.getNombre_match());
             prepare.setDate(4, (Date) tournois.getDate_debut());
             prepare.setDate(5, (Date) tournois.getDate_fin());
+            prepare.setInt(6, tournois.getId_tournois());
 
             prepare.executeUpdate();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

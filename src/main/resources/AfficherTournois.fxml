@@ -10,45 +10,64 @@
 
 <AnchorPane prefHeight="690.0" prefWidth="943.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controller.AfficherTournois">
    <children>
-      <Button fx:id="Bsupprimer" layoutX="691.0" layoutY="18.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="98.0" style="-fx-background-color: Green;" text="Supprimer" textFill="WHITE" />
-      <Button fx:id="Bmodifier" layoutX="162.0" layoutY="573.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="104.0" style="-fx-background-color: Green;" text="Modifier" textFill="WHITE" />
-      <TextField fx:id="TFnom" layoutX="34.0" layoutY="123.0" prefHeight="26.0" prefWidth="226.0" promptText="Nom" />
-      <TextField fx:id="TFaddress" layoutX="34.0" layoutY="224.0" prefHeight="26.0" prefWidth="226.0" promptText="Address" />
-      <TextField fx:id="TFnbrmatch" layoutX="34.0" layoutY="318.0" prefHeight="26.0" prefWidth="226.0" promptText="Nombre Match" />
-      <Label layoutX="72.0" layoutY="80.0" prefHeight="30.0" prefWidth="142.0" text="Nom Tournois" textFill="#456e41">
+      <Button fx:id="Bsupprimer" layoutX="648.0" layoutY="17.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="110.0" style="-fx-background-color: #33691e;" text="Supprimer" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Button fx:id="Bmodifier" layoutX="180.0" layoutY="573.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="110.0" style="-fx-background-color: #33691e;" text="Modifier" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <TextField fx:id="TFnom" layoutX="34.0" layoutY="222.0" prefHeight="26.0" prefWidth="226.0" promptText="Nom" />
+      <TextField fx:id="TFaddress" layoutX="34.0" layoutY="306.0" prefHeight="26.0" prefWidth="226.0" promptText="Address" />
+      <TextField fx:id="TFnbrmatch" layoutX="34.0" layoutY="387.0" prefHeight="26.0" prefWidth="226.0" promptText="Nombre Match" />
+      <Label layoutX="76.0" layoutY="178.0" prefHeight="30.0" prefWidth="142.0" text="Nom Tournois" textFill="#1b5e20">
          <font>
             <Font name="Wingdings" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="51.0" layoutY="175.0" prefHeight="30.0" prefWidth="173.0" text="Address Tournois" textFill="#456e41">
+      <Label layoutX="56.0" layoutY="260.0" prefHeight="30.0" prefWidth="173.0" text="Address Tournois" textFill="#1b5e20">
          <font>
             <Font name="Wingdings" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="70.0" layoutY="274.0" prefHeight="30.0" prefWidth="142.0" text="Nombre Match" textFill="#456e41">
+      <Label layoutX="66.0" layoutY="345.0" prefHeight="30.0" prefWidth="142.0" text="Nombre Match" textFill="#1b5e20">
          <font>
             <Font name="Wingdings" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="81.0" layoutY="369.0" prefHeight="30.0" prefWidth="118.0" text="Date Debut" textFill="#456e41">
+      <Label layoutX="88.0" layoutY="424.0" prefHeight="30.0" prefWidth="118.0" text="Date Debut" textFill="#1b5e20">
          <font>
             <Font name="Wingdings" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="88.0" layoutY="458.0" prefHeight="30.0" prefWidth="118.0" text="Date Fin" textFill="#456e41">
+      <Label layoutX="88.0" layoutY="495.0" prefHeight="30.0" prefWidth="118.0" text="Date Fin" textFill="#1b5e20">
          <font>
             <Font name="Wingdings" size="23.0" />
          </font>
       </Label>
-      <DatePicker fx:id="TFdated" layoutX="34.0" layoutY="413.0" prefHeight="26.0" prefWidth="226.0" promptText="Date Debut" />
-      <DatePicker fx:id="TFdatef" layoutX="34.0" layoutY="496.0" prefHeight="26.0" prefWidth="226.0" promptText="Date Fin" />
-      <Label layoutX="42.0" layoutY="15.0" prefHeight="42.0" prefWidth="226.0" text="Gestion Des Tournois" textAlignment="CENTER" textFill="#456e41">
+      <DatePicker fx:id="TFdated" layoutX="34.0" layoutY="468.0" prefHeight="26.0" prefWidth="226.0" promptText="Date Debut" />
+      <DatePicker fx:id="TFdatef" layoutX="34.0" layoutY="526.0" prefHeight="26.0" prefWidth="226.0" promptText="Date Fin" />
+      <Label layoutX="42.0" layoutY="15.0" prefHeight="42.0" prefWidth="226.0" text="Gestion Des Tournois" textAlignment="CENTER" textFill="#1b5e20">
          <font>
             <Font name="Agency FB Bold" size="31.0" />
          </font>
       </Label>
-      <Button layoutX="20.0" layoutY="573.0" mnemonicParsing="false" onAction="#ajouterTournoisAction" prefHeight="42.0" prefWidth="104.0" style="-fx-background-color: green;" text="Ajouter" textFill="WHITE" />
+      <Button layoutX="34.0" layoutY="573.0" mnemonicParsing="false" onAction="#ajouterTournoisAction" prefHeight="42.0" prefWidth="110.0" style="-fx-background-color: #00c853;" text="Ajouter" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
       <VBox fx:id="Vbox" layoutX="335.0" layoutY="68.0" prefHeight="554.0" prefWidth="576.0" />
-      <Button fx:id="Bnavigatet" layoutX="812.0" layoutY="18.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="98.0" style="-fx-background-color: green;" text="Gestion Match" textFill="WHITE" />
+      <Button fx:id="Bnavigatet" layoutX="781.0" layoutY="18.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="142.0" style="-fx-background-color: #00c853;" text="Gestion Match" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Label layoutX="77.0" layoutY="80.0" prefHeight="34.0" prefWidth="132.0" text="ID Tournois" textFill="#1b5e20">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <TextField fx:id="TFid" disable="true" layoutX="34.0" layoutY="130.0" prefHeight="26.0" prefWidth="226.0" promptText="ID" />
    </children>
 </AnchorPane>
