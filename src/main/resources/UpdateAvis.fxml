@@ -74,5 +74,6 @@
             </Button>
          </children>
       </VBox>
+      <VBox layoutX="500.0" prefHeight="400.0" prefWidth="110.0" style="-fx-background-color: #c3cfb6;" />
    </children>
 </AnchorPane>

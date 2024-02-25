@@ -29,6 +29,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+
+/*
+*
+   Author: Ghazi saoudi
+*
+*/
+
+
 public class AffecterPlayers implements Initializable {
 
     ServiceEquipe serviceEquipe = ServiceEquipe.getInstance();
@@ -39,6 +47,7 @@ public class AffecterPlayers implements Initializable {
     Button add;
     @FXML
     ImageView BackHome;
+
 
 
 

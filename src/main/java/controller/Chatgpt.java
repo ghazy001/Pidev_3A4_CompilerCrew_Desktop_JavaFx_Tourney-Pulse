@@ -1,5 +1,7 @@
 package controller;
 
+import io.github.cdimascio.dotenv.Dotenv;
+import io.github.cdimascio.dotenv.DotenvException;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
@@ -30,6 +32,9 @@ import javafx.fxml.FXML;
 import javafx.util.Duration;
 
 
+
+
+
 public class Chatgpt implements Initializable {
 
     @FXML
@@ -45,7 +50,26 @@ public class Chatgpt implements Initializable {
     @FXML
     private Label Ai;
 
-    private static final String API_KEY = "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";
+
+    // get the api key from varaible in .env
+    public static String api() {
+        String apiKey = null;
+
+        try {
+            Dotenv dotenv = Dotenv.load();
+            apiKey = dotenv.get("MPD");
+            System.out.println("API Key: " + apiKey);
+        } catch (DotenvException e) {
+            System.err.println("Error loading .env file: " + e.getMessage());
+        }
+
+        return apiKey;
+    }
+
+
+
+
+    private static final String API_KEY = api();
     private static final String GPT_MODEL = "gpt-3.5-turbo";
     private static final String API_URL = "https://api.openai.com/v1/chat/completions";
 
@@ -104,6 +128,9 @@ public class Chatgpt implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+
 
 
         send.setOnAction(this::handleSendButtonAction);

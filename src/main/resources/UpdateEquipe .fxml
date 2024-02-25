@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="Css/stylesheetEquipe.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UpdateEquipe">
+<AnchorPane prefHeight="395.0" prefWidth="610.0" stylesheets="Css/stylesheetEquipe.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UpdateEquipe">
    <children>
       <ImageView fx:id="image" fitHeight="150.0" fitWidth="186.0" layoutX="239.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
       <DatePicker fx:id="Dateequipe" layoutX="211.0" layoutY="263.0" prefHeight="26.0" prefWidth="197.0" />
@@ -47,5 +47,6 @@
             </Button>
          </children>
       </VBox>
+      <VBox layoutX="500.0" layoutY="-10.0" prefHeight="409.0" prefWidth="110.0" style="-fx-background-color: #c3cfb6;" />
    </children>
 </AnchorPane>
