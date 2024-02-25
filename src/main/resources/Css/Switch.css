@@ -1,0 +1,20 @@
+/* iOS-style ToggleButton CSS */
+.toggle-button {
+    -fx-background-color: #b4b4b4; /* Background color for the inactive state */
+    -fx-background-radius: 20; /* Adjust border radius as needed */
+    -fx-border-width: 0;
+}
+
+.toggle-button:selected {
+    -fx-background-color: #4CD964; /* Background color for the active state */
+}
+
+.toggle-button .thumb {
+    -fx-background-color: #ffffff; /* Color of the thumb (the moving part) */
+    -fx-background-radius: 50%; /* Make it round */
+}
+
+.toggle-button:selected .thumb {
+    -fx-translate-x: 22; /* Adjust the x-coordinate to move the thumb to the selected position */
+}
+

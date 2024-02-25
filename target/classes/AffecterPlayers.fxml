@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="home" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #c3cfb6;" stylesheets="Css/StylesheetEquipeJoueur.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AffecterPlayers">
+   <children>
+      <ComboBox fx:id="players" layoutX="39.0" layoutY="308.0" prefHeight="25.0" prefWidth="129.0" promptText="players" />
+      <ComboBox fx:id="teams" layoutX="423.0" layoutY="308.0" prefWidth="150.0" promptText="teams" />
+      <Button fx:id="add" layoutX="268.0" layoutY="320.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="64.0" text="join" />
+      <Label layoutX="423.0" layoutY="260.0" prefHeight="48.0" prefWidth="150.0" text="Select your team">
+         <font>
+            <Font name="Gill Sans Bold" size="17.0" />
+         </font></Label>
+      <Label layoutX="22.0" layoutY="260.0" prefHeight="48.0" prefWidth="179.0" text="Select your player">
+         <font>
+            <Font name="Gill Sans Bold" size="17.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="156.0" fitWidth="316.0" layoutX="142.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view">
+         <image>
+            <Image url="@media/mb.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="build" layoutX="163.0" layoutY="17.0" prefHeight="37.0" prefWidth="316.0" text="BUILD YOUR DREAM TEAM">
+         <font>
+            <Font name="Gill Sans Bold" size="21.0" />
+         </font></Label>
+      <ImageView fx:id="BackHome" fitHeight="37.0" fitWidth="34.0" layoutX="552.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@media/home.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

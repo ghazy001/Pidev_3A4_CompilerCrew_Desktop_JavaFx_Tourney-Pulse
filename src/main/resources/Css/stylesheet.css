@@ -1,0 +1,300 @@
+/* Styles for the ComboBox */
+.combo-box {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #333333;
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+/* Styles for the ComboBox arrow button */
+.combo-box .arrow-button {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #333333;
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+/* Styles for the ComboBox list view */
+.combo-box-popup .list-view {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #333333;
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+/* Styles for the ComboBox list cell */
+.combo-box-popup .list-view .list-cell {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #333333;
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+/* Styles for the ComboBox list cell text */
+.combo-box-popup .list-view .list-cell .text {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #333333;
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+/* Styles for the ComboBox list cell hover effect */
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #4CAF50;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0, 0, 1);
+}
+
+/* Styles for the ComboBox list cell selected state */
+.combo-box-popup .list-view .list-cell:selected {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #4CAF50;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0, 0, 1);
+}
+
+/* Styles for the ComboBox prompt text */
+.combo-box .text-input {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #333333;
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+/* Styles for the TextArea */
+#commaintre {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #333333;
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+#com{
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #333333;
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+.label {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #333333;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+#Welcome {
+
+    -fx-text-fill: #1F3D1C;
+    -fx-font-size: 26px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+
+}
+#date{
+    -fx-text-fill: black;
+    -fx-background-color: #FFFFFF;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+
+}
+
+#warinig{
+
+    -fx-text-fill: red;
+    -fx-font-size: 10px;
+
+}
+
+/* Styles for the general Button with fx:id "myButton" */
+/* Styles for the general Button with fx:id "myButton" */
+#buttonone {
+    -fx-font-size: 11px;
+    -fx-font-family: 'Arial Black';
+    -fx-text-fill: #1F3D1C; /* Light Green */
+    -fx-font-weight: bold;
+    -fx-background-color: #c3cfb6; /* Light Green background */
+    -fx-background-radius: 8;
+    -fx-padding: 10px 20px;
+    -fx-border-width: 2;
+    -fx-border-color: #688a38; /* Olive Green border */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 1);
+    -fx-transition: transform 0.3s, background-color 0.3s, text-fill 0.3s, border-color 0.3s;
+}
+
+/* Styles for the Button with fx:id "myButton" when hovered */
+#buttonone:hover {
+    -fx-background-color: #688a38; /* Olive Green background on hover */
+    -fx-text-fill: #c3cfb6; /* Light Green text on hover */
+    -fx-border-color: #1F3D1C; /* Dark Green border on hover */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 1); /* Increase drop shadow on hover */
+    -fx-cursor: hand; /* Change cursor on hover */
+    -fx-rotate: 5deg; /* Add a subtle rotation on hover */
+}
+#ajouter {
+    -fx-font-size: 11px;
+    -fx-font-family: 'Arial Black';
+    -fx-text-fill: #1F3D1C; /* Light Green */
+    -fx-font-weight: bold;
+    -fx-background-color: #c3cfb6; /* Light Green background */
+    -fx-background-radius: 8;
+    -fx-padding: 10px 20px;
+    -fx-border-width: 2;
+    -fx-border-color: #688a38; /* Olive Green border */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 1);
+    -fx-transition: transform 0.3s, background-color 0.3s, text-fill 0.3s, border-color 0.3s;
+}
+
+/* Styles for the Button with fx:id "myButton" when hovered */
+#ajouter:hover {
+    -fx-background-color: #688a38; /* Olive Green background on hover */
+    -fx-text-fill: #c3cfb6; /* Light Green text on hover */
+    -fx-border-color: #1F3D1C; /* Dark Green border on hover */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 1); /* Increase drop shadow on hover */
+    -fx-cursor: hand; /* Change cursor on hover */
+    -fx-rotate: 5deg; /* Add a subtle rotation on hover */
+}
+#delete {
+    -fx-font-size: 11px;
+    -fx-font-family: 'Arial Black';
+    -fx-text-fill: #1F3D1C; /* Light Green */
+    -fx-font-weight: bold;
+    -fx-background-color: #c3cfb6; /* Light Green background */
+    -fx-background-radius: 8;
+    -fx-padding: 10px 20px;
+    -fx-border-width: 2;
+    -fx-border-color: #688a38; /* Olive Green border */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 1);
+    -fx-transition: transform 0.3s, background-color 0.3s, text-fill 0.3s, border-color 0.3s;
+}
+
+/* Styles for the Button with fx:id "myButton" when hovered */
+#delete:hover {
+    -fx-background-color: #688a38; /* Olive Green background on hover */
+    -fx-text-fill: #c3cfb6; /* Light Green text on hover */
+    -fx-border-color: #1F3D1C; /* Dark Green border on hover */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 1); /* Increase drop shadow on hover */
+    -fx-cursor: hand; /* Change cursor on hover */
+    -fx-rotate: 5deg; /* Add a subtle rotation on hover */
+}
+#update {
+    -fx-font-size: 11px;
+    -fx-font-family: 'Arial Black';
+    -fx-text-fill: #1F3D1C; /* Light Green */
+    -fx-font-weight: bold;
+    -fx-background-color: #c3cfb6; /* Light Green background */
+    -fx-background-radius: 8;
+    -fx-padding: 10px 20px;
+    -fx-border-width: 2;
+    -fx-border-color: #688a38; /* Olive Green border */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 1);
+    -fx-transition: transform 0.3s, background-color 0.3s, text-fill 0.3s, border-color 0.3s;
+}
+
+/* Styles for the Button with fx:id "myButton" when hovered */
+#update:hover {
+    -fx-background-color: #688a38; /* Olive Green background on hover */
+    -fx-text-fill: #c3cfb6; /* Light Green text on hover */
+    -fx-border-color: #1F3D1C; /* Dark Green border on hover */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 1); /* Increase drop shadow on hover */
+    -fx-cursor: hand; /* Change cursor on hover */
+    -fx-rotate: 5deg; /* Add a subtle rotation on hover */
+}
+#returnb {
+    -fx-font-size: 11px;
+    -fx-font-family: 'Arial Black';
+    -fx-text-fill: #1F3D1C; /* Light Green */
+    -fx-font-weight: bold;
+    -fx-background-color: #c3cfb6; /* Light Green background */
+    -fx-background-radius: 8;
+    -fx-padding: 10px 20px;
+    -fx-border-width: 2;
+    -fx-border-color: #688a38; /* Olive Green border */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 1);
+    -fx-transition: transform 0.3s, background-color 0.3s, text-fill 0.3s, border-color 0.3s;
+}
+
+/* Styles for the Button with fx:id "myButton" when hovered */
+#returnb:hover {
+    -fx-background-color: #688a38; /* Olive Green background on hover */
+    -fx-text-fill: #c3cfb6; /* Light Green text on hover */
+    -fx-border-color: #1F3D1C; /* Dark Green border on hover */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 1); /* Increase drop shadow on hover */
+    -fx-cursor: hand; /* Change cursor on hover */
+    -fx-rotate: 5deg; /* Add a subtle rotation on hover */
+}
+#home {
+    -fx-font-size: 11px;
+    -fx-font-family: 'Arial Black';
+    -fx-text-fill: #1F3D1C; /* Light Green */
+    -fx-font-weight: bold;
+    -fx-background-color: #c3cfb6; /* Light Green background */
+    -fx-background-radius: 8;
+    -fx-padding: 10px 20px;
+    -fx-border-width: 2;
+    -fx-border-color: #688a38; /* Olive Green border */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 1);
+    -fx-transition: transform 0.3s, background-color 0.3s, text-fill 0.3s, border-color 0.3s;
+}
+
+/* Styles for the Button with fx:id "myButton" when hovered */
+#home:hover {
+    -fx-background-color: #688a38; /* Olive Green background on hover */
+    -fx-text-fill: #c3cfb6; /* Light Green text on hover */
+    -fx-border-color: #1F3D1C; /* Dark Green border on hover */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 1); /* Increase drop shadow on hover */
+    -fx-cursor: hand; /* Change cursor on hover */
+    -fx-rotate: 5deg; /* Add a subtle rotation on hover */
+}
+
+
+
+
+
+

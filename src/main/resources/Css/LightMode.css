@@ -1,0 +1,55 @@
+.root{
+    -fx-background-color: #c3cfb6; /* Light background color */
+    background-color: #c3cfb6;
+}
+
+.label{
+    -fx-text-fill: #1F3D1C; /* Dark Green text color */
+}
+
+.pane-grid{
+    -fx-background-color: #c3cfb6; /* Light background color */
+    background-color: #c3cfb6;
+}
+
+.tab-pane-grid{
+    -fx-background-color: #c3cfb6; /* Light background color */
+    background-color: #c3cfb6;
+}
+
+.text-field, .combo-box, .choice-box, .list-view, .button, .check-box, .text-area, .scroll-bar, .menu-bar, .progress-bar, .slider, .titled-pane, .table-view, .tooltip {
+    -fx-background-color: #c3cfb6; /* Light background color */
+    background-color: #c3cfb6;
+    -fx-border-color: #222222; /* Dark border color */
+    border-color: #222222;
+    -fx-text-fill: #1F3D1C; /* Dark Green text color */
+}
+
+.text-field:hover, .combo-box:hover, .choice-box:hover, .list-view:hover, .button:hover, .check-box:hover, .text-area:hover, .scroll-bar:hover, .menu-bar:hover, .progress-bar:hover, .slider:hover, .titled-pane:hover, .table-view:hover, .tooltip:hover {
+    -fx-background-color: #3E3E40; /* Darker background color on hover */
+    background-color: #3E3E40;
+}
+
+.text-field:focused, .combo-box:focused, .choice-box:focused, .list-view:focused, .button:focused, .check-box:focused, .text-area:focused, .scroll-bar:focused, .menu-bar:focused, .progress-bar:focused, .slider:focused, .titled-pane:focused, .table-view:focused, .tooltip:focused {
+    -fx-background-color: #1A1A1A; /* Dark background color on focus */
+    background-color: #1A1A1A;
+    -fx-border-color: #4e4e4e; /* Dark border color on focus */
+    border-color: #4e4e4e;
+}
+
+/* Add more specific styles for each individual component if needed */
+
+/* Specific styles for label in the light mode */
+.label.light-mode {
+    -fx-text-fill: #1F3D1C; /* Dark Green text color */
+}
+
+/* Specific styles for button in the light mode */
+.button.light-mode {
+    -fx-background-color: #c3cfb6; /* Light background color */
+    background-color: #c3cfb6;
+    -fx-text-fill: #1F3D1C; /* Dark Green text color */
+}
+/* Light mode styles for MenuBar */
+/* Light mode styles for MenuBar */
+/* Light mode styles for MenuBar */

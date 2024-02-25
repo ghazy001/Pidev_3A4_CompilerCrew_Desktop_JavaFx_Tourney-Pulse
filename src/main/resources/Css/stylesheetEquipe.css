@@ -1,0 +1,148 @@
+.label {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #333333;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+#date{
+
+
+}
+.date-picker-popup > .month-year-pane {
+    -fx-base: #4CAF50; /* Set your desired background color */
+    -fx-mark-highlight-color: -fx-light-text-color; /* Ensures arrows match text color */
+
+}
+
+/* Additional styles */
+.date-picker > .text-field {
+    -fx-text-fill: black; /* Text color for the selected date */
+}
+.text-field {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #333333;
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-min-width: 200px;
+    -fx-pref-width: 200px;
+    -fx-max-width: 200px;
+    -fx-min-height: 40px;
+    -fx-pref-height: 40px;
+    -fx-max-height: 40px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+/* Styles for the TextField prompt text */
+.text-field .prompt-text {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #333333;
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+
+#captchaCode {
+
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #c3cfb6;
+    -fx-background-color: #1F3D1C;
+    -fx-border-width: 2px;
+    -fx-border-color: #1F3D3A;
+    -fx-border-radius: 8px;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+
+}
+
+
+#captchaCode:hover {
+    -fx-background-color: #c3cfb6;
+    -fx-text-fill: #1F3D1C;
+}
+
+
+
+#Welcome {
+
+    -fx-text-fill: #1F3D1C;
+    -fx-font-size: 26px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+
+}
+
+.list-view {
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 10px;
+}
+
+.list-cell {
+    -fx-background-color: white;
+    -fx-padding: 10px;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: #1F3D1C;
+    -fx-text-fill: white;
+}
+
+.list-cell:empty {
+    -fx-background-color: transparent;
+}
+
+.list-cell .text {
+    -fx-font-family: 'Monospaced';
+    -fx-font-size: 16px;
+    -fx-fill: #333;
+    -fx-font-weight: bold;
+}
+
+.list-cell:filled:selected .text {
+    -fx-fill: white;
+    -fx-font-weight: bold;
+}
+/* Styles for the Button with fx:id "myButton" */
+.button {
+    -fx-font-size: 11px;
+    -fx-font-family: 'Arial Black';
+    -fx-text-fill: #1F3D1C; /* Light Green */
+    -fx-font-weight: bold;
+    -fx-background-color: #c3cfb6; /* Light Green background */
+    -fx-background-radius: 8;
+    -fx-padding: 10px 20px;
+    -fx-border-width: 2;
+    -fx-border-color: #688a38; /* Olive Green border */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 1);
+    -fx-transition: transform 0.3s, background-color 0.3s, text-fill 0.3s, border-color 0.3s;
+}
+
+/* Styles for the Button with fx:id "myButton" when hovered */
+.button:hover {
+    -fx-background-color: #688a38; /* Olive Green background on hover */
+    -fx-text-fill: #c3cfb6; /* Light Green text on hover */
+    -fx-border-color: #1F3D1C; /* Dark Green border on hover */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 1); /* Increase drop shadow on hover */
+    -fx-cursor: hand; /* Change cursor on hover */
+    -fx-rotate: 5deg; /* Add a subtle rotation on hover */
+}
+
+
+
+
+
