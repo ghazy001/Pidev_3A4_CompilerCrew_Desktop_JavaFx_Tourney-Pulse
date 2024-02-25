@@ -1,0 +1,153 @@
+/* Styles for the ComboBox */
+.combo-box {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #333333;
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+/* Styles for the ComboBox arrow button */
+.combo-box .arrow-button {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #333333;
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+/* Styles for the ComboBox list view */
+.combo-box-popup .list-view {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #333333;
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+/* Styles for the ComboBox list cell */
+.combo-box-popup .list-view .list-cell {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #333333;
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+/* Styles for the ComboBox list cell text */
+.combo-box-popup .list-view .list-cell .text {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #333333;
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+/* Styles for the ComboBox list cell hover effect */
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #4CAF50;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0, 0, 1);
+}
+
+/* Styles for the ComboBox list cell selected state */
+.combo-box-popup .list-view .list-cell:selected {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #4CAF50;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0, 0, 1);
+}
+
+/* Styles for the ComboBox prompt text */
+.combo-box .text-input {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #333333;
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+/* Styles for the TextArea */
+#commaintre {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #333333;
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+#com{
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #333333;
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+.label {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #333333;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+#Welcome {
+
+    -fx-text-fill: white;
+    -fx-font-size: 26px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+
+}
+#date{
+    -fx-text-fill: black;
+    -fx-background-color: #FFFFFF;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+
+}
+
+#warinig{
+
+    -fx-text-fill: red;
+    -fx-font-size: 10px;
+
+}

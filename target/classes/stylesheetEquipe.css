@@ -1,0 +1,89 @@
+.label {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #333333;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+#date{
+
+
+}
+.date-picker-popup > .month-year-pane {
+    -fx-base: #4CAF50; /* Set your desired background color */
+    -fx-mark-highlight-color: -fx-light-text-color; /* Ensures arrows match text color */
+
+}
+
+/* Additional styles */
+.date-picker > .text-field {
+    -fx-text-fill: black; /* Text color for the selected date */
+}
+.text-field {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #333333;
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-min-width: 200px;
+    -fx-pref-width: 200px;
+    -fx-max-width: 200px;
+    -fx-min-height: 40px;
+    -fx-pref-height: 40px;
+    -fx-max-height: 40px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+/* Styles for the TextField prompt text */
+.text-field .prompt-text {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-text-fill: #333333;
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+#captchaCode {
+    -fx-font-family: 'Comic Sans MS', cursive;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #c3cfb6;
+    -fx-background-color: #1F3D1C;
+    -fx-padding: 10px;
+    -fx-border-width: 2px;
+    -fx-border-color: #1F3D3A;
+    -fx-border-radius: 8px;
+    -fx-display: inline-block;
+    -fx-letter-spacing: 4px;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+    -fx-background-insets: 0, 1;
+}
+
+
+#captchaCode:hover {
+    -fx-background-color: #c3cfb6;
+    -fx-text-fill: #1F3D1C;
+}
+
+
+
+#Welcome {
+
+    -fx-text-fill: white;
+    -fx-font-size: 26px;
+    -fx-font-family: 'Helvetica Neue';
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+
+}
+
+
+

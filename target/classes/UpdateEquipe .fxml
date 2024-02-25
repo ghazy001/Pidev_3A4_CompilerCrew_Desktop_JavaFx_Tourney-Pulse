@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="Css/stylesheetEquipe.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UpdateEquipe">
+   <children>
+      <ImageView fx:id="image" fitHeight="150.0" fitWidth="186.0" layoutX="239.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <DatePicker fx:id="Dateequipe" layoutX="211.0" layoutY="263.0" prefHeight="26.0" prefWidth="197.0" />
+      <TextField fx:id="Nomequipe" layoutX="210.0" layoutY="213.0" prefHeight="26.0" prefWidth="186.0" />
+      <Button fx:id="update" layoutX="226.0" layoutY="322.0" mnemonicParsing="false" text="update" />
+      <Button fx:id="delete" layoutX="315.0" layoutY="322.0" mnemonicParsing="false" text="delete" />
+      <Button fx:id="upload" layoutX="211.0" layoutY="164.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="197.0" text="upload" />
+      <VBox fx:id="myBox" prefHeight="400.0" prefWidth="180.0" style="-fx-background-color: #c3cfb6;">
+         <children>
+            <Label fx:id="Welcome" text="Welcome" textFill="WHITE">
+               <font>
+                  <Font name="Gill Sans Bold" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="40.0" top="8.0" />
+               </VBox.margin></Label>
+            <ImageView fitHeight="95.0" fitWidth="107.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@media/cris.png" />
+               </image>
+               <VBox.margin>
+                  <Insets left="40.0" top="20.0" />
+               </VBox.margin>
+            </ImageView>
+            <Button fx:id="home" mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" text="home">
+               <VBox.margin>
+                  <Insets left="40.0" top="40.0" />
+               </VBox.margin></Button>
+            <Button fx:id="JoinTeam" mnemonicParsing="false" text="add players">
+               <VBox.margin>
+                  <Insets left="40.0" top="26.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
