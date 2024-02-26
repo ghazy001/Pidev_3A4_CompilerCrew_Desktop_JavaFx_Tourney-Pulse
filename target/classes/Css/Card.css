@@ -1,0 +1,70 @@
+#Mypane {
+    -fx-width: 200px;
+    -fx-height: 350px;
+    -fx-border-radius: 2px;
+    -fx-border-color: #1F3D1C;
+    -fx-border-width: 8px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 60, 0, 0, 1); /* /* Increased shadow clarity */
+    -fx-background-color: #F0F8FF;
+    -fx-display: flex;
+    -fx-flex-direction: column;
+    -fx-align-items: center;
+    -fx-justify-content: space-around;
+    -fx-text-align: center;
+    -fx-font-family: 'Helvetica Neue', sans-serif;
+    -fx-transition: transform 0.3s ease-in-out; /* Transition added for scaling */
+}
+
+#Mypane:hover {
+    -fx-background-color: #9fc5e8;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 80, 0, 0, 1); /* Increased shadow clarity on hover */
+    fx-scale-x: 1.025;
+    -fx-scale-y: 1.025;
+}
+
+.image-view {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 1);
+    -fx-shape: "M 0 0 L 0 100 L 50 50 Z";
+}
+
+.image-view:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0, 0, 1);
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-rotate: 5deg;
+    -fx-transition: transform 0.3s ease-in-out, scale 0.3s ease-in-out;
+    -fx-cursor: hand;
+}
+#teamname {
+    -fx-font-size: 24px;
+    -fx-font-family: 'Helvetica Neue', sans-serif;
+    -fx-text-fill: #1F3D1C; /* Light Green */
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 1);
+    -fx-transition: transform 0.3s, text-fill 0.3s;
+}
+
+#teamname:hover {
+    -fx-text-fill: #688a38; /* Olive Green text on hover */
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 15, 0, 0, 1); /* Increase drop shadow on hover */
+    -fx-cursor: hand; /* Change cursor on hover */
+    -fx-rotate: -2deg; /* Add a subtle rotation on hover */
+}
+#dateteam {
+    -fx-font-size: 18px;
+    -fx-font-family: 'Helvetica Neue', sans-serif;
+    -fx-text-fill: #1F3D1C; /* Light Green */
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 1);
+    -fx-transition: transform 0.3s, text-fill 0.3s;
+}
+
+#listeplayer {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Helvetica Neue', sans-serif;
+    -fx-text-fill: #1F3D1C; /* Light Green */
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 1);
+    -fx-transition: transform 0.3s, text-fill 0.3s;
+}
+

@@ -1,4 +1,15 @@
+/*
+*
+   Author: @Ghazy001
+   * ghazi saoudi
+*
+*/
+
+
 package controller;
+
+
+
 
 import entities.Equipe;
 import entities.User;
@@ -29,12 +40,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-
-/*
-*
-   Author: Ghazi saoudi
-*
-*/
 
 
 public class AffecterPlayers implements Initializable {

@@ -30,13 +30,11 @@ import java.time.LocalDate;
 import java.sql.*;
 
 
-
 /*
 *
    Author: Ghazi saoudi
 *
 */
-
 
 public class AjouterEquipe implements Initializable {
 
@@ -143,6 +141,9 @@ public class AjouterEquipe implements Initializable {
         Image defaultImage = new Image("/equipe.png");
         image.setImage(defaultImage);
 
+
+
+
           //----------------- upload function ------------------
         uplaod_pic.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -151,7 +152,11 @@ public class AjouterEquipe implements Initializable {
             }
         });
 
+
+
         //-----------------------captcha-call---------------------
+
+
         generateCaptcha();
 
         //--------------------Save-Button-------------------------
@@ -162,6 +167,7 @@ public class AjouterEquipe implements Initializable {
                 ServiceEquipe serviceEquipe = ServiceEquipe.getInstance();
 
                 //------testing-input---------
+
                 String nomEquipe = nomequipe.getText();
                 boolean isNomEmpty = nomEquipe.trim().isEmpty();
                 LocalDate dateValue = date.getValue();

@@ -51,8 +51,8 @@ public class Chatgpt implements Initializable {
     private Label Ai;
 
 
-    // get the api key from varaible in .env
-    public static String api() {
+/*
+    public static String Read_Key_From_env() {
         String apiKey = null;
 
         try {
@@ -65,11 +65,13 @@ public class Chatgpt implements Initializable {
 
         return apiKey;
     }
+    
+ */
 
 
 
 
-    private static final String API_KEY = api();
+    private static final String API_KEY = "";
     private static final String GPT_MODEL = "gpt-3.5-turbo";
     private static final String API_URL = "https://api.openai.com/v1/chat/completions";
 

@@ -36,12 +36,12 @@ import java.util.ResourceBundle;
 public class ShowAvis implements Initializable {
 
     ServiceAvisJoueur serviceAvisJoueur = ServiceAvisJoueur.getInstance();
-    public static ResultSet rs;
-    public  static Integer idSelct;
-    public  static Integer idAvisSelct;
-    public static String commSelect;
-    public static float noteSelect;
-    public static String dateSelec;
+      static ResultSet rs;
+      static Integer idSelct;
+      static Integer idAvisSelct;
+      static String commSelect;
+      static float noteSelect;
+      static String dateSelec;
 
 
 
@@ -157,6 +157,8 @@ public class ShowAvis implements Initializable {
     //--------------scroll function--------------------
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         getGrid();
+
     }
 }
