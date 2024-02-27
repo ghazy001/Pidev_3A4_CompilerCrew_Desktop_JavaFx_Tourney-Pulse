@@ -32,6 +32,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+/*
+*
+   Author: Ghazi saoudi
+*
+*/
+
+
 public class HOME implements Initializable {
 
     @FXML

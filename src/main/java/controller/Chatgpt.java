@@ -33,6 +33,12 @@ import javafx.util.Duration;
 
 
 
+/*
+*
+   Author: Ghazi saoudi
+*
+*/
+
 
 
 public class Chatgpt implements Initializable {
@@ -51,7 +57,7 @@ public class Chatgpt implements Initializable {
     private Label Ai;
 
 
-/*
+
     public static String Read_Key_From_env() {
         String apiKey = null;
 
@@ -65,13 +71,11 @@ public class Chatgpt implements Initializable {
 
         return apiKey;
     }
-    
- */
 
 
 
 
-    private static final String API_KEY = "";
+    private static final String API_KEY = "My key";
     private static final String GPT_MODEL = "gpt-3.5-turbo";
     private static final String API_URL = "https://api.openai.com/v1/chat/completions";
 

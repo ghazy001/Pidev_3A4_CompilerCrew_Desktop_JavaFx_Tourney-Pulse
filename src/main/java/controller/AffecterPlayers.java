@@ -41,6 +41,14 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 
+/*
+*
+   Author: Ghazi saoudi
+*
+*/
+
+
+
 
 public class AffecterPlayers implements Initializable {
 

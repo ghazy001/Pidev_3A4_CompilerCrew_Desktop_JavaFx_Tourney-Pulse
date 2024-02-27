@@ -28,6 +28,13 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+/*
+*
+   Author: Ghazi saoudi
+*
+*/
+
+
 public class StaticAvis implements Initializable {
 
     @FXML

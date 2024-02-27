@@ -24,6 +24,14 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+/*
+*
+   Author: Ghazi saoudi
+*
+*/
+
+
+
 public class DisplayTeamCard implements Initializable {
 
     @FXML
@@ -70,7 +78,7 @@ public class DisplayTeamCard implements Initializable {
 
             }
         });
-        Mypane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        teampic.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
 

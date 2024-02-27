@@ -29,6 +29,13 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import static controller.DisplayEquipe.*;
 import static controller.ShowAvis.idAvisSelct;
+/*
+*
+   Author: Ghazi saoudi
+*
+*/
+
+
 
 public class UpdateEquipe implements Initializable {
 

@@ -30,16 +30,17 @@ import java.util.*;
 import javafx.animation.FadeTransition;
 import javafx.util.Duration;
 
+/*
+*
+   Author: Ghazi saoudi
+*
+*/
+
 
 
 public class AddAvisController implements Initializable {
 
 
-    /*
-*
-   Author: Ghazi saoudi
-*
-*/
 
 
 

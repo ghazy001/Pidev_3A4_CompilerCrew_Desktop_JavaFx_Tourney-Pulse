@@ -33,6 +33,13 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/*
+*
+   Author: Ghazi saoudi
+*
+*/
+
+
 public class ShowAvis implements Initializable {
 
     ServiceAvisJoueur serviceAvisJoueur = ServiceAvisJoueur.getInstance();

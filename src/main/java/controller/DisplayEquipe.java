@@ -25,6 +25,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
+
+/*
+*
+   Author: Ghazi saoudi
+*
+*/
+
+
+
 public class DisplayEquipe implements Initializable {
 
     @FXML

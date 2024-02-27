@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="Css/Card.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DisplayTeamCard">
    <children>
-      <ImageView fx:id="nextteam" fitHeight="46.0" fitWidth="74.0" layoutX="540.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="nextteam" fitHeight="46.0" fitWidth="74.0" layoutX="521.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="33.0">
          <image>
             <Image url="@media/right-arrow.png" />
          </image>
