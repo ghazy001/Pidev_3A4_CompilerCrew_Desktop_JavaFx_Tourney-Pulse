@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="edu.esprit.Controllers.AddMess"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <center>
+        <TextArea fx:id="messageTextArea" prefWidth="200" prefHeight="100"/>
+    </center>
+    <bottom>
+        <Button text="Afficher Message" onAction="#displayMessage"/>
+    </bottom>
+    <right>
+        <VBox fx:id="messagePane" prefWidth="200" spacing="10"/>
+    </right>
+</BorderPane>

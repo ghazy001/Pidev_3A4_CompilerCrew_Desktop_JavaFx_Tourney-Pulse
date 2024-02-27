@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -16,6 +17,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /*
 public class Addrec {
@@ -25,7 +28,7 @@ public class Addrec implements Initializable {
     @FXML
     private TextField TFObjet;
     @FXML
-    private TextField TFReclamation;
+    private TextArea TFReclamation;
     @FXML
     private TextField TFEmail;
     ServiceReclamation sp = new ServiceReclamation();
@@ -38,14 +41,40 @@ public class Addrec implements Initializable {
 
 
 
-
+    // Expression régulière pour vérifier le format d'une adresse email
+    private static final String EMAIL_REGEX =
+            "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+    // Pattern correspondant à l'expression régulière
+    private static final Pattern pattern = Pattern.compile(EMAIL_REGEX);
 
     @FXML
     void ajouterReclamationAction(ActionEvent event) {
         try {
             Date today = new Date(System.currentTimeMillis());
             int id = 123;
-            this.sp.ajouter(new Reclamation(this.TFObjet.getText(), this.TFEmail.getText(), this.TFReclamation.getText(), today, id));
+
+            // Vérification si tous les champs sont remplis
+            if (TFObjet.getText().isEmpty() || TFEmail.getText().isEmpty() || TFReclamation.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Champs vides");
+                alert.setContentText("Veuillez remplir tous les champs.");
+                alert.showAndWait();
+                return; // Sortir de la méthode si un champ est vide
+            }
+
+
+            // Vérification du format de l'adresse email saisie
+            String email = TFEmail.getText().trim();
+            Matcher matcher = pattern.matcher(email);
+            if (!matcher.matches()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Format d'email incorrect");
+                alert.setContentText("Veuillez saisir une adresse email valide.");
+                alert.showAndWait();
+                return; // Sortir de la méthode si le format est incorrect
+            }
+
+            this.sp.ajouter(new Reclamation(this.TFObjet.getText(), email, this.TFReclamation.getText(), today, id));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setContentText("Ajoutee avec succes");

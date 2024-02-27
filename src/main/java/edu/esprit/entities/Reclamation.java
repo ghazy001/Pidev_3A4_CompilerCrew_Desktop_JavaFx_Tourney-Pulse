@@ -6,7 +6,9 @@ import java.util.Objects;
 
 
 public class Reclamation {
-    private int id_rec,id;
+    private int id_rec;
+
+    private int id;
 
     private String email, object, rec;
     Date date_rec;

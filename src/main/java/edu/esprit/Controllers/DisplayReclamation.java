@@ -45,7 +45,7 @@ public class DisplayReclamation implements Initializable {
             @Override
             public void handle(ActionEvent actionEvent) {
                 try {
-                    Parent root = FXMLLoader.load(getClass().getResource("/Affmess.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("/Messagerie.fxml"));
 
                     // Create a Scene with custom dimensions
                     Scene scene = new Scene(root, 800, 600); // Adjust width and height as needed
@@ -132,7 +132,7 @@ public class DisplayReclamation implements Initializable {
                     selectedDateRec = String.valueOf(reclamation.getDate_rec());
 
                     // Perform any action with the selected values
-                    System.out.println("Selected ID: " + selectedId);
+                   System.out.println("Selected ID: " + selectedId);
                     System.out.println("Selected UserID: " + selectedUserId);
                     System.out.println("Selected Email: " + selectedEmail);
                     System.out.println("Selected Object: " + selectedObject);
@@ -213,15 +213,15 @@ public class DisplayReclamation implements Initializable {
 
         for (Reclamation reclamation : reclamationList) {
             // Create layout for each reclamation
-            Label idLabel = new Label("ID: " + reclamation.getId_rec());
-            Label userIdLabel = new Label("UserID: " + reclamation.getId());
+           // Label idLabel = new Label("ID: " + reclamation.getId_rec());
+            Label userIdLabel = new Label("User: " + reclamation.getId());
             Label emailLabel = new Label("Email: " + reclamation.getEmail());
             Label objectLabel = new Label("Object: " + reclamation.getObject());
             Label recLabel = new Label("Rec: " + reclamation.getRec());
             Label dateLabel = new Label("Date Rec: " + reclamation.getDate_rec());
 
             GridPane gridPane = new GridPane();
-            gridPane.add(idLabel, 0, 0);
+           // gridPane.add(idLabel, 0, 0);
             gridPane.add(userIdLabel, 0, 1);
             gridPane.add(emailLabel, 0, 2);
             gridPane.add(objectLabel, 0, 3);

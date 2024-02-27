@@ -30,8 +30,11 @@ public class MainFX extends Application {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/Addrec.fxml"));
         Parent root = (Parent)loader.load();
         Scene scene = new Scene(root);
+        //stage.setScene(scene);
         stage.setScene(scene);
-        stage.setTitle("Gestion reclamation");
+      stage.setHeight(656);
+      stage.setWidth(969);
+        stage.setTitle("Gestion mesagerie");
         stage.show();
     }
 }

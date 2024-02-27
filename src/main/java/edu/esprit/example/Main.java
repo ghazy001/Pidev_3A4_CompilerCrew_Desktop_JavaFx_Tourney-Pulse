@@ -4,7 +4,6 @@ import edu.esprit.Services.ServiceMessagerie;
 import edu.esprit.Services.ServiceReclamation;
 import edu.esprit.Utils.DataSource;
 import edu.esprit.entities.Messagerie;
-import edu.esprit.entities.Reclamation;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -59,7 +58,7 @@ public class Main {
         //-------------------------------------------
         // Assuming you have imported the necessary packages
 
-
+/*
             List<Reclamation> reclamationList = service.getAll();
 
 
@@ -74,6 +73,24 @@ public class Main {
                     System.out.println("Date: " + reclamation.getDate_rec());
                     System.out.println("----------------------------------------");
                 }
+*/
+        ServiceMessagerie service1 = new ServiceMessagerie();
+
+        List<Messagerie> messagerieList = service1.getAll();
+
+
+
+        System.out.println("List of Reclamations:");
+        for (Messagerie messagerie : messagerieList) {
+
+            System.out.println("ID mess: " + messagerie.getId_mess());
+            System.out.println("ID rec: " + messagerie.getId_rec());
+
+            System.out.println("contenue: " + messagerie.getContenue());
+            System.out.println("date: " + messagerie.getTemps());
+            System.out.println("----------------------------------------");
+        }
+
 
 
 

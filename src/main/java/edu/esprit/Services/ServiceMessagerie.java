@@ -2,6 +2,7 @@ package edu.esprit.Services;
 
 import edu.esprit.Utils.DataSource;
 import edu.esprit.entities.Messagerie;
+import edu.esprit.entities.Reclamation;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class ServiceMessagerie implements IService<Messagerie> {
 
         }
     }
+
 
     @Override
     public void modifier(int id_mess, Messagerie t) {
@@ -113,7 +115,32 @@ public class ServiceMessagerie implements IService<Messagerie> {
 
         }
     }
+    public List<Messagerie> getAll() {
+        List<Messagerie> Mes = new ArrayList<>();
 
+        String req = "Select * from messagerie";
+        try {
+            Statement st = cnx.createStatement();
+            ResultSet res = st.executeQuery(req);
+            while (res.next()){
+                int id_mess = res.getInt("id_mess");
+
+                int id_rec = res.getInt("id_rec");
+                String contenue = res.getString("contenue");
+
+                Date temps = res.getDate("temps");
+
+                Messagerie p = new Messagerie(id_mess,id_rec,contenue,temps);
+                Mes.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return Mes;
+    }
+
+/*
     public List<Messagerie> getMessagesForReclamationId(int id_rec) {
         List<Messagerie> messages = new ArrayList<>();
         connection = DataSource.getInstance().getCnx();
@@ -141,7 +168,7 @@ public class ServiceMessagerie implements IService<Messagerie> {
         }
 
         return messages;
-    }
+    }*/
 
     }
 
