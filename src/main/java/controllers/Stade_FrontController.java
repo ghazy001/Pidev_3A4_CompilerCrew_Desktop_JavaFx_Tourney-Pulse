@@ -19,14 +19,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import services.BlockedDateCell;
 import services.Reservation_Service;
 import services.Stade_Service;
 
 import java.net.URL;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.time.LocalDate;
+import java.util.*;
 
 public class Stade_FrontController implements Initializable {
     Stade_Service ss = new Stade_Service();
@@ -183,8 +183,8 @@ public class Stade_FrontController implements Initializable {
             btnPreviousStadeUpdate.setVisible(false);
 
         }
-        lbNomStadeUpdate.setText(stade.Nom);
-        lbCapacityStadeUpdate.setText(stade.Capacity+"");
+        lbNomStadeUpdate.setText(stade.getNom());
+        lbCapacityStadeUpdate.setText(stade.getCapacity()+"");
         lbLieuStadeUpdate.setText(stade.getLieu());
         lbNumeroStadeUpdate.setText(stade.getNumero()+"");
         String name = ss.getImages(stade.getId()).get(0);
@@ -201,8 +201,8 @@ public class Stade_FrontController implements Initializable {
         Stade stade = ss.GetStadeByName(cbStade.getValue());
         Reservation reservation = tvReservation.getSelectionModel().getSelectedItem();
         reservation.setDate(Date.valueOf(tfDateModifier.getValue()));
-        reservation.setId_stade(stade.id);
-        rs.modify_reservation(reservation);
+        reservation.setId_stade(stade.getId());
+        rs.Update(reservation);
         fnshowReservation();
         pnMesReservation.toFront();
         hbDetailsStade.setVisible(false);
@@ -233,8 +233,8 @@ public class Stade_FrontController implements Initializable {
             btnPreviousStadeUpdate.setVisible(false);
 
         }
-        lbNomStadeUpdate.setText(stade.Nom);
-        lbCapacityStadeUpdate.setText(stade.Capacity+"");
+        lbNomStadeUpdate.setText(stade.getNom());
+        lbCapacityStadeUpdate.setText(stade.getCapacity()+"");
         lbLieuStadeUpdate.setText(stade.getLieu());
         lbNumeroStadeUpdate.setText(stade.getNumero()+"");
         String name = ss.getImages(stade.getId()).get(0);
@@ -290,7 +290,7 @@ public class Stade_FrontController implements Initializable {
 
     }
     public void fnshowReservation(){
-        ObservableList<Reservation> list = FXCollections.observableList(rs.GetResevation());
+        ObservableList<Reservation> list = FXCollections.observableList(rs.Get());
 
 
         colDateReservation.setCellValueFactory(new PropertyValueFactory<>("Date"));
@@ -326,8 +326,8 @@ public class Stade_FrontController implements Initializable {
             btnPreviousStade.setVisible(false);
 
         }
-        lbNomStade.setText(stade.Nom);
-        lbCapacityStade.setText(stade.Capacity+"");
+        lbNomStade.setText(stade.getNom());
+        lbCapacityStade.setText(stade.getCapacity()+"");
         lbLieuStade.setText(stade.getLieu());
         lbNumeroStade.setText(stade.getNumero()+"");
         System.out.println(stade.getId()+"++++++++++++++++++++++++++++++++++");
@@ -348,13 +348,30 @@ public class Stade_FrontController implements Initializable {
 
     @FXML
     void fnReserver(ActionEvent event) {
+        boolean isPremEquipeEmpty =tfPremierEquipe.getText().isEmpty();
+        boolean isDeuxEquipeEmpty = tfDeusiemeEquipe.getText().isEmpty();
+
+        boolean isDateEmpty = ( tfDateReservation.getValue()== null);
+
+        if( isPremEquipeEmpty|| isDeuxEquipeEmpty  || isDateEmpty){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("error");
+            alert.setContentText("please fill in all fiels");
+            alert.show();
+            return;
+        }
         Reservation reservation = new Reservation();
         reservation.setId_stade(Integer.parseInt(lbIdstade.getText()));
         reservation.setId_organisateur(1);
         reservation.setId_PremiereEquipe(Integer.parseInt(tfPremierEquipe.getText()));
         reservation.setId_DeuxiemeEquipe(Integer.parseInt(tfDeusiemeEquipe.getText()));
         reservation.setDate(Date.valueOf(tfDateReservation.getValue()));
-        rs.createReservation(reservation);
+
+        rs.Add(reservation);
+        Alert alert5 = new Alert(Alert.AlertType.INFORMATION);
+        alert5.setTitle("succes");
+        alert5.setContentText("reservation ajoute avec succes");
+        alert5.show();
         vbReserverStade.setVisible(false);
         pnMesReservation.toFront();
         btnModifierReservation.setVisible(false);
@@ -365,13 +382,25 @@ public class Stade_FrontController implements Initializable {
     @FXML
     void fnStadeList(ActionEvent event) {
         pnStade.toFront();
+        vbReserverStade.setVisible(true);
+        tfDateReservation.setValue(null);
+        tfDeusiemeEquipe.setText("");
+        tfPremierEquipe.setText("");
         fnshow();
     }
 
     @FXML
     void fnSupprimer(ActionEvent event) {
         Reservation reservation = tvReservation.getSelectionModel().getSelectedItem();
-        rs.delete_reservation(reservation);
+        Alert alert4= new Alert(Alert.AlertType.CONFIRMATION);
+        alert4.setTitle("warning");
+        alert4.setContentText("voulez vous supprimer ?");
+
+        Optional<ButtonType> result = alert4.showAndWait();
+        if(result.get()==ButtonType.OK){
+
+            rs.delete(reservation);}
+
         fnshowReservation();
         hbDetailsStade.setVisible(false);
 
@@ -379,12 +408,22 @@ public class Stade_FrontController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        tfPremierEquipe.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                tfPremierEquipe.setText(oldValue);
+            }
+        });
+        tfDeusiemeEquipe.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                tfDeusiemeEquipe.setText(oldValue);
+            }
+        });
         fnshow();
         pnStade.toFront();
     }
 
     public void fnshow() {
-        ObservableList<Stade> list = FXCollections.observableList(ss.GetStade());
+        ObservableList<Stade> list = FXCollections.observableList(ss.Get());
 
         scrollPaneStade.setContent(null);
 
@@ -419,6 +458,22 @@ public class Stade_FrontController implements Initializable {
                 lbIdstade.setText(stade.getId()+"");
                 vbReserverStade.setVisible(true);
                 btnModifierReservation.setVisible(true);
+                // Define your list of blocked dates
+                List<LocalDate> blockedDates = rs.getReservedDaysByStade(stade.getId());
+
+                // Set the DayCellFactory
+                tfDateReservation.setDayCellFactory(param -> new BlockedDateCell(blockedDates));
+
+                // Optional: Add custom validation for additional checks (e.g., date range)
+                tfDateReservation.valueProperty().addListener((observable, oldValue, newValue) -> {
+                    if (newValue != null && !blockedDates.contains(newValue)) {
+                        // Date is valid (not blocked)
+                    } else {
+                        // Date is blocked, handle error (e.g., display message, reset date)
+                        tfDateReservation.setValue(null); // Reset date to avoid invalid selection
+                        // Show an error message or perform other actions
+                    }
+                });
             });
         }
 

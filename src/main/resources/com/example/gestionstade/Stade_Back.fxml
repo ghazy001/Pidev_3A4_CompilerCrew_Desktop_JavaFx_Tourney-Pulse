@@ -20,6 +20,95 @@
    <children>
       <StackPane layoutX="269.0" prefHeight="802.0" prefWidth="930.0" style="-fx-background-color: #ffffff;">
          <children>
+            <Pane fx:id="pnGestionStade" prefHeight="802.0" prefWidth="903.0" style="-fx-background-color: #ffffff;">
+               <children>
+                  <VBox layoutX="75.0" layoutY="120.0" prefHeight="441.0" prefWidth="809.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="56.0" prefWidth="450.0" spacing="10.0">
+                           <children>
+                              <TextField fx:id="tfSearchStade" onAction="#fnSearchStade" prefHeight="25.0" prefWidth="152.0" promptText="Search" />
+                              <Label prefHeight="35.0" prefWidth="95.0" text="State : ">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="cbLieuStade" prefHeight="25.0" prefWidth="109.0" />
+                              <Button fx:id="btnAppliquer" mnemonicParsing="false" onAction="#fnAppliquer" text="Appliquer" />
+                           </children>
+                        </HBox>
+                        <TableView fx:id="tvStade" onMouseClicked="#fnSelectedStade" prefHeight="387.0" prefWidth="458.0">
+                           <columns>
+                              <TableColumn fx:id="colImageStade" prefWidth="398.4000244140625" text="Image" />
+                            <TableColumn fx:id="colNomStade" prefWidth="211.199951171875" text="Nom" />
+                            <TableColumn fx:id="colLieuStade" prefWidth="201.866455078125" text="Lieu" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+                  <Label layoutX="80.0" layoutY="38.0" prefHeight="56.0" prefWidth="397.0" text="Gestion Stade : " textFill="#1f3d1c">
+                     <font>
+                        <Font size="40.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" layoutX="75.0" layoutY="581.0" prefHeight="100.0" prefWidth="809.0" spacing="20.0">
+                     <children>
+                        <Button fx:id="btnAddStade" mnemonicParsing="false" onAction="#fnAddStade" prefHeight="62.0" prefWidth="161.0" style="-fx-background-color: #688A38;" text="Add" textFill="WHITE">
+                           <font>
+                              <Font name="Wingdings" size="31.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="41.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/plus.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnUpdateStade" layoutX="313.0" layoutY="30.0" mnemonicParsing="false" onAction="#fnUpdateStade" prefHeight="62.0" prefWidth="191.0" style="-fx-background-color: #688A38;" text="Update" textFill="WHITE">
+                           <font>
+                              <Font name="Wingdings" size="31.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="41.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/editer.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnDeleteStade" layoutX="415.0" layoutY="30.0" mnemonicParsing="false" onAction="#fnDeleteStade" prefHeight="62.0" prefWidth="182.0" style="-fx-background-color: #688A38;" text="Delete" textFill="WHITE">
+                           <font>
+                              <Font name="Wingdings" size="31.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="41.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/poubelle-de-recyclage.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnDetailsStade" layoutX="393.0" layoutY="29.0" mnemonicParsing="false" onAction="#fnDetails" prefHeight="62.0" prefWidth="182.0" style="-fx-background-color: #688A38;" text="Details" textFill="WHITE">
+                           <font>
+                              <Font name="Wingdings" size="31.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="41.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/search.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <ImageView fitHeight="150.0" fitWidth="172.0" layoutX="734.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../Downloads/stadium.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
             <Pane fx:id="pnAddUpdateStade" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
                <children>
                   <Label fx:id="lbAddStade" layoutX="56.0" layoutY="62.0" prefHeight="56.0" prefWidth="397.0" text="Add Stade : " textFill="#1f3d1c">
@@ -104,7 +193,7 @@
                      <graphic>
                         <ImageView fitHeight="41.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../java/images/plus.png" />
+                              <Image url="@../../../images/plus.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -116,50 +205,69 @@
                      <graphic>
                         <ImageView fitHeight="41.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../java/images/editer.png" />
+                              <Image url="@../../../images/editer.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="662.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/goal.gif" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="pnGestionStade" prefHeight="802.0" prefWidth="903.0" style="-fx-background-color: #ffffff;">
+            <Pane fx:id="pnReservation" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
                <children>
-                  <VBox layoutX="75.0" layoutY="120.0" prefHeight="441.0" prefWidth="458.0">
+                  <TableView fx:id="tvReservation" layoutX="93.0" layoutY="183.0" onMouseClicked="#fnReservationSelected" prefHeight="474.0" prefWidth="662.0">
+                    <columns>
+                      <TableColumn fx:id="colStadeReservation" prefWidth="75.0" text="Stade" />
+                        <TableColumn fx:id="colIdPreEqReservation" prefWidth="120.0" text="id_Premier_Equipe" />
+                        <TableColumn fx:id="colDeuEqReservation" prefWidth="130.0" text="id_Deuxieme_Equipe" />
+                        <TableColumn fx:id="colDateReservation" prefWidth="180.800048828125" text="Date" />
+                        <TableColumn fx:id="colIdOrgaReservation" prefWidth="155.20001220703125" text="Id_Organisateur" />
+                    </columns>
+                  </TableView>
+                  <TextField fx:id="tfSearchReservation" layoutX="93.0" layoutY="137.0" prefHeight="25.0" prefWidth="325.0" promptText="Rechercher" />
+                  <Label layoutX="93.0" layoutY="35.0" prefHeight="56.0" prefWidth="397.0" text="Reservations : " textFill="#1f3d1c">
+                     <font>
+                        <Font size="40.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btnDeleteReservation" layoutX="93.0" layoutY="699.0" mnemonicParsing="false" onAction="#fnDeleteReservation" prefHeight="60.0" prefWidth="202.0" style="-fx-background-color: #688A38;" text="Delete" textFill="WHITE">
+                     <font>
+                        <Font name="Wingdings" size="31.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="41.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/poubelle-de-recyclage.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="705.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/goal.gif" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="pnDetails" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+               <children>
+                  <VBox fx:id="hbDetailsStade" layoutX="170.0" layoutY="172.0" prefHeight="499.0" prefWidth="607.0">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="56.0" prefWidth="450.0" spacing="10.0">
+                        <HBox alignment="CENTER" prefHeight="341.0" prefWidth="607.0">
                            <children>
-                              <TextField fx:id="tfSearchStade" onAction="#fnSearchStade" prefHeight="25.0" prefWidth="152.0" promptText="Search" />
-                              <Label prefHeight="35.0" prefWidth="95.0" text="State : ">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                              <ComboBox fx:id="cbLieuStade" prefHeight="25.0" prefWidth="109.0" />
-                              <Button fx:id="btnAppliquer" mnemonicParsing="false" onAction="#fnAppliquer" text="Appliquer" />
-                           </children>
-                        </HBox>
-                        <TableView fx:id="tvStade" onMouseClicked="#fnSelectedStade" prefHeight="387.0" prefWidth="458.0">
-                           <columns>
-                            <TableColumn fx:id="colNomStade" prefWidth="204.26666259765625" text="Nom" />
-                            <TableColumn fx:id="colLieuStade" prefWidth="249.3333740234375" text="Lieu" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </VBox>
-                  <VBox fx:id="hbDetailsStade" layoutX="546.0" layoutY="129.0" prefHeight="349.0" prefWidth="379.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Button fx:id="btnPreviousStade" mnemonicParsing="false" onAction="#fnPreviousStade" text="&lt;" />
+                              <Button fx:id="btnPreviousStade" mnemonicParsing="false" onAction="#fnPreviousStade" prefHeight="57.0" prefWidth="54.0" text="&lt;" />
                                  
-                              <ImageView fx:id="ImgViewStade" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                              <Button fx:id="btnNextStade" mnemonicParsing="false" onAction="#fnNext" text="&gt;" />
+                              <ImageView fx:id="ImgViewStade" fitHeight="239.0" fitWidth="324.0" pickOnBounds="true" preserveRatio="true" />
+                              <Button fx:id="btnNextStade" mnemonicParsing="false" onAction="#fnNext" prefHeight="57.0" prefWidth="54.0" text="&gt;" />
                            </children>
                         </HBox>
                         <HBox alignment="TOP_CENTER" prefHeight="356.0" prefWidth="370.0">
                            <children>
-                              <VBox alignment="CENTER" prefHeight="356.0" prefWidth="194.0" spacing="5.0">
+                              <VBox alignment="CENTER" prefHeight="349.0" prefWidth="288.0" spacing="5.0">
                                  <children>
                                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="190.0" text="Nom">
                                        <font>
@@ -186,7 +294,7 @@
                                     <Insets />
                                  </HBox.margin>
                               </VBox>
-                              <VBox alignment="CENTER" layoutX="108.0" layoutY="10.0" prefHeight="356.0" prefWidth="195.0" spacing="5.0">
+                              <VBox alignment="CENTER" layoutX="108.0" layoutY="10.0" prefHeight="349.0" prefWidth="326.0" spacing="5.0">
                                  <children>
                                     <Label fx:id="lbNomStade" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="190.0">
                                        <font>
@@ -214,90 +322,38 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <Label layoutX="80.0" layoutY="38.0" prefHeight="56.0" prefWidth="397.0" text="Gestion Stade : " textFill="#1f3d1c">
+                  <Label layoutX="257.0" layoutY="72.0" prefHeight="56.0" prefWidth="397.0" text="Details Stade : " textFill="#1f3d1c">
                      <font>
                         <Font size="40.0" />
                      </font>
                   </Label>
-                  <HBox alignment="CENTER_LEFT" layoutX="75.0" layoutY="581.0" prefHeight="100.0" prefWidth="809.0" spacing="20.0">
-                     <children>
-                        <Button fx:id="btnAddStade" mnemonicParsing="false" onAction="#fnAddStade" prefHeight="60.0" prefWidth="202.0" style="-fx-background-color: #688A38;" text="Add" textFill="WHITE">
-                           <font>
-                              <Font name="Wingdings" size="31.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="41.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../java/images/plus.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="btnUpdateStade" layoutX="313.0" layoutY="30.0" mnemonicParsing="false" onAction="#fnUpdateStade" prefHeight="60.0" prefWidth="202.0" style="-fx-background-color: #688A38;" text="Update" textFill="WHITE">
-                           <font>
-                              <Font name="Wingdings" size="31.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="41.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../java/images/editer.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="btnDeleteStade" layoutX="415.0" layoutY="30.0" mnemonicParsing="false" onAction="#fnDeleteStade" prefHeight="60.0" prefWidth="202.0" style="-fx-background-color: #688A38;" text="Delete" textFill="WHITE">
-                           <font>
-                              <Font name="Wingdings" size="31.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="41.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../java/images/poubelle-de-recyclage.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </HBox>
-               </children>
-            </Pane>
-            <Pane fx:id="pnReservation" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
-               <children>
-                  <TableView fx:id="tvReservation" layoutX="93.0" layoutY="183.0" onMouseClicked="#fnReservationSelected" prefHeight="474.0" prefWidth="662.0">
-                    <columns>
-                      <TableColumn fx:id="colIdReservation" prefWidth="75.0" text="id" />
-                      <TableColumn fx:id="colStadeReservation" prefWidth="75.0" text="Stade" />
-                        <TableColumn fx:id="colIdPreEqReservation" prefWidth="120.0" text="id_Premier_Equipe" />
-                        <TableColumn fx:id="colDeuEqReservation" prefWidth="130.0" text="id_Deuxieme_Equipe" />
-                        <TableColumn fx:id="colDateReservation" prefWidth="130.0" text="Date" />
-                        <TableColumn fx:id="colIdOrgaReservation" prefWidth="130.0" text="Id_Organisateur" />
-                    </columns>
-                  </TableView>
-                  <TextField fx:id="tfSearchReservation" layoutX="93.0" layoutY="137.0" prefHeight="25.0" prefWidth="325.0" promptText="Rechercher" />
-                  <Label layoutX="93.0" layoutY="35.0" prefHeight="56.0" prefWidth="397.0" text="Reservations : " textFill="#1f3d1c">
-                     <font>
-                        <Font size="40.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="btnDeleteReservation" layoutX="93.0" layoutY="699.0" mnemonicParsing="false" onAction="#fnDeleteReservation" prefHeight="60.0" prefWidth="202.0" style="-fx-background-color: #688A38;" text="Delete" textFill="WHITE">
+                  <Button fx:id="btnBackStade" layoutX="44.0" layoutY="71.0" mnemonicParsing="false" onAction="#fnBackStade" prefHeight="62.0" prefWidth="161.0" style="-fx-background-color: #688A38;" text="Back" textFill="WHITE">
                      <font>
                         <Font name="Wingdings" size="31.0" />
                      </font>
                      <graphic>
                         <ImageView fitHeight="41.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../java/images/poubelle-de-recyclage.png" />
+                              <Image url="@../../../images/back-button.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="677.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/placeholder.gif" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
          </children>
       </StackPane>
       <VBox alignment="TOP_CENTER" layoutX="1.0" layoutY="1.0" prefHeight="685.0" prefWidth="258.0" spacing="20.0">
          <children>
-            <ImageView fitHeight="194.0" fitWidth="255.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="194.0" fitWidth="194.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../../../../../../../Downloads/421909257_266130739694870_1007709414835084119_n.png" />
+               </image></ImageView>
             <Button fx:id="btnStadeList" mnemonicParsing="false" onAction="#fnStadeList" prefHeight="70.0" prefWidth="236.0" style="-fx-background-color: #688A38;" text="Stade" textFill="#1f3d1c">
                <VBox.margin>
                   <Insets />

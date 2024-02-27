@@ -6,19 +6,15 @@
 package controllers;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.Date;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import entities.Reservation;
-import entities.images_stade;
+import entities.ImagesStade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -26,24 +22,15 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import entities.Stade;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import services.Reservation_Service;
 import services.Stade_Service;
 
@@ -62,6 +49,8 @@ public class Stade_BackController implements Initializable {
     private TableColumn<Stade, String> colNomStade;
     @FXML
     private TableColumn<Stade, String> colLieuStade;
+    @FXML
+    private TableColumn<Stade, ImageView> colImageStade;
     @FXML
     private Button btnPreviousStade;
     @FXML
@@ -137,12 +126,15 @@ public class Stade_BackController implements Initializable {
     @FXML
     private TableColumn<Reservation, Integer> colIdPreEqReservation;
     @FXML
-    private TableColumn<Reservation, Integer> colIdReservation;
-    @FXML
     private TableColumn<Reservation, String> colStadeReservation;
     @FXML
     private TextField tfSearchReservation;
-
+    @FXML
+    private Pane pnDetails;
+    @FXML
+    private Button btnDetailsStade;
+    @FXML
+    private Button btnBackStade;
 
     private int currentIndex = 0;
     private List<String> imagePaths = new ArrayList<>();
@@ -154,14 +146,35 @@ public class Stade_BackController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        tfNumeroStadeAdd.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                tfNumeroStadeAdd.setText(oldValue);
+            }
+        });
+        tfNameStadeAdd.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[a-zA-Z]*")) {
+
+                tfNameStadeAdd.setText(oldValue);
+            }
+        });
+        tfCapacityStadeAdd.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                tfCapacityStadeAdd.setText(oldValue);
+            }
+        });
+        tfPlaceStadeAdd.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[a-zA-Z]*")) {
+
+                tfPlaceStadeAdd.setText(oldValue);
+            }
+        });
         pnGestionStade.toFront();
         ObservableList<String>  list =FXCollections.observableArrayList("All","Tunis","Manouba","Ariana","Ben Arous"); // TODO
         cbLieuStade.setItems(list);
-        hbDetailsStade.setVisible(false);
+        hbDetailsStade.setVisible(true);
         btnDeleteStade.setVisible(false);
         btnUpdateStade.setVisible(false);
-        btnPreviousStade.setVisible(false);
-        btnNextStade.setVisible(false);
+        btnDetailsStade.setVisible(false);
         this.currentIndex = 0;
         fnshow();
     }
@@ -198,7 +211,7 @@ public class Stade_BackController implements Initializable {
         if(!filter.equals("") && !filter.equals("All")) {
             list = FXCollections.observableList(ss.GetStadeFiltred(filter));
         }else{
-            list = FXCollections.observableList(ss.GetStade());
+            list = FXCollections.observableList(ss.Get());
         }
 
 
@@ -206,7 +219,7 @@ public class Stade_BackController implements Initializable {
 
         colNomStade.setCellValueFactory(new PropertyValueFactory<>("Nom"));
         colLieuStade.setCellValueFactory(new PropertyValueFactory<>("Lieu"));
-
+        colImageStade.setCellValueFactory(new PropertyValueFactory<>("imageIntiale"));
         tvStade.setItems(list);
 
 
@@ -248,9 +261,10 @@ public class Stade_BackController implements Initializable {
     @FXML
     private void fnSelectedStade(MouseEvent event) {
         Stade p = tvStade.getSelectionModel().getSelectedItem();
-        hbDetailsStade.setVisible(true);
+
         btnDeleteStade.setVisible(true);
         btnUpdateStade.setVisible(true);
+        btnDetailsStade.setVisible(true);
         if (ss.getImages(p.getId()).size() > 1) {
             btnNextStade.setVisible(true);
             btnPreviousStade.setVisible(true);
@@ -259,9 +273,11 @@ public class Stade_BackController implements Initializable {
             btnPreviousStade.setVisible(false);
 
         }
-        lbNomStade.setText(p.Nom);
-        lbCapacityStade.setText(p.Capacity+"");
-        lbLieuStade.setText(p.getLieu());
+       String nom = p.getNom();
+        lbNomStade.setText(nom);
+        lbCapacityStade.setText(p.getCapacity()+"");
+        String lieu = p.getLieu();
+        lbLieuStade.setText(lieu);
         lbNumeroStade.setText(p.getNumero()+"");
         String name = ss.getImages(p.getId()).get(0);
         Image img = new Image(name);
@@ -308,6 +324,8 @@ public class Stade_BackController implements Initializable {
 
     @FXML
     private void fnAddStade(ActionEvent event) {
+
+
         tfCapacityStadeAdd.setText("");
         tfNameStadeAdd.setText("");
         tfNumeroStadeAdd.setText("");
@@ -344,8 +362,10 @@ public class Stade_BackController implements Initializable {
     private void fnDeleteStade(ActionEvent event) {
         Stade stade = new Stade();
         stade.setId(tvStade.getSelectionModel().getSelectedItem().getId());
-        ss.deleteStade(stade);
-        hbDetailsStade.setVisible(false);
+        ss.delete(stade);
+        btnDetailsStade.setVisible(false);
+        btnUpdateStade.setVisible(false);
+        btnDeleteStade.setVisible(false);
         fnshow();
     }
 
@@ -407,15 +427,32 @@ public class Stade_BackController implements Initializable {
 
     @FXML
     private void fnConfirmAddStade(ActionEvent event) {
+        boolean isCapacityEmpty = tfCapacityStadeAdd.getText().isEmpty();
+        boolean isNameEmpty = tfNameStadeAdd.getText().isEmpty();
+        boolean isNumeroEmpty = tfNumeroStadeAdd.getText().isEmpty();
+        boolean isPlaceEmpty = tfPlaceStadeAdd.getText().isEmpty();
+        boolean isImageEmpty = ( ImgViewStadeAdd.getImage()== null);
+
+        if(isCapacityEmpty || isNameEmpty || isNumeroEmpty || isPlaceEmpty || isImageEmpty){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("error");
+            alert.setContentText("please fill in all fiels");
+            alert.show();
+            return;
+        }
         Stade stade= new Stade();
         stade.setLieu(tfPlaceStadeAdd.getText());
         stade.setCapacity(Integer.parseInt(tfCapacityStadeAdd.getText()));
         stade.setNumero(Integer.parseInt(tfNumeroStadeAdd.getText()));
         stade.setNom(tfNameStadeAdd.getText());
-        ss.createStade(stade);
+        ss.Add(stade);
+        Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+        alert2.setTitle("succes");
+        alert2.setContentText("stade ajoute avec succes");
+        alert2.show();
         stade.setId(ss.getLastStadeId());
         for(int i=0;i<imagePaths.size();i++){
-            images_stade img = new images_stade();
+            ImagesStade img = new ImagesStade();
             img.setId_stade(stade.getId());
             img.setUrl_image(imagePaths.get(i));
             ss.addImage(img);
@@ -424,7 +461,7 @@ public class Stade_BackController implements Initializable {
         pnGestionStade.toFront();
         ObservableList<String>  list =FXCollections.observableArrayList("All","Tunis","Manouba","Ariana","Ben Arous"); // TODO
         cbLieuStade.setItems(list);
-        hbDetailsStade.setVisible(false);
+        btnDetailsStade.setVisible(false);
         btnDeleteStade.setVisible(false);
         btnUpdateStade.setVisible(false);
         this.currentIndex = 0;
@@ -441,14 +478,20 @@ public class Stade_BackController implements Initializable {
         stade.setCapacity(Integer.parseInt(tfCapacityStadeAdd.getText()));
         stade.setNumero(Integer.parseInt(tfNumeroStadeAdd.getText()));
         stade.setNom(tfNameStadeAdd.getText());
-        ss.modifyStade(stade);
+
+
+        ss.Update(stade);
+        Alert alert4 = new Alert(Alert.AlertType.INFORMATION);
+        alert4.setTitle("succes");
+        alert4.setContentText("modidfie avec succes");
+        alert4.show();
         stade.setId(ss.getLastStadeId());
         for(int i = 0; i < imagePaths.size(); i++) {
             List<String> imagePathsExisted = ss.getImages(stade.getId());
             String imagePath = imagePaths.get(i);
 
             if (!imagePathsExisted.contains(imagePath)) {
-                images_stade img = new images_stade();
+                ImagesStade img = new ImagesStade();
                 img.setId_stade(stade.getId());
                 img.setUrl_image(imagePath);
                 ss.addImage(img);
@@ -457,7 +500,7 @@ public class Stade_BackController implements Initializable {
         fnshow();
         ObservableList<String>  list =FXCollections.observableArrayList("All","Tunis","Manouba","Ariana","Ben Arous"); // TODO
         cbLieuStade.setItems(list);
-        hbDetailsStade.setVisible(false);
+        btnDetailsStade.setVisible(false);
         btnDeleteStade.setVisible(false);
         btnUpdateStade.setVisible(false);
         this.currentIndex = 0;
@@ -472,7 +515,7 @@ public class Stade_BackController implements Initializable {
         pnGestionStade.toFront();
         ObservableList<String>  list =FXCollections.observableArrayList("All","Tunis","Manouba","Ariana","Ben Arous"); // TODO
         cbLieuStade.setItems(list);
-        hbDetailsStade.setVisible(false);
+        btnDetailsStade.setVisible(false);
         btnDeleteStade.setVisible(false);
         btnUpdateStade.setVisible(false);
         this.currentIndex = 0;
@@ -487,7 +530,7 @@ public class Stade_BackController implements Initializable {
 
     }
     public void fnshowReservation(){
-        ObservableList<Reservation> list = FXCollections.observableList(rs.GetResevation());
+        ObservableList<Reservation> list = FXCollections.observableList(rs.Get());
 
 
 
@@ -497,7 +540,7 @@ public class Stade_BackController implements Initializable {
         colDeuEqReservation.setCellValueFactory(new PropertyValueFactory<>("id_DeuxiemeEquipe"));
         colIdPreEqReservation.setCellValueFactory(new PropertyValueFactory<>("id_PremiereEquipe"));
         colIdOrgaReservation.setCellValueFactory(new PropertyValueFactory<>("id_organisateur"));
-        colIdReservation.setCellValueFactory(new PropertyValueFactory<>("id"));
+
         colStadeReservation.setCellValueFactory(new PropertyValueFactory<>("NomStade"));
 
 
@@ -506,7 +549,7 @@ public class Stade_BackController implements Initializable {
 
         FilteredList<Reservation> filteredData = new FilteredList<>(list, b -> true);
 
-        tfSearchStade.textProperty().addListener((observable, oldValue, newValue) -> {
+        tfSearchReservation.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(reservation -> {
 
                 if (newValue == null || newValue.isEmpty()) {
@@ -516,17 +559,7 @@ public class Stade_BackController implements Initializable {
 
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if (reservation.getId()+"".toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
-                    return true;
-                }else if (reservation.getId_stade()+"".toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
-                    return true;
-                }else if (reservation.getId_DeuxiemeEquipe()+"".toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
-                    return true;
-                }else if (reservation.getId_organisateur()+"".toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
-                    return true;
-                }else if (reservation.getId_PremiereEquipe()+"".toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
-                    return true;
-                }else if (reservation.getNomStade().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
+                if (reservation.getNomStade().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
                     return true;
                 }
                 else
@@ -559,14 +592,35 @@ public class Stade_BackController implements Initializable {
     @FXML
     void fnDeleteReservation(ActionEvent event) {
         Reservation r = tvReservation.getSelectionModel().getSelectedItem();
-        rs.delete_reservation(r);
+        Alert alert3 = new Alert(Alert.AlertType.CONFIRMATION);
+        alert3.setTitle("warning");
+        alert3.setContentText("voulez vous supprimer ?");
+
+        Optional<ButtonType> result = alert3.showAndWait();
+        if(result.get()==ButtonType.OK){
+
+        rs.delete(r);}
 
         fnshowReservation();
+
 
     }
 
     @FXML
     private void fnLogOut(ActionEvent event) {
+    }
+
+    @FXML
+    void fnBackStade(ActionEvent event) {
+        pnGestionStade.toFront();
+        btnDeleteStade.setVisible(false);
+        btnUpdateStade.setVisible(false);
+        btnDetailsStade.setVisible(false);
+    }
+
+    @FXML
+    void fnDetails(ActionEvent event) {
+        pnDetails.toFront();
     }
     
 }

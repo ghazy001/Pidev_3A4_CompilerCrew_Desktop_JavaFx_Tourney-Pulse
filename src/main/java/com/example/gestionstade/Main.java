@@ -12,9 +12,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Stade_Front.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Stade_Back.fxml"));
             Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root, 320, 240);
+            Scene scene = new Scene(root, 1000, 600);
             stage.setTitle("Hello!");
             stage.setScene(scene);
             stage.show();

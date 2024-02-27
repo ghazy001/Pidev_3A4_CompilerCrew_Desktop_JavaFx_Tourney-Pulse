@@ -1,8 +1,12 @@
 package entities;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class Stade {
-    public int id,Capacity,Numero;
-    public String Nom,Lieu;
+    private int id,Capacity,Numero;
+    private String Nom,Lieu;
+    private ImageView imageIntiale;
 
     public Stade() {
     }
@@ -60,6 +64,16 @@ public class Stade {
 
     public void setLieu(String lieu) {
         Lieu = lieu;
+    }
+
+    public ImageView getImageIntiale() {
+        return imageIntiale;
+    }
+
+    public void setImageIntiale(String url) {
+        this.imageIntiale = new ImageView(new Image(url));
+        this.imageIntiale.setFitHeight(200);
+        this.imageIntiale.setFitWidth(200);
     }
 
     @Override

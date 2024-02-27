@@ -1,13 +1,13 @@
 package entities;
 
-public class images_stade {
+public class ImagesStade {
     public int id,id_stade;
     public String url_image;
 
-    public images_stade() {
+    public ImagesStade() {
     }
 
-    public images_stade(int id_stade, String url_image) {
+    public ImagesStade(int id_stade, String url_image) {
         this.id_stade = id_stade;
         this.url_image = url_image;
     }

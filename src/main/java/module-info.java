@@ -10,6 +10,7 @@ module com.example.gestionstade {
     opens com.example.gestionstade to javafx.fxml;
     exports com.example.gestionstade;
 
+
     opens entities;
     opens controllers to javafx.fxml;
     exports controllers;

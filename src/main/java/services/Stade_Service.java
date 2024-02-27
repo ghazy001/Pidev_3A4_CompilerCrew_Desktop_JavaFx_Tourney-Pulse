@@ -1,107 +1,30 @@
 package services;
 
 import entities.Stade;
-import entities.images_stade;
+import entities.ImagesStade;
+import interfaces.IService;
 import utiles.DbConnector;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Stade_Service {
+public class Stade_Service implements IService<Stade> {
     private Connection cnx;
     private PreparedStatement ste;
 
     public Stade_Service() {
         cnx = DbConnector.getInstance().getCon();
     }
-    public void createStade(Stade E) {
-        try {
-            String req = "INSERT INTO stade (`Nom`,`Lieu`,`Capacity`,`Numero`) VALUES (?,?,?,?)";
-            PreparedStatement st = cnx.prepareStatement(req);
-
-            st.setString(1, E.getNom());
-            st.setString(2, E.getLieu());
-            st.setInt(3, E.getCapacity());
-            st.setInt(4, E.getNumero());
-
-
-            st.executeUpdate();
-            System.out.println("stade ajoutée avec succes.");
-
-        } catch (SQLException ex) {
-
-            ex.printStackTrace();
-        }
-
-    }
-
-
-    public void modifyStade(Stade E) {
-        String sql = "UPDATE stade SET `Nom`=?,`Lieu`=?,`Capacity`=?,`Numero`=? where id=?";
-        try {
-            PreparedStatement st = cnx.prepareStatement(sql);
-
-            st.setString(1, E.getNom());
-            st.setString(2, E.getLieu());
-            st.setInt(3,E.getCapacity());
-            st.setInt(4,E.getNumero());
-            st.setInt(5, E.getId());
-            System.out.println(st.toString());
-            st.executeUpdate();
-            System.out.println("modification avec succees !");
-            System.out.println(E);
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-
-    public void deleteStade(Stade e) {
-        try {
-
-            if (e.getId() != 0) {
-                String sql = "delete from reservation WHERE id_stade=?";
-                String sql0 = "delete from stade WHERE id=?";
-                PreparedStatement st = cnx.prepareStatement(sql);
-                st.setInt(1, e.getId());
-                st.executeUpdate();
-                PreparedStatement st1 = cnx.prepareStatement(sql0);
-                st1.setInt(1, e.getId());
-                st1.executeUpdate();
-                System.out.println("deleted !");
-            }
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
 
 
 
-    public List<Stade> GetStade() {
-        ArrayList<Stade> stades = new ArrayList();
-        String req = "SELECT * FROM stade";
-
-        try {
-            Statement st;
-
-            st= DbConnector.getInstance().getCon().prepareStatement(req);
-            ResultSet rs = st.executeQuery(req);
-            while (rs.next()) {
-                Stade e= new Stade(rs.getInt(1),rs.getInt(4),rs.getInt(5), rs.getString(2),
-                        rs.getString(3));
-                stades.add(e
-                );
-
-            }
 
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
 
-        return stades;
-    }
+
+
+
 
     public List<String> GetNomStade() {
         ArrayList<String> stades = new ArrayList();
@@ -115,7 +38,7 @@ public class Stade_Service {
             while (rs.next()) {
                 Stade e= new Stade(rs.getInt(1),rs.getInt(4),rs.getInt(5), rs.getString(2),
                         rs.getString(3));
-                stades.add(e.Nom
+                stades.add(e.getNom()
                 );
 
             }
@@ -140,6 +63,11 @@ public class Stade_Service {
             while (rs.next()) {
                 Stade e= new Stade(rs.getInt(1),rs.getInt(4),rs.getInt(5), rs.getString(2),
                         rs.getString(3));
+                String urlImage = "";
+                if(getImages(e.getId()).stream().count()>0){
+                    urlImage = getImages(e.getId()).get(0);
+                    e.setImageIntiale(urlImage);
+                }
                 stades.add(e
                 );
 
@@ -202,7 +130,7 @@ public class Stade_Service {
     }
 
 
-    public void addImage(images_stade E) {
+    public void addImage(ImagesStade E) {
         try {
             String req = "INSERT INTO images_stade (`id_stade`,`url_image`) VALUES (?,?)";
             PreparedStatement st = cnx.prepareStatement(req);
@@ -277,5 +205,99 @@ public class Stade_Service {
     }
 
 
+    @Override
+    public void Add(Stade item) {
+        try {
+            String req = "INSERT INTO stade (`Nom`,`Lieu`,`Capacity`,`Numero`) VALUES (?,?,?,?)";
+            PreparedStatement st = cnx.prepareStatement(req);
 
+            st.setString(1, item.getNom());
+            st.setString(2, item.getLieu());
+            st.setInt(3, item.getCapacity());
+            st.setInt(4, item.getNumero());
+
+
+            st.executeUpdate();
+            System.out.println("stade ajoutée avec succes.");
+
+        } catch (SQLException ex) {
+
+            ex.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void Update(Stade item) {
+        String sql = "UPDATE stade SET `Nom`=?,`Lieu`=?,`Capacity`=?,`Numero`=? where id=?";
+        try {
+            PreparedStatement st = cnx.prepareStatement(sql);
+
+            st.setString(1, item.getNom());
+            st.setString(2, item.getLieu());
+            st.setInt(3,item.getCapacity());
+            st.setInt(4,item.getNumero());
+            st.setInt(5, item.getId());
+            System.out.println(st.toString());
+            st.executeUpdate();
+            System.out.println("modification avec succees !");
+            System.out.println(item);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+    }
+
+    @Override
+    public void delete(Stade item) {
+        try {
+
+            if (item.getId() != 0) {
+                String sql = "delete from reservation WHERE id_stade=?";
+                String sql0 = "delete from stade WHERE id=?";
+                PreparedStatement st = cnx.prepareStatement(sql);
+                st.setInt(1, item.getId());
+                st.executeUpdate();
+                PreparedStatement st1 = cnx.prepareStatement(sql0);
+                st1.setInt(1, item.getId());
+                st1.executeUpdate();
+                System.out.println("deleted !");
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @Override
+    public List<Stade> Get() {
+        ArrayList<Stade> stades = new ArrayList();
+        String req = "SELECT * FROM stade";
+
+        try {
+            Statement st;
+
+            st= DbConnector.getInstance().getCon().prepareStatement(req);
+            ResultSet rs = st.executeQuery(req);
+            while (rs.next()) {
+                Stade e= new Stade(rs.getInt(1),rs.getInt(4),rs.getInt(5), rs.getString(2),
+                        rs.getString(3));
+                String urlImage = "";
+                if(getImages(e.getId()).stream().count()>0){
+                    urlImage = getImages(e.getId()).get(0);
+                    e.setImageIntiale(urlImage);
+                }
+
+                stades.add(e
+                );
+
+            }
+
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return stades;
+    }
 }
