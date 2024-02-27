@@ -2,6 +2,7 @@ package edu.esprit.test;
 
 import edu.esprit.entities.Matchs;
 import edu.esprit.entities.Tournois;
+import edu.esprit.entities.Equipe;
 import edu.esprit.services.ServiceMatch;
 import edu.esprit.services.ServiceTournois;
 import edu.esprit.utils.DataSource;
@@ -49,8 +50,12 @@ public class Main {
 
         Tournois tournoisForMatch = new Tournois();
         tournoisForMatch.setId_tournois(1);
+        Equipe equipe1 = new Equipe();
+        Equipe equipe2 = new Equipe();
+        equipe1.setId_equipe(2);
+        equipe2.setId_equipe(3);
 
-        Matchs m = new Matchs("Demi Final",sqlDateM,"90 min",tournoisForMatch);
+        Matchs m = new Matchs("Demi Final",sqlDateM,"90 min",tournoisForMatch,equipe1,equipe2);
         ServiceMatch service = new ServiceMatch();
 
         service.ajouter(m);
@@ -61,8 +66,12 @@ public class Main {
 
         Tournois tournoisForMatch1 = new Tournois();
         tournoisForMatch1.setId_tournois(2);
+        Equipe equipe3 = new Equipe();
+        Equipe equipe4 = new Equipe();
+        equipe3.setId_equipe(2);
+        equipe4.setId_equipe(3);
 
-        Matchs m1 = new Matchs("Final",sqlDateM1,"90 min",tournoisForMatch1);
+        Matchs m1 = new Matchs("Final",sqlDateM1,"90 min",tournoisForMatch1,equipe3,equipe4);
         service.modifier(m1);
         service.afficher();
 

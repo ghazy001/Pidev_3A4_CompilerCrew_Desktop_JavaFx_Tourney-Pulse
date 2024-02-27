@@ -1,5 +1,6 @@
 package edu.esprit.services;
 
+import edu.esprit.entities.Equipe;
 import edu.esprit.entities.Matchs;
 import edu.esprit.entities.Tournois;
 import edu.esprit.utils.DataSource;
@@ -18,14 +19,16 @@ public class ServiceMatch implements InterfaceService<Matchs> {
         connection = DataSource.getInsatnce().getConnection();
 
 
-        String sql = "INSERT INTO `match` ( `nom_match`, `date_match`, `duree_match`, `id_tournois`) VALUES (?, ?, ?, ?);";
+        String sql = "INSERT INTO `match` ( `nom_match`, `date_match`, `duree_match`, `id_tournois` , `id_equipe1`, `id_equipe2`) VALUES (?, ?, ?, ?, ?, ?);";
         try {
             prepare = connection.prepareStatement(sql);
 
             prepare.setString(1, matchs.getNom_match());
             prepare.setDate(2, (Date) matchs.getDate_match());
             prepare.setString(3, matchs.getDuree_match());
-            prepare.setInt(4, matchs.getId_tournois().getId_tournois());
+            prepare.setInt(4, matchs.getTournois().getId_tournois());
+            prepare.setInt(5, matchs.getEquipe().getId_equipe());
+            prepare.setInt(6, matchs.getEquipe1().getId_equipe());
 
             prepare.executeUpdate();
 
@@ -38,7 +41,7 @@ public class ServiceMatch implements InterfaceService<Matchs> {
     public void modifier(Matchs matchs) {
             connection = DataSource.getInsatnce().getConnection();
 
-        String sql = "UPDATE `match` SET `nom_match` = ?, `date_match` = ?, `duree_match` = ?, `id_tournois` = ? WHERE `id_match` = ? ";
+        String sql = "UPDATE `match` SET `nom_match` = ?, `date_match` = ?, `duree_match` = ?, `id_tournois` = ?, `id_equipe1` = ?, `id_equipe2` = ? WHERE `id_match` = ? ";
 
         try {
             prepare = connection.prepareStatement(sql);
@@ -46,8 +49,10 @@ public class ServiceMatch implements InterfaceService<Matchs> {
             prepare.setString(1, matchs.getNom_match());
             prepare.setDate(2, (Date) matchs.getDate_match());
             prepare.setString(3, matchs.getDuree_match());
-            prepare.setInt(4, matchs.getId_tournois().getId_tournois());
-            prepare.setInt(5, matchs.getId_match());
+            prepare.setInt(4, matchs.getTournois().getId_tournois());
+            prepare.setInt(5, matchs.getEquipe().getId_equipe());
+            prepare.setInt(6, matchs.getEquipe1().getId_equipe());
+            prepare.setInt(7, matchs.getId_match());
 
 
             prepare.executeUpdate();
@@ -129,7 +134,11 @@ public class ServiceMatch implements InterfaceService<Matchs> {
         List<Matchs> matchsList = new ArrayList<>();
         connection = DataSource.getInsatnce().getConnection();
 
-        String sql = "SELECT m.*, t.nom_tournois FROM `match` m JOIN `tournois` t ON m.id_tournois = t.id_tournois";
+        String sql = "SELECT m.*, t.nom_tournois, e1.nom, e2.nom " +
+                "FROM `match` m " +
+                "JOIN `tournois` t ON m.id_tournois = t.id_tournois " +
+                "JOIN `equipe` e1 ON m.id_equipe1 = e1.id " +
+                "JOIN `equipe` e2 ON m.id_equipe2 = e2.id";
 
         try {
 
@@ -143,6 +152,10 @@ public class ServiceMatch implements InterfaceService<Matchs> {
                 String dureeMatch = resultSet.getString("duree_match");
                 int idTournois = resultSet.getInt("id_tournois");
                 String nomTournois = resultSet.getString("nom_tournois");
+                int idEquipe1 = resultSet.getInt("id_equipe1");
+                String nomEquipe1 = resultSet.getString("nom");
+                int idEquipe2 = resultSet.getInt("id_equipe2");
+                String nomEquipe2 = resultSet.getString("nom");
 
                 Matchs m = new Matchs();
                 m.setId_match(id);
@@ -153,7 +166,17 @@ public class ServiceMatch implements InterfaceService<Matchs> {
                 Tournois tour = new Tournois();
                 tour.setId_tournois(idTournois);
                 tour.setNom_tournoi(nomTournois);
-                m.setId_tournois(tour);
+                m.setTournois(tour);
+
+                Equipe equ = new Equipe();
+                equ.setId_equipe(idEquipe1);
+                equ.setNom_equipe(nomEquipe1);
+                m.setEquipe(equ);
+
+                Equipe equ1 = new Equipe();
+                equ1.setId_equipe(idEquipe2);
+                equ1.setNom_equipe(nomEquipe2);
+                m.setEquipe1(equ1);
 
                 matchsList.add(m);
             }

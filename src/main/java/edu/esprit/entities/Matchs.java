@@ -9,25 +9,31 @@ public class Matchs {
     private String nom_match;
     private Date date_match;
     private String duree_match;
-    private Tournois id_tournois;
+    private Tournois tournois;
+    private Equipe equipe;
+    private Equipe equipe1;
 
 
     public Matchs() {
     }
 
-    public Matchs(String nom_match, Date date_match, String duree_match, Tournois id_tournois) {
+    public Matchs(String nom_match, Date date_match, String duree_match, Tournois tournois, Equipe equipe, Equipe equipe1) {
         this.nom_match = nom_match;
         this.date_match = date_match;
         this.duree_match = duree_match;
-        this.id_tournois = id_tournois;
+        this.tournois = tournois;
+        this.equipe = equipe;
+        this.equipe1 = equipe1;
     }
 
-    public Matchs(int id_match, String nom_match, Date date_match, String duree_match, Tournois id_tournois) {
+    public Matchs(int id_match, String nom_match, Date date_match, String duree_match, Tournois tournois, Equipe equipe, Equipe equipe1) {
         this.id_match = id_match;
         this.nom_match = nom_match;
         this.date_match = date_match;
         this.duree_match = duree_match;
-        this.id_tournois = id_tournois;
+        this.tournois = tournois;
+        this.equipe = equipe;
+        this.equipe1 = equipe1;
     }
 
     public int getId_match() {
@@ -62,12 +68,28 @@ public class Matchs {
         this.duree_match = duree_match;
     }
 
-    public Tournois getId_tournois() {
-        return id_tournois;
+    public Tournois getTournois() {
+        return tournois;
     }
 
-    public void setId_tournois(Tournois id_tournois) {
-        this.id_tournois = id_tournois;
+    public void setTournois(Tournois tournois) {
+        this.tournois = tournois;
+    }
+
+    public Equipe getEquipe() {
+        return equipe;
+    }
+
+    public void setEquipe(Equipe equipe) {
+        this.equipe = equipe;
+    }
+
+    public Equipe getEquipe1() {
+        return equipe1;
+    }
+
+    public void setEquipe1(Equipe equipe1) {
+        this.equipe1 = equipe1;
     }
 
     @Override
@@ -75,22 +97,13 @@ public class Matchs {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Matchs matchs = (Matchs) o;
-        return id_match == matchs.id_match && Objects.equals(nom_match, matchs.nom_match) && Objects.equals(date_match, matchs.date_match) && Objects.equals(duree_match, matchs.duree_match) && Objects.equals(id_tournois, matchs.id_tournois);
+        return id_match == matchs.id_match && Objects.equals(nom_match, matchs.nom_match) && Objects.equals(date_match, matchs.date_match) && Objects.equals(duree_match, matchs.duree_match) && Objects.equals(tournois, matchs.tournois) && Objects.equals(equipe, matchs.equipe) && Objects.equals(equipe1, matchs.equipe1);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_match, nom_match, date_match, duree_match, id_tournois);
+        return Objects.hash(id_match, nom_match, date_match, duree_match, tournois, equipe, equipe1);
     }
 
-    @Override
-    public String toString() {
-        return "matchs{" +
-                "id_match=" + id_match +
-                ", nom_match='" + nom_match + '\'' +
-                ", date_match='" + date_match + '\'' +
-                ", duree_match='" + duree_match + '\'' +
-                ", id_tournois=" + id_tournois +
-                '}';
-    }
+
 }

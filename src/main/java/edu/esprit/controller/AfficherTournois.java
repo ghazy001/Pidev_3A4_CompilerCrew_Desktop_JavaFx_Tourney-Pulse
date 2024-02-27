@@ -40,13 +40,10 @@ public class AfficherTournois implements Initializable {
         private TextField TFaddress;
 
         @FXML
-        private DatePicker TFdated;
+        private DatePicker DPdated;
 
         @FXML
-        private DatePicker TFdatef;
-
-        @FXML
-        private TextField TFid;
+        private DatePicker DPdatef;
 
         @FXML
         private TextField TFnbrmatch;
@@ -96,10 +93,16 @@ public class AfficherTournois implements Initializable {
                         List<Tournois> tournoisList = serviceTournois.getAll();
                         System.out.println("Tournois List: " + tournoisList); // Print the list
 
+
+                TFnbrmatch.textProperty().addListener((observable, oldValue, newValue) -> {
+                        if (!newValue.matches("\\d*")) {
+                                TFnbrmatch.setText(newValue.replaceAll("[^\\d]", ""));
+                        }
+                });
+
                         for (Tournois tournois : tournoisList) {
                                 System.out.println("Adding tournois to TitledPane: " + tournois);
                                 // Create layout for each reclamation
-                                Label idtLabel = new Label("ID: " + tournois.getId_tournois());
                                 Label nomtLabel = new Label("Nom: " + tournois.getNom_tournois());
                                 Label addressLabel = new Label("Address: " + tournois.getAddress_tournois());
                                 Label nombremLabel = new Label("Nombre Match: " + tournois.getNombre_match());
@@ -107,7 +110,6 @@ public class AfficherTournois implements Initializable {
                                 Label datefLabel = new Label("Date Fin: " + tournois.getDate_fin());
 
                                 GridPane gridPane = new GridPane();
-                                gridPane.add(idtLabel, 0, 0);
                                 gridPane.add(nomtLabel, 0, 1);
                                 gridPane.add(addressLabel, 0, 2);
                                 gridPane.add(nombremLabel, 0, 3);
@@ -135,14 +137,13 @@ public class AfficherTournois implements Initializable {
                                                 System.out.println("Selected Date Debut: " + selectedDated);
                                                 System.out.println("Selected Date Fin: " + selectedDatef);
 
-                                                TFid.setText(selectedIdt);
                                                 TFnom.setText(selectedNomt);
                                                 TFaddress.setText(selectedAddress);
                                                 TFnbrmatch.setText(selectedNombrem);
                                                 LocalDate dateDebut = Date.valueOf(selectedDated).toLocalDate();
-                                                TFdated.setValue(dateDebut);
+                                                DPdated.setValue(dateDebut);
                                                 LocalDate dateFin = Date.valueOf(selectedDatef).toLocalDate();
-                                                TFdatef.setValue(dateFin);
+                                                DPdatef.setValue(dateFin);
 
                                         }
                                 });
@@ -155,16 +156,29 @@ public class AfficherTournois implements Initializable {
                         Bsupprimer.setOnAction(new EventHandler<ActionEvent>() {
                                 @Override
                                 public void handle(ActionEvent actionEvent) {
+                                        String nomText = TFnom.getText();
+                                        String addressText = TFaddress.getText();
+                                        String nbrMatchText = TFnbrmatch.getText();
+                                        LocalDate dateD = DPdated.getValue();
+                                        LocalDate dateF = DPdatef.getValue();
+                                        if (nomText.isEmpty() || addressText.isEmpty() || nbrMatchText.isEmpty() || dateD == null || dateF == null || dateD.isEqual(dateF)) {
+                                                Alert alert = new Alert(Alert.AlertType.ERROR);
+                                                alert.setTitle("Information manquante!");
+                                                alert.setHeaderText("Gestion Des Tournois");
+                                                alert.setContentText("Veuillez compléter tous les champs et assurez-vous que les dates de début et de fin sont différentes.");
+                                                alert.showAndWait();
+                                                return;
+                                        }
+
                                         if (selectedIdt != null) {
                                                 serviceTournois.supprimer(Integer.parseInt(selectedIdt));
                                                 loadData();
                                                 LocalDate t = null;
-                                                TFid.setText("");
                                                 TFnom.setText("");
                                                 TFaddress.setText("");
                                                 TFnbrmatch.setText("");
-                                                TFdated.setValue(t);
-                                                TFdatef.setValue(t);
+                                                DPdated.setValue(t);
+                                                DPdatef.setValue(t);
                                                 TFnom.requestFocus();
                                         }
                                 }
@@ -174,33 +188,59 @@ public class AfficherTournois implements Initializable {
                         Bmodifier.setOnAction(new EventHandler<ActionEvent>() {
                                 @Override
                                 public void handle(ActionEvent actionEvent) {
+                                        String nomText = TFnom.getText();
+                                        String addressText = TFaddress.getText();
+                                        String nbrMatchText = TFnbrmatch.getText();
+                                        LocalDate dateD = DPdated.getValue();
+                                        LocalDate dateF = DPdatef.getValue();
+                                        if (nomText.isEmpty() || addressText.isEmpty() || nbrMatchText.isEmpty() || dateD == null || dateF == null || dateD.isEqual(dateF)) {
+                                                Alert alert = new Alert(Alert.AlertType.ERROR);
+                                                alert.setTitle("Information manquante!");
+                                                alert.setHeaderText("Gestion Des Tournois");
+                                                alert.setContentText("Veuillez compléter tous les champs et assurez-vous que les dates de début et de fin sont différentes.");
+                                                alert.showAndWait();
+                                                return;
+                                        }
 
                                         if (selectedIdt != null) {
-                                                String nbrMatchText = TFnbrmatch.getText();
-                                                int nbrMatch;
-                                                String dateDText = String.valueOf(TFdated.getValue());
-                                                java.util.Date dateD;
-                                                String dateFText = String.valueOf(TFdatef.getValue());
-                                                java.util.Date dateF;
+
+                                                String nbrMText = TFnbrmatch.getText();
+                                                int nbrMatch = 0;
+                                                String dateDText = String.valueOf(DPdated.getValue());
+                                                java.util.Date dateDebut = null;
+                                                String dateFText = String.valueOf(DPdatef.getValue());
+                                                java.util.Date dateFin = null;
                                                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                                                 try {
-                                                        nbrMatch = Integer.parseInt(nbrMatchText);
-                                                        dateD = sdf.parse(dateDText);
-                                                        dateF = sdf.parse(dateFText);
-                                                } catch (ParseException e) {
-                                                        throw new RuntimeException(e);
+                                                        nbrMatch = Integer.parseInt(nbrMText);
+                                                } catch (NumberFormatException e) {
+                                                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                                                        alert.setTitle("Erreur de format");
+                                                        alert.setContentText("Le nombre de matchs doit être un entier valide.");
+                                                        alert.showAndWait();
+                                                        return;
                                                 }
-                                                Date sqlDateD = new Date(dateD.getTime());
-                                                Date sqlDateF = new Date(dateF.getTime());
-                                                serviceTournois.modifier(new Tournois(Integer.parseInt(TFid.getText()),TFnom.getText(), TFaddress.getText(), nbrMatch, sqlDateD, sqlDateF));
+                                                try {
+                                                        dateDebut = sdf.parse(dateDText);
+                                                        dateFin = sdf.parse(dateFText);
+                                                } catch (ParseException e) {
+                                                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                                                        alert.setTitle("Format de date invalide");
+                                                        alert.setHeaderText("Format de date incorrect");
+                                                        alert.setContentText("Le format de date doit être 'yyyy-MM-dd'.");
+                                                        alert.showAndWait();
+
+                                                }
+                                                Date sqlDateD = new Date(dateDebut.getTime());
+                                                Date sqlDateF = new Date(dateFin.getTime());
+                                                serviceTournois.modifier(new Tournois(Integer.parseInt(selectedIdt),TFnom.getText(), TFaddress.getText(), nbrMatch, sqlDateD, sqlDateF));
                                                 loadData();
                                                 LocalDate t = null;
-                                                TFid.setText("");
                                                 TFnom.setText("");
                                                 TFaddress.setText("");
                                                 TFnbrmatch.setText("");
-                                                TFdated.setValue(t);
-                                                TFdatef.setValue(t);
+                                                DPdated.setValue(t);
+                                                DPdatef.setValue(t);
                                                 TFnom.requestFocus();
                                         }
                                 }
@@ -214,50 +254,65 @@ public class AfficherTournois implements Initializable {
 
         @FXML
         void ajouterTournoisAction(ActionEvent event) {
+                String nomText = TFnom.getText();
+                String addressText = TFaddress.getText();
                 String nbrMatchText = TFnbrmatch.getText();
-                int nbrMatch;
-                String dateDText = String.valueOf(TFdated.getValue());
-                java.util.Date dateD;
-                String dateFText = String.valueOf(TFdatef.getValue());
-                java.util.Date dateF;
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                LocalDate dateD = DPdated.getValue();
+                LocalDate dateF = DPdatef.getValue();
+
+                if (nomText.isEmpty() || addressText.isEmpty() || nbrMatchText.isEmpty() || dateD == null || dateF == null || dateD.isEqual(dateF)) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Information manquante!");
+                        alert.setHeaderText("Gestion Des Tournois");
+                        alert.setContentText("Veuillez compléter tous les champs et assurez-vous que les dates de début et de fin sont différentes.");
+                        alert.showAndWait();
+                        return;
+                }
+                int nbrMatch = 0;
                 try {
                         nbrMatch = Integer.parseInt(nbrMatchText);
-                        dateD = sdf.parse(dateDText);
-                        dateF = sdf.parse(dateFText);
-                        Date sqlDateD = new Date(dateD.getTime());
-                        Date sqlDateF = new Date(dateF.getTime());
-
-                        ServiceTournois st = new ServiceTournois();
-
-                        if (!TFnom.getText().isEmpty() || !TFaddress.getText().isEmpty() || !TFnbrmatch.getText().isEmpty() || !TFdated.getValue().isEqual(TFdatef.getValue()) || !TFdatef.getValue().isEqual(TFdated.getValue())) {
-                                st.ajouter(new Tournois(TFnom.getText(), TFaddress.getText(), nbrMatch, sqlDateD, sqlDateF));
-                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                                alert.setTitle("Success");
-                                alert.setContentText("Tournois ajouter!");
-                                alert.show();
-                                loadData();
-
-
-                            LocalDate t = null;
-                                TFnom.setText("");
-                                TFaddress.setText("");
-                                TFnbrmatch.setText("");
-                                TFdated.setValue(t);
-                                TFdatef.setValue(t);
-                                TFnom.requestFocus();
-                        } else {
-                                Alert alert = new Alert(Alert.AlertType.ERROR);
-                                alert.setTitle("Information manquante!");
-                                alert.setContentText("Veuillez completez les champs manquant pour le match.");
-                                alert.show();
-                        }
+                } catch (NumberFormatException e) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Erreur de format");
+                        alert.setContentText("Le nombre de tournois doit être un entier valide.");
+                        alert.showAndWait();
+                        return;
+                }
+                String dateDText = String.valueOf(DPdated.getValue());
+                java.util.Date dateDebut = null;
+                String dateFText = String.valueOf(DPdatef.getValue());
+                java.util.Date dateFin = null;
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                        dateDebut = sdf.parse(dateDText);
+                        dateFin = sdf.parse(dateFText);
                 } catch (ParseException e) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Parse Exception");
-                        alert.setContentText("Error parsing date: " + e.getMessage());
+                        alert.setTitle("Format de date invalide");
+                        alert.setHeaderText("Format de date incorrect");
+                        alert.setContentText("Le format de date doit être 'yyyy-MM-dd'.");
                         alert.showAndWait();
+
                 }
+                Date sqlDateD = new Date(dateDebut.getTime());
+                Date sqlDateF = new Date(dateFin.getTime());
+
+                ServiceTournois st = new ServiceTournois();
+                st.ajouter(new Tournois(nomText, addressText, nbrMatch, sqlDateD, sqlDateF));
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setContentText("Tournois ajouté!");
+                alert.showAndWait();
+
+                loadData();
+
+                TFnom.clear();
+                TFaddress.clear();
+                TFnbrmatch.clear();
+                DPdated.setValue(null);
+                DPdatef.setValue(null);
+                TFnom.requestFocus();
 
         }
 
@@ -270,7 +325,6 @@ public class AfficherTournois implements Initializable {
                 for (Tournois tournois : tournoisList) {
                         System.out.println("Adding tournois to TitledPane: " + tournois);
                         // Create layout for each reclamation
-                        Label idtLabel = new Label("ID: " + tournois.getId_tournois());
                         Label nomtLabel = new Label("Nom: " + tournois.getNom_tournois());
                         Label addressLabel = new Label("Address: " + tournois.getAddress_tournois());
                         Label nombremLabel = new Label("Nombre Match: " + tournois.getNombre_match());
@@ -278,7 +332,6 @@ public class AfficherTournois implements Initializable {
                         Label datefLabel = new Label("Date Fin: " + tournois.getDate_fin());
 
                         GridPane gridPane = new GridPane();
-                        gridPane.add(idtLabel, 0, 0);
                         gridPane.add(nomtLabel, 0, 1);
                         gridPane.add(addressLabel, 0, 2);
                         gridPane.add(nombremLabel, 0, 3);
@@ -306,14 +359,13 @@ public class AfficherTournois implements Initializable {
                                         System.out.println("Selected Date Debut: " + selectedDated);
                                         System.out.println("Selected Date Fin: " + selectedDatef);
 
-                                        TFid.setText(selectedIdt);
                                         TFnom.setText(selectedNomt);
                                         TFaddress.setText(selectedAddress);
                                         TFnbrmatch.setText(selectedNombrem);
                                         LocalDate dateDebut = Date.valueOf(selectedDated).toLocalDate();
-                                        TFdated.setValue(dateDebut);
+                                        DPdated.setValue(dateDebut);
                                         LocalDate dateFin = Date.valueOf(selectedDatef).toLocalDate();
-                                        TFdatef.setValue(dateFin);
+                                        DPdatef.setValue(dateFin);
 
                                 }
                         });

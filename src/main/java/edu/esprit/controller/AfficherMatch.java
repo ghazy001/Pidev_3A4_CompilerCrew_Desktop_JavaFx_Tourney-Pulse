@@ -1,5 +1,6 @@
 package edu.esprit.controller;
 
+import edu.esprit.entities.Equipe;
 import edu.esprit.entities.Matchs;
 import edu.esprit.entities.Tournois;
 import edu.esprit.services.ServiceMatch;
@@ -27,40 +28,45 @@ import java.util.ResourceBundle;
 
 public class AfficherMatch implements Initializable {
 
-        @FXML
-        private Button Bmodm;
+    @FXML
+    private Button Bmodm;
 
-        @FXML
-        private Button Bnavigatem;
+    @FXML
+    private Button Bnavigatem;
 
-        @FXML
-        private Button Bsuppm;
+    @FXML
+    private Button Bsuppm;
 
-        @FXML
-        private DatePicker TFdatem;
+    @FXML
+    private DatePicker DPdatem;
 
-        @FXML
-        private TextField TFdureem;
+    @FXML
+    private TextField TFdureem;
 
-        @FXML
-        private TextField TFidm;
+    @FXML
+    private TextField TFequipe1;
 
-        @FXML
-        private TextField TFnomm;
+    @FXML
+    private TextField TFequipe2;
 
-        @FXML
-        private TextField TFidt;
+    @FXML
+    private TextField TFnomm;
 
-        @FXML
-        private VBox Vboxx;
+    @FXML
+    private TextField TFtournois;
 
-        ServiceMatch serviceMatch = new ServiceMatch();
+    @FXML
+    private VBox Vboxx;
 
-        private String selectedIdm;
-        private String selectedNomm;
-        private String selectedDate;
-        private String selectedDuree;
-        private String selectedIdt;
+    ServiceMatch serviceMatch = new ServiceMatch();
+
+    private String selectedIdm;
+    private String selectedNomm;
+    private String selectedDate;
+    private String selectedDuree;
+    private String selectedIdt;
+    private String selectedIde1;
+    private String selectedIde2;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -96,20 +102,24 @@ public class AfficherMatch implements Initializable {
         for (Matchs matchs : matchsList) {
             System.out.println("Adding match to TitledPane: " + matchs);
             // Create layout for each reclamation
-            Label idmLabel = new Label("ID: " + matchs.getId_match());
             Label nommLabel = new Label("Nom: " + matchs.getNom_match());
             Label dateLabel = new Label("Date: " + matchs.getDate_match());
             Label dureeLabel = new Label("Duree: " + matchs.getDuree_match());
-            Label idtLabel = new Label("Nom Tournois: " + matchs.getId_tournois().getNom_tournois());
+            Label idtLabel = new Label("Nom Tournois: " + matchs.getTournois().getNom_tournois());
+            Label ideLabel1 = new Label("Nom Equipe 1: " + matchs.getEquipe().getNom_equipe());
+            Label ideLabel2 = new Label("Nom Equipe 2: " + matchs.getEquipe1().getNom_equipe());
+
 
             GridPane gridPane = new GridPane();
-            gridPane.add(idmLabel, 0, 0);
             gridPane.add(nommLabel, 0, 1);
             gridPane.add(dateLabel, 0, 2);
             gridPane.add(dureeLabel, 0, 3);
             gridPane.add(idtLabel, 0, 4);
+            gridPane.add(ideLabel1, 0, 5);
+            gridPane.add(ideLabel2, 0, 6);
 
-            TitledPane titledPane = new TitledPane("Tournois " + matchs.getId_match(), gridPane);
+
+            TitledPane titledPane = new TitledPane("Match " + matchs.getId_match(), gridPane);
 
 
             titledPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -119,7 +129,9 @@ public class AfficherMatch implements Initializable {
                     selectedNomm = matchs.getNom_match();
                     selectedDate = String.valueOf(matchs.getDate_match());
                     selectedDuree = matchs.getDuree_match();
-                    selectedIdt = String.valueOf(matchs.getId_tournois().getId_tournois());
+                    selectedIdt = String.valueOf(matchs.getTournois().getId_tournois());
+                    selectedIde1 = String.valueOf(matchs.getEquipe().getId_equipe());
+                    selectedIde2 = String.valueOf(matchs.getEquipe1().getId_equipe());
 
                     // Perform any action with the selected values
                     System.out.println("Selected ID: " + selectedIdm);
@@ -127,14 +139,17 @@ public class AfficherMatch implements Initializable {
                     System.out.println("Selected Date: " + selectedDate);
                     System.out.println("Selected Duree: " + selectedDuree);
                     System.out.println("Selected ID Tournois: " + selectedIdt);
+                    System.out.println("Selected ID Equipe 1: " + selectedIde1);
+                    System.out.println("Selected ID Equipe 2: " + selectedIde2);
 
 
-                    TFidm.setText(selectedIdm);
                     TFnomm.setText(selectedNomm);
                     LocalDate dateMatch = Date.valueOf(selectedDate).toLocalDate();
-                    TFdatem.setValue(dateMatch);
+                    DPdatem.setValue(dateMatch);
                     TFdureem.setText(selectedDuree);
-                    TFidt.setText(selectedIdt);
+                    TFtournois.setText(selectedIdt);
+                    TFequipe1.setText(selectedIde1);
+                    TFequipe2.setText(selectedIde2);
 
                 }
             });
@@ -147,15 +162,32 @@ public class AfficherMatch implements Initializable {
         Bsuppm.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                String nomText = TFnomm.getText();
+                String dureeText = TFdureem.getText();
+                String tournoisText = TFtournois.getText();
+                String equipe1Text = TFequipe1.getText();
+                String equipe2Text = TFequipe2.getText();
+                LocalDate date = DPdatem.getValue();
+
+                if (nomText.isEmpty() || dureeText.isEmpty() || tournoisText.isEmpty() || equipe1Text.isEmpty() || equipe2Text.isEmpty() || date == null) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Information manquante!");
+                    alert.setHeaderText("Gestion Des Matchs");
+                    alert.setContentText("Veuillez compléter tous les champs.");
+                    alert.showAndWait();
+                    return;
+                }
+
                 if (selectedIdm != null) {
                     serviceMatch.supprimer(Integer.parseInt(selectedIdm));
                     loadData();
                     LocalDate t = null;
-                    TFidm.setText("");
                     TFnomm.setText("");
-                    TFdatem.setValue(t);
+                    DPdatem.setValue(t);
                     TFdureem.setText("");
-                    TFidt.setText("");
+                    TFtournois.setText("");
+                    TFequipe1.setText("");
+                    TFequipe2.setText("");
                     TFnomm.requestFocus();
                 }
             }
@@ -166,13 +198,33 @@ public class AfficherMatch implements Initializable {
             @Override
             public void handle(ActionEvent actionEvent) {
 
+                String nomText = TFnomm.getText();
+                String dureeText = TFdureem.getText();
+                String tournoisText = TFtournois.getText();
+                String equipe1Text = TFequipe1.getText();
+                String equipe2Text = TFequipe2.getText();
+                LocalDate date = DPdatem.getValue();
+
+                if (nomText.isEmpty() || dureeText.isEmpty() || tournoisText.isEmpty() || equipe1Text.isEmpty() || equipe2Text.isEmpty() || date == null) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Information manquante!");
+                    alert.setHeaderText("Gestion Des Matchs");
+                    alert.setContentText("Veuillez compléter tous les champs.");
+                    alert.showAndWait();
+                    return;
+                }
+
                 if (selectedIdm != null) {
                     int idTourText;
-                    String dateMText = String.valueOf(TFdatem.getValue());
+                    int idEquipeText1;
+                    int idEquipeText2;
+                    String dateMText = String.valueOf(DPdatem.getValue());
                     java.util.Date dateM;
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     try {
-                        idTourText = Integer.parseInt(TFidt.getText());
+                        idTourText = Integer.parseInt(TFtournois.getText());
+                        idEquipeText1 = Integer.parseInt(TFequipe1.getText());
+                        idEquipeText2 = Integer.parseInt(TFequipe2.getText());
                         dateM = sdf.parse(dateMText);
                     } catch (ParseException e) {
                         throw new RuntimeException(e);
@@ -180,15 +232,20 @@ public class AfficherMatch implements Initializable {
 
                     Tournois tournois = new Tournois();
                     tournois.setId_tournois(idTourText);
+                    Equipe equipe1 = new Equipe();
+                    Equipe equipe2 = new Equipe();
+                    equipe1.setId_equipe(idEquipeText1);
+                    equipe2.setId_equipe(idEquipeText2);
                     Date sqlDateM = new Date(dateM.getTime());
-                    serviceMatch.modifier(new Matchs(Integer.parseInt(TFidm.getText()),TFnomm.getText(), sqlDateM, TFdureem.getText(), tournois));
+                    serviceMatch.modifier(new Matchs(Integer.parseInt(selectedIdm),TFnomm.getText(), sqlDateM, TFdureem.getText(), tournois, equipe1, equipe2));
                     loadData();
                     LocalDate t = null;
-                    TFidm.setText("");
                     TFnomm.setText("");
-                    TFdatem.setValue(t);
+                    DPdatem.setValue(t);
                     TFdureem.setText("");
-                    TFidt.setText("");
+                    TFtournois.setText("");
+                    TFequipe1.setText("");
+                    TFequipe2.setText("");
                     TFnomm.requestFocus();
                 }
             }
@@ -200,49 +257,68 @@ public class AfficherMatch implements Initializable {
 
     @FXML
     void ajouterMatchsAction(ActionEvent event) {
-        String nomTourText = TFidt.getText();
-        int idTour;
-        String dateMText = String.valueOf(TFdatem.getValue());
-        java.util.Date dateM;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            dateM = sdf.parse(dateMText);
-            Date sqlDateM = new Date(dateM.getTime());
+        String nomText = TFnomm.getText();
+        String dureeText = TFdureem.getText();
+        String tournoisText = TFtournois.getText();
+        String equipe1Text = TFequipe1.getText();
+        String equipe2Text = TFequipe2.getText();
+        LocalDate date = DPdatem.getValue();
 
-            ServiceMatch sm = new ServiceMatch();
-
-
-            if (!TFnomm.getText().isEmpty() || !TFdureem.getText().isEmpty() || !TFidt.getText().isEmpty()) {
-                idTour = Integer.parseInt(nomTourText);
-                Tournois tournois = new Tournois();
-                tournois.setId_tournois(idTour);
-                sm.ajouter(new Matchs(TFnomm.getText(), sqlDateM, TFdureem.getText(), tournois));
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success");
-                alert.setContentText("Match ajouter!");
-                alert.show();
-                loadData();
-
-                LocalDate t = null;
-                TFnomm.setText("");
-                TFdatem.setValue(t);
-                TFdureem.setText("");
-                TFidt.setText("");
-                TFnomm.requestFocus();
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Information manquante!");
-                alert.setContentText("Veuillez completez les champs manquant pour le match");
-                alert.show();
-            }
-        } catch (ParseException e) {
+        if (nomText.isEmpty() || dureeText.isEmpty() || tournoisText.isEmpty() || equipe1Text.isEmpty() || equipe2Text.isEmpty() || date == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Parse Exception");
-            alert.setContentText("Error parsing date: " + e.getMessage());
+            alert.setTitle("Information manquante!");
+            alert.setHeaderText("Gestion Des Matchs");
+            alert.setContentText("Veuillez compléter tous les champs.");
             alert.showAndWait();
+            return;
         }
 
+        int idTour;
+        int idequipe1;
+        int idequipe2;
+
+        try {
+            idTour = Integer.parseInt(tournoisText);
+            idequipe1 = Integer.parseInt(equipe1Text);
+            idequipe2 = Integer.parseInt(equipe2Text);
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de format");
+            alert.setContentText("Les ID du tournois et des équipes doivent être des entiers valides.");
+            alert.showAndWait();
+            return;
+        }
+
+        java.util.Date dateM = java.sql.Date.valueOf(date);
+
+        Equipe equipe1 = new Equipe();
+        Equipe equipe2 = new Equipe();
+
+        equipe1.setId_equipe(idequipe1);
+        equipe2.setId_equipe(idequipe2);
+
+        Tournois tournois = new Tournois();
+        tournois.setId_tournois(idTour);
+
+        ServiceMatch sm = new ServiceMatch();
+        sm.ajouter(new Matchs(nomText, dateM, dureeText, tournois, equipe1, equipe2));
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setContentText("Match ajouté!");
+        alert.showAndWait();
+
+        loadData();
+
+        TFnomm.clear();
+        TFdureem.clear();
+        TFtournois.clear();
+        TFequipe1.clear();
+        TFequipe2.clear();
+        DPdatem.setValue(null);
+        TFnomm.requestFocus();
     }
+
 
     private void loadData() {
         Vboxx.getChildren().clear(); // Clear existing display
@@ -252,18 +328,21 @@ public class AfficherMatch implements Initializable {
         for (Matchs matchs : matchsList) {
             System.out.println("Adding match to TitledPane: " + matchs);
             // Create layout for each reclamation
-            Label idmLabel = new Label("ID: " + matchs.getId_match());
             Label nommLabel = new Label("Nom: " + matchs.getNom_match());
             Label dateLabel = new Label("Date: " + matchs.getDate_match());
             Label dureeLabel = new Label("Duree: " + matchs.getDuree_match());
-            Label idtLabel = new Label("Nom Tournois: " + matchs.getId_tournois().getNom_tournois());
+            Label idtLabel = new Label("Nom Tournois: " + matchs.getTournois().getNom_tournois());
+            Label ideLabel1 = new Label("Nom Equipe 1: " + (matchs.getEquipe().getNom_equipe() ));
+            Label ideLabel2 = new Label("Nom Equipe 2: " + (matchs.getEquipe1().getNom_equipe()));
 
             GridPane gridPane = new GridPane();
-            gridPane.add(idmLabel, 0, 0);
             gridPane.add(nommLabel, 0, 1);
             gridPane.add(dateLabel, 0, 2);
             gridPane.add(dureeLabel, 0, 3);
             gridPane.add(idtLabel, 0, 4);
+            gridPane.add(ideLabel1, 0, 5);
+            gridPane.add(ideLabel2, 0, 6);
+
 
             TitledPane titledPane = new TitledPane("Match " + matchs.getId_match(), gridPane);
 
@@ -275,21 +354,27 @@ public class AfficherMatch implements Initializable {
                     selectedNomm = matchs.getNom_match();
                     selectedDate = String.valueOf(matchs.getDate_match());
                     selectedDuree = matchs.getDuree_match();
-                    selectedIdt = String.valueOf(matchs.getId_tournois().getId_tournois());
+                    selectedIdt = String.valueOf(matchs.getTournois().getId_tournois());
+                    selectedIde1 = String.valueOf(matchs.getEquipe().getId_equipe());
+                    selectedIde2 = String.valueOf(matchs.getEquipe1().getId_equipe());
 
                     // Perform any action with the selected values
                     System.out.println("Selected ID: " + selectedIdm);
                     System.out.println("Selected Nom: " + selectedNomm);
                     System.out.println("Selected Date: " + selectedDate);
                     System.out.println("Selected Duree: " + selectedDuree);
-                    System.out.println("Selected Nom Tournois: " + selectedIdt);
+                    System.out.println("Selected ID Tournois: " + selectedIdt);
+                    System.out.println("Selected ID Equipe 1: " + selectedIde1);
+                    System.out.println("Selected ID Equipe 2: " + selectedIde2);
 
-                    TFidm.setText(selectedIdm);
+
                     TFnomm.setText(selectedNomm);
                     LocalDate dateMatch = Date.valueOf(selectedDate).toLocalDate();
-                    TFdatem.setValue(dateMatch);
+                    DPdatem.setValue(dateMatch);
                     TFdureem.setText(selectedDuree);
-                    TFidt.setText(selectedIdt);
+                    TFtournois.setText(selectedIdt);
+                    TFequipe1.setText(selectedIde1);
+                    TFequipe2.setText(selectedIde2);
 
                 }
             });

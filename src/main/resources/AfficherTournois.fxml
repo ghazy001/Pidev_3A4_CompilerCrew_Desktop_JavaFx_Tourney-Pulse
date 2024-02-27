@@ -1,73 +1,166 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="690.0" prefWidth="943.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controller.AfficherTournois">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1130.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controller.AfficherTournois">
    <children>
-      <Button fx:id="Bsupprimer" layoutX="648.0" layoutY="17.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="110.0" style="-fx-background-color: #33691e;" text="Supprimer" textFill="WHITE">
-         <font>
-            <Font size="16.0" />
-         </font></Button>
-      <Button fx:id="Bmodifier" layoutX="180.0" layoutY="573.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="110.0" style="-fx-background-color: #33691e;" text="Modifier" textFill="WHITE">
-         <font>
-            <Font size="16.0" />
-         </font></Button>
-      <TextField fx:id="TFnom" layoutX="34.0" layoutY="222.0" prefHeight="26.0" prefWidth="226.0" promptText="Nom" />
-      <TextField fx:id="TFaddress" layoutX="34.0" layoutY="306.0" prefHeight="26.0" prefWidth="226.0" promptText="Address" />
-      <TextField fx:id="TFnbrmatch" layoutX="34.0" layoutY="387.0" prefHeight="26.0" prefWidth="226.0" promptText="Nombre Match" />
-      <Label layoutX="76.0" layoutY="178.0" prefHeight="30.0" prefWidth="142.0" text="Nom Tournois" textFill="#1b5e20">
-         <font>
-            <Font name="Wingdings" size="23.0" />
-         </font>
-      </Label>
-      <Label layoutX="56.0" layoutY="260.0" prefHeight="30.0" prefWidth="173.0" text="Address Tournois" textFill="#1b5e20">
-         <font>
-            <Font name="Wingdings" size="23.0" />
-         </font>
-      </Label>
-      <Label layoutX="66.0" layoutY="345.0" prefHeight="30.0" prefWidth="142.0" text="Nombre Match" textFill="#1b5e20">
-         <font>
-            <Font name="Wingdings" size="23.0" />
-         </font>
-      </Label>
-      <Label layoutX="88.0" layoutY="424.0" prefHeight="30.0" prefWidth="118.0" text="Date Debut" textFill="#1b5e20">
-         <font>
-            <Font name="Wingdings" size="23.0" />
-         </font>
-      </Label>
-      <Label layoutX="88.0" layoutY="495.0" prefHeight="30.0" prefWidth="118.0" text="Date Fin" textFill="#1b5e20">
-         <font>
-            <Font name="Wingdings" size="23.0" />
-         </font>
-      </Label>
-      <DatePicker fx:id="TFdated" layoutX="34.0" layoutY="468.0" prefHeight="26.0" prefWidth="226.0" promptText="Date Debut" />
-      <DatePicker fx:id="TFdatef" layoutX="34.0" layoutY="526.0" prefHeight="26.0" prefWidth="226.0" promptText="Date Fin" />
-      <Label layoutX="42.0" layoutY="15.0" prefHeight="42.0" prefWidth="226.0" text="Gestion Des Tournois" textAlignment="CENTER" textFill="#1b5e20">
-         <font>
-            <Font name="Agency FB Bold" size="31.0" />
-         </font>
-      </Label>
-      <Button layoutX="34.0" layoutY="573.0" mnemonicParsing="false" onAction="#ajouterTournoisAction" prefHeight="42.0" prefWidth="110.0" style="-fx-background-color: #00c853;" text="Ajouter" textFill="WHITE">
-         <font>
-            <Font size="16.0" />
-         </font></Button>
-      <VBox fx:id="Vbox" layoutX="335.0" layoutY="68.0" prefHeight="554.0" prefWidth="576.0" />
-      <Button fx:id="Bnavigatet" layoutX="781.0" layoutY="18.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="142.0" style="-fx-background-color: #00c853;" text="Gestion Match" textFill="WHITE">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Button>
-      <Label layoutX="77.0" layoutY="80.0" prefHeight="34.0" prefWidth="132.0" text="ID Tournois" textFill="#1b5e20">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
-      <TextField fx:id="TFid" disable="true" layoutX="34.0" layoutY="130.0" prefHeight="26.0" prefWidth="226.0" promptText="ID" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <BorderPane layoutX="77.0" layoutY="71.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <top>
+                  <AnchorPane prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #efefef; -fx-border-color: #000; -fx-border-width: .2px .4px .8px .4px;" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane layoutX="35.0" layoutY="-77.0" prefHeight="44.0" prefWidth="1100.0" style="-fx-background-color: #fff; -fx-border-color: #000; -fx-border-width: .4px .4px .2px .4px;" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label layoutX="58.0" layoutY="10.0" text="Gestion Des Tournois">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="34.0" fitWidth="55.0" layoutX="8.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Image/logopi.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </top>
+               <left>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane layoutX="-1.6" prefHeight="554.0" prefWidth="202.0" style="-fx-background-color: #BFEA7C; -fx-border-color: #000; -fx-border-width: .4px 0px .4px .4px;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label layoutX="50.0" layoutY="122.0" text="Welcome," textFill="#219a6a">
+                                 <font>
+                                    <Font name="Tahoma Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="9.0" layoutY="158.0" prefHeight="32.0" prefWidth="182.0" textFill="#219a6a">
+                                 <font>
+                                    <Font name="Tahoma" size="25.0" />
+                                 </font>
+                              </Label>
+                              <Line endX="76.30000305175781" endY="-1.52587890625E-5" layoutX="99.0" layoutY="211.0" startX="-75.10711669921875" startY="-1.52587890625E-5" stroke="#219a6a" strokeWidth="2.0" />
+                              <Button fx:id="Bnavigatet" layoutX="40.0" layoutY="241.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="158.0" styleClass="nav" stylesheets="@Style/StyleSheet.css" text="Gestion Match" textFill="WHITE" underline="true" />
+                              <ImageView fitHeight="99.0" fitWidth="93.0" layoutX="53.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Image/utilisateur.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="32.0" fitWidth="35.0" layoutX="14.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Image/parametres-curseurs.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </left>
+               <center>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane layoutX="11.2" layoutY="4.8" prefHeight="542.0" prefWidth="911.0" style="-fx-background-color: #C5EBAA; -fx-background-radius: 8px;" styleClass="shadow" stylesheets="@Style/StyleSheet.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="5.0">
+                           <children>
+                              <AnchorPane layoutX="7.0" layoutY="7.0" prefHeight="528.0" prefWidth="394.0" style="-fx-background-color: #fff; -fx-background-radius: 8px;" styleClass="shadow" stylesheets="@Style/StyleSheet.css">
+                                 <children>
+                                    <Label layoutX="97.0" layoutY="30.0" text="Nom Tournois" textFill="#bfea7c">
+                                       <font>
+                                          <Font name="Tahoma Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="125.0" layoutY="360.0" text="Date Fin" textFill="#bfea7c">
+                                       <font>
+                                          <Font name="Tahoma Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="110.0" layoutY="276.0" text="Date Debut" textFill="#bfea7c">
+                                       <font>
+                                          <Font name="Tahoma Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="80.0" layoutY="109.0" text="Address Tournois" textFill="#bfea7c">
+                                       <font>
+                                          <Font name="Tahoma Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="93.0" layoutY="190.0" text="Nombre match" textFill="#bfea7c">
+                                       <font>
+                                          <Font name="Tahoma Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="TFnom" layoutX="31.0" layoutY="68.0" prefHeight="32.0" prefWidth="286.0" promptText="Nom" />
+                                    <TextField fx:id="TFnbrmatch" layoutX="31.0" layoutY="232.0" prefHeight="32.0" prefWidth="286.0" promptText="Nombre Match" />
+                                    <TextField fx:id="TFaddress" layoutX="31.0" layoutY="148.0" prefHeight="32.0" prefWidth="286.0" promptText="Address" />
+                                    <DatePicker fx:id="DPdated" layoutX="30.0" layoutY="313.0" prefHeight="35.0" prefWidth="286.0" promptText="Date Debut" />
+                                    <DatePicker fx:id="DPdatef" layoutX="30.0" layoutY="395.0" prefHeight="35.0" prefWidth="286.0" promptText="Date Fin" />
+                                    <Button alignment="CENTER" layoutX="10.0" layoutY="460.0" mnemonicParsing="false" onAction="#ajouterTournoisAction" prefHeight="37.0" prefWidth="114.0" stylesheets="@Style/StyleSheet.css" text="  Add" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                       <styleClass>
+                                          <String fx:value="shadow" />
+                                          <String fx:value="btn" />
+                                       </styleClass></Button>
+                                    <Button fx:id="Bmodifier" layoutX="139.0" layoutY="460.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="114.0" stylesheets="@Style/StyleSheet.css" text="  Update" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                       <styleClass>
+                                          <String fx:value="shadow" />
+                                          <String fx:value="btn" />
+                                       </styleClass></Button>
+                                    <Button fx:id="Bsupprimer" layoutX="265.0" layoutY="460.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="114.0" stylesheets="@Style/StyleSheet.css" text="  Delete" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                       <styleClass>
+                                          <String fx:value="shadow" />
+                                          <String fx:value="btn" />
+                                       </styleClass></Button>
+                                    <ImageView fitHeight="28.0" fitWidth="24.0" layoutX="21.0" layoutY="466.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Image/ajouter.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="28.0" fitWidth="25.0" layoutX="144.0" layoutY="466.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Image/crayon.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="28.0" fitWidth="25.0" layoutX="272.0" layoutY="466.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Image/poubelle.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="414.0" layoutY="7.0" prefHeight="527.0" prefWidth="490.0" style="-fx-background-color: #fff; -fx-background-radius: 8px;" styleClass="shadow" stylesheets="@Style/StyleSheet.css">
+                                 <children>
+                                    <VBox fx:id="Vbox" layoutX="7.0" layoutY="8.0" prefHeight="512.0" prefWidth="479.0" styleClass="vbox" stylesheets="@Style/StyleSheet.css" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </center>
+            </BorderPane>
+         </children>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</StackPane>
