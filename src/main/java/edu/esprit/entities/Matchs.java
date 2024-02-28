@@ -105,5 +105,16 @@ public class Matchs {
         return Objects.hash(id_match, nom_match, date_match, duree_match, tournois, equipe, equipe1);
     }
 
-
+    @Override
+    public String toString() {
+        return "Matchs{" +
+                "id_match=" + id_match +
+                ", nom_match='" + nom_match + '\'' +
+                ", date_match=" + date_match +
+                ", duree_match='" + duree_match + '\'' +
+                ", tournois=" + tournois +
+                ", equipe=" + equipe +
+                ", equipe1=" + equipe1 +
+                '}';
+    }
 }

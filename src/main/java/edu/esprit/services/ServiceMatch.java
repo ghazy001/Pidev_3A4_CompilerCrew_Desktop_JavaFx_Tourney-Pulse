@@ -134,7 +134,7 @@ public class ServiceMatch implements InterfaceService<Matchs> {
         List<Matchs> matchsList = new ArrayList<>();
         connection = DataSource.getInsatnce().getConnection();
 
-        String sql = "SELECT m.*, t.nom_tournois, e1.nom, e2.nom " +
+        String sql = "SELECT m.*, t.nom_tournois, e1.nom AS nom1, e2.nom AS nom2 " + // Correction des alias pour les noms des équipes
                 "FROM `match` m " +
                 "JOIN `tournois` t ON m.id_tournois = t.id_tournois " +
                 "JOIN `equipe` e1 ON m.id_equipe1 = e1.id " +
@@ -153,9 +153,9 @@ public class ServiceMatch implements InterfaceService<Matchs> {
                 int idTournois = resultSet.getInt("id_tournois");
                 String nomTournois = resultSet.getString("nom_tournois");
                 int idEquipe1 = resultSet.getInt("id_equipe1");
-                String nomEquipe1 = resultSet.getString("nom");
+                String nomEquipe1 = resultSet.getString("nom1");
                 int idEquipe2 = resultSet.getInt("id_equipe2");
-                String nomEquipe2 = resultSet.getString("nom");
+                String nomEquipe2 = resultSet.getString("nom2");
 
                 Matchs m = new Matchs();
                 m.setId_match(id);
