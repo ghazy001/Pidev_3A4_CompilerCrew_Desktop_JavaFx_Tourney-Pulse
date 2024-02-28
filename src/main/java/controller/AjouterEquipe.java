@@ -1,5 +1,9 @@
 package controller;
 
+import com.twilio.Twilio;
+import com.twilio.base.ResourceSet;
+import com.twilio.converter.Promoter;
+import com.twilio.rest.api.v2010.account.Message;
 import entities.Equipe;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
@@ -22,12 +26,26 @@ import service.ServiceEquipe;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.time.LocalDate;
 import java.sql.*;
+import com.twilio.Twilio;
+import com.twilio.converter.Promoter;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
+
+import java.net.URI;
+import java.math.BigDecimal;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.File;
+
 
 /*
 *
@@ -50,7 +68,7 @@ public class AjouterEquipe implements Initializable {
     @FXML
     Button save;
     @FXML
-    Button home,EquipeDisplay;
+    Button home, EquipeDisplay;
     @FXML
     Label captchaCode;
     @FXML
@@ -60,6 +78,10 @@ public class AjouterEquipe implements Initializable {
     private String captcha;
 
     private String imagePath; // Add this line to store the image path
+
+    public static final String ACCOUNT_SID = "AC4d1d41f7d616d4a60ac222a861f9a695";
+    public static final String AUTH_TOKEN = "ssss";
+
 
 
     //--------------upload-pic--------------
@@ -100,6 +122,9 @@ public class AjouterEquipe implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
+        Verifer();
+
         //--------------Hover-------------
         FadeTransition ft = new FadeTransition(Duration.millis(300), myBox);
         ft.setFromValue(1.0);
@@ -129,30 +154,19 @@ public class AjouterEquipe implements Initializable {
         });
 
 
-
-
-
-
-
-
-
-
-     //-------------------------image by default----------------------------
+        //-------------------------image by default----------------------------
 
         Image defaultImage = new Image("/equipe.png");
         image.setImage(defaultImage);
 
 
-
-
-          //----------------- upload function ------------------
+        //----------------- upload function ------------------
         uplaod_pic.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 chooseImage();
             }
         });
-
 
 
         //-----------------------captcha-call---------------------
@@ -184,8 +198,8 @@ public class AjouterEquipe implements Initializable {
                 }
 
                 //-------------testing captcha --------------
-                     captchaInput.setAlignment(Pos.CENTER);
-                
+                captchaInput.setAlignment(Pos.CENTER);
+
                 if (!captchaInput.getText().equals(captcha)) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Captcha");
@@ -202,11 +216,18 @@ public class AjouterEquipe implements Initializable {
                 equipe.setImage(imagePath); // Set the image path
 
                 try {
+                    // sms
+                    sendTwilioSMS();
+                    //
                     serviceEquipe.ajouter(equipe);
+                    //sing
+                    //sing();
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Success");
                     alert.setContentText("Good job");
                     alert.show();
+
+
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -246,5 +267,55 @@ public class AjouterEquipe implements Initializable {
             }
         });
 
+        //----------------switching-to-display2card equipe------------
+
+
     }
+
+    // ------------- sms confirmation by twil
+
+    private void sendTwilioSMS() {
+        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+        Message message = Message.creator(
+                        new com.twilio.type.PhoneNumber("+21626864405"),
+                        new com.twilio.type.PhoneNumber("+17816337025"),
+                        "Your team has been added")
+                .setMediaUrl(
+                        Promoter.listOfOne(URI.create("http://placekitten.com/300/200")))
+                .create();
+
+        System.out.println(message.getSid()+"status :" +message.getStatus());
+
+    }
+
+    public void sing() {
+        // sound effect
+        try {
+            File file = new File("src/main/resources/media/sui.wav");
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            clip.start();
+            Thread.sleep(clip.getMicrosecondLength() / 1000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // ------------only Letters-------------------
+
+    void Verifer() {
+        nomequipe.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[a-zA-Z]*")) {
+                // If the new value is not a string (contains non-alphabetic characters), set it back to the old value
+                nomequipe.setText(oldValue);
+            }
+        });
+    }
+
+
+
+
+
+
 }

@@ -8,6 +8,7 @@ controller/UpdateEquipe$5.class
 controller/Chatgpt.class
 controller/AjouterEquipe$2.class
 controller/UpdateAvis$5.class
+controller/HOME$11.class
 controller/DisplayEquipe$1.class
 controller/HOME$5.class
 service/IServiceEquipe.class

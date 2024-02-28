@@ -52,7 +52,7 @@ public class HOME implements Initializable {
     @FXML
     public MenuItem staticavismenuitem;
     @FXML
-    public MenuItem add_equipe_menuitem,add_equipe_menuitem1,Teampalyer_menuitem;
+    public MenuItem add_equipe_menuitem,add_equipe_menuitem1,Teampalyer_menuitem,menuitemCardTeam;
 
     @FXML
     public Label time;
@@ -222,6 +222,26 @@ public class HOME implements Initializable {
 
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/AffecterPlayers.fxml"));
+                try {
+                    Parent root = loader.load();
+                    Stage stage = (Stage) menuBar.getScene().getWindow();
+                    stage.setScene(new Scene(root));
+                    stage.setTitle("Gestion Equipe");
+                    stage.show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        });
+        //--------------------------switching to Card equipe ------------
+
+        menuitemCardTeam.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/DisplayTeamCard.fxml"));
                 try {
                     Parent root = loader.load();
                     Stage stage = (Stage) menuBar.getScene().getWindow();

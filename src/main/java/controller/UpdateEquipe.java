@@ -51,6 +51,7 @@ public class UpdateEquipe implements Initializable {
     VBox myBox;
 
 
+
     Date Selcdate = DisplayEquipe.selectedDate;
     String SelcNom = DisplayEquipe.selectedNom;
     String Selcimage = DisplayEquipe.selectedImage;

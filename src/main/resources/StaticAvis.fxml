@@ -27,9 +27,9 @@
                <font>
                   <Font name="Gill Sans Bold" size="13.0" />
                </font></Label>
-            <Label fx:id="NbrUser" layoutX="79.0" layoutY="30.0" text="test">
+            <Label fx:id="NbrUser" layoutX="78.0" layoutY="29.0" text="test">
                <font>
-                  <Font name="System Bold Italic" size="18.0" />
+                  <Font name="System Bold Italic" size="24.0" />
                </font></Label>
             <ImageView fitHeight="77.0" fitWidth="46.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -44,9 +44,9 @@
                <font>
                   <Font name="Gill Sans Bold" size="13.0" />
                </font></Label>
-            <Label fx:id="NbrUser1" layoutX="78.0" layoutY="30.0" text="test">
+            <Label fx:id="NbrUser1" layoutX="81.0" layoutY="29.0" text="test">
                <font>
-                  <Font name="System Bold Italic" size="18.0" />
+                  <Font name="System Bold Italic" size="24.0" />
                </font></Label>
             <ImageView fitHeight="77.0" fitWidth="46.0" layoutX="7.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -61,9 +61,9 @@
                <font>
                   <Font name="Gill Sans Bold" size="13.0" />
                </font></Label>
-            <Label fx:id="NbrUser2" layoutX="82.0" layoutY="30.0" text="test">
+            <Label fx:id="NbrUser2" layoutX="74.0" layoutY="29.0" text="test">
                <font>
-                  <Font name="System Bold Italic" size="18.0" />
+                  <Font name="System Bold Italic" size="24.0" />
                </font></Label>
             <ImageView fitHeight="77.0" fitWidth="46.0" layoutX="4.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
                <image>

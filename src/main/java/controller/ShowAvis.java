@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -54,7 +55,9 @@ public class ShowAvis implements Initializable {
 
 
     @FXML
-    private VBox mainContainer; // Assuming you have a VBox in your FXML file
+    private VBox mainContainer;
+    @FXML
+    ScrollPane pane;
 
   
 
@@ -158,12 +161,18 @@ public class ShowAvis implements Initializable {
 
             titledPane.setContent(gridPane);
             mainContainer.getChildren().add(titledPane);
+            pane.setContent(mainContainer);
+
+
 
         }
+
+
     }
     //--------------scroll function--------------------
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
 
         getGrid();
 
