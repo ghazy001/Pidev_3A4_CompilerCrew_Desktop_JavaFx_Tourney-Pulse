@@ -20,9 +20,6 @@ public class MyConnection {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
-
-
     }
     public Connection getCnx(){
         return cnx;
@@ -34,5 +31,4 @@ public class MyConnection {
         }
         return instance;
     }
-
 }

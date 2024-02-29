@@ -1,14 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
-
+<AnchorPane prefHeight="509.0" prefWidth="799.0" style="-fx-background-color: #688a38;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UiadminController">
+   <children>
+      <HBox prefHeight="509.0" prefWidth="799.0" style="-fx-background-color: #c3cfb6;">
+         <children>
+            <VBox prefHeight="451.0" prefWidth="151.0" style="-fx-background-color: #688a38;">
+               <children>
+                  <Button mnemonicParsing="false" style="-fx-background-color: #1f3d1c;" text="Dashboard" textFill="#c3cfb6">
+                     <VBox.margin>
+                        <Insets left="35.0" top="130.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" style="-fx-background-color: #1f3d1c;" text="Users" textFill="#c3cfb6">
+                     <VBox.margin>
+                        <Insets left="50.0" top="100.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <ListView fx:id="listView" prefHeight="509.0" prefWidth="390.0" style="-fx-background-color: #c3cfb6; -fx-control-inner-background: #c3cfb6; -fx-text-fill: #1f3d1c;" />
+            <VBox fx:id="updateForm" prefHeight="509.0" prefWidth="258.0" visible="false">
+               <children>
+                  <Label text="First Name" textFill="#1f3d1c">
+                     <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="firstNameField" style="-fx-background-color: #c3cfb6; -fx-border-color: #1f3d1c; -fx-border-width: 0 0 1 0;">
+                     <VBox.margin>
+                        <Insets right="5.0" top="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Second name" textFill="#1f3d1c">
+                     <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="lastNameField" style="-fx-background-color: #c3cfb6; -fx-border-color: #1f3d1c; -fx-border-width: 0 0 1 0;">
+                     <VBox.margin>
+                        <Insets right="5.0" top="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Username" textFill="#1f3d1c">
+                     <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="usernameField" style="-fx-background-color: #c3cfb6; -fx-border-color: #1f3d1c; -fx-border-width: 0 0 1 0;">
+                     <VBox.margin>
+                        <Insets right="5.0" top="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Email" textFill="#1f3d1c">
+                     <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="emailField" style="-fx-background-color: #c3cfb6; -fx-border-color: #1f3d1c; -fx-border-width: 0 0 1 0;">
+                     <VBox.margin>
+                        <Insets right="5.0" top="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Number" textFill="#1f3d1c">
+                     <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="numberField" style="-fx-background-color: #c3cfb6; -fx-border-color: #1f3d1c; -fx-border-width: 0 0 1 0;">
+                     <VBox.margin>
+                        <Insets right="5.0" top="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Password" textFill="#1f3d1c">
+                     <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="passwordField" style="-fx-background-color: #c3cfb6; -fx-border-color: #1f3d1c; -fx-border-width: 0 0 1 0;">
+                     <VBox.margin>
+                        <Insets right="5.0" top="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Role" textFill="#1f3d1c">
+                     <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="roleComboBox" prefHeight="25.0" prefWidth="259.0" style="-fx-background-color: #c3cfb6; -fx-border-color: #1f3d1c;">
+                     <VBox.margin>
+                        <Insets right="5.0" top="10.0" />
+                     </VBox.margin>
+                  </ComboBox>
+                  <Button fx:id="savebtn" mnemonicParsing="false" onAction="#handleSave" prefHeight="25.0" prefWidth="68.0" style="-fx-background-color: #688a38;" text="Save " textFill="#c3cfb6">
+                     <VBox.margin>
+                        <Insets left="100.0" top="7.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
 </AnchorPane>

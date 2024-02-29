@@ -1,14 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
-
+<AnchorPane prefHeight="486.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RegisterUserController">
+   <children>
+      <HBox prefHeight="608.0" prefWidth="776.0" style="-fx-background-color: #c3cfb6;">
+         <children>
+            <ImageView fitHeight="507.0" fitWidth="281.0" pickOnBounds="true" style="-fx-background-radius: 10;">
+               <image>
+                  <Image url="@media/pexels-markus-spiske-112786.jpg" />
+               </image>
+               <HBox.margin>
+                  <Insets bottom="50.0" left="20.0" top="50.0" />
+               </HBox.margin>
+            </ImageView>
+            <VBox prefHeight="522.0" prefWidth="479.0">
+               <children>
+                  <HBox prefHeight="53.0" prefWidth="477.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Register">
+                           <font>
+                              <Font name="System Bold" size="39.0" />
+                           </font>
+                           <fill>
+                              <LinearGradient endX="0.5687203791469194" endY="0.9668246445497631" startX="0.6350710900473934" startY="0.13744075829383884">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color red="0.12156862765550613" green="0.239215686917305" blue="0.10980392247438431" />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color red="0.40784314274787903" green="0.5411764979362488" blue="0.21960784494876862" />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </LinearGradient>
+                           </fill>
+                           <HBox.margin>
+                              <Insets left="30.0" top="60.0" />
+                           </HBox.margin>
+                        </Text>
+                        <VBox prefHeight="125.0" prefWidth="73.0">
+                           <children>
+                              <ImageView fx:id="imgviewimport" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@media/icons8-user-96.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <Button fx:id="chooseimg" mnemonicParsing="false" onAction="#handleUploadImage" prefHeight="25.0" prefWidth="96.0" style="-fx-background-color: #688a38;" text="Choose image" textFill="#c3cfb6">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="170.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="20.0" prefWidth="477.0">
+                     <children>
+                        <TextField fx:id="TFfirstname" prefHeight="26.0" prefWidth="189.0" promptText="First Name" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets left="30.0" top="20.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <TextField fx:id="TFlastname" prefHeight="26.0" prefWidth="189.0" promptText="Last Name" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets left="40.0" top="20.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <TextField fx:id="TFemail" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="306.0" promptText="Email" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
+                     <VBox.margin>
+                        <Insets left="30.0" right="30.0" top="20.0" />
+                     </VBox.margin>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </TextField>
+                  <TextField fx:id="TFusername" alignment="CENTER_RIGHT" layoutX="40.0" layoutY="92.0" prefHeight="25.0" prefWidth="306.0" promptText="Username" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets left="30.0" right="30.0" top="30.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="Tfnumber" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="306.0" promptText="Phone Number" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets left="30.0" right="30.0" top="30.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <PasswordField fx:id="TFpassword" alignment="CENTER_RIGHT" promptText="Password" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
+                     <VBox.margin>
+                        <Insets left="30.0" right="30.0" top="30.0" />
+                     </VBox.margin>
+                  </PasswordField>
+                  <PasswordField fx:id="TFconfirmpass" alignment="CENTER_RIGHT" layoutX="40.0" layoutY="306.0" promptText="Confirm Password" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
+                     <VBox.margin>
+                        <Insets left="30.0" right="30.0" top="30.0" />
+                     </VBox.margin>
+                  </PasswordField>
+                  <CheckBox fx:id="checkbx" mnemonicParsing="false" text="I agree to the Terms of Service and Privacy Policy." textFill="#1f3d1c">
+                     <VBox.margin>
+                        <Insets left="30.0" top="30.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <HBox prefHeight="47.0" prefWidth="477.0">
+                     <children>
+                        <Text fill="#1f3d1c" strokeType="OUTSIDE" strokeWidth="0.0" text="Already have account, ">
+                           <HBox.margin>
+                              <Insets left="33.0" top="20.0" />
+                           </HBox.margin>
+                        </Text>
+                        <Button fx:id="loginbtn" mnemonicParsing="false" onAction="#goToLogin" style="-fx-background-color: #c3cfb6;" text="Log in" textFill="#1f3d1c">
+                           <HBox.margin>
+                              <Insets left="-5.0" top="13.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <Button fx:id="btncreate" mnemonicParsing="false" onAction="#registerUserToDatabase" style="-fx-background-color: #688a38;" text="Create account" textFill="#c3cfb6">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="320.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
 </AnchorPane>

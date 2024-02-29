@@ -1,14 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
-
+<AnchorPane prefHeight="486.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ForgetpassController">
+   <children>
+      <VBox layoutX="-1.0" prefHeight="486.0" prefWidth="782.0" style="-fx-background-color: #c3cfb6;">
+         <children>
+            <ImageView>
+               <image>
+                  <Image url="@media/icons8-lock-100.png" />
+               </image>
+               <VBox.margin>
+                  <Insets left="340.0" top="50.0" />
+               </VBox.margin>
+            </ImageView>
+            <Text fill="#1f3d1c" strokeType="OUTSIDE" strokeWidth="0.0" text="Trouble logging in">
+               <VBox.margin>
+                  <Insets left="280.0" top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="27.0" />
+               </font>
+            </Text>
+            <Text fill="#1f3d1c" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your email to reset your password">
+               <VBox.margin>
+                  <Insets left="260.0" top="15.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <Label text="Email" textFill="#1f3d1c">
+               <VBox.margin>
+                  <Insets left="260.0" top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="TFemail" style="-fx-background-color: #c3cfb6; -fx-border-color: #1f3d1c; -fx-border-width: 0 0 1 0;">
+               <VBox.margin>
+                  <Insets left="260.0" right="240.0" top="2.0" />
+               </VBox.margin>
+            </TextField>
+            <HBox prefHeight="57.0" prefWidth="282.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets left="260.0" right="240.0" top="10.0" />
+               </VBox.margin>
+               <children>
+                  <Button fx:id="resetpass" mnemonicParsing="false" onAction="#resetPassword" prefHeight="35.0" prefWidth="133.0" style="-fx-background-color: #688a38;" text="Reset password" textFill="#1f3d1c">
+                     <HBox.margin>
+                        <Insets left="5.0" top="15.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Line endX="-100.43504333496094" endY="76.56495666503906" startX="-100.43525695800781" startY="116.85784912109375">
+                     <HBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Line>
+                  <Button fx:id="Createbtn" mnemonicParsing="false" onAction="#Backtoregister" prefHeight="35.0" prefWidth="158.0" style="-fx-background-color: #c3cfb6;" text="Create new account" textFill="#1f3d1c">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="15.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <VBox.margin>
+                  <Insets bottom="50.0" left="260.0" right="240.0" top="20.0" />
+               </VBox.margin>
+               <children>
+                  <Text fill="#1f3d1c" strokeType="OUTSIDE" strokeWidth="0.0" text="Return to">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="80.0" top="20.0" />
+                     </HBox.margin>
+                  </Text>
+                  <Button fx:id="returnlogin" mnemonicParsing="false" onAction="#loginnavigate" prefWidth="55.0" style="-fx-background-color: #c3cfb6;" text="Login" textFill="#688a38">
+                     <HBox.margin>
+                        <Insets top="15.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>

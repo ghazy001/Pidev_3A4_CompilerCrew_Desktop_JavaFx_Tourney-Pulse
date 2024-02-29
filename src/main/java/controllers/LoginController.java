@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -14,14 +15,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import services.LoginService;
 
+import java.io.IOException;
 
-public class Login {
+
+public class LoginController {
 
     @FXML
     private Button google;
-
-    @FXML
-    private Button facebook;
 
     @FXML
     private TextField name;
@@ -34,6 +34,8 @@ public class Login {
 
     @FXML
     private Button signinbtn;
+    @FXML
+    private Button forgetpass;
 
     private final LoginService loginService = new LoginService();
     @FXML
@@ -42,26 +44,17 @@ public class Login {
         String userName = name.getText();
         String pass = password.getText();
 
-        // Fetch user data from the database
         User user = new LoginService().getUserByUsername(userName);
-
-        // Check if the user exists and the password matches
         if (user != null && user.getPassword().equals(pass)) {
-            // Navigate to the next screen or perform any other action
-            // For example:
-            // switchScene();
-            // Or show a success message
-            switchScene("/Display.fxml", event);
-            showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome " + user.getName() + "!");
+            switchScene("/Uiadmin.fxml", event);
+            showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome " + user.getUsername() + "!");
         } else {
-            // Show error message
-            showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid email or password!");
+            showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid Username or password!");
         }
     }
     private void switchScene(String fxmlFile, ActionEvent event) {
         try {
             System.out.println("fxml:"+ fxmlFile);
-
             Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
@@ -78,7 +71,35 @@ public class Login {
         alert.setContentText(message);
         alert.showAndWait();
     }
+    @FXML
+    void handleSignIn(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/RegisterUser.fxml"));
+            Parent root = loader.load();
+            RegisterUserController controller = loader.getController();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) signinbtn.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+
+    @FXML
+    void forgetpsswd(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forgetpass.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 
