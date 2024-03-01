@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="373.0" prefWidth="570.0" style="-fx-background-color: #3A9D23;" stylesheets="Css/StylesheetEquipeJoueur.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FormationController">
+   <children>
+      <ImageView fitHeight="78.0" fitWidth="77.0" layoutX="515.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@media/Players/fifa.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="GK" alignment="CENTER" layoutX="506.0" layoutY="204.0" prefHeight="31.0" prefWidth="142.0" text="GK" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold Italic" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="LB" alignment="CENTER" layoutX="308.0" layoutY="150.0" prefHeight="31.0" prefWidth="118.0" text="LB" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold Italic" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="RB" alignment="CENTER" layoutX="299.0" layoutY="353.0" prefHeight="31.0" prefWidth="135.0" text="RB" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold Italic" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="CF" alignment="CENTER" layoutX="33.0" layoutY="150.0" prefHeight="31.0" prefWidth="135.0" text="CF" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold Italic" size="14.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="139.0" fitWidth="92.0" layoutX="531.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@media/Players/2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="117.0" fitWidth="107.0" layoutX="314.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@media/Players/3.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="117.0" fitWidth="107.0" layoutX="312.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@media/Players/3.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="117.0" fitWidth="107.0" layoutX="47.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@media/Players/3.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="117.0" fitWidth="107.0" layoutX="53.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@media/Players/3.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="ST" alignment="CENTER" layoutX="36.0" layoutY="353.0" prefHeight="31.0" prefWidth="135.0" text="ST" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold Italic" size="14.0" />
+         </font>
+      </Label>
+      <VBox layoutX="464.0" layoutY="285.0" prefHeight="138.0" prefWidth="184.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="184.0" text="substitution :" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+            <Label fx:id="substitution" alignment="CENTER" prefHeight="136.0" prefWidth="184.0" style="-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 10px;" text="List of players" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <ImageView fitHeight="78.0" fitWidth="55.0" layoutX="593.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@media/Players/football.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="home" fitHeight="37.0" fitWidth="44.0" layoutY="387.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@media/home.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

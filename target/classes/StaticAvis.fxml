@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Mypane" prefHeight="400.0" prefWidth="600.0" stylesheets="Css/Switch.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StaticAvis">
+<AnchorPane fx:id="Mypane" prefHeight="400.0" prefWidth="600.0" stylesheets="Css/Switch.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StaticAvisController">
    <children>
       <Pane fx:id="pane" layoutX="307.0" layoutY="97.0" prefHeight="303.0" prefWidth="293.0" />
       <StackedBarChart fx:id="bar" layoutX="-6.0" layoutY="104.0" prefHeight="296.0" prefWidth="311.0">

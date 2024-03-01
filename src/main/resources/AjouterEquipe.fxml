@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="Css/stylesheetEquipe.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AjouterEquipe">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="Css/stylesheetEquipe.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AjouterEquipeController">
    <children>
       <ImageView fx:id="image" fitHeight="117.0" fitWidth="231.0" layoutX="225.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
       <TextField fx:id="nomequipe" layoutX="216.0" layoutY="142.0" />

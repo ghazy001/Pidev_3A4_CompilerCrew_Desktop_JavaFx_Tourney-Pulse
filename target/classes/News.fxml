@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="474.0" prefWidth="616.0" stylesheets="Css/News.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewsController">
+   <children>
+      <TableView fx:id="classement" layoutX="14.0" layoutY="34.0" prefHeight="218.0" prefWidth="587.0">
+        <columns>
+          <TableColumn fx:id="teamcol" prefWidth="153.0" text="Club" />
+          <TableColumn fx:id="playedcol" prefWidth="69.0" text="played" />
+            <TableColumn fx:id="wincol" prefWidth="61.0" text="win" />
+            <TableColumn fx:id="drawcol" prefWidth="61.0" text="draw" />
+            <TableColumn fx:id="losscol" prefWidth="59.0" text="loss" />
+            <TableColumn fx:id="golasforCol" prefWidth="64.0" text="goals+" />
+            <TableColumn fx:id="golasagiCol" prefWidth="58.0" text="goals-" />
+            <TableColumn fx:id="pointsCol" prefWidth="62.0" text="points" />
+        </columns>
+      </TableView>
+      <ListView fx:id="List" layoutX="12.0" layoutY="289.0" prefHeight="171.0" prefWidth="587.0" />
+      <Label layoutX="24.0" layoutY="262.0" text="For more Information press the Team name" />
+      <Label layoutX="21.0" layoutY="7.0" prefHeight="17.0" prefWidth="122.0" text="Premier League" />
+   </children>
+</AnchorPane>

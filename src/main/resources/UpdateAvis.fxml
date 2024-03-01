@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.Rating?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="Css/stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UpdateAvis">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="Css/stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UpdateAvisController">
    <children>
       <TextArea fx:id="com" layoutX="186.0" layoutY="255.0" prefHeight="79.0" prefWidth="200.0" />
       <Rating fx:id="rating" layoutX="196.0" layoutY="198.0" />

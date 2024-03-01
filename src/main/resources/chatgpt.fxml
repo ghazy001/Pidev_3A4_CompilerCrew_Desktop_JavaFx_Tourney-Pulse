@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="Css/Chatgpt.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Chatgpt">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="Css/Chatgpt.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ChatgptController">
    <children>
       <TextArea fx:id="talktochat" layoutX="71.0" layoutY="284.0" prefHeight="72.0" prefWidth="461.0" />
       <Button fx:id="send" layoutX="244.0" layoutY="364.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="send">

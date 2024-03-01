@@ -20,13 +20,14 @@ import service.ServiceEquipe;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 /*
 *
-   Author: Ghazi saoudi
+   Author: @Ghazi saoudi
 *
 */
 
@@ -47,6 +48,7 @@ public class DisplayTeamCard implements Initializable {
 
 
     private List<Equipe> equipes;
+    static List<User> allPlayers = new ArrayList<>();
     private int currentIndex = 0;
     ServiceEquipe serviceEquipe = new ServiceEquipe();
 
@@ -83,7 +85,8 @@ public class DisplayTeamCard implements Initializable {
             public void handle(MouseEvent mouseEvent) {
 
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/DisplayEquipe.fxml"));
+                    System.out.println(allPlayers);
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Formation.fxml"));
                     Parent root = loader.load();
                     Stage stage = (Stage) Mypane.getScene().getWindow();
                     stage.setScene(new Scene(root));
@@ -105,10 +108,12 @@ public class DisplayTeamCard implements Initializable {
         try {
             teamname.setText(equipe.getNom());
             dateteam.setText(equipe.getDateCreation().toString());
-            listeplayer.setText(String.join(", ", equipe.getJouers().stream().map(User::getName).collect(Collectors.toList())));
-            listeplayer.setWrapText(true);
+           //listeplayer.setText(String.join(", ", equipe.getJouers().stream().map(User::getName).collect(Collectors.toList())));
+           // listeplayer.setWrapText(true);
+            listeplayer.setText("Squad size : " + String.valueOf(equipe.getJouers().size()));
             Image image = new Image("file:" + equipe.getImage());
             teampic.setImage(image);
+            allPlayers = equipe.getJouers();
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Invalid URL: " + equipe.getImage());

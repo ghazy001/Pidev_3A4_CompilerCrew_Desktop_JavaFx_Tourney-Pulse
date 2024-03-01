@@ -32,7 +32,7 @@ import javafx.util.Duration;
 
 /*
 *
-   Author: Ghazi saoudi
+   Author: @Ghazi saoudi
 *
 */
 

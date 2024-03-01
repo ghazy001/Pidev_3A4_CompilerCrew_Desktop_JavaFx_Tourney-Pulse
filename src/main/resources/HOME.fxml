@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="384.0" prefWidth="736.0" stylesheets="Css/Switch.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HOME">
+<AnchorPane prefHeight="384.0" prefWidth="736.0" stylesheets="Css/Switch.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HOMEController">
    <children>
       <MenuBar fx:id="menuBar" prefHeight="28.0" prefWidth="817.0">
         <menus>
@@ -87,6 +87,19 @@
                      </graphic></MenuItem>
             </items>
           </Menu>
+            <Menu fx:id="staticmenu1" mnemonicParsing="false" text="Team's Mondial News">
+               <items>
+                  <MenuItem fx:id="Newsmenuitem" mnemonicParsing="false" text="Static Avis">
+                     <graphic>
+                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@United.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
       <Label fx:id="time" layoutX="547.0" layoutY="98.0" prefHeight="38.0" prefWidth="150.0" text="TIME">
@@ -99,11 +112,6 @@
             <Font name="Comic Sans MS Bold" size="14.0" />
          </font>
       </Label>
-      <ImageView fitHeight="386.0" fitWidth="539.0" layoutX="-1.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@media/stade.jpg" />
-         </image>
-      </ImageView>
       <ToggleButton fx:id="darkToggleButton" layoutX="734.0" layoutY="34.0" mnemonicParsing="false" text="Dark Mode" />
       <Button fx:id="facebook" layoutX="702.0" layoutY="357.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="78.0" style="-fx-background-color: #1877F2;" text="Facebook" textFill="WHITE" />
       <Label layoutX="710.0" layoutY="336.0" text="join us on ">
