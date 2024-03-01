@@ -4,24 +4,31 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="474.0" prefWidth="616.0" stylesheets="Css/News.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewsController">
+<AnchorPane prefHeight="576.0" prefWidth="690.0" stylesheets="Css/News.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewsController">
    <children>
-      <TableView fx:id="classement" layoutX="14.0" layoutY="34.0" prefHeight="218.0" prefWidth="587.0">
+      <ImageView fitHeight="107.0" fitWidth="179.0" layoutX="-10.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@media/Players/news.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="classement" layoutX="10.0" layoutY="85.0" prefHeight="284.0" prefWidth="676.0">
         <columns>
           <TableColumn fx:id="teamcol" prefWidth="153.0" text="Club" />
           <TableColumn fx:id="playedcol" prefWidth="69.0" text="played" />
             <TableColumn fx:id="wincol" prefWidth="61.0" text="win" />
-            <TableColumn fx:id="drawcol" prefWidth="61.0" text="draw" />
-            <TableColumn fx:id="losscol" prefWidth="59.0" text="loss" />
-            <TableColumn fx:id="golasforCol" prefWidth="64.0" text="goals+" />
-            <TableColumn fx:id="golasagiCol" prefWidth="58.0" text="goals-" />
-            <TableColumn fx:id="pointsCol" prefWidth="62.0" text="points" />
+            <TableColumn fx:id="drawcol" prefWidth="69.72409057617188" text="draw" />
+            <TableColumn fx:id="losscol" prefWidth="74.7327880859375" text="loss" />
+            <TableColumn fx:id="golasforCol" prefWidth="69.2801513671875" text="goals+" />
+            <TableColumn fx:id="golasagiCol" prefWidth="71.91378784179688" text="goals-" />
+            <TableColumn fx:id="pointsCol" prefWidth="90.9051513671875" text="points" />
         </columns>
       </TableView>
-      <ListView fx:id="List" layoutX="12.0" layoutY="289.0" prefHeight="171.0" prefWidth="587.0" />
-      <Label layoutX="24.0" layoutY="262.0" text="For more Information press the Team name" />
-      <Label layoutX="21.0" layoutY="7.0" prefHeight="17.0" prefWidth="122.0" text="Premier League" />
+      <ListView fx:id="List" layoutX="57.0" layoutY="395.0" prefHeight="171.0" prefWidth="587.0" />
+      <Label layoutX="226.0" layoutY="57.0" text="For more Information press the Team name" />
+      <Label fx:id="title" alignment="CENTER" layoutX="243.0" layoutY="19.0" prefHeight="17.0" prefWidth="220.0" text="Premier League" />
    </children>
 </AnchorPane>

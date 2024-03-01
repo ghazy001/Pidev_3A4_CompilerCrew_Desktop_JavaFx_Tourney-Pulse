@@ -211,6 +211,95 @@
     -fx-rotate: 5deg; /* Add a subtle rotation on hover */
 }
 
+#pic1 {
+    -fx-effect: dropshadow(three-pass-box, rgba(128, 0, 128, 0.8), 60, 0, 0, 1); /* Purple drop shadow */
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+    -fx-transition: transform 0.3s, scale 0.3s;
+    -fx-background-color: white;
+    -fx-background-insets: -2; /* Adjust this value to control the border thickness */
+}
+
+#pic1:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(128, 0, 128, 0.8), 80, 0, 0, 1); /* Purple drop shadow on hover */
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+    -fx-transition: transform 0.3s, scale 0.3s;
+    -fx-background-color: white;
+    -fx-background-insets: -2; /* Adjust this value to control the border thickness */
+}
+
+
+#pic2 {
+     -fx-effect: dropshadow(three-pass-box, rgba(255, 0, 0, 0.8), 60, 0, 0, 1); /* Red drop shadow */
+     -fx-scale-x: 1.0;
+     -fx-scale-y: 1.0;
+     -fx-transition: transform 0.3s, scale 0.3s;
+     -fx-background-color: white;
+     -fx-background-insets: -2; /* Adjust this value to control the border thickness */
+ }
+
+#pic2:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 0, 0, 0.8), 80, 0, 0, 1); /* Red drop shadow on hover */
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+    -fx-transition: transform 0.3s, scale 0.3s;
+    -fx-background-color: white;
+    -fx-background-insets: -2; /* Adjust this value to control the border thickness */
+}
+
+
+#pic3 {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.9), 80, 0, 0, 1);  
+    -fx-scale-y: 1.0;
+    -fx-transition: transform 0.3s, scale 0.3s;
+    -fx-background-color: white;
+    -fx-background-insets: -2; /* Adjust this value to control the border thickness */
+}
+
+#pic3:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 100, 0, 0, 1); /* Increased shadow clarity on hover */
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+    -fx-transition: transform 0.3s, scale 0.3s;
+    -fx-background-color: white;
+    -fx-background-insets: -2; /* Adjust this value to control the border thickness */
+}
+#pic4 {
+    -fx-effect: dropshadow(three-pass-box, rgba(165, 42, 42, 0.8), 60, 0, 0, 1); /* Brown drop shadow */
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+    -fx-transition: transform 0.3s, scale 0.3s;
+    -fx-background-color: white;
+    -fx-background-insets: -2; /* Adjust this value to control the border thickness */
+}
+
+#pic4:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(165, 42, 42, 0.8), 80, 0, 0, 1); /* Brown drop shadow on hover */
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+    -fx-transition: transform 0.3s, scale 0.3s;
+    -fx-background-color: white;
+    -fx-background-insets: -2; /* Adjust this value to control the border thickness */
+}
+#pic0 {
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 223, 0, 0.8), 60, 0, 0, 1); /* Gold drop shadow */
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+    -fx-transition: transform 0.3s, scale 0.3s;
+    -fx-background-color: white;
+    -fx-background-insets: -2; /* Adjust this value to control the border thickness */
+}
+
+#pic0:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 223, 0, 0.8), 80, 0, 0, 1); /* Gold drop shadow on hover */
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+    -fx-transition: transform 0.3s, scale 0.3s;
+    -fx-background-color: white;
+    -fx-background-insets: -2; /* Adjust this value to control the border thickness */
+}
+
 
 
 

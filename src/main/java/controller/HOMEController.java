@@ -129,7 +129,7 @@ public class HOMEController implements Initializable {
         AddAvisMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/AddAvisPlayer.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Players.fxml"));
                 try {
                     Parent root = loader.load();
                     Stage stage = (Stage) menuBar.getScene().getWindow();

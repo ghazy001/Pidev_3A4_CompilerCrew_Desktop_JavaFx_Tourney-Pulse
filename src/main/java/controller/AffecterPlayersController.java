@@ -67,8 +67,6 @@ public class AffecterPlayersController implements Initializable {
 
 
 
-
-
     Map<Integer,String> setUpComboBox() {
         Map<Integer,String> items = new HashMap<Integer,String>();
 

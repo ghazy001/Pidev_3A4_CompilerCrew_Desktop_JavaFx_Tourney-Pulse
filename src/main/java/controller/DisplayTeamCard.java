@@ -47,6 +47,7 @@ public class DisplayTeamCard implements Initializable {
     Label listeplayer;
 
 
+
     private List<Equipe> equipes;
     static List<User> allPlayers = new ArrayList<>();
     private int currentIndex = 0;

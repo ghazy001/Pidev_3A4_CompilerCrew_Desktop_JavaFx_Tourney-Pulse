@@ -122,6 +122,35 @@ public class ServiceAvisJoueur implements IServiceAvisJoueur<AvisJoueur> {
     }
 
 
+    public List<User> getUsers() throws SQLException {
+        List<User> Players = new ArrayList<>();
+        String req = "SELECT *  FROM user";
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(req)) {
+
+            while (resultSet.next()) {
+                int idUser = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+
+
+
+                User user = new User();
+                user.setId(idUser);
+                user.setName(name);
+                user.setEmail(email);
+
+
+
+
+
+                Players.add(user);
+            }
+        }
+        return Players;
+    }
+
+
 
 
 

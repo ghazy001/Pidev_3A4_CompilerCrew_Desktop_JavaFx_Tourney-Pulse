@@ -5,8 +5,10 @@ controller/AddAvisController$1.class
 controller/UpdateEquipeController$2.class
 controller/HOMEController$3.class
 controller/ShowAvisController$1.class
+controller/PlayerController.class
 controller/UpdateAvisController$4.class
 controller/AjouterEquipeController$4.class
+controller/AjouterEquipeController$7.class
 controller/UpdateAvisController$1.class
 controller/FormationController$1.class
 controller/NewsController$1.class
@@ -19,6 +21,7 @@ controller/UpdateAvisController$5.class
 service/IServiceAvisJoueur.class
 controller/AffecterPlayersController.class
 controller/DisplayTeamCard$3.class
+controller/AjouterEquipeController$8.class
 controller/UpdateEquipeController$4.class
 controller/HOMEController$10.class
 controller/DisplayTeamCard.class
@@ -66,3 +69,4 @@ controller/UpdateAvisController$2.class
 controller/ChatgptController$1.class
 controller/AjouterEquipeController$6.class
 entities/User.class
+controller/PlayerController$1.class

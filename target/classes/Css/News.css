@@ -1,22 +1,25 @@
 /* styles.css */
 
 .table-view {
-    -fx-background-color: #ecf0f1;
+    -fx-background-color: #c3cfb6; /* Updated color */
 }
 
 .table-view .column-header-background {
-    -fx-background-color: #2980b9;
+    -fx-background-color: #c3cfb6; /* Updated color */
 }
 
 .table-view .column-header, .table-row-cell {
-    -fx-background-color: #3498db;
+    -fx-background-color: #c3cfb6; /* Updated color */
     -fx-border-color: #2c3e50;
     -fx-border-width: 0.5;
     -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 10, 0, 0, 1); /* Added drop shadow effect */
 }
 
 .table-view .column-header:hover, .table-row-cell:hover {
     -fx-background-color: #1f618d;
+    -fx-cursor: hand; /* Change cursor on hover */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 12, 0, 0, 2); /* Enhanced drop shadow on hover */
 }
 
 .table-view .column-header .label {
@@ -30,42 +33,48 @@
     -fx-border-color: #2c3e50;
     -fx-border-width: 0.5;
     -fx-padding: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 1); /* Added drop shadow effect */
 }
 
 .table-cell:odd {
-    -fx-background-color: #ecf0f1;
+    -fx-background-color: #c3cfb6; /* Updated color */
 }
 
 .table-view .column-header-background .filler {
-    -fx-background-color: #2980b9;
+    -fx-background-color: #c3cfb6; /* Updated color */
 }
 
 .table-view .column-header .arrow {
-    -fx-background-color: #ecf0f1;
+    -fx-background-color: #c3cfb6; /* Updated color */
 }
+
 /* styles.css */
 
 .list-view {
-    -fx-background-color: #ecf0f1;
+    -fx-background-color: #c3cfb6; /* Updated color */
     -fx-font-size: 14px;
 }
 
 .list-view .list-cell {
-    -fx-background-color: #3498db;
+    -fx-background-color: #c3cfb6; /* Updated color */
     -fx-border-color: #2c3e50;
     -fx-border-width: 0.5;
     -fx-text-fill: white;
     -fx-padding: 10px;
-    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.2) , 10, 0, 0, 1 );
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0, 0, 1); /* Added drop shadow effect */
 }
 
 .list-view .list-cell:hover {
     -fx-background-color: #1f618d;
+    -fx-cursor: hand; /* Change cursor on hover */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0, 0, 2); /* Enhanced drop shadow on hover */
 }
 
 .list-view .list-cell:selected {
     -fx-background-color: #2980b9;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 12, 0, 0, 3); /* Added drop shadow effect for selection */
 }
+
 /* styles.css */
 
 .label {
@@ -73,6 +82,19 @@
     -fx-text-fill: #2c3e50;
 }
 
+#title {
+    -fx-font-size: 18px;
+    -fx-font-family: 'Arial Black';
+    -fx-text-fill: #1F3D1C; /* Light Green */
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 1);
+    -fx-transition: transform 0.3s, text-fill 0.3s;
+}
 
-
-
+/* Styles for the Label with fx:id "build" when hovered */
+#title:hover {
+    -fx-text-fill: #688a38; /* Olive Green text on hover */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 15, 0, 0, 1); /* Increase drop shadow on hover */
+    -fx-cursor: hand; /* Change cursor on hover */
+    -fx-rotate: 5deg; /* Add a subtle rotation on hover */
+}

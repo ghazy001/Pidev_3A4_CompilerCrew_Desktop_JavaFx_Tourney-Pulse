@@ -114,6 +114,7 @@ public class AjouterEquipeController implements Initializable {
 
 
         Verifer();
+        InterditDateFuture();
 
         //--------------Hover-------------
         FadeTransition ft = new FadeTransition(Duration.millis(300), myBox);
@@ -164,6 +165,19 @@ public class AjouterEquipeController implements Initializable {
 
         generateCaptcha();
 
+
+        //----------------- regenreate captcha----------------------
+
+
+        captchaCode.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                generateCaptcha();
+            }
+        });
+
+
+
         //--------------------Save-Button-------------------------
         save.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -206,16 +220,24 @@ public class AjouterEquipeController implements Initializable {
                 equipe.setImage(imagePath); // Set the image path
 
                 try {
+
+                    if (serviceEquipe.teamExists(equipe.getNom())) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Team Already Exists");
+                        alert.setContentText("A team with the same name already exists. Please choose a different name.");
+                        alert.show();
+                        return;
+                    }
+
                     // sms
                      sendTwilioSMS();
                     //
                     serviceEquipe.ajouter(equipe);
                     //sing
                     sing();
-                    //
                     // Clearing inputs
                     nomequipe.clear();
-                    date.getEditor().clear(); // Clear the DatePicker
+                    date.getEditor().clear();
                     image.setImage(defaultImage);
                     captchaInput.clear();
                     generateCaptcha();
@@ -309,6 +331,17 @@ public class AjouterEquipeController implements Initializable {
                 nomequipe.setText(oldValue);
             }
         });
+    }
+
+    void InterditDateFuture(){
+        date.setDayCellFactory(picker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                setDisable(date.isAfter(LocalDate.now()));
+            }
+        });
+
     }
 
 

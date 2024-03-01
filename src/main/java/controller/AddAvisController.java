@@ -52,8 +52,8 @@ public class AddAvisController implements Initializable {
     private TextArea commaintre;
     @FXML
     private DatePicker date;
-    @FXML
-    private ComboBox<String> idplayer;
+   // @FXML
+   // private ComboBox<String> idplayer;
 
     @FXML
     private Rating rating;
@@ -115,9 +115,9 @@ public class AddAvisController implements Initializable {
         });
 
        // set up combobox
-        Map<Integer,String> items=setUpComboBox();
-        ObservableList<String> observableList = FXCollections.observableArrayList(items.values());
-        idplayer.setItems(observableList);
+        //Map<Integer,String> items=setUpComboBox();
+       // ObservableList<String> observableList = FXCollections.observableArrayList(items.values());
+      //  idplayer.setItems(observableList);
         //------------------------------add function----------------------------
 
         ajouter.setOnAction(new EventHandler<ActionEvent>() {
@@ -129,12 +129,12 @@ public class AddAvisController implements Initializable {
 
                 String Comm = commaintre.getText();
                 boolean isCommentaireEmpty = Comm.trim().isEmpty();
-                boolean isIdPayerEmpty=idplayer.getValue() == null;
+                //boolean isIdPayerEmpty=idplayer.getValue() == null;
                 //boolean isRatingEmpty= rating.isDisabled();
 
 
 
-                if ( isCommentaireEmpty ||  isIdPayerEmpty ) {
+                if ( isCommentaireEmpty ){  //isIdPayerEmpty ) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Input is empty");
                     alert.setContentText("Input or select fields can't be empty");
@@ -149,13 +149,18 @@ public class AddAvisController implements Initializable {
                 avisJoueur.setNote(note);
 
 
-                Integer selectedKey = getKeyByValue(items, idplayer.getValue());
+               // Integer selectedKey = getKeyByValue(items, idplayer.getValue());
+
+
+
+
 
 
 
 
                     // Set the user ID and save the avisJoueur
-                    user.setId(selectedKey.intValue());
+                    user.setId(PlayerController.SelectedUserid);
+
 
                     try {
                         serviceAvis.ajouter(avisJoueur, user);

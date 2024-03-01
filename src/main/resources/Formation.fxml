@@ -1,91 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="373.0" prefWidth="570.0" style="-fx-background-color: #3A9D23;" stylesheets="Css/StylesheetEquipeJoueur.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FormationController">
+<AnchorPane prefHeight="431.0" prefWidth="727.0" style="-fx-background-color: #688a38;" stylesheets="Css/StylesheetEquipeJoueur.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FormationController">
    <children>
-      <ImageView fitHeight="78.0" fitWidth="77.0" layoutX="515.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@media/Players/fifa.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="GK" alignment="CENTER" layoutX="506.0" layoutY="204.0" prefHeight="31.0" prefWidth="142.0" text="GK" textFill="WHITE">
+      <Label fx:id="GK" alignment="CENTER" layoutX="577.0" layoutY="221.0" prefHeight="31.0" prefWidth="142.0" text="GK" textFill="WHITE">
          <font>
             <Font name="Arial Bold Italic" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="LB" alignment="CENTER" layoutX="308.0" layoutY="150.0" prefHeight="31.0" prefWidth="118.0" text="LB" textFill="WHITE">
+      <Label fx:id="LB" alignment="CENTER" layoutX="387.0" layoutY="171.0" prefHeight="31.0" prefWidth="118.0" text="CB" textFill="WHITE">
          <font>
             <Font name="Arial Bold Italic" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="RB" alignment="CENTER" layoutX="299.0" layoutY="353.0" prefHeight="31.0" prefWidth="135.0" text="RB" textFill="WHITE">
+      <Label fx:id="RB" alignment="CENTER" layoutX="376.0" layoutY="386.0" prefHeight="31.0" prefWidth="135.0" text="CB" textFill="WHITE">
          <font>
             <Font name="Arial Bold Italic" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="CF" alignment="CENTER" layoutX="33.0" layoutY="150.0" prefHeight="31.0" prefWidth="135.0" text="CF" textFill="WHITE">
+      <Label fx:id="CF" alignment="CENTER" layoutX="37.0" layoutY="169.0" prefHeight="31.0" prefWidth="135.0" text="CF" textFill="WHITE">
          <font>
             <Font name="Arial Bold Italic" size="14.0" />
          </font>
       </Label>
-      <ImageView fitHeight="139.0" fitWidth="92.0" layoutX="531.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="pic0" fitHeight="156.0" fitWidth="122.0" layoutX="587.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@media/Players/2.png" />
+            <Image url="@media/Players/Card2.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="117.0" fitWidth="107.0" layoutX="314.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="pic1" fitHeight="157.0" fitWidth="122.0" layoutX="386.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@media/Players/3.png" />
+            <Image url="@media/Players/card4.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="117.0" fitWidth="107.0" layoutX="312.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="pic3" fitHeight="163.0" fitWidth="142.0" layoutX="385.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@media/Players/3.png" />
+            <Image url="@media/Players/card3.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="117.0" fitWidth="107.0" layoutX="47.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="pic2" fitHeight="162.0" fitWidth="122.0" layoutX="47.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@media/Players/3.png" />
+            <Image url="@media/Players/card1.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="117.0" fitWidth="107.0" layoutX="53.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="pic4" fitHeight="163.0" fitWidth="122.0" layoutX="48.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@media/Players/3.png" />
+            <Image url="@media/Players/card5.png" />
          </image>
       </ImageView>
-      <Label fx:id="ST" alignment="CENTER" layoutX="36.0" layoutY="353.0" prefHeight="31.0" prefWidth="135.0" text="ST" textFill="WHITE">
+      <Label fx:id="ST" alignment="CENTER" layoutX="39.0" layoutY="385.0" prefHeight="31.0" prefWidth="135.0" text="ST" textFill="WHITE">
          <font>
             <Font name="Arial Bold Italic" size="14.0" />
          </font>
       </Label>
-      <VBox layoutX="464.0" layoutY="285.0" prefHeight="138.0" prefWidth="184.0">
+      <VBox layoutX="531.0" layoutY="280.0" prefHeight="138.0" prefWidth="184.0">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="184.0" text="substitution :" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font></Label>
-            <Label fx:id="substitution" alignment="CENTER" prefHeight="136.0" prefWidth="184.0" style="-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 10px;" text="List of players" textFill="WHITE">
+            <Label fx:id="substitution" alignment="CENTER" prefHeight="136.0" prefWidth="184.0" style="-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 10px;" text="List of players : " textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
          </children>
       </VBox>
-      <ImageView fitHeight="78.0" fitWidth="55.0" layoutX="593.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@media/Players/football.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="home" fitHeight="37.0" fitWidth="44.0" layoutY="387.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="home" fitHeight="37.0" fitWidth="44.0" layoutX="684.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@media/home.png" />
          </image>
       </ImageView>
+      <Circle fill="#ffffff00" layoutX="278.0" layoutY="203.0" radius="71.0" stroke="WHITE" strokeType="INSIDE" />
+      <Line endX="43.277679443359375" endY="353.5000305175781" layoutX="236.0" layoutY="78.0" startX="43.277679443359375" startY="-78.00000762939453" stroke="WHITE" />
    </children>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
 </AnchorPane>

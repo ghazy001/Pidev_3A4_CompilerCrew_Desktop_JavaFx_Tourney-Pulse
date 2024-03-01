@@ -89,7 +89,7 @@
           </Menu>
             <Menu fx:id="staticmenu1" mnemonicParsing="false" text="Team's Mondial News">
                <items>
-                  <MenuItem fx:id="Newsmenuitem" mnemonicParsing="false" text="Static Avis">
+                  <MenuItem fx:id="Newsmenuitem" mnemonicParsing="false" text="Premier League">
                      <graphic>
                         <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                            <image>

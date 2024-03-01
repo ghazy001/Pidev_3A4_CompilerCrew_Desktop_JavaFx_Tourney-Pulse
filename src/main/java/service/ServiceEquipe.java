@@ -4,6 +4,7 @@ import entities.Equipe;
 import entities.User;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -146,6 +147,42 @@ public class ServiceEquipe implements IServiceEquipe<Equipe> {
         }
         return result;
     }
+
+
+// ----------------------------------- Equipe dont existe ------------------
+
+
+    public boolean teamExists(String teamName) throws SQLException {
+        return getTeamByName(teamName) != null;
+    }
+
+    public Equipe getTeamByName(String teamName) throws SQLException {
+        String sql = "SELECT * FROM equipe WHERE nom = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, teamName);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                return resultSet.next() ? createEquipeFromResultSet(resultSet) : null;
+            }
+        }
+    }
+
+    private Equipe createEquipeFromResultSet(ResultSet resultSet) throws SQLException {
+        int id = resultSet.getInt("id");
+        String nom = resultSet.getString("nom");
+        java.util.Date dateCreation = resultSet.getDate("dateCreation");
+        String image = resultSet.getString("image");
+        // Set other attributes based on your actual Equipe class
+        Equipe equipe = new Equipe();
+        equipe.setId(id);
+        equipe.setNom(nom);
+        equipe.setDateCreation(dateCreation);
+        equipe.setImage(image);
+        return equipe;
+    }
+
+
+
+
 
 
 

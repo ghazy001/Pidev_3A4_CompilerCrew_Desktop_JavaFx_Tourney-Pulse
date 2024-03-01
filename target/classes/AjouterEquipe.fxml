@@ -11,31 +11,31 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="Css/stylesheetEquipe.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AjouterEquipeController">
+<AnchorPane prefHeight="447.0" prefWidth="685.0" stylesheets="Css/stylesheetEquipe.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AjouterEquipeController">
    <children>
-      <ImageView fx:id="image" fitHeight="117.0" fitWidth="231.0" layoutX="225.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
-      <TextField fx:id="nomequipe" layoutX="216.0" layoutY="142.0" />
-      <DatePicker fx:id="date" layoutX="215.0" layoutY="191.0" prefHeight="25.0" prefWidth="205.0" />
-      <Button fx:id="uplaod_pic" layoutX="209.0" layoutY="359.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="100.0" text="uplaod ">
+      <ImageView fx:id="image" fitHeight="94.0" fitWidth="184.0" layoutX="277.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+      <TextField fx:id="nomequipe" layoutX="251.0" layoutY="158.0" />
+      <DatePicker fx:id="date" layoutX="253.0" layoutY="220.0" prefHeight="25.0" prefWidth="205.0" />
+      <Button fx:id="uplaod_pic" layoutX="274.0" layoutY="109.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="132.0" text="uplaod ">
          <font>
             <Font name="Arial" size="14.0" />
          </font></Button>
-      <Button fx:id="save" layoutX="318.0" layoutY="359.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="100.0" text="save">
+      <Button fx:id="save" layoutX="293.0" layoutY="408.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="100.0" text="save">
          <font>
             <Font name="Arial" size="14.0" />
          </font></Button>
-      <Label layoutX="95.0" layoutY="143.0" prefHeight="17.0" prefWidth="199.0" text="Nom equipe" />
-      <Label layoutX="89.0" layoutY="192.0" prefHeight="17.0" prefWidth="112.0" text="Date Creation" />
-      <Label layoutX="116.0" layoutY="78.0" text="logo" />
-      <Label fx:id="captchaCode" layoutX="238.0" layoutY="242.0" prefHeight="55.0" prefWidth="147.0" text="Label" textFill="#ff4400">
+      <Label layoutX="152.0" layoutY="158.0" prefHeight="17.0" prefWidth="199.0" text="Nom equipe" />
+      <Label layoutX="139.0" layoutY="224.0" prefHeight="17.0" prefWidth="112.0" text="Date Creation" />
+      <Label layoutX="170.0" layoutY="44.0" prefHeight="17.0" prefWidth="111.0" text="logo" />
+      <Label fx:id="captchaCode" layoutX="275.0" layoutY="282.0" prefHeight="55.0" prefWidth="147.0" text="Label" textFill="#ff4400">
          <font>
             <Font name="Zapfino" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="captchaInput" layoutX="217.0" layoutY="305.0" prefHeight="26.0" prefWidth="161.0" />
-      <Label layoutX="108.0" layoutY="305.0" prefHeight="17.0" prefWidth="98.0" text="Entre code" />
-      <Label layoutX="88.0" layoutY="246.0" prefHeight="17.0" prefWidth="139.0" text="Security Code" />
-      <VBox fx:id="myBox" prefHeight="400.0" prefWidth="185.0" style="-fx-background-color: #c3cfb6;">
+      <TextField fx:id="captchaInput" layoutX="254.0" layoutY="353.0" prefHeight="26.0" prefWidth="161.0" />
+      <Label layoutX="154.0" layoutY="357.0" prefHeight="17.0" prefWidth="98.0" text="Entre code" />
+      <Label layoutX="134.0" layoutY="293.0" prefHeight="17.0" prefWidth="139.0" text="Security Code" />
+      <VBox fx:id="myBox" prefHeight="449.0" prefWidth="185.0" style="-fx-background-color: #c3cfb6;">
          <children>
             <Label fx:id="Welcome" prefHeight="20.0" prefWidth="184.0" text="Welcome" textFill="WHITE">
                <VBox.margin>
@@ -75,6 +75,6 @@
             </Button>
          </children>
       </VBox>
-      <VBox layoutX="508.0" prefHeight="400.0" prefWidth="92.0" style="-fx-background-color: #c3cfb6;" />
+      <VBox layoutX="593.0" layoutY="-2.0" prefHeight="450.0" prefWidth="92.0" style="-fx-background-color: #c3cfb6;" />
    </children>
 </AnchorPane>

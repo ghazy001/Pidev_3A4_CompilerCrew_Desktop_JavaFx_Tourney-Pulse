@@ -116,5 +116,6 @@ public class FormationController implements Initializable {
 
     private void addPlayerToSubstitution(String playerName) {
         substitution.setText(substitution.getText() + playerName + ", ");
+        substitution.setWrapText(true);
     }
 }
