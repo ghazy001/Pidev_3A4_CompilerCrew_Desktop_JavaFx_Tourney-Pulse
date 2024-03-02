@@ -17,11 +17,11 @@ public class ServiceTournois implements InterfaceService<Tournois> {
         connection = DataSource.getInsatnce().getConnection();
 
 
-        String sql = "INSERT INTO `tournois` ( `nom_tournois`, `address_tournois`, `nombre_match`, `date_debut`, `date_fin`) VALUES (?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO `tournois` ( `nom_tournois`, `stade`, `nombre_match`, `date_debut`, `date_fin`) VALUES (?, ?, ?, ?, ?);";
         try {
             prepare = connection.prepareStatement(sql);
             prepare.setString(1, tournois.getNom_tournois());
-            prepare.setString(2, tournois.getAddress_tournois());
+            prepare.setString(2, tournois.getStade());
             prepare.setInt(3, tournois.getNombre_match());
             prepare.setDate(4, (Date) tournois.getDate_debut());
             prepare.setDate(5, (Date) tournois.getDate_fin());
@@ -37,13 +37,13 @@ public class ServiceTournois implements InterfaceService<Tournois> {
     public void modifier(Tournois tournois) {
         connection = DataSource.getInsatnce().getConnection();
 
-        String sql = "UPDATE `tournois` SET nom_tournois = ?, address_tournois = ?, nombre_match = ?, date_debut = ?, date_fin = ? WHERE `id_tournois` = ? ";
+        String sql = "UPDATE `tournois` SET nom_tournois = ?, stade = ?, nombre_match = ?, date_debut = ?, date_fin = ? WHERE `id_tournois` = ? ";
 
         try {
              prepare = connection.prepareStatement(sql);
 
             prepare.setString(1, tournois.getNom_tournois());
-            prepare.setString(2, tournois.getAddress_tournois());
+            prepare.setString(2, tournois.getStade());
             prepare.setInt(3, tournois.getNombre_match());
             prepare.setDate(4, (Date) tournois.getDate_debut());
             prepare.setDate(5, (Date) tournois.getDate_fin());
@@ -105,7 +105,7 @@ public class ServiceTournois implements InterfaceService<Tournois> {
             while (resultSet.next()) {
                 System.out.println("ID: " + resultSet.getInt("id_tournois"));
                 System.out.println("Nom Tournois : " + resultSet.getString("nom_tournois"));
-                System.out.println("Address Tournois: " + resultSet.getString("address_tournois"));
+                System.out.println("Nom Stade: " + resultSet.getString("stade"));
                 System.out.println("Nombre Match: " + resultSet.getInt("nombre_match"));
                 System.out.println("Date Debut: " + resultSet.getDate("date_debut"));
                 System.out.println("Date Fin: " + resultSet.getDate("date_fin"));
@@ -137,14 +137,14 @@ public class ServiceTournois implements InterfaceService<Tournois> {
             while (resultSet.next()) {
                 int id = resultSet.getInt("id_tournois");
                 String nomTournois = resultSet.getString("nom_tournois");
-                String addressTournois = resultSet.getString("address_tournois");
+                String nomStade = resultSet.getString("stade");
                 int nombreMatch =resultSet.getInt("nombre_match");
                 Date dateDebut = resultSet.getDate("date_debut");
                 Date dateFin = resultSet.getDate("date_fin");
                 Tournois t = new Tournois();
                 t.setId_tournois(id);
                 t.setNom_tournoi(nomTournois);
-                t.setAddress_tournois(addressTournois);
+                t.setStade(nomStade);
                 t.setNombre_match(nombreMatch);
                 t.setDate_debut(dateDebut);
                 t.setDate_fin(dateFin);

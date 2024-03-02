@@ -15,7 +15,15 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.graphics.color.PDColor;
+import org.apache.pdfbox.pdmodel.graphics.color.PDDeviceRGB;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,7 +43,17 @@ public class AfficherMatch implements Initializable {
     private Button Bnavigatem;
 
     @FXML
+    private Button Brecherchem;
+
+    @FXML
+    private Button Bnavigatestats;
+
+    @FXML
     private Button Bsuppm;
+
+    @FXML
+    private Button Bnavigatemail;
+
 
     @FXML
     private DatePicker DPdatem;
@@ -53,7 +71,16 @@ public class AfficherMatch implements Initializable {
     private TextField TFnomm;
 
     @FXML
+    private TextField TFrecherchem;
+
+    @FXML
     private TextField TFtournois;
+
+    @FXML
+    private TextField cityInput;
+
+    @FXML
+    private Text weatherText;
 
     @FXML
     private VBox Vboxx;
@@ -64,9 +91,9 @@ public class AfficherMatch implements Initializable {
     private String selectedNomm;
     private String selectedDate;
     private String selectedDuree;
-    private String selectedIdt;
-    private String selectedIde1;
-    private String selectedIde2;
+    private String selectedTournois;
+    private String selectedEquipe1;
+    private String selectedEquipe2;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -96,8 +123,66 @@ public class AfficherMatch implements Initializable {
             }
         });
 
+        Bnavigatemail.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("/SendMail.fxml"));
+
+                    // Create a Scene with custom dimensions
+                    Scene scene = new Scene(root); // Adjust width and height as needed
+
+                    // Get the current stage
+                    Stage stage = (Stage) TFnomm.getScene().getWindow();
+
+                    // Set the new scene to the stage
+                    stage.setScene(scene);
+
+
+                } catch (IOException var4) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText("Sorry");
+                    alert.setTitle("Error");
+                    alert.show();
+                }
+
+            }
+        });
+
+        Bnavigatestats.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("/Statistique.fxml"));
+
+                    // Create a Scene with custom dimensions
+                    Scene scene = new Scene(root); // Adjust width and height as needed
+
+                    // Get the current stage
+                    Stage stage = (Stage) TFnomm.getScene().getWindow();
+
+                    // Set the new scene to the stage
+                    stage.setScene(scene);
+
+
+                } catch (IOException var4) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText("Sorry");
+                    alert.setTitle("Error");
+                    alert.show();
+                }
+
+            }
+        });
+
         List<Matchs> matchsList = serviceMatch.getAll();
         System.out.println("Match List: " + matchsList); // Print the list
+
+        TFnomm.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[a-zA-Z0-9 ]*")) {
+                TFnomm.setText(newValue.replaceAll("[^a-zA-Z0-9 ]", ""));
+            }
+        });
 
         for (Matchs matchs : matchsList) {
             System.out.println("Adding match to TitledPane: " + matchs);
@@ -129,27 +214,27 @@ public class AfficherMatch implements Initializable {
                     selectedNomm = matchs.getNom_match();
                     selectedDate = String.valueOf(matchs.getDate_match());
                     selectedDuree = matchs.getDuree_match();
-                    selectedIdt = String.valueOf(matchs.getTournois().getId_tournois());
-                    selectedIde1 = String.valueOf(matchs.getEquipe().getId_equipe());
-                    selectedIde2 = String.valueOf(matchs.getEquipe1().getId_equipe());
+                    selectedTournois = matchs.getTournois().getNom_tournois();
+                    selectedEquipe1 = matchs.getEquipe().getNom_equipe();
+                    selectedEquipe2 = matchs.getEquipe1().getNom_equipe();
 
                     // Perform any action with the selected values
                     System.out.println("Selected ID: " + selectedIdm);
                     System.out.println("Selected Nom: " + selectedNomm);
                     System.out.println("Selected Date: " + selectedDate);
                     System.out.println("Selected Duree: " + selectedDuree);
-                    System.out.println("Selected ID Tournois: " + selectedIdt);
-                    System.out.println("Selected ID Equipe 1: " + selectedIde1);
-                    System.out.println("Selected ID Equipe 2: " + selectedIde2);
+                    System.out.println("Selected Tournois: " + selectedTournois);
+                    System.out.println("Selected Equipe 1: " + selectedEquipe1);
+                    System.out.println("Selected Equipe 2: " + selectedEquipe2);
 
 
                     TFnomm.setText(selectedNomm);
                     LocalDate dateMatch = Date.valueOf(selectedDate).toLocalDate();
                     DPdatem.setValue(dateMatch);
                     TFdureem.setText(selectedDuree);
-                    TFtournois.setText(selectedIdt);
-                    TFequipe1.setText(selectedIde1);
-                    TFequipe2.setText(selectedIde2);
+                    TFtournois.setText(selectedTournois);
+                    TFequipe1.setText(selectedEquipe1);
+                    TFequipe2.setText(selectedEquipe2);
 
                 }
             });
@@ -215,27 +300,21 @@ public class AfficherMatch implements Initializable {
                 }
 
                 if (selectedIdm != null) {
-                    int idTourText;
-                    int idEquipeText1;
-                    int idEquipeText2;
                     String dateMText = String.valueOf(DPdatem.getValue());
                     java.util.Date dateM;
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     try {
-                        idTourText = Integer.parseInt(TFtournois.getText());
-                        idEquipeText1 = Integer.parseInt(TFequipe1.getText());
-                        idEquipeText2 = Integer.parseInt(TFequipe2.getText());
                         dateM = sdf.parse(dateMText);
                     } catch (ParseException e) {
                         throw new RuntimeException(e);
                     }
 
                     Tournois tournois = new Tournois();
-                    tournois.setId_tournois(idTourText);
+                    tournois.setNom_tournoi(tournoisText);
                     Equipe equipe1 = new Equipe();
                     Equipe equipe2 = new Equipe();
-                    equipe1.setId_equipe(idEquipeText1);
-                    equipe2.setId_equipe(idEquipeText2);
+                    equipe1.setNom_equipe(equipe1Text);
+                    equipe2.setNom_equipe(equipe2Text);
                     Date sqlDateM = new Date(dateM.getTime());
                     serviceMatch.modifier(new Matchs(Integer.parseInt(selectedIdm),TFnomm.getText(), sqlDateM, TFdureem.getText(), tournois, equipe1, equipe2));
                     loadData();
@@ -252,6 +331,8 @@ public class AfficherMatch implements Initializable {
 
 
         });
+
+        Brecherchem.setOnAction(event -> searchTournaments());
 
     }
 
@@ -273,32 +354,17 @@ public class AfficherMatch implements Initializable {
             return;
         }
 
-        int idTour;
-        int idequipe1;
-        int idequipe2;
-
-        try {
-            idTour = Integer.parseInt(tournoisText);
-            idequipe1 = Integer.parseInt(equipe1Text);
-            idequipe2 = Integer.parseInt(equipe2Text);
-        } catch (NumberFormatException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur de format");
-            alert.setContentText("Les ID du tournois et des équipes doivent être des entiers valides.");
-            alert.showAndWait();
-            return;
-        }
 
         java.util.Date dateM = java.sql.Date.valueOf(date);
 
         Equipe equipe1 = new Equipe();
         Equipe equipe2 = new Equipe();
 
-        equipe1.setId_equipe(idequipe1);
-        equipe2.setId_equipe(idequipe2);
+        equipe1.setNom_equipe(equipe1Text);
+        equipe2.setNom_equipe(equipe2Text);
 
         Tournois tournois = new Tournois();
-        tournois.setId_tournois(idTour);
+        tournois.setNom_tournoi(tournoisText);
 
         ServiceMatch sm = new ServiceMatch();
         sm.ajouter(new Matchs(nomText, dateM, dureeText, tournois, equipe1, equipe2));
@@ -318,6 +384,190 @@ public class AfficherMatch implements Initializable {
         DPdatem.setValue(null);
         TFnomm.requestFocus();
     }
+
+    @FXML
+    void pdfMatchAction(ActionEvent event) {
+        String nomText = TFnomm.getText();
+        String dureeText = TFdureem.getText();
+        String tournoisText = TFtournois.getText();
+        String equipe1Text = TFequipe1.getText();
+        String equipe2Text = TFequipe2.getText();
+        String date = String.valueOf(DPdatem.getValue());
+        java.util.Date dateMatch = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            dateMatch = sdf.parse(date);
+        } catch (ParseException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Format de date invalide");
+            alert.setHeaderText("Format de date incorrect");
+            alert.setContentText("Le format de date doit être 'yyyy-MM-dd'.");
+            alert.showAndWait();
+
+        }
+        if (selectedIdm != null) {
+            try {
+                // Création d'un document PDF
+                PDDocument document = new PDDocument();
+                PDPage page = new PDPage();
+                document.addPage(page);
+
+                // Ajout de contenu au document
+                PDPageContentStream contentStream = new PDPageContentStream(document, page);
+                // Créer un objet PDColor avec les valeurs RVB
+                PDColor greenColor = new PDColor(new float[]{104/255f, 138/255f, 56/255f}, PDDeviceRGB.INSTANCE);
+                PDColor couleur = new PDColor(new float[]{195 / 255f, 207 / 255f, 182 / 255f}, PDDeviceRGB.INSTANCE);
+                PDColor color = new PDColor(new float[]{31 / 255f, 61 / 255f, 28 / 255f}, PDDeviceRGB.INSTANCE);
+
+                contentStream.setNonStrokingColor(greenColor);
+                // Dessine un rectangle rempli de la couleur de fond
+                contentStream.fillRect(0, 0, (int) page.getMediaBox().getWidth(), (int) page.getMediaBox().getHeight());
+                //Ajouter Image
+                PDImageXObject pdImage = PDImageXObject.createFromFile("C:\\Users\\msi\\IdeaProjects\\GestionTournois\\src\\main\\resources\\Image\\logopi.png", document);
+                contentStream.drawImage(pdImage, 100, 50);
+
+                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 18);
+                contentStream.beginText();
+                contentStream.newLineAtOffset(100, 700);
+                contentStream.moveTextPositionByAmount(0, -30);
+                contentStream.setNonStrokingColor(couleur);
+                contentStream.showText("Venez participer à notre Match et gagnez des recomponse.");
+
+                contentStream.moveTextPositionByAmount(0, -40);
+                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16);
+                // Définir la couleur de non-contour
+                contentStream.setNonStrokingColor(couleur);
+                contentStream.showText("Nom: ");
+                contentStream.setFont(PDType1Font.HELVETICA, 15); // Revenir à une police normale pour le reste du texte
+                // Définir la couleur de non-contour
+                contentStream.setNonStrokingColor(color);
+                contentStream.showText(nomText);
+
+                contentStream.moveTextPositionByAmount(0, -30);
+                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16);
+                // Définir la couleur de non-contour
+                contentStream.setNonStrokingColor(couleur);
+                contentStream.showText("Date du match:");
+                contentStream.setFont(PDType1Font.HELVETICA, 15); // Revenir à une police normale pour le reste du texte
+                // Définir la couleur de non-contour
+                contentStream.setNonStrokingColor(color);
+                contentStream.showText(String.valueOf(dateMatch));
+
+                contentStream.moveTextPositionByAmount(0, -30);
+                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16);
+                // Définir la couleur de non-contour
+                contentStream.setNonStrokingColor(couleur);
+                contentStream.showText("Duree:");
+                contentStream.setFont(PDType1Font.HELVETICA, 15); // Revenir à une police normale pour le reste du texte
+                // Définir la couleur de non-contour
+                contentStream.setNonStrokingColor(color);
+                contentStream.showText(dureeText);
+
+                contentStream.moveTextPositionByAmount(0, -30);
+                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16);
+                // Définir la couleur de non-contour
+                contentStream.setNonStrokingColor(couleur);
+                contentStream.showText("Nom du tournois:");
+                contentStream.setFont(PDType1Font.HELVETICA, 15); // Revenir à une police normale pour le reste du texte
+                // Définir la couleur de non-contour
+                contentStream.setNonStrokingColor(color);
+                contentStream.showText(tournoisText);
+
+                contentStream.moveTextPositionByAmount(0, -30);
+                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16);
+                // Définir la couleur de non-contour
+                contentStream.setNonStrokingColor(couleur);
+                contentStream.showText("Equipe 1:");
+                contentStream.setFont(PDType1Font.HELVETICA, 15); // Revenir à une police normale pour le reste du texte
+                // Définir la couleur de non-contour
+                contentStream.setNonStrokingColor(color);
+                contentStream.showText(equipe1Text);
+
+                contentStream.moveTextPositionByAmount(0, -30);
+                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16);
+                // Définir la couleur de non-contour
+                contentStream.setNonStrokingColor(couleur);
+                contentStream.showText("Equipe 2:");
+                contentStream.setFont(PDType1Font.HELVETICA, 15); // Revenir à une police normale pour le reste du texte
+                // Définir la couleur de non-contour
+                contentStream.setNonStrokingColor(color);
+                contentStream.showText(equipe2Text);
+
+                contentStream.moveTextPositionByAmount(0, -30);
+                contentStream.setFont(PDType1Font.HELVETICA, 15); // Revenir à une police normale pour le reste du texte
+                // Définir la couleur de non-contour
+                contentStream.setNonStrokingColor(color);
+                contentStream.showText("Notre site web: www.TourneyPulse.com");
+
+                contentStream.endText();
+                contentStream.close();
+
+                // Enregistrement du document
+                String filePath = "C:\\Users\\msi\\OneDrive\\Bureau\\match.pdf";
+                document.save(filePath);
+                document.close();
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Gestion Des Matchs");
+
+                alert.setHeaderText("Gestion Des Matchs");
+                alert.setContentText("Fichier PDF créé avec succès : " + filePath);
+                alert.showAndWait();
+            } catch (IOException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setContentText("Erreur lors de la création du fichier PDF : " + e.getMessage());
+                alert.showAndWait();
+            }
+            TFnomm.clear();
+            TFdureem.clear();
+            TFtournois.clear();
+            TFequipe1.clear();
+            TFequipe2.clear();
+            DPdatem.setValue(null);
+            TFnomm.requestFocus();
+        }
+
+    }
+
+    @FXML
+    void refrechMatchAction(ActionEvent event) {
+        loadData();
+        TFrecherchem.clear();
+    }
+
+    private void searchTournaments() {
+        List<Matchs> matchsList = serviceMatch.getAll();
+        System.out.println("Match List: " + matchsList);
+        String searchText = TFrecherchem.getText().trim().toLowerCase(); // Récupérez le texte de recherche
+        Vboxx.getChildren().clear(); // Effacez les résultats précédents
+
+        // Parcourez la liste des tournois et recherchez ceux correspondant au critère de recherche
+        for (Matchs matchs : matchsList) {
+            if (matchs.getNom_match().toLowerCase().contains(searchText)) {
+                // Si le nom du tournoi correspond au critère de recherche, affichez-le
+                Label nommLabel = new Label("Nom: " + matchs.getNom_match());
+                Label dateLabel = new Label("Date: " + matchs.getDate_match());
+                Label dureeLabel = new Label("Duree: " + matchs.getDuree_match());
+                Label idtLabel = new Label("Nom Tournois: " + matchs.getTournois().getNom_tournois());
+                Label ideLabel1 = new Label("Nom Equipe 1: " + (matchs.getEquipe().getNom_equipe() ));
+                Label ideLabel2 = new Label("Nom Equipe 2: " + (matchs.getEquipe1().getNom_equipe()));
+
+                GridPane gridPane = new GridPane();
+                gridPane.add(nommLabel, 0, 1);
+                gridPane.add(dateLabel, 0, 2);
+                gridPane.add(dureeLabel, 0, 3);
+                gridPane.add(idtLabel, 0, 4);
+                gridPane.add(ideLabel1, 0, 5);
+                gridPane.add(ideLabel2, 0, 6);
+
+                TitledPane titledPane = new TitledPane("Match " + matchs.getId_match(), gridPane);
+
+                Vboxx.getChildren().add(titledPane);
+            }
+        }
+    }
+
 
 
     private void loadData() {
@@ -354,27 +604,27 @@ public class AfficherMatch implements Initializable {
                     selectedNomm = matchs.getNom_match();
                     selectedDate = String.valueOf(matchs.getDate_match());
                     selectedDuree = matchs.getDuree_match();
-                    selectedIdt = String.valueOf(matchs.getTournois().getId_tournois());
-                    selectedIde1 = String.valueOf(matchs.getEquipe().getId_equipe());
-                    selectedIde2 = String.valueOf(matchs.getEquipe1().getId_equipe());
+                    selectedTournois = matchs.getTournois().getNom_tournois();
+                    selectedEquipe1 = matchs.getEquipe().getNom_equipe();
+                    selectedEquipe2 = matchs.getEquipe1().getNom_equipe();
 
                     // Perform any action with the selected values
                     System.out.println("Selected ID: " + selectedIdm);
                     System.out.println("Selected Nom: " + selectedNomm);
                     System.out.println("Selected Date: " + selectedDate);
                     System.out.println("Selected Duree: " + selectedDuree);
-                    System.out.println("Selected ID Tournois: " + selectedIdt);
-                    System.out.println("Selected ID Equipe 1: " + selectedIde1);
-                    System.out.println("Selected ID Equipe 2: " + selectedIde2);
+                    System.out.println("Selected Tournois: " + selectedTournois);
+                    System.out.println("Selected Equipe 1: " + selectedEquipe1);
+                    System.out.println("Selected Equipe 2: " + selectedEquipe2);
 
 
                     TFnomm.setText(selectedNomm);
                     LocalDate dateMatch = Date.valueOf(selectedDate).toLocalDate();
                     DPdatem.setValue(dateMatch);
                     TFdureem.setText(selectedDuree);
-                    TFtournois.setText(selectedIdt);
-                    TFequipe1.setText(selectedIde1);
-                    TFequipe2.setText(selectedIde2);
+                    TFtournois.setText(selectedTournois);
+                    TFequipe1.setText(selectedEquipe1);
+                    TFequipe2.setText(selectedEquipe2);
 
                 }
             });
@@ -383,4 +633,5 @@ public class AfficherMatch implements Initializable {
             Vboxx.getChildren().add(titledPane);
         }
     }
+
 }

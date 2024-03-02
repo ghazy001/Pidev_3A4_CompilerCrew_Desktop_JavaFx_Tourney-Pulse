@@ -14,6 +14,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.graphics.color.PDColor;
+import org.apache.pdfbox.pdmodel.graphics.color.PDDeviceRGB;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,10 +41,19 @@ public class AfficherTournois implements Initializable {
         private Button Bnavigatet;
 
         @FXML
+        private Button Brecherchet;
+
+        @FXML
+        private Button Bnavigatestats;
+
+        @FXML
+        private Button Bnavigatemail;
+
+        @FXML
         private Button Bsupprimer;
 
         @FXML
-        private TextField TFaddress;
+        private TextField TFstade;
 
         @FXML
         private DatePicker DPdated;
@@ -49,7 +65,10 @@ public class AfficherTournois implements Initializable {
         private TextField TFnbrmatch;
 
         @FXML
-        private TextField TFnom;
+        private TextField TFnomt;
+
+        @FXML
+        private TextField TFrecherchet;
 
         @FXML
         private VBox Vbox;
@@ -58,7 +77,7 @@ public class AfficherTournois implements Initializable {
 
         private String selectedIdt;
         private String selectedNomt;
-        private String selectedAddress;
+        private String selectedStade;
         private String selectedNombrem;
         private String selectedDated;
         private String selectedDatef;
@@ -74,7 +93,59 @@ public class AfficherTournois implements Initializable {
                                         Scene scene = new Scene(root); // Adjust width and height as needed
 
                                         // Get the current stage
-                                        Stage stage = (Stage) TFnom.getScene().getWindow();
+                                        Stage stage = (Stage) TFnomt.getScene().getWindow();
+
+                                        // Set the new scene to the stage
+                                        stage.setScene(scene);
+
+
+                                } catch (IOException var4) {
+                                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                        alert.setContentText("Sorry");
+                                        alert.setTitle("Error");
+                                        alert.show();
+                                }
+
+                        }
+                });
+
+                Bnavigatestats.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent actionEvent) {
+                                try {
+                                        Parent root = FXMLLoader.load(getClass().getResource("/Statistique.fxml"));
+
+                                        // Create a Scene with custom dimensions
+                                        Scene scene = new Scene(root); // Adjust width and height as needed
+
+                                        // Get the current stage
+                                        Stage stage = (Stage) TFnomt.getScene().getWindow();
+
+                                        // Set the new scene to the stage
+                                        stage.setScene(scene);
+
+
+                                } catch (IOException var4) {
+                                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                        alert.setContentText("Sorry");
+                                        alert.setTitle("Error");
+                                        alert.show();
+                                }
+
+                        }
+                });
+
+                Bnavigatemail.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent actionEvent) {
+                                try {
+                                        Parent root = FXMLLoader.load(getClass().getResource("/SendMail.fxml"));
+
+                                        // Create a Scene with custom dimensions
+                                        Scene scene = new Scene(root); // Adjust width and height as needed
+
+                                        // Get the current stage
+                                        Stage stage = (Stage) TFnomt.getScene().getWindow();
 
                                         // Set the new scene to the stage
                                         stage.setScene(scene);
@@ -99,19 +170,29 @@ public class AfficherTournois implements Initializable {
                                 TFnbrmatch.setText(newValue.replaceAll("[^\\d]", ""));
                         }
                 });
+                TFnomt.textProperty().addListener((observable, oldValue, newValue) -> {
+                        if (!newValue.matches("[a-zA-Z0-9 ]*")) {
+                                TFnomt.setText(newValue.replaceAll("[^a-zA-Z0-9 ]", ""));
+                        }
+                });
+                TFstade.textProperty().addListener((observable, oldValue, newValue) -> {
+                        if (!newValue.matches("[a-zA-Z0-9 ]*")) {
+                                TFstade.setText(newValue.replaceAll("[^a-zA-Z0-9 ]", ""));
+                        }
+                });
 
                         for (Tournois tournois : tournoisList) {
                                 System.out.println("Adding tournois to TitledPane: " + tournois);
                                 // Create layout for each reclamation
                                 Label nomtLabel = new Label("Nom: " + tournois.getNom_tournois());
-                                Label addressLabel = new Label("Address: " + tournois.getAddress_tournois());
+                                Label stadeLabel = new Label("Nom Stade: " + tournois.getStade());
                                 Label nombremLabel = new Label("Nombre Match: " + tournois.getNombre_match());
                                 Label datedLabel = new Label("Date Debut: " + tournois.getDate_debut());
                                 Label datefLabel = new Label("Date Fin: " + tournois.getDate_fin());
 
                                 GridPane gridPane = new GridPane();
                                 gridPane.add(nomtLabel, 0, 1);
-                                gridPane.add(addressLabel, 0, 2);
+                                gridPane.add(stadeLabel, 0, 2);
                                 gridPane.add(nombremLabel, 0, 3);
                                 gridPane.add(datedLabel, 0, 4);
                                 gridPane.add(datefLabel, 0, 5);
@@ -124,7 +205,7 @@ public class AfficherTournois implements Initializable {
                                         public void handle(MouseEvent mouseEvent) {
                                                 selectedIdt = "" + tournois.getId_tournois();
                                                 selectedNomt = tournois.getNom_tournois();
-                                                selectedAddress = tournois.getAddress_tournois();
+                                                selectedStade = tournois.getStade();
                                                 selectedNombrem = String.valueOf(tournois.getNombre_match());
                                                 selectedDated = String.valueOf(tournois.getDate_debut());
                                                 selectedDatef = String.valueOf(tournois.getDate_fin());
@@ -132,13 +213,13 @@ public class AfficherTournois implements Initializable {
                                                 // Perform any action with the selected values
                                                 System.out.println("Selected ID: " + selectedIdt);
                                                 System.out.println("Selected Nom: " + selectedNomt);
-                                                System.out.println("Selected Address: " + selectedAddress);
+                                                System.out.println("Selected Stade: " + selectedStade);
                                                 System.out.println("Selected Nombre Matchs: " + selectedNombrem);
                                                 System.out.println("Selected Date Debut: " + selectedDated);
                                                 System.out.println("Selected Date Fin: " + selectedDatef);
 
-                                                TFnom.setText(selectedNomt);
-                                                TFaddress.setText(selectedAddress);
+                                                TFnomt.setText(selectedNomt);
+                                                TFstade.setText(selectedStade);
                                                 TFnbrmatch.setText(selectedNombrem);
                                                 LocalDate dateDebut = Date.valueOf(selectedDated).toLocalDate();
                                                 DPdated.setValue(dateDebut);
@@ -156,12 +237,12 @@ public class AfficherTournois implements Initializable {
                         Bsupprimer.setOnAction(new EventHandler<ActionEvent>() {
                                 @Override
                                 public void handle(ActionEvent actionEvent) {
-                                        String nomText = TFnom.getText();
-                                        String addressText = TFaddress.getText();
+                                        String nomText = TFnomt.getText();
+                                        String stadeText = TFstade.getText();
                                         String nbrMatchText = TFnbrmatch.getText();
                                         LocalDate dateD = DPdated.getValue();
                                         LocalDate dateF = DPdatef.getValue();
-                                        if (nomText.isEmpty() || addressText.isEmpty() || nbrMatchText.isEmpty() || dateD == null || dateF == null || dateD.isEqual(dateF)) {
+                                        if (nomText.isEmpty() || stadeText.isEmpty() || nbrMatchText.isEmpty() || dateD == null || dateF == null || dateD.isEqual(dateF)) {
                                                 Alert alert = new Alert(Alert.AlertType.ERROR);
                                                 alert.setTitle("Information manquante!");
                                                 alert.setHeaderText("Gestion Des Tournois");
@@ -174,12 +255,12 @@ public class AfficherTournois implements Initializable {
                                                 serviceTournois.supprimer(Integer.parseInt(selectedIdt));
                                                 loadData();
                                                 LocalDate t = null;
-                                                TFnom.setText("");
-                                                TFaddress.setText("");
+                                                TFnomt.setText("");
+                                                TFstade.setText("");
                                                 TFnbrmatch.setText("");
                                                 DPdated.setValue(t);
                                                 DPdatef.setValue(t);
-                                                TFnom.requestFocus();
+                                                TFnomt.requestFocus();
                                         }
                                 }
 
@@ -188,12 +269,12 @@ public class AfficherTournois implements Initializable {
                         Bmodifier.setOnAction(new EventHandler<ActionEvent>() {
                                 @Override
                                 public void handle(ActionEvent actionEvent) {
-                                        String nomText = TFnom.getText();
-                                        String addressText = TFaddress.getText();
+                                        String nomText = TFnomt.getText();
+                                        String stadeText = TFstade.getText();
                                         String nbrMatchText = TFnbrmatch.getText();
                                         LocalDate dateD = DPdated.getValue();
                                         LocalDate dateF = DPdatef.getValue();
-                                        if (nomText.isEmpty() || addressText.isEmpty() || nbrMatchText.isEmpty() || dateD == null || dateF == null || dateD.isEqual(dateF)) {
+                                        if (nomText.isEmpty() || stadeText.isEmpty() || nbrMatchText.isEmpty() || dateD == null || dateF == null || dateD.isEqual(dateF)) {
                                                 Alert alert = new Alert(Alert.AlertType.ERROR);
                                                 alert.setTitle("Information manquante!");
                                                 alert.setHeaderText("Gestion Des Tournois");
@@ -233,20 +314,22 @@ public class AfficherTournois implements Initializable {
                                                 }
                                                 Date sqlDateD = new Date(dateDebut.getTime());
                                                 Date sqlDateF = new Date(dateFin.getTime());
-                                                serviceTournois.modifier(new Tournois(Integer.parseInt(selectedIdt),TFnom.getText(), TFaddress.getText(), nbrMatch, sqlDateD, sqlDateF));
+                                                serviceTournois.modifier(new Tournois(Integer.parseInt(selectedIdt), TFnomt.getText(), TFstade.getText(), nbrMatch, sqlDateD, sqlDateF));
                                                 loadData();
                                                 LocalDate t = null;
-                                                TFnom.setText("");
-                                                TFaddress.setText("");
+                                                TFnomt.setText("");
+                                                TFstade.setText("");
                                                 TFnbrmatch.setText("");
                                                 DPdated.setValue(t);
                                                 DPdatef.setValue(t);
-                                                TFnom.requestFocus();
+                                                TFnomt.requestFocus();
                                         }
                                 }
 
 
                         });
+
+                Brecherchet.setOnAction(event -> searchTournaments());
 
 
 
@@ -254,13 +337,13 @@ public class AfficherTournois implements Initializable {
 
         @FXML
         void ajouterTournoisAction(ActionEvent event) {
-                String nomText = TFnom.getText();
-                String addressText = TFaddress.getText();
+                String nomText = TFnomt.getText();
+                String stadeText = TFstade.getText();
                 String nbrMatchText = TFnbrmatch.getText();
                 LocalDate dateD = DPdated.getValue();
                 LocalDate dateF = DPdatef.getValue();
 
-                if (nomText.isEmpty() || addressText.isEmpty() || nbrMatchText.isEmpty() || dateD == null || dateF == null || dateD.isEqual(dateF)) {
+                if (nomText.isEmpty() || stadeText.isEmpty() || nbrMatchText.isEmpty() || dateD == null || dateF == null || dateD.isEqual(dateF)) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Information manquante!");
                         alert.setHeaderText("Gestion Des Tournois");
@@ -298,7 +381,7 @@ public class AfficherTournois implements Initializable {
                 Date sqlDateF = new Date(dateFin.getTime());
 
                 ServiceTournois st = new ServiceTournois();
-                st.ajouter(new Tournois(nomText, addressText, nbrMatch, sqlDateD, sqlDateF));
+                st.ajouter(new Tournois(nomText, stadeText, nbrMatch, sqlDateD, sqlDateF));
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
@@ -307,13 +390,185 @@ public class AfficherTournois implements Initializable {
 
                 loadData();
 
-                TFnom.clear();
-                TFaddress.clear();
+                TFnomt.clear();
+                TFstade.clear();
                 TFnbrmatch.clear();
                 DPdated.setValue(null);
                 DPdatef.setValue(null);
-                TFnom.requestFocus();
+                TFnomt.requestFocus();
 
+        }
+
+        @FXML
+        void pdfTournoisAction(ActionEvent event) {
+                String nomText = TFnomt.getText();
+                String stadeText = TFstade.getText();
+                String nbrMatchText = TFnbrmatch.getText();
+                String dateDText = String.valueOf(DPdated.getValue());
+                java.util.Date dateDebut = null;
+                String dateFText = String.valueOf(DPdatef.getValue());
+                java.util.Date dateFin = null;
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                        dateDebut = sdf.parse(dateDText);
+                        dateFin = sdf.parse(dateFText);
+                } catch (ParseException e) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Format de date invalide");
+                        alert.setHeaderText("Format de date incorrect");
+                        alert.setContentText("Le format de date doit être 'yyyy-MM-dd'.");
+                        alert.showAndWait();
+
+                }
+                if (selectedIdt != null) {
+                        try {
+                                // Création d'un document PDF
+                                PDDocument document = new PDDocument();
+                                PDPage page = new PDPage();
+                                document.addPage(page);
+
+                                // Ajout de contenu au document
+                                PDPageContentStream contentStream = new PDPageContentStream(document, page);
+                                // Créer un objet PDColor avec les valeurs RVB
+                                PDColor greenColor = new PDColor(new float[]{104/255f, 138/255f, 56/255f}, PDDeviceRGB.INSTANCE);
+                                PDColor couleur = new PDColor(new float[]{195 / 255f, 207 / 255f, 182 / 255f}, PDDeviceRGB.INSTANCE);
+                                PDColor color = new PDColor(new float[]{31 / 255f, 61 / 255f, 28 / 255f}, PDDeviceRGB.INSTANCE);
+
+                                contentStream.setNonStrokingColor(greenColor);
+                                // Dessine un rectangle rempli de la couleur de fond
+                                contentStream.fillRect(0, 0, (int) page.getMediaBox().getWidth(), (int) page.getMediaBox().getHeight());
+                                //Ajouter Image
+                                PDImageXObject pdImage = PDImageXObject.createFromFile("C:\\Users\\msi\\IdeaProjects\\GestionTournois\\src\\main\\resources\\Image\\logopi.png", document);
+                                contentStream.drawImage(pdImage, 100, 50);
+
+                                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 18);
+                                contentStream.beginText();
+                                contentStream.newLineAtOffset(100, 700);
+                                contentStream.moveTextPositionByAmount(0, -40);
+                                contentStream.setNonStrokingColor(couleur);
+                                contentStream.showText("Venez participer à notre tourois et gagnez des recomponse.");
+
+                                contentStream.moveTextPositionByAmount(0, -80);
+                                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16);
+                                // Définir la couleur de non-contour
+                                contentStream.setNonStrokingColor(couleur);
+                                contentStream.showText("Nom: ");
+                                contentStream.setFont(PDType1Font.HELVETICA, 15); // Revenir à une police normale pour le reste du texte
+                                // Définir la couleur de non-contour
+                                contentStream.setNonStrokingColor(color);
+                                contentStream.showText(nomText);
+
+                                contentStream.moveTextPositionByAmount(0, -40);
+                                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16);
+                                // Définir la couleur de non-contour
+                                contentStream.setNonStrokingColor(couleur);
+                                contentStream.showText("Stade:");
+                                contentStream.setFont(PDType1Font.HELVETICA, 15); // Revenir à une police normale pour le reste du texte
+                                // Définir la couleur de non-contour
+                                contentStream.setNonStrokingColor(color);
+                                contentStream.showText(stadeText);
+
+                                contentStream.moveTextPositionByAmount(0, -40);
+                                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16);
+                                // Définir la couleur de non-contour
+                                contentStream.setNonStrokingColor(couleur);
+                                contentStream.showText("Nombre Match:");
+                                contentStream.setFont(PDType1Font.HELVETICA, 15); // Revenir à une police normale pour le reste du texte
+                                // Définir la couleur de non-contour
+                                contentStream.setNonStrokingColor(color);
+                                contentStream.showText(nbrMatchText);
+
+                                contentStream.moveTextPositionByAmount(0, -40);
+                                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16);
+                                // Définir la couleur de non-contour
+                                contentStream.setNonStrokingColor(couleur);
+                                contentStream.showText("Date Debut:");
+                                contentStream.setFont(PDType1Font.HELVETICA, 15); // Revenir à une police normale pour le reste du texte
+                                // Définir la couleur de non-contour
+                                contentStream.setNonStrokingColor(color);
+                                contentStream.showText(String.valueOf(dateDebut));
+
+                                contentStream.moveTextPositionByAmount(0, -40);
+                                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16);
+                                // Définir la couleur de non-contour
+                                contentStream.setNonStrokingColor(couleur);
+                                contentStream.showText("Date Fin:");
+                                contentStream.setFont(PDType1Font.HELVETICA, 15); // Revenir à une police normale pour le reste du texte
+                                // Définir la couleur de non-contour
+                                contentStream.setNonStrokingColor(color);
+                                contentStream.showText(String.valueOf(dateFin));
+
+                                contentStream.moveTextPositionByAmount(0, -40);
+                                contentStream.setFont(PDType1Font.HELVETICA, 15); // Revenir à une police normale pour le reste du texte
+                                // Définir la couleur de non-contour
+                                contentStream.setNonStrokingColor(color);
+                                contentStream.showText("Notre site web: www.TourneyPulse.com");
+
+                                contentStream.endText();
+                                contentStream.close();
+
+                                // Enregistrement du document
+                                String filePath = "C:\\Users\\msi\\OneDrive\\Bureau\\tournois.pdf";
+                                document.save(filePath);
+                                document.close();
+
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("Gestion Des Tournois");
+
+                                alert.setHeaderText("Gestion Des Tournois");
+                                alert.setContentText("Fichier PDF créé avec succès : " + filePath);
+                                alert.showAndWait();
+                        } catch (IOException e) {
+                                Alert alert = new Alert(Alert.AlertType.ERROR);
+                                alert.setTitle("Erreur");
+                                alert.setContentText("Erreur lors de la création du fichier PDF : " + e.getMessage());
+                                alert.showAndWait();
+                        }
+                        TFnomt.clear();
+                        TFstade.clear();
+                        TFnbrmatch.clear();
+                        DPdated.setValue(null);
+                        DPdatef.setValue(null);
+                        TFnomt.requestFocus();
+                }
+
+        }
+
+        @FXML
+        void refrechTournoisAction(ActionEvent event) {
+                loadData();
+                TFrecherchet.clear();
+
+        }
+
+        private void searchTournaments() {
+                List<Tournois> tournoisList = serviceTournois.getAll();
+                System.out.println("Tournois List: " + tournoisList);
+                String searchText = TFrecherchet.getText().trim().toLowerCase(); // Récupérez le texte de recherche
+                Vbox.getChildren().clear(); // Effacez les résultats précédents
+
+                // Parcourez la liste des tournois et recherchez ceux correspondant au critère de recherche
+                for (Tournois tournois : tournoisList) {
+                        if (tournois.getNom_tournois().toLowerCase().contains(searchText) || tournois.getStade().toLowerCase().contains(searchText)) {
+                                // Si le nom du tournoi correspond au critère de recherche, affichez-le
+                                Label nomtLabel = new Label("Nom: " + tournois.getNom_tournois());
+                                Label stadeLabel = new Label("Nom Stade: " + tournois.getStade());
+                                Label nombremLabel = new Label("Nombre Match: " + tournois.getNombre_match());
+                                Label datedLabel = new Label("Date Debut: " + tournois.getDate_debut());
+                                Label datefLabel = new Label("Date Fin: " + tournois.getDate_fin());
+
+                                GridPane gridPane = new GridPane();
+                                gridPane.add(nomtLabel, 0, 1);
+                                gridPane.add(stadeLabel, 0, 2);
+                                gridPane.add(nombremLabel, 0, 3);
+                                gridPane.add(datedLabel, 0, 4);
+                                gridPane.add(datefLabel, 0, 5);
+
+                                TitledPane titledPane = new TitledPane("Tournois " + tournois.getId_tournois(), gridPane);
+
+                                Vbox.getChildren().add(titledPane);
+                        }
+                }
         }
 
 
@@ -326,14 +581,14 @@ public class AfficherTournois implements Initializable {
                         System.out.println("Adding tournois to TitledPane: " + tournois);
                         // Create layout for each reclamation
                         Label nomtLabel = new Label("Nom: " + tournois.getNom_tournois());
-                        Label addressLabel = new Label("Address: " + tournois.getAddress_tournois());
+                        Label stadeLabel = new Label("Nom Stade: " + tournois.getStade());
                         Label nombremLabel = new Label("Nombre Match: " + tournois.getNombre_match());
                         Label datedLabel = new Label("Date Debut: " + tournois.getDate_debut());
                         Label datefLabel = new Label("Date Fin: " + tournois.getDate_fin());
 
                         GridPane gridPane = new GridPane();
                         gridPane.add(nomtLabel, 0, 1);
-                        gridPane.add(addressLabel, 0, 2);
+                        gridPane.add(stadeLabel, 0, 2);
                         gridPane.add(nombremLabel, 0, 3);
                         gridPane.add(datedLabel, 0, 4);
                         gridPane.add(datefLabel, 0, 5);
@@ -346,7 +601,7 @@ public class AfficherTournois implements Initializable {
                                 public void handle(MouseEvent mouseEvent) {
                                         selectedIdt = "" + tournois.getId_tournois();
                                         selectedNomt = tournois.getNom_tournois();
-                                        selectedAddress = tournois.getAddress_tournois();
+                                        selectedStade = tournois.getStade();
                                         selectedNombrem = String.valueOf(tournois.getNombre_match());
                                         selectedDated = String.valueOf(tournois.getDate_debut());
                                         selectedDatef = String.valueOf(tournois.getDate_fin());
@@ -354,13 +609,13 @@ public class AfficherTournois implements Initializable {
                                         // Perform any action with the selected values
                                         System.out.println("Selected ID: " + selectedIdt);
                                         System.out.println("Selected Nom: " + selectedNomt);
-                                        System.out.println("Selected Address: " + selectedAddress);
+                                        System.out.println("Selected Stade: " + selectedStade);
                                         System.out.println("Selected Nombre Matchs: " + selectedNombrem);
                                         System.out.println("Selected Date Debut: " + selectedDated);
                                         System.out.println("Selected Date Fin: " + selectedDatef);
 
-                                        TFnom.setText(selectedNomt);
-                                        TFaddress.setText(selectedAddress);
+                                        TFnomt.setText(selectedNomt);
+                                        TFstade.setText(selectedStade);
                                         TFnbrmatch.setText(selectedNombrem);
                                         LocalDate dateDebut = Date.valueOf(selectedDated).toLocalDate();
                                         DPdated.setValue(dateDebut);

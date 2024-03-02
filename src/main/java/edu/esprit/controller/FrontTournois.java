@@ -32,6 +32,12 @@ public class FrontTournois implements Initializable {
     private Label LLafichet;
 
     @FXML
+    private TextField TFrecherchet;
+
+    @FXML
+    private Button Brecherchet;
+
+    @FXML
     private VBox Vbox;
     ServiceTournois serviceTournois = new ServiceTournois();
 
@@ -75,7 +81,7 @@ public class FrontTournois implements Initializable {
             System.out.println("Adding tournois to TitledPane: " + tournois);
             // Create layout for each reclamation
             Label nomtLabel = new Label("Nom: " + tournois.getNom_tournois());
-            Label addressLabel = new Label("Address: " + tournois.getAddress_tournois());
+            Label addressLabel = new Label("Address: " + tournois.getStade());
             Label nombremLabel = new Label("Nombre Match: " + tournois.getNombre_match());
             Label datedLabel = new Label("Date Debut: " + tournois.getDate_debut());
             Label datefLabel = new Label("Date Fin: " + tournois.getDate_fin());
@@ -97,9 +103,8 @@ public class FrontTournois implements Initializable {
                         // Assurez-vous que LLafichet n'est pas null pour éviter les erreurs
                         if (LLafichet != null) {
                             // Récupérez les valeurs sélectionnées
-                            selectedIdt = "" + tournois.getId_tournois();
                             selectedNomt = tournois.getNom_tournois();
-                            selectedAddress = tournois.getAddress_tournois();
+                            selectedAddress = tournois.getStade();
                             selectedNombrem = String.valueOf(tournois.getNombre_match());
                             selectedDated = String.valueOf(tournois.getDate_debut());
                             selectedDatef = String.valueOf(tournois.getDate_fin());
@@ -126,12 +131,45 @@ public class FrontTournois implements Initializable {
         }
         loadData();
 
+        Brecherchet.setOnAction(event -> searchTournaments());
+
     }
 
     @FXML
     void refrechTournoisAction(ActionEvent event) {
         loadData();
 
+    }
+
+    private void searchTournaments() {
+        List<Tournois> tournoisList = serviceTournois.getAll();
+        System.out.println("Tournois List: " + tournoisList);
+        String searchText = TFrecherchet.getText().trim().toLowerCase(); // Récupérez le texte de recherche
+        Vbox.getChildren().clear(); // Effacez les résultats précédents
+
+        // Parcourez la liste des tournois et recherchez ceux correspondant au critère de recherche
+        for (Tournois tournois : tournoisList) {
+            if (tournois.getNom_tournois().toLowerCase().contains(searchText) || tournois.getStade().toLowerCase().contains(searchText)) {
+                // Si le nom du tournoi correspond au critère de recherche, affichez-le
+                Label nomtLabel = new Label("Nom: " + tournois.getNom_tournois());
+                Label addressLabel = new Label("Address: " + tournois.getStade());
+                Label nombremLabel = new Label("Nombre Match: " + tournois.getNombre_match());
+                Label datedLabel = new Label("Date Debut: " + tournois.getDate_debut());
+                Label datefLabel = new Label("Date Fin: " + tournois.getDate_fin());
+
+                GridPane gridPane = new GridPane();
+                gridPane.add(nomtLabel, 0, 1);
+                gridPane.add(addressLabel, 0, 2);
+                gridPane.add(nombremLabel, 0, 3);
+                gridPane.add(datedLabel, 0, 4);
+                gridPane.add(datefLabel, 0, 5);
+
+                TitledPane titledPane = new TitledPane("Tournois " + tournois.getId_tournois(), gridPane);
+
+
+                Vbox.getChildren().add(titledPane);
+            }
+        }
     }
 
     private void loadData() {
@@ -143,7 +181,7 @@ public class FrontTournois implements Initializable {
             System.out.println("Adding tournois to TitledPane: " + tournois);
             // Create layout for each reclamation
             Label nomtLabel = new Label("Nom: " + tournois.getNom_tournois());
-            Label addressLabel = new Label("Address: " + tournois.getAddress_tournois());
+            Label addressLabel = new Label("Address: " + tournois.getStade());
             Label nombremLabel = new Label("Nombre Match: " + tournois.getNombre_match());
             Label datedLabel = new Label("Date Debut: " + tournois.getDate_debut());
             Label datefLabel = new Label("Date Fin: " + tournois.getDate_fin());
@@ -165,16 +203,14 @@ public class FrontTournois implements Initializable {
                         // Assurez-vous que LLafichet n'est pas null pour éviter les erreurs
                         if (LLafichet != null) {
                             // Récupérez les valeurs sélectionnées
-                            String selectedIdt = "" + tournois.getId_tournois();
                             String selectedNomt = tournois.getNom_tournois();
-                            String selectedAddress = tournois.getAddress_tournois();
+                            String selectedAddress = tournois.getStade();
                             String selectedNombrem = String.valueOf(tournois.getNombre_match());
                             String selectedDated = String.valueOf(tournois.getDate_debut());
                             String selectedDatef = String.valueOf(tournois.getDate_fin());
 
                             // Mettre à jour le Label avec les valeurs sélectionnées
                             LLafichet.setText(
-                                    "Selected ID: " + selectedIdt + "\n" +
                                             "Selected Nom: " + selectedNomt + "\n" +
                                             "Selected Address: " + selectedAddress + "\n" +
                                             "Selected Nombre Matchs: " + selectedNombrem + "\n" +

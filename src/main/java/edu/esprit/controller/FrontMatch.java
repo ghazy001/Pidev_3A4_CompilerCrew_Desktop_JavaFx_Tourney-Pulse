@@ -9,13 +9,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TitledPane;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -30,6 +27,12 @@ public class FrontMatch implements Initializable {
 
     @FXML
     private Label LLafichem;
+
+    @FXML
+    private TextField TFrecherchem;
+
+    @FXML
+    private Button Brecherchem;
 
     @FXML
     private VBox Vboxx;
@@ -105,7 +108,6 @@ public class FrontMatch implements Initializable {
                         // Assurez-vous que LLafichet n'est pas null pour éviter les erreurs
                         if (LLafichem != null) {
                             // Récupérez les valeurs sélectionnées
-                            selectedIdm = "" + matchs.getId_match();
                             selectedNomm = matchs.getNom_match();
                             selectedDate = String.valueOf(matchs.getDate_match());
                             selectedDuree = matchs.getDuree_match();
@@ -133,6 +135,8 @@ public class FrontMatch implements Initializable {
         }
         loadData();
 
+        Brecherchem.setOnAction(event -> searchTournaments());
+
     }
 
 
@@ -140,6 +144,38 @@ public class FrontMatch implements Initializable {
     void refrechMatchAction(ActionEvent event) {
         loadData();
 
+    }
+
+    private void searchTournaments() {
+        List<Matchs> matchsList = serviceMatch.getAll();
+        System.out.println("Match List: " + matchsList);
+        String searchText = TFrecherchem.getText().trim().toLowerCase(); // Récupérez le texte de recherche
+        Vboxx.getChildren().clear(); // Effacez les résultats précédents
+
+        // Parcourez la liste des tournois et recherchez ceux correspondant au critère de recherche
+        for (Matchs matchs : matchsList) {
+            if (matchs.getNom_match().toLowerCase().contains(searchText)) {
+                // Si le nom du tournoi correspond au critère de recherche, affichez-le
+                Label nommLabel = new Label("Nom: " + matchs.getNom_match());
+                Label dateLabel = new Label("Date: " + matchs.getDate_match());
+                Label dureeLabel = new Label("Duree: " + matchs.getDuree_match());
+                Label idtLabel = new Label("Nom Tournois: " + matchs.getTournois().getNom_tournois());
+                Label ideLabel1 = new Label("Nom Equipe 1: " + (matchs.getEquipe().getNom_equipe() ));
+                Label ideLabel2 = new Label("Nom Equipe 2: " + (matchs.getEquipe1().getNom_equipe()));
+
+                GridPane gridPane = new GridPane();
+                gridPane.add(nommLabel, 0, 1);
+                gridPane.add(dateLabel, 0, 2);
+                gridPane.add(dureeLabel, 0, 3);
+                gridPane.add(idtLabel, 0, 4);
+                gridPane.add(ideLabel1, 0, 5);
+                gridPane.add(ideLabel2, 0, 6);
+
+                TitledPane titledPane = new TitledPane("Match " + matchs.getId_match(), gridPane);
+
+                Vboxx.getChildren().add(titledPane);
+            }
+        }
     }
 
     private void loadData() {
@@ -176,7 +212,6 @@ public class FrontMatch implements Initializable {
                         // Assurez-vous que LLafichet n'est pas null pour éviter les erreurs
                         if (LLafichem != null) {
                             // Récupérez les valeurs sélectionnées
-                            selectedIdm = "" + matchs.getId_match();
                             selectedNomm = matchs.getNom_match();
                             selectedDate = String.valueOf(matchs.getDate_match());
                             selectedDuree = matchs.getDuree_match();
@@ -203,4 +238,7 @@ public class FrontMatch implements Initializable {
             Vboxx.getChildren().add(titledPane);
         }
     }
+
+
+
 }
