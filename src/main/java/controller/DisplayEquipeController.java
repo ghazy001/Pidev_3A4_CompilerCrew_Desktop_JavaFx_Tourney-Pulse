@@ -18,9 +18,11 @@ import service.ServiceEquipe;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 
 /*
@@ -35,6 +37,11 @@ public class DisplayEquipeController implements Initializable {
 
     @FXML
     ListView<Equipe> Mylist;
+
+    @FXML
+    TextField searchbar;
+
+
 
 
     public ObservableList<Equipe> gameList;
@@ -104,10 +111,10 @@ public class DisplayEquipeController implements Initializable {
             if (newValue != null) {
                 // Handle the selected item
 
-                 selectedNom = newValue.getNom();
-                 selectedDate =newValue.getDateCreation();
-                 selectedImage = newValue.getImage();
-                 selectedId = newValue.getId();
+                selectedNom = newValue.getNom();
+                selectedDate = newValue.getDateCreation();
+                selectedImage = newValue.getImage();
+                selectedId = newValue.getId();
 
                 // Now you have the selected data, you can use it as needed
                 System.out.println("Selected Nom: " + selectedNom);
@@ -116,7 +123,6 @@ public class DisplayEquipeController implements Initializable {
                 System.out.println("Selected Id: " + selectedId);
 
                 //--------------change page----------
-
 
 
                 try {
@@ -132,10 +138,33 @@ public class DisplayEquipeController implements Initializable {
                 }
 
 
+            }
+        });
 
+        //--------------------------- search ------------------------------
+        searchbar.setOnKeyReleased(event -> {
+            try {
+                String searchTerm = searchbar.getText().trim();
+                List<Equipe> searchResults = serviceEquipe.searchEquipes(searchTerm);
+                gameList.setAll(searchResults);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                // Handle the exception as needed
             }
         });
 
 
+
+
+            //------------------------ ComboBox functionality ------------------------
+
+        }
+
+
+
+
     }
-}
+
+
+
+

@@ -129,24 +129,27 @@ public class ServiceEquipe implements IServiceEquipe<Equipe> {
         return equipeList;
     }
 
-
-    public List<Equipe> search(String query) throws SQLException {
-        List<Equipe> result = new ArrayList<>();
-        String sql = "SELECT * FROM Equipe WHERE nom LIKE ?";
-        PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setString(1, "%" + query + "%");
-        ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            Equipe equipe = new Equipe();
-            equipe.setId(rs.getInt("id"));  // Assuming "id" is the column name in your table
-            equipe.setNom(rs.getString("nom"));
-            equipe.setImage(rs.getString("image"));
-            equipe.setDateCreation(rs.getDate("dateCreation"));  // Assuming dateCreation is a java.sql.Date
-            // Add any other fields you have in the Equipe class
-            result.add(equipe);
+    public List<Equipe> searchEquipes(String searchTerm) throws SQLException {
+        String query = "SELECT * FROM equipe WHERE nom LIKE ? OR dateCreation LIKE ? ";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, "%" + searchTerm + "%");
+            statement.setString(2, "%" + searchTerm + "%");
+            ResultSet resultSet = statement.executeQuery();
+            return createEquipeListFromResultSet(resultSet);
         }
-        return result;
     }
+
+    private List<Equipe> createEquipeListFromResultSet(ResultSet resultSet) throws SQLException {
+        List<Equipe> equipes = new ArrayList<>();
+        while (resultSet.next()) {
+            // Create Equipe objects from the ResultSet rows
+            Equipe equipe = createEquipeFromResultSet(resultSet);
+            equipes.add(equipe);
+        }
+        return equipes;
+    }
+
+
 
 
 // ----------------------------------- Equipe dont existe ------------------

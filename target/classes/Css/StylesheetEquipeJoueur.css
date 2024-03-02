@@ -250,7 +250,7 @@
 
 
 #pic3 {
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.9), 80, 0, 0, 1);  
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.9), 80, 0, 0, 1);
     -fx-scale-y: 1.0;
     -fx-transition: transform 0.3s, scale 0.3s;
     -fx-background-color: white;

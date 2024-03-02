@@ -41,7 +41,7 @@ public class StaticAvisController implements Initializable {
     Label NbrUser,NbrUser2,NbrUser1;
 
 
-    // --------------- nbr total user ------------------
+    // ---------------------------- nbr total user ---------------------------------
     private int fetchData() {
         int numberOfUsers = 0;
 
@@ -59,7 +59,7 @@ public class StaticAvisController implements Initializable {
         return numberOfUsers;
     }
 
-    // -------------------- nbr total joueurs -----------------------------------
+    // ------------------------------ nbr total joueurs -----------------------------------
 
     private int fetchDataJoueur() {
         int numberOfUsers = 0;
@@ -78,7 +78,7 @@ public class StaticAvisController implements Initializable {
         return numberOfUsers;
     }
 
-    // -------------------nbr tota equipe------------
+    // ------------------------- nbr tota equipe -----------------------
     private int fetchDataEquipe() {
         int numberOfUsers = 0;
 
@@ -99,7 +99,33 @@ public class StaticAvisController implements Initializable {
 
 
 
-    //---------------------------------------
+    // Updated fetchDataForPieChart method for equipe statistics in PieChart
+    private ObservableList<PieChart.Data> fetchDataForPieChart() {
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+
+        String sql = "SELECT equipe.id, COUNT(*), equipe.nom " +
+                "FROM user " +
+                "JOIN equipe ON user.id_equipe = equipe.id " +
+                "GROUP BY equipe.id, equipe.nom";
+        try (PreparedStatement preparedStatement = MyDB.getInsatnce().getConnection().prepareStatement(sql);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                int equipeId = resultSet.getInt("id");
+                String equipeName = resultSet.getString("nom");
+                long userCount = resultSet.getLong(2); // Use index 2 for the count column
+
+                PieChart.Data data = new PieChart.Data("Nom du equipe : "+equipeName, userCount);
+                pieChartData.add(data);
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        return pieChartData;
+    }
+
+    // Updated fetchDataForBarChart method for avis statistics in StackedBarChart
     private ObservableList<StackedBarChart.Series<String, Number>> fetchDataForBarChart() {
         ObservableList<StackedBarChart.Series<String, Number>> barChartData = FXCollections.observableArrayList();
 
@@ -111,12 +137,12 @@ public class StaticAvisController implements Initializable {
              ResultSet resultSet = preparedStatement.executeQuery()) {
 
             while (resultSet.next()) {
-                int idjoueur = resultSet.getInt("idjoueur");
+
                 String playerName = resultSet.getString("name");
                 long count = resultSet.getLong(2); // Use index 2 for the count column
 
                 StackedBarChart.Series<String, Number> series = new StackedBarChart.Series<>();
-                series.setName(playerName + " (idjoueur " + idjoueur + ")");
+                series.setName(playerName);
                 series.getData().add(new StackedBarChart.Data<>(playerName, count));
 
                 barChartData.add(series);
@@ -128,31 +154,6 @@ public class StaticAvisController implements Initializable {
         return barChartData;
     }
 
-//pie chart function
-    private ObservableList<PieChart.Data> fetchDataFromDatabase() {
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
-
-        String sql = "SELECT avis.idjoueur, COUNT(*), user.name " +
-                "FROM avisjoueur avis " +
-                "JOIN user ON avis.idjoueur = user.id " +
-                "GROUP BY avis.idjoueur, user.name";
-        try (PreparedStatement preparedStatement = MyDB.getInsatnce().getConnection().prepareStatement(sql);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
-
-            while (resultSet.next()) {
-                int idjoueur = resultSet.getInt("idjoueur");
-                String playerName = resultSet.getString("name");
-                long count = resultSet.getLong(2); // Use index 2 for the count column
-
-                PieChart.Data data = new PieChart.Data(playerName + " (idjoueur " + idjoueur + ")", count);
-                pieChartData.add(data);
-            }
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
-        }
-
-        return pieChartData;
-    }
 
 
 
@@ -161,7 +162,7 @@ public class StaticAvisController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
-        ObservableList<PieChart.Data> pieChartData = fetchDataFromDatabase();
+        ObservableList<PieChart.Data> pieChartData = fetchDataForPieChart();
 
         PieChart pieChart = new PieChart(pieChartData);
         //pieChart.setTitle("Statics");
@@ -189,8 +190,6 @@ public class StaticAvisController implements Initializable {
         NbrUser.setText(String.valueOf(fetchData()));
         NbrUser2.setText(String.valueOf(fetchDataJoueur()));
         NbrUser1.setText(String.valueOf(fetchDataEquipe()));
-
-
 
 
 
