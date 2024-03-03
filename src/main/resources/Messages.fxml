@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="656.0" prefWidth="969.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.Controllers.MessagesController">
+   <children>
+      <AnchorPane prefHeight="656.0" prefWidth="174.0" style="-fx-background-color: #8C9C7C;">
+         <children>
+            <Button fx:id="navigate" layoutX="16.0" layoutY="199.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: #9ACD32;" text="Ajouter reclamation" />
+            <Button fx:id="back" layoutX="17.0" layoutY="315.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: #9ACD32;" text="back" />
+            <ImageView fitHeight="120.0" fitWidth="139.0" layoutX="27.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@image/421909257_266130739694870_1007709414835084119_n-removebg-preview.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <ScrollPane fx:id="scrollId" layoutX="175.0" layoutY="94.0" prefHeight="400.0" prefWidth="678.0">
+        <content>
+          <AnchorPane fx:id="listMessages" minHeight="0.0" minWidth="0.0" prefHeight="447.0" prefWidth="795.0" />
+        </content>
+      </ScrollPane>
+      <Text fx:id="objetRec" layoutX="188.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Objet reclamation" wrappingWidth="365.46665649414064">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Text>
+      <Text fx:id="recText" layoutX="198.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="reclamation" wrappingWidth="740.9333618164062">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Text>
+      <TextField fx:id="messageContent" layoutX="176.0" layoutY="533.0" prefHeight="47.0" prefWidth="554.0" style="-fx-background-radius: 1000; -fx-border-radius: 1000; -fx-border-color: black;" />
+      <Button fx:id="btnAddMessage" layoutX="754.0" layoutY="537.0" mnemonicParsing="false" onAction="#handleAddMessage" prefHeight="33.0" prefWidth="87.0" style="-fx-background-color: #9ACD32;" text="Send" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

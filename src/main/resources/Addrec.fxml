@@ -15,7 +15,7 @@
         <AnchorPane layoutX="158.0" layoutY="78.0" prefHeight="668.0" prefWidth="818.0">
             <children>
                 <TextField fx:id="TFObjet" layoutX="335.0" layoutY="204.0" prefHeight="26.0" prefWidth="190.0" promptText="Objet" />
-                <Button layoutX="351.0" layoutY="397.0" mnemonicParsing="false" onAction="#ajouterReclamationAction" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: green;" text="Ajouter" textFill="WHITE">
+                <Button layoutX="351.0" layoutY="397.0" mnemonicParsing="false" onAction="#ajouterReclamationAction" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: #9ACD32;" text="Ajouter" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font></Button>
@@ -41,15 +41,15 @@
             <Font size="42.0" />
          </font>
       </Text>
-      <AnchorPane prefHeight="656.0" prefWidth="174.0" style="-fx-background-color: green;">
+      <AnchorPane prefHeight="656.0" prefWidth="174.0" style="-fx-background-color: #8C9C7C;">
          <children>
-            <Button fx:id="message" layoutX="17.0" layoutY="315.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: #9ACD32;" text="Messages" />
+            <Button fx:id="message" layoutX="20.0" layoutY="315.0" mnemonicParsing="false" onAction="#message" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: #9ACD32;" text="Messages" />
             <ImageView fitHeight="120.0" fitWidth="139.0" layoutX="27.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image/421909257_266130739694870_1007709414835084119_n-removebg-preview.png" />
                </image>
             </ImageView>
-                <Button fx:id="navigate" layoutX="20.0" layoutY="238.0" mnemonicParsing="false" onAction="#navigatetoAfficherReclamationAction" prefHeight="26.0" prefWidth="139.0" text="Navigate" />
+                <Button fx:id="navigate" layoutX="20.0" layoutY="238.0" mnemonicParsing="false" onAction="#navigatetoAfficherReclamationAction" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: #9ACD32;" text="Navigate" />
             <Button layoutX="59.0" layoutY="548.0" mnemonicParsing="false" style="-fx-background-color: #9ACD32;" text="Log out" />
          </children>
       </AnchorPane>

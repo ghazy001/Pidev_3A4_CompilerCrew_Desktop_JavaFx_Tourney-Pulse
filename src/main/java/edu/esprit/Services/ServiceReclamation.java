@@ -1,6 +1,7 @@
 package edu.esprit.Services;
 
 import edu.esprit.Utils.DataSource;
+import edu.esprit.entities.Messages;
 import edu.esprit.entities.Reclamation;
 
 import java.sql.*;
@@ -123,6 +124,33 @@ public class ServiceReclamation implements IService<Reclamation> {
             System.out.println(e.getMessage());
         }
     }
+    public Reclamation getReclamationById(int id_rec) {
+        Reclamation reclamation = null;
+        String sql = "SELECT r.*, u.name FROM reclamation r " +
+                "JOIN user u ON r.id = u.id WHERE r.id_rec = ?";
+        try {
+            PreparedStatement pst = cnx.prepareStatement(sql);
+            pst.setInt(1, id_rec);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                reclamation = new Reclamation();
+                reclamation.setId_rec(rs.getInt("id_rec"));
+                reclamation.setEmail(rs.getString("email"));
+                reclamation.setObject(rs.getString("object"));
+                reclamation.setReclamation(rs.getString("reclamation"));
+                reclamation.setDate_rec(rs.getDate("date_rec")); // Assuming date_rec is stored as a Date
+                reclamation.setId(rs.getInt("id"));
+                reclamation.setName(rs.getString("name"));
+                System.out.println("Reclamation fetched successfully.");
+            } else {
+                System.out.println("No Reclamation found with ID: " + id_rec);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching Reclamation by ID: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return reclamation;
+    }
 
 /*
     @Override
@@ -161,7 +189,7 @@ public class ServiceReclamation implements IService<Reclamation> {
 
     }
 
-    public List<Reclamation> getAll() {
+ /*   public List<Reclamation> getAll() {
         List<Reclamation> Rec = new ArrayList<>();
 
         String req = "Select * from reclamation";
@@ -169,6 +197,7 @@ public class ServiceReclamation implements IService<Reclamation> {
             Statement st = cnx.createStatement();
             ResultSet res = st.executeQuery(req);
             while (res.next()){
+                ServiceMessages ms=new ServiceMessages();
                 int id = res.getInt("id_rec");
                 Date date = res.getDate("date_rec");
                 String object = res.getString("object");
@@ -184,6 +213,31 @@ public class ServiceReclamation implements IService<Reclamation> {
         }
 
         return Rec;
-    }
+    }*/
+ public List<Reclamation> getAll() {
+     List<Reclamation> Rec = new ArrayList<>();
+
+     String req = "Select * from reclamation";
+     try {
+         Statement st = cnx.createStatement();
+         ResultSet res = st.executeQuery(req);
+         while (res.next()){
+             ServiceMessages ms=new ServiceMessages();
+             Reclamation reclamation=new Reclamation();
+             reclamation.setId_rec(res.getInt("id_rec"));
+             reclamation.setDate_rec(res.getDate("date_rec"));
+             reclamation.setObject(res.getString("object"));
+             reclamation.setEmail( res.getString("email"));
+             reclamation.setReclamation(res.getString("reclamation"));
+             reclamation.setId(res.getInt("id"));
+             reclamation.setReclamationsMs(ms.getMessagesByReclamationId(reclamation.getId_rec()));
+             Rec.add(reclamation);
+         }
+     } catch (SQLException e) {
+         System.out.println(e.getMessage());
+     }
+
+     return Rec;
+ }
 
 }

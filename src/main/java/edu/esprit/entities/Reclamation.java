@@ -1,6 +1,7 @@
 package edu.esprit.entities;
 import java.sql.Date;
 
+import java.util.List;
 import java.util.Objects;
 
 
@@ -10,13 +11,24 @@ public class Reclamation {
 
     private int id;
 
-    private String email, object, rec;
+    private String email, object, reclamation,name;
     Date date_rec;
+    private List<Messages> reclamationsMs;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
 
     public Reclamation(String email, String object, String rec, Date date_rec, int id) {
         this.email = email;
         this.object = object;
-        this.rec = rec;
+        this.reclamation = rec;
         this.date_rec = Date.valueOf(String.valueOf(date_rec));
         this.id=id;
     }
@@ -42,8 +54,16 @@ public class Reclamation {
         this.id = id;
         this.email = email;
         this.object = object;
-        this.rec = rec;
+        this.reclamation = rec;
         this.date_rec = date_rec;
+    }
+
+    public List<Messages> getReclamationsMs() {
+        return reclamationsMs;
+    }
+
+    public void setReclamationsMs(List<Messages> reclamationsMs) {
+        this.reclamationsMs = reclamationsMs;
     }
 
     public int getId_rec() {
@@ -79,44 +99,45 @@ public class Reclamation {
     }
 
     public String getRec() {
-        return rec;
+        return reclamation;
     }
 
     public void setReclamation(String reclamation) {
-        this.rec = rec;
+        this.reclamation = reclamation;
     }
 
     public Date getDate_rec() {
         return date_rec;
     }
 
-    public void setDate_rec(String date_rec) {
-        this.date_rec = Date.valueOf(date_rec);
+    public void setDate_rec(Date date_rec) {
+        this.date_rec = date_rec;
     }
+
 
     @Override
     public String toString() {
-        return "reclamation{" +
+        return "Reclamation{" +
                 "id_rec=" + id_rec +
                 ", id=" + id +
                 ", email='" + email + '\'' +
                 ", object='" + object + '\'' +
-                ", rec='" + rec + '\'' +
+                ", rec='" + reclamation + '\'' +
                 ", date_rec=" + date_rec +
+                ", reclamationsMs=" + reclamationsMs.toString() +
                 '}';
     }
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Reclamation that = (Reclamation) o;
-        return id_rec == that.id_rec && id == that.id && Objects.equals(email, that.email) && Objects.equals(object, that.object) && Objects.equals(rec, that.rec) && Objects.equals(date_rec, that.date_rec);
+        return id_rec == that.id_rec && id == that.id && Objects.equals(email, that.email) && Objects.equals(object, that.object) && Objects.equals(reclamation, that.reclamation) && Objects.equals(date_rec, that.date_rec);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_rec, id, email, object, rec, date_rec);
+        return Objects.hash(id_rec, id, email, object, reclamation, date_rec);
     }
 }

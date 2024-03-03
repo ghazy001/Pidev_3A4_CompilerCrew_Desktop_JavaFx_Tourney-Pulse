@@ -1,9 +1,11 @@
 package edu.esprit.example;
 
 import edu.esprit.Services.ServiceMessagerie;
+import edu.esprit.Services.ServiceMessages;
 import edu.esprit.Services.ServiceReclamation;
 import edu.esprit.Utils.DataSource;
 import edu.esprit.entities.Messagerie;
+import edu.esprit.entities.Messages;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -20,6 +22,16 @@ public class Main {
 
 
         ServiceReclamation service = new ServiceReclamation();
+        ServiceMessages ms=new ServiceMessages();
+
+        //ms.modifierMessage(new Messages(1,"hello",new Date(System.currentTimeMillis())));
+        //ms.supprimer(1);
+        /*List<Messages> l= ms.getMessagesByReclamationId(247);
+        for(Messages messages:l){
+            System.out.println(messages);
+        }
+        System.out.println(ms.getMessagesByReclamationId(247));*/
+        System.out.println(service.getAll());
 /*
         Reclamation r = new Reclamation("iheb", "probleme", "jj", new Date(System.currentTimeMillis()) ,100);
         Reclamation r1 = new Reclamation("saami", "probleme2", "jjll", new Date(System.currentTimeMillis()), 101);

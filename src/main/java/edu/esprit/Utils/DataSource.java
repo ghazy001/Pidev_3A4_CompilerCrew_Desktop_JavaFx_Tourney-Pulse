@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DataSource {
-    private final String URL = "jdbc:mysql://localhost:3306/esprit";
+    private final String URL = "jdbc:mysql://localhost:3306/esprit2";
     private final String USER = "root";
     private final String PWD = "";
 

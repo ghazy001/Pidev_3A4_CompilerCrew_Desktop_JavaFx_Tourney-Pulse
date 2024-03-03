@@ -51,7 +51,7 @@ public class Addrec implements Initializable {
     void ajouterReclamationAction(ActionEvent event) {
         try {
             Date today = new Date(System.currentTimeMillis());
-            int id = 123;
+            int id = 4;
 
             // Vérification si tous les champs sont remplis
             if (TFObjet.getText().isEmpty() || TFEmail.getText().isEmpty() || TFReclamation.getText().isEmpty()) {
@@ -74,7 +74,7 @@ public class Addrec implements Initializable {
                 return; // Sortir de la méthode si le format est incorrect
             }
 
-            this.sp.ajouter(new Reclamation(this.TFObjet.getText(), email, this.TFReclamation.getText(), today, id));
+            this.sp.ajouter(new Reclamation(email,this.TFObjet.getText(), this.TFReclamation.getText(), today, id));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setContentText("Ajoutee avec succes");
@@ -84,6 +84,23 @@ public class Addrec implements Initializable {
             alert.setTitle("SQL Exception");
             alert.setContentText(var5.getMessage());
             alert.showAndWait();
+        }
+
+    }
+    public void message(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FrontMess.fxml"));
+            Parent root = loader.load();
+            //MessagesController messagesController = loader.getController();
+            //messagesController.setUser_id(4);
+            TFEmail.getScene().setRoot(root);
+
+
+        } catch (IOException var4) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Sorry");
+            alert.setTitle("Error");
+            alert.show();
         }
 
     }

@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="656.0" prefWidth="969.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.Controllers.DisplayReclamation">
    <children>
-      <TextField fx:id="id" disable="true" layoutX="771.0" layoutY="137.0" prefHeight="26.0" prefWidth="174.0" />
+      <TextField fx:id="id" disable="true" layoutX="825.0" layoutY="464.0" prefHeight="0.0" prefWidth="10.0" />
       <TextField fx:id="userid" layoutX="771.0" layoutY="186.0" prefHeight="26.0" prefWidth="174.0" />
       <TextField fx:id="email" layoutX="771.0" layoutY="238.0" prefHeight="26.0" prefWidth="174.0" />
       <TextField fx:id="object" layoutX="771.0" layoutY="281.0" prefHeight="26.0" prefWidth="174.0" />
@@ -21,10 +21,10 @@
       <Button fx:id="update" layoutX="862.0" layoutY="464.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="89.0" style="-fx-background-color: green;" text="Update" textFill="WHITE" />
       <VBox fx:id="Vbox" layoutX="193.0" layoutY="68.0" minHeight="500.0" minWidth="456.0" prefHeight="500.0" prefWidth="456.0" />
       <TextField fx:id="date" disable="true" layoutX="771.0" layoutY="373.0" prefHeight="26.0" prefWidth="173.0" />
-      <AnchorPane prefHeight="656.0" prefWidth="174.0" style="-fx-background-color: green;">
+      <AnchorPane prefHeight="656.0" prefWidth="174.0" style="-fx-background-color: #8C9C7C;">
          <children>
             <Button fx:id="navigate" layoutX="16.0" layoutY="199.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: #9ACD32;" text="Ajouter reclamation" />
-            <Button fx:id="message" layoutX="17.0" layoutY="315.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: #9ACD32;" text="Messages" />
+            <Button layoutX="17.0" layoutY="315.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: #9ACD32;" text="Messages" />
             <ImageView fitHeight="120.0" fitWidth="139.0" layoutX="27.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image/421909257_266130739694870_1007709414835084119_n-removebg-preview.png" />
@@ -53,6 +53,12 @@
          </font>
       </Label>
       <Label layoutX="673.0" layoutY="186.0" prefHeight="26.0" prefWidth="62.0" text="User">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="messageBtn" layoutX="817.0" layoutY="504.0" mnemonicParsing="false" onAction="#handleUpdate" prefHeight="26.0" prefWidth="89.0" style="-fx-background-color: #9ACD32;" text="repondre" textFill="WHITE" />
+      <Label layoutX="675.0" layoutY="373.0" prefHeight="26.0" prefWidth="119.0" text="Date">
          <font>
             <Font size="14.0" />
          </font>
