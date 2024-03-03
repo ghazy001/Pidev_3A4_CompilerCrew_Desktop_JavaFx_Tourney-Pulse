@@ -98,7 +98,7 @@
                         </TextField>
                      </children>
                   </HBox>
-                  <TextField fx:id="TFemail" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="306.0" promptText="Email" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
+                  <TextField fx:id="TFemail" prefHeight="25.0" prefWidth="306.0" promptText="Email" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
                      <VBox.margin>
                         <Insets left="30.0" right="30.0" top="20.0" />
                      </VBox.margin>
@@ -106,7 +106,7 @@
                         <Insets />
                      </opaqueInsets>
                   </TextField>
-                  <TextField fx:id="TFusername" alignment="CENTER_RIGHT" layoutX="40.0" layoutY="92.0" prefHeight="25.0" prefWidth="306.0" promptText="Username" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
+                  <TextField fx:id="TFusername" layoutX="40.0" layoutY="92.0" prefHeight="25.0" prefWidth="306.0" promptText="Username" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -114,7 +114,7 @@
                         <Insets left="30.0" right="30.0" top="30.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="Tfnumber" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="306.0" promptText="Phone Number" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
+                  <TextField fx:id="Tfnumber" prefHeight="25.0" prefWidth="306.0" promptText="Phone Number" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -122,12 +122,12 @@
                         <Insets left="30.0" right="30.0" top="30.0" />
                      </VBox.margin>
                   </TextField>
-                  <PasswordField fx:id="TFpassword" alignment="CENTER_RIGHT" promptText="Password" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
+                  <PasswordField fx:id="TFpassword" promptText="Password" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
                      <VBox.margin>
                         <Insets left="30.0" right="30.0" top="30.0" />
                      </VBox.margin>
                   </PasswordField>
-                  <PasswordField fx:id="TFconfirmpass" alignment="CENTER_RIGHT" layoutX="40.0" layoutY="306.0" promptText="Confirm Password" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
+                  <PasswordField fx:id="TFconfirmpass" layoutX="40.0" layoutY="306.0" promptText="Confirm Password" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
                      <VBox.margin>
                         <Insets left="30.0" right="30.0" top="30.0" />
                      </VBox.margin>

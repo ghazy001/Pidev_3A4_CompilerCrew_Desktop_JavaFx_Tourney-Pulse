@@ -57,12 +57,12 @@ public class UiadminController implements Initializable {
         users = FXCollections.observableArrayList(userList);
 
         listView.setItems(users);
+        listView.refresh();
 
         listView.setCellFactory(new Callback<>() {
             @Override
             public ListCell<User> call(ListView<User> param) {
                 return new ListCell<>() {
-                    @Override
                     protected void updateItem(User item, boolean empty) {
                         super.updateItem(item, empty);
                         if (empty || item == null) {
@@ -71,6 +71,9 @@ public class UiadminController implements Initializable {
                         } else {
                             String passwordHash = String.valueOf(item.getPassword().hashCode());
                             VBox vbox = new VBox();
+
+                            // Set spacing between the buttons
+                            vbox.setStyle("-fx-spacing: 10;");
 
                             Button deleteButton = new Button("Delete");
                             deleteButton.setOnAction(event -> {
@@ -82,7 +85,6 @@ public class UiadminController implements Initializable {
 
                             Button updateButton = new Button("Update");
                             updateButton.setOnAction(event -> {
-                                // Populate text fields and combo box with user information
                                 updateForm.setVisible(true);
                                 firstNameField.setText(item.getFirstname());
                                 lastNameField.setText(item.getLastname());
@@ -90,7 +92,6 @@ public class UiadminController implements Initializable {
                                 emailField.setText(item.getEmail());
                                 numberField.setText(item.getNumber());
 
-                                // Set the role in the combo box
                                 String role = item.getRole();
                                 if (role != null) {
                                     roleComboBox.setValue(role);
@@ -98,7 +99,6 @@ public class UiadminController implements Initializable {
                                     roleComboBox.setValue("User"); // Default value
                                 }
                             });
-                            // Set background color and text color for Update button
                             updateButton.setStyle("-fx-background-color: #1f3d1c; -fx-text-fill: #c3cfb6;");
 
                             vbox.getChildren().addAll(deleteButton, updateButton);
@@ -117,25 +117,23 @@ public class UiadminController implements Initializable {
             }
         });
 
-
-        // Initialize combo box with values "admin" and "user"
         ObservableList<String> roles = FXCollections.observableArrayList("Admin", "User");
         roleComboBox.setItems(roles);
     }
     @FXML
     private void handleSave(ActionEvent event) {
         // Get the selected user from the ListView
+
         User selectedUser = listView.getSelectionModel().getSelectedItem();
         if (selectedUser != null) {
-            // Update the user object with the new values
             selectedUser.setFirstname(firstNameField.getText());
             selectedUser.setLastname(lastNameField.getText());
             selectedUser.setUsername(usernameField.getText()); // Update the username
             selectedUser.setEmail(emailField.getText());
             selectedUser.setNumber(numberField.getText());
-            // In a real application, you might want to handle password updates differently
             //selectedUser.setPassword(passwordField.getText());
             selectedUser.setRole(roleComboBox.getValue());
+
 
             // Update the user in the database
             userService.updateEntity(selectedUser);
@@ -151,5 +149,4 @@ public class UiadminController implements Initializable {
             alert.showAndWait();
         }
     }
-
 }

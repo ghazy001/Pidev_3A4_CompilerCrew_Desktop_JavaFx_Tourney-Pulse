@@ -1,7 +1,7 @@
 package interfaces;
 import java.util.List;
 
-public interface CRUD <T>{
+public interface EService <T>{
 
     void addEntity(T t);
     void updateEntity(T t);

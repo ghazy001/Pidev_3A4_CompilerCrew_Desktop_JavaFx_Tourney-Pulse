@@ -91,6 +91,18 @@ public class RegisterUserController {
                 throw new Exception("Password must be at least 8 characters long and contain at least one digit and one capital letter");
             }
 
+            // Validate first name format
+            String firstName = TFfirstname.getText();
+            if (!isValidName(firstName)) {
+                throw new Exception("First name should contain only alphabetic characters");
+            }
+
+            // Validate last name format
+            String lastName = TFlastname.getText();
+            if (!isValidName(lastName)) {
+                throw new Exception("Last name should contain only alphabetic characters");
+            }
+
             if (!checkbx.isSelected()) {
                 throw new Exception("Please agree to the Terms of Service and Privacy Policy");
             }
@@ -118,8 +130,8 @@ public class RegisterUserController {
 
             // Assuming you have a User class and set methods for first name, last name, etc.
             User user = new User();
-            user.setFirstname(TFfirstname.getText());
-            user.setLastname(TFlastname.getText());
+            user.setFirstname(firstName);
+            user.setLastname(lastName);
             user.setEmail(email);
             user.setUsername(username);
             user.setNumber(number);
@@ -187,6 +199,18 @@ public class RegisterUserController {
 
         // Check if the password matches the pattern
         return pattern.matcher(password).matches();
+    }
+
+    // Method to validate name format
+    private boolean isValidName(String name) {
+        // Regular expression pattern for alphabetic characters only
+        String nameRegex = "^[a-zA-Z]+$";
+
+        // Compile the pattern into a regex pattern object
+        Pattern pattern = Pattern.compile(nameRegex);
+
+        // Check if the name matches the pattern
+        return pattern.matcher(name).matches();
     }
 
     @FXML

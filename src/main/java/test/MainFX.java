@@ -14,7 +14,7 @@ public class MainFX extends Application {
         Parent root = loader.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("Gestion User");
+        stage.setTitle("Tourne Pulse");
         stage.show();
     }
 }

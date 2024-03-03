@@ -1,7 +1,7 @@
 package services;
 
 import entities.User;
-import interfaces.CRUD;
+import interfaces.EService;
 import utiles.MyConnection;
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,7 +15,7 @@ import java.util.List;
 
 
 
-public class UserService implements CRUD<User> {
+public class UserService implements EService<User> {
 
     @Override
     public void addEntity(User user) {
@@ -50,15 +50,15 @@ public class UserService implements CRUD<User> {
     @Override
     public void updateEntity(User user) {
         try {
-            PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement("UPDATE `user` SET `password` = ?, `firstname` = ?, `lastname` = ?, `email` = ?, `number` = ?, `role` = ?, `username` = ? WHERE `id` = ?");
-            pst.setString(1, user.getPassword());
-            pst.setString(2, user.getFirstname());
-            pst.setString(3, user.getLastname());
-            pst.setString(4, user.getEmail());
-            pst.setString(5, user.getNumber());
-            pst.setString(6, user.getRole());
-            pst.setString(7, user.getUsername()); // Add the username
-            pst.setInt(8, user.getId());
+            PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement("UPDATE `user` SET `firstname` = ?, `lastname` = ?, `email` = ?, `number` = ?, `role` = ?, `username` = ? WHERE `id` = ?");
+            //pst.setString(1, user.getPassword());
+            pst.setString(1, user.getFirstname());
+            pst.setString(2, user.getLastname());
+            pst.setString(3, user.getEmail());
+            pst.setString(4, user.getNumber());
+            pst.setString(5, user.getRole());
+            pst.setString(6, user.getUsername()); // Add the username
+            pst.setInt(7, user.getId());
 
             int rowsUpdated = pst.executeUpdate();
             if (rowsUpdated > 0) {
