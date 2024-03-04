@@ -5,12 +5,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import services.UserService;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -23,10 +30,15 @@ public class UiadminController implements Initializable {
     private Button dashboardButton;
     @FXML
     private Button usersButton;
+    @FXML
+    private Button logoutbtn;
+    @FXML
+    private TextField chercher;
 
     private ObservableList<User> users;
     private UserService userService = new UserService();
     private List<User> userList;
+
 
     @FXML
     private VBox updateForm;
@@ -119,7 +131,9 @@ public class UiadminController implements Initializable {
 
         ObservableList<String> roles = FXCollections.observableArrayList("Admin", "User");
         roleComboBox.setItems(roles);
+        chercher.setOnAction(event->advancedSearchUsers());
     }
+
     @FXML
     private void handleSave(ActionEvent event) {
         // Get the selected user from the ListView
@@ -149,4 +163,36 @@ public class UiadminController implements Initializable {
             alert.showAndWait();
         }
     }
+    @FXML
+    private void logout(ActionEvent event) {
+        // Load the login.fxml file
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
+        try {
+            Parent root = loader.load();
+            Stage stage = (Stage) logoutbtn.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void advancedSearchUsers() {
+        String searchText = chercher.getText().trim().toLowerCase();
+
+        ObservableList<User> filteredUsers = FXCollections.observableArrayList();
+        for (User user : userList) {
+            if (user.getFirstname().toLowerCase().contains(searchText) ||
+                    user.getLastname().toLowerCase().contains(searchText) ||
+                    user.getUsername().toLowerCase().contains(searchText) ||
+                    user.getEmail().toLowerCase().contains(searchText) ||
+                    user.getNumber().toLowerCase().contains(searchText) ||
+                    (user.getRole() != null && user.getRole().toLowerCase().contains(searchText))) {
+                filteredUsers.add(user);
+            }
+        }
+        listView.setItems(filteredUsers);
+        listView.refresh();
+    }
+
 }

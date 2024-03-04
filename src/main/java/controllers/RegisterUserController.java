@@ -136,6 +136,7 @@ public class RegisterUserController {
             user.setUsername(username);
             user.setNumber(number);
             user.setPassword(password);
+            user.setRole("User");
 
             // Set the image file path
             user.setImageFile(selectedImageFile);

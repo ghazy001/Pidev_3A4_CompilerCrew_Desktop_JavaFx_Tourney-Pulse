@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -20,7 +21,7 @@
    <children>
       <HBox prefHeight="608.0" prefWidth="776.0" style="-fx-background-color: #c3cfb6;">
          <children>
-            <ImageView fitHeight="507.0" fitWidth="281.0" pickOnBounds="true" style="-fx-background-radius: 10;">
+            <ImageView fitHeight="568.0" fitWidth="281.0" pickOnBounds="true" style="-fx-background-radius: 10;">
                <image>
                   <Image url="@media/pexels-markus-spiske-112786.jpg" />
                </image>
@@ -56,9 +57,9 @@
                               <Insets left="30.0" top="60.0" />
                            </HBox.margin>
                         </Text>
-                        <VBox prefHeight="125.0" prefWidth="73.0">
+                        <VBox prefHeight="125.0" prefWidth="105.0">
                            <children>
-                              <ImageView fx:id="imgviewimport" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="imgviewimport" fitHeight="80.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@media/icons8-user-96.png" />
                                  </image>
@@ -66,7 +67,7 @@
                                     <Insets top="20.0" />
                                  </VBox.margin>
                               </ImageView>
-                              <Button fx:id="chooseimg" mnemonicParsing="false" onAction="#handleUploadImage" prefHeight="25.0" prefWidth="96.0" style="-fx-background-color: #688a38;" text="Choose image" textFill="#c3cfb6">
+                              <Button fx:id="chooseimg" mnemonicParsing="false" onAction="#handleUploadImage" prefHeight="25.0" prefWidth="98.0" style="-fx-background-color: #688a38;" text="Choose image" textFill="#c3cfb6">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -80,56 +81,108 @@
                   </HBox>
                   <HBox prefHeight="20.0" prefWidth="477.0">
                      <children>
-                        <TextField fx:id="TFfirstname" prefHeight="26.0" prefWidth="189.0" promptText="First Name" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
+                        <VBox prefHeight="43.0" prefWidth="232.0">
+                           <children>
+                              <Label text="First Name" textFill="#688a38">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="30.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <TextField fx:id="TFfirstname" prefHeight="26.0" prefWidth="189.0" promptText="First Name" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <VBox.margin>
+                                    <Insets left="30.0" />
+                                 </VBox.margin>
+                              </TextField>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="48.0" prefWidth="184.0">
+                           <children>
+                              <Label text="Last Name" textFill="#688a38">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <TextField fx:id="TFlastname" prefHeight="26.0" prefWidth="189.0" promptText="Last Name" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </TextField>
+                           </children>
                            <HBox.margin>
-                              <Insets left="30.0" top="20.0" />
+                              <Insets left="30.0" />
                            </HBox.margin>
-                        </TextField>
-                        <TextField fx:id="TFlastname" prefHeight="26.0" prefWidth="189.0" promptText="Last Name" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <HBox.margin>
-                              <Insets left="40.0" top="20.0" />
-                           </HBox.margin>
-                        </TextField>
+                        </VBox>
                      </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets top="7.0" />
+                     </VBox.margin>
                   </HBox>
+                  <Label text="Email" textFill="#688a38">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="30.0" top="20.0" />
+                     </VBox.margin>
+                  </Label>
                   <TextField fx:id="TFemail" prefHeight="25.0" prefWidth="306.0" promptText="Email" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
                      <VBox.margin>
-                        <Insets left="30.0" right="30.0" top="20.0" />
+                        <Insets left="30.0" right="30.0" />
                      </VBox.margin>
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </TextField>
+                  <Label text="Username" textFill="#688a38">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="30.0" top="20.0" />
+                     </VBox.margin>
+                  </Label>
                   <TextField fx:id="TFusername" layoutX="40.0" layoutY="92.0" prefHeight="25.0" prefWidth="306.0" promptText="Username" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                      <VBox.margin>
-                        <Insets left="30.0" right="30.0" top="30.0" />
+                        <Insets left="30.0" right="30.0" />
                      </VBox.margin>
                   </TextField>
+                  <Label text="Phone Number" textFill="#688a38">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="30.0" top="20.0" />
+                     </VBox.margin>
+                  </Label>
                   <TextField fx:id="Tfnumber" prefHeight="25.0" prefWidth="306.0" promptText="Phone Number" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                      <VBox.margin>
-                        <Insets left="30.0" right="30.0" top="30.0" />
+                        <Insets left="30.0" right="30.0" />
                      </VBox.margin>
                   </TextField>
+                  <Label text="Password" textFill="#688a38">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="30.0" top="20.0" />
+                     </VBox.margin>
+                  </Label>
                   <PasswordField fx:id="TFpassword" promptText="Password" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
                      <VBox.margin>
-                        <Insets left="30.0" right="30.0" top="30.0" />
+                        <Insets left="30.0" right="30.0" />
                      </VBox.margin>
                   </PasswordField>
+                  <Label text="Confirm Password" textFill="#688a38">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="30.0" top="20.0" />
+                     </VBox.margin>
+                  </Label>
                   <PasswordField fx:id="TFconfirmpass" layoutX="40.0" layoutY="306.0" promptText="Confirm Password" style="-fx-border-color: #1f3d1c; -fx-background-color: #c3cfb6; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: #1f3d1c;">
                      <VBox.margin>
-                        <Insets left="30.0" right="30.0" top="30.0" />
+                        <Insets left="30.0" right="30.0" />
                      </VBox.margin>
                   </PasswordField>
                   <CheckBox fx:id="checkbx" mnemonicParsing="false" text="I agree to the Terms of Service and Privacy Policy." textFill="#1f3d1c">
@@ -159,7 +212,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets left="320.0" />
+                        <Insets bottom="5.0" left="320.0" />
                      </VBox.margin>
                   </Button>
                </children>

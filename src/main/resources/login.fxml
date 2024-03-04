@@ -8,7 +8,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -23,41 +22,30 @@
             </ImageView>
             <AnchorPane prefHeight="454.0" prefWidth="340.0">
                <children>
-                  <Button fx:id="signinbtn" layoutX="168.0" layoutY="333.0" mnemonicParsing="false" onAction="#handleSignIn" style="-fx-background-color: #c3cfb6;" text="Sign in">
+                  <Button fx:id="signinbtn" layoutX="173.0" layoutY="288.0" mnemonicParsing="false" onAction="#handleSignIn" style="-fx-background-color: #c3cfb6;" text="Sign up">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="google" layoutX="64.0" layoutY="28.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #c3cfb6;" text="Continue with Google" textFill="#1f3d1c">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Button>
-                  <ImageView fitHeight="31.0" fitWidth="31.0" layoutX="47.0" layoutY="26.0">
-                     <image>
-                        <Image url="@media/icons8-google-50.png" />
-                     </image>
-                  </ImageView>
-                  <Line endX="100.0" layoutX="139.0" layoutY="81.0" startX="-100.0" stroke="#1f3d1c" />
-                  <Label layoutX="75.0" layoutY="103.0" text="Username" textFill="#1f3d1c">
+                  <Label layoutX="80.0" layoutY="58.0" text="Username" textFill="#1f3d1c">
                      <font>
                         <Font name="Wingdings" size="30.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="name" alignment="CENTER" layoutX="64.0" layoutY="149.0" promptText="Username" style="-fx-background-color: #c3cfb6; -fx-border-color: #1f3d1c; -fx-border-width: 0 0 1 0;" />
-                  <Label layoutX="78.0" layoutY="183.0" text="Password" textFill="#1f3d1c">
+                  <TextField fx:id="name" alignment="CENTER" layoutX="69.0" layoutY="104.0" promptText="Username" style="-fx-background-color: #c3cfb6; -fx-border-color: #1f3d1c; -fx-border-width: 0 0 1 0;" />
+                  <Label layoutX="83.0" layoutY="138.0" text="Password" textFill="#1f3d1c">
                      <font>
                         <Font name="Wingdings" size="30.0" />
                      </font>
                   </Label>
-                  <PasswordField fx:id="password" alignment="CENTER" layoutX="64.0" layoutY="226.0" promptText="Password" style="-fx-background-color: #c3cfb6; -fx-border-color: #1f3d1c; -fx-border-width: 0 0 1 0;" />
-                  <Button fx:id="loginbtn" layoutX="66.0" layoutY="274.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: #688a38;" text="Log in" textFill="#1f3d1c" />
-                  <Text fill="#1f3d1c" layoutX="53.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have account,">
+                  <PasswordField fx:id="password" alignment="CENTER" layoutX="69.0" layoutY="181.0" promptText="Password" style="-fx-background-color: #c3cfb6; -fx-border-color: #1f3d1c; -fx-border-width: 0 0 1 0;" />
+                  <Button fx:id="loginbtn" layoutX="71.0" layoutY="229.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: #688a38;" text="Log in" textFill="#1f3d1c" />
+                  <Text fill="#1f3d1c" layoutX="58.0" layoutY="308.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have account,">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Button fx:id="forgetpass" layoutX="79.0" layoutY="308.0" mnemonicParsing="false" onAction="#forgetpsswd" style="-fx-background-color: #c3cfb6;" text="Forget Password !" textFill="#1f3d1c">
+                  <Button fx:id="forgetpass" layoutX="84.0" layoutY="263.0" mnemonicParsing="false" onAction="#forgetpsswd" style="-fx-background-color: #c3cfb6;" text="Forget Password !" textFill="#1f3d1c">
                      <font>
                         <Font size="14.0" />
                      </font>

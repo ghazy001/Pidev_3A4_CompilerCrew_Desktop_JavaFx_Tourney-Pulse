@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -17,9 +16,9 @@
    <children>
       <HBox prefHeight="486.0" prefWidth="368.0">
          <children>
-            <ImageView fitHeight="486.0" fitWidth="368.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="486.0" fitWidth="371.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../Downloads/protection-concept-with-lock.jpg" />
+                  <Image url="@media/protection-concept-with-lock.jpg" />
                </image>
             </ImageView>
          </children>
@@ -28,38 +27,12 @@
          <children>
             <Text fill="#1f3d1c" strokeType="OUTSIDE" strokeWidth="0.0" text="Reset password">
                <VBox.margin>
-                  <Insets bottom="70.0" left="140.0" top="50.0" />
+                  <Insets bottom="100.0" left="140.0" top="50.0" />
                </VBox.margin>
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Text>
-            <Label alignment="CENTER" contentDisplay="CENTER" text="Email" textFill="#1f3d1c">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="50.0" />
-               </VBox.margin>
-            </Label>
-            <TextField fx:id="emailField" editable="false" style="-fx-background-color: #c3cfb6; -fx-border-color: #1f3d1c; -fx-border-width: 0 0 1 0;">
-               <VBox.margin>
-                  <Insets left="50.0" right="50.0" />
-               </VBox.margin>
-            </TextField>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="60.0" layoutY="162.0" text="Code received " textFill="#1f3d1c">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="50.0" top="5.0" />
-               </VBox.margin>
-            </Label>
-            <TextField fx:id="CodeField" editable="false" layoutX="60.0" layoutY="189.0" style="-fx-background-color: #c3cfb6; -fx-border-color: #1f3d1c; -fx-border-width: 0 0 1 0;">
-               <VBox.margin>
-                  <Insets left="50.0" right="50.0" />
-               </VBox.margin>
-            </TextField>
             <Label alignment="CENTER" contentDisplay="CENTER" text="New password" textFill="#1f3d1c">
                <VBox.margin>
                   <Insets left="50.0" />
@@ -75,7 +48,7 @@
             </PasswordField>
             <Label text="Confirm new password" textFill="#1f3d1c">
                <VBox.margin>
-                  <Insets left="50.0" />
+                  <Insets left="50.0" top="20.0" />
                </VBox.margin>
                <font>
                   <Font name="System Bold" size="18.0" />

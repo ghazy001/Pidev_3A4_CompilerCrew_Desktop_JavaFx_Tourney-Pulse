@@ -3,16 +3,14 @@ package services;
 import entities.User;
 import interfaces.EService;
 import utiles.MyConnection;
+
+import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 
 
 public class UserService implements EService<User> {
@@ -30,7 +28,6 @@ public class UserService implements EService<User> {
             pst.setString(6, user.getPassword());
             pst.setString(7, user.getRole());
 
-            // Set the image data
             File imageFile = user.getImageFile();
             if (imageFile != null && imageFile.exists()) {
                 FileInputStream fis = new FileInputStream(imageFile);
@@ -114,37 +111,9 @@ public class UserService implements EService<User> {
         }
         return data;
     }
-    public boolean saveOTP(String email, String otp) {
-        // Check if email already exists
-        if (getUserByEmail(email) != null) {
-            // Email already exists, update OTP
-            String updateQuery = "UPDATE user SET OTP = ? WHERE email = ?";
-            try (PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(updateQuery)) {
-                pst.setString(1, otp);
-                pst.setString(2, email);
-                int rowsUpdated = pst.executeUpdate();
-                return rowsUpdated > 0;
-            } catch (SQLException e) {
-                System.out.println("Error updating OTP: " + e.getMessage());
-                return false;
-            }
-        } else {
-            // Email does not exist, insert new OTP record
-            String insertQuery = "INSERT INTO user (email, OTP) VALUES (?, ?)";
-            try (PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(insertQuery)) {
-                pst.setString(1, email);
-                pst.setString(2, otp);
-                int rowsInserted = pst.executeUpdate();
-                return rowsInserted > 0;
-            } catch (SQLException e) {
-                System.out.println("Error saving OTP: " + e.getMessage());
-                return false;
-            }
-        }
-    }
 
-    public boolean updatePassword(String email, String newPassword) {
-        String query = "UPDATE user SET password = ? WHERE email = ?";
+    public boolean updatePassword(String newPassword,String email) {
+        String query = "UPDATE user SET password = ? where email= ?";
         try (PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(query)) {
             pst.setString(1, newPassword);
             pst.setString(2, email);
@@ -156,26 +125,61 @@ public class UserService implements EService<User> {
         }
     }
 
-    private User getUserByEmail(String email) {
-        String query = "SELECT * FROM user WHERE email = ?";
-        try (PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(query)) {
-            pst.setString(1, email);
-            ResultSet rs = pst.executeQuery();
+    public boolean doesEmailExist(String email) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        boolean exists = false;
+
+        try {
+            conn = MyConnection.getInstance().getCnx();
+            String sql = "SELECT COUNT(*) FROM user WHERE email = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, email);
+            rs = stmt.executeQuery();
             if (rs.next()) {
-                User user = new User();
-                user.setId(rs.getInt("id"));
-                user.setFirstname(rs.getString("firstname"));
-                user.setLastname(rs.getString("lastname"));
-                user.setUsername(rs.getString("username"));
-                user.setEmail(rs.getString("email"));
-                user.setNumber(rs.getString("number"));
-                user.setPassword(rs.getString("password"));
-                user.setRole(rs.getString("role"));
-                return user;
+                int count = rs.getInt(1);
+                exists = count > 0;
             }
         } catch (SQLException e) {
-            System.out.println("Error fetching user by email: " + e.getMessage());
+            e.printStackTrace();
         }
-        return null;
+        return exists;
+    }
+
+    public void updateOTP(String email, String otp) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        try {
+            conn = MyConnection.getInstance().getCnx();
+            String sql = "UPDATE user SET OTP = ? WHERE email = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, otp);
+            stmt.setString(2, email);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public String getOTP(String email) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String otp = null;
+
+        try {
+            conn = MyConnection.getInstance().getCnx();
+            String sql = "SELECT otp FROM user WHERE email = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, email);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                otp = rs.getString("otp");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return otp;
     }
 }
