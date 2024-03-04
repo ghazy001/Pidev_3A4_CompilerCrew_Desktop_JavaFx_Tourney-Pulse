@@ -127,10 +127,10 @@ public class Reservation_Service implements IService<Reservation> {
         try {
             Statement st;
 
-            st= DbConnector.getInstance().getCon().prepareStatement(req);
+            st = DbConnector.getInstance().getCon().prepareStatement(req);
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                Reservation e= new Reservation(rs.getInt(1),rs.getInt(2),rs.getInt(3), rs.getInt(4),rs.getInt(6),
+                Reservation e = new Reservation(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(6),
                         rs.getDate(5));
                 e.setNomStade(ss.GetStadeById(e.getId_stade()).getNom());
                 reservations.add(e
@@ -142,6 +142,32 @@ public class Reservation_Service implements IService<Reservation> {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+
+        return reservations;
+    }
+        public List<Reservation> GetByLocation(String Location) {
+            ArrayList<Reservation> reservations = new ArrayList();
+            Stade_Service ss = new Stade_Service();
+            String req = "SELECT * FROM reservation r inner join stade s on r.id_stade = s.id where s.Lieu= '"+Location+"'";
+
+            try {
+                Statement st;
+
+                st= DbConnector.getInstance().getCon().prepareStatement(req);
+                ResultSet rs = st.executeQuery(req);
+                while (rs.next()) {
+                    Reservation e= new Reservation(rs.getInt(1),rs.getInt(2),rs.getInt(3), rs.getInt(4),rs.getInt(6),
+                            rs.getDate(5));
+                    e.setNomStade(ss.GetStadeById(e.getId_stade()).getNom());
+                    reservations.add(e
+                    );
+
+                }
+
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
 
         return reservations;
     }

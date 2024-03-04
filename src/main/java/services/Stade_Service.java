@@ -227,6 +227,26 @@ public class Stade_Service implements IService<Stade> {
 
     }
 
+    public List<String> getDistinctLocations() {
+        List<String> distinctLocations = new ArrayList<>();
+        try {
+            String req = "SELECT DISTINCT Lieu FROM stade";
+            PreparedStatement st = cnx.prepareStatement(req);
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                String location = rs.getString("Lieu");
+                distinctLocations.add(location);
+            }
+
+            rs.close();
+            st.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return distinctLocations;
+    }
+
     @Override
     public void Update(Stade item) {
         String sql = "UPDATE stade SET `Nom`=?,`Lieu`=?,`Capacity`=?,`Numero`=? where id=?";

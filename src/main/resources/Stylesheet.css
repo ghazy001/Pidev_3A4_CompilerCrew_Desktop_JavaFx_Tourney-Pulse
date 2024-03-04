@@ -1,0 +1,38 @@
+/* Labels inside VBox */
+#scrollPaneStade .label {
+    -fx-font-family: "Arial", sans-serif; /* Use Arial font */
+    -fx-font-size: 14px; /* Font size */
+    -fx-text-fill: #333; /* Text color */
+    -fx-font-weight: normal; /* Normal font weight */
+    -fx-text-alignment: left; /* Text alignment */
+    -fx-padding: 5; /* Padding around the labels */
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.2) , 1,1,1,1 ); /* Drop shadow effect */
+    -fx-cursor: hand; /* Cursor style */
+}
+
+/* Hover effect */
+#scrollPaneStade .label:hover {
+    -fx-background-color: #66bb6a; /* Green background on hover */
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.4) , 2,2,2,2 ); /* Enhanced drop shadow on hover */
+}
+/* Button style */
+#btnStadeList {
+    -fx-background-color: #688A38;
+    -fx-font-family: "Arial", sans-serif; /* Use Arial font */
+    -fx-font-size: 14px; /* Font size */
+    -fx-text-fill: #1f3d1c; /* Text color */
+    -fx-font-weight: normal; /* Normal font weight */
+    -fx-text-alignment: center; /* Text alignment */
+    -fx-padding: 5 10; /* Padding around the button */
+       -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.2) , 1,1,1,1 ); /* Drop shadow effect */
+    -fx-cursor: hand; /* Cursor style */
+}
+
+/* Hover effect for the button */
+#btnStadeList:hover {
+    -fx-background-color: white; /* Green background on hover */
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.4) , 2,2,2,2 ); /* Enhanced drop shadow on hover */
+}
+
+

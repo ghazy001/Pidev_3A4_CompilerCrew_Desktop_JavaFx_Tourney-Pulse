@@ -441,13 +441,16 @@ public class Stade_FrontController implements Initializable {
 
             stadeBox.getChildren().addAll(nameLabel, lieuLabel, CpacityLabel, NumeroLabel);
 
-            List<String> images = ss.getImages(stade.getId());
+
+           /* List<String> images = ss.getImages(stade.getId());
             for (String imageUrl : images) {
                 ImageView imageView = new ImageView(new Image(imageUrl));
                 imageView.setFitWidth(200);
                 imageView.setPreserveRatio(true);
                 stadeBox.getChildren().add(imageView);
-            }
+            }*/
+
+
 
             Separator separator = new Separator();
             separator.setOrientation(Orientation.VERTICAL);

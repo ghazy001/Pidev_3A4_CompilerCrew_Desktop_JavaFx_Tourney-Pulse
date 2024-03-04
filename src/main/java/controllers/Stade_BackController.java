@@ -6,15 +6,14 @@
 package controllers;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import entities.Reservation;
 import entities.ImagesStade;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -33,6 +32,7 @@ import entities.Stade;
 import javafx.stage.FileChooser;
 import services.Reservation_Service;
 import services.Stade_Service;
+import services.WeatherService;
 
 
 public class Stade_BackController implements Initializable {
@@ -135,6 +135,7 @@ public class Stade_BackController implements Initializable {
     private Button btnDetailsStade;
     @FXML
     private Button btnBackStade;
+    private Timer timer;
 
     private int currentIndex = 0;
     private List<String> imagePaths = new ArrayList<>();
@@ -146,30 +147,32 @@ public class Stade_BackController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //------------------------------------------------------
         tfNumeroStadeAdd.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 tfNumeroStadeAdd.setText(oldValue);
             }
         });
         tfNameStadeAdd.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("[a-zA-Z]*")) {
-
+            if (!newValue.matches("(\\s*\\w+\\s*)*")) {
                 tfNameStadeAdd.setText(oldValue);
             }
         });
+
+
         tfCapacityStadeAdd.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 tfCapacityStadeAdd.setText(oldValue);
             }
         });
         tfPlaceStadeAdd.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("[a-zA-Z]*")) {
-
+            if (!newValue.matches("(\\s*\\w+\\s*)*")) {
                 tfPlaceStadeAdd.setText(oldValue);
             }
         });
+        //-------------------------------------------------------------------------
         pnGestionStade.toFront();
-        ObservableList<String>  list =FXCollections.observableArrayList("All","Tunis","Manouba","Ariana","Ben Arous"); // TODO
+        ObservableList<String>  list =FXCollections.observableArrayList("All","Tunis","Manouba","Ariana","Ben Arous","Maktar"); // TODO
         cbLieuStade.setItems(list);
         hbDetailsStade.setVisible(true);
         btnDeleteStade.setVisible(false);
@@ -177,6 +180,27 @@ public class Stade_BackController implements Initializable {
         btnDetailsStade.setVisible(false);
         this.currentIndex = 0;
         fnshow();
+        WeatherService ws = new WeatherService();
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    List<String> listLieu = ss.getDistinctLocations();
+                    for(int i=0; i< listLieu.size();i++){
+                        try {
+                            ws.weather(listLieu.get(i));
+                        } catch (UnsupportedEncodingException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                });
+
+            }
+        }, 0, 3000);
+
+
+
     }
     private void updateImageView() {
         String imagePath = imagePaths.get(currentIndexAdd);
@@ -562,9 +586,15 @@ public class Stade_BackController implements Initializable {
                 if (reservation.getNomStade().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
                     return true;
                 }
-                else
-                    return false;
-
+              else if (String.valueOf(reservation.getId_PremiereEquipe()).toLowerCase().contains(lowerCaseFilter)) {
+                return true;
+            }  else if (String.valueOf(reservation.getId_DeuxiemeEquipe()).toLowerCase().contains(lowerCaseFilter)) {
+                return true;
+            } else if (reservation.getDate().toString().contains(lowerCaseFilter)) {
+                return true;
+            } else {
+                return false;
+            }
 
             });
         });

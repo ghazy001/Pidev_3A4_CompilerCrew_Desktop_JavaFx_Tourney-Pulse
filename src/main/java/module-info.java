@@ -6,6 +6,8 @@ module com.example.gestionstade {
     requires net.synedra.validatorfx;
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
+    requires com.google.gson;
+    requires commons.email;
 
     opens com.example.gestionstade to javafx.fxml;
     exports com.example.gestionstade;
