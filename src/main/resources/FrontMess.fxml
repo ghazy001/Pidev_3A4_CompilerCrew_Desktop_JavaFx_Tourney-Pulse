@@ -13,8 +13,8 @@
    <children>
       <AnchorPane layoutY="-11.0" prefHeight="656.0" prefWidth="174.0" style="-fx-background-color: #8C9C7C;">
          <children>
-            <Button fx:id="navigate" layoutX="16.0" layoutY="199.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: #9ACD32;" text="Ajouter reclamation" />
-            <Button fx:id="message" layoutX="17.0" layoutY="315.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: #9ACD32;" text="Messages" />
+            <Button fx:id="navigate" layoutX="17.0" layoutY="314.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: #9ACD32;" text="Back" />
+            <Button fx:id="message" layoutX="17.0" layoutY="243.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: #9ACD32;" text="Messages" />
             <ImageView fitHeight="120.0" fitWidth="139.0" layoutX="27.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image/421909257_266130739694870_1007709414835084119_n-removebg-preview.png" />

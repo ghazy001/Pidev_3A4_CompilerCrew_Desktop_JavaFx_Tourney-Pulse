@@ -17,6 +17,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.Date;
 
@@ -27,10 +29,23 @@ public class DisplayReclamation implements Initializable {
     @FXML
     VBox Vbox;
     @FXML
-    TextField id,userid,email,date,object,reclamationI;
+    TextField id,userid,email,date,object;
+    @FXML
+    TextArea reclamationI;
     @FXML
     Button delete,update,navigate,message;
+    @FXML
+    private TextField searchId;
 
+    @FXML
+    private TextField searchUserId;
+    @FXML
+    private TextField TFrecherchet;
+
+    @FXML
+    private TextField searchIdTextField;
+
+    @FXML
     ServiceReclamation serviceReclamation = new ServiceReclamation();
 
     private String selectedId;
@@ -59,11 +74,16 @@ public class DisplayReclamation implements Initializable {
     }
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        loadReclamationData();
+
+
+        TFrecherchet.setOnAction(event -> advancedSearchReclamations());
+        loadReclamationData();
 
 
 
 
-      /*  message.setOnAction(new EventHandler<ActionEvent>() {
+        message.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 try {
@@ -90,7 +110,7 @@ public class DisplayReclamation implements Initializable {
         });
 
 
-*/
+
         navigate.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -126,7 +146,7 @@ public class DisplayReclamation implements Initializable {
             System.out.println("Adding reclamation to TitledPane: " + reclamation);
             // Create layout for each reclamation
             Label idLabel = new Label("ID: " + reclamation.getId_rec());
-           // Label userIdLabel = new Label("UserID: " + reclamation.getId());
+            Label userIdLabel = new Label("UserID: " + reclamation.getId());
             Label emailLabel = new Label("Email: " + reclamation.getEmail());
             Label objectLabel = new Label("Object: " + reclamation.getObject());
             Label recLabel = new Label("Rec: " + reclamation.getRec());
@@ -134,7 +154,7 @@ public class DisplayReclamation implements Initializable {
             System.out.println("reclamation!!!!!!!"+reclamation.getRec());
             GridPane gridPane = new GridPane();
             gridPane.add(idLabel, 0, 0);
-            //gridPane.add(userIdLabel, 0, 1);
+            gridPane.add(userIdLabel, 0, 1);
             gridPane.add(emailLabel, 0, 2);
             gridPane.add(objectLabel, 0, 3);
             gridPane.add(recLabel, 0, 4);
@@ -151,7 +171,7 @@ public class DisplayReclamation implements Initializable {
 
                             // Single-click behavior
                             selectedId = "" + reclamation.getId_rec();
-                           // selectedUserId = "" + reclamation.getId();
+                            selectedUserId = "" + reclamation.getId();
                             selectedEmail = reclamation.getEmail();
                             selectedObject = reclamation.getObject();
                             selectedRec = reclamation.getRec();
@@ -159,14 +179,14 @@ public class DisplayReclamation implements Initializable {
 
                             // Perform any action with the selected values
                             System.out.println("Selected ID: " + selectedId);
-                           // System.out.println("Selected UserID: " + selectedUserId);
+                            System.out.println("Selected UserID: " + selectedUserId);
                             System.out.println("Selected Email: " + selectedEmail);
                             System.out.println("Selected Object: " + selectedObject);
                             System.out.println("Selected Rec: " + selectedRec);
                             System.out.println("Selected Date Rec: " + selectedDateRec);
 
                             id.setText(selectedId);
-                           // userid.setText(selectedUserId);
+                            userid.setText(selectedUserId);
                             email.setText(selectedEmail);
                             date.setText(selectedDateRec);
                             reclamationI.setText(selectedRec);
@@ -210,6 +230,7 @@ public class DisplayReclamation implements Initializable {
 
 
 
+
         update.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -243,17 +264,10 @@ public class DisplayReclamation implements Initializable {
 
 
 
-
-
-
-
-
     }
 
 
-
-
- //-------------refresh fucnction ---------------------------------------
+    //-------------refresh fucnction ---------------------------------------
     private void loadReclamationData() {
         Vbox.getChildren().clear(); // Clear existing display
 
@@ -261,8 +275,8 @@ public class DisplayReclamation implements Initializable {
 
         for (Reclamation reclamation : reclamationList) {
             // Create layout for each reclamation
-          // Label idLabel = new Label("ID: " + reclamation.getId_rec());
-           // Label userIdLabel = new Label("User: " + reclamation.getId());
+           // Label idLabel = new Label("ID: " + reclamation.getId_rec());
+            Label userIdLabel = new Label("User: " + reclamation.getId());
             Label emailLabel = new Label("Email: " + reclamation.getEmail());
             Label objectLabel = new Label("Object: " + reclamation.getObject());
             Label recLabel = new Label("Rec: " + reclamation.getRec());
@@ -270,7 +284,7 @@ public class DisplayReclamation implements Initializable {
 
             GridPane gridPane = new GridPane();
            // gridPane.add(idLabel, 0, 0);
-            //gridPane.add(userIdLabel, 0, 1);
+            gridPane.add(userIdLabel, 0, 1);
             gridPane.add(emailLabel, 0, 2);
             gridPane.add(objectLabel, 0, 3);
             gridPane.add(recLabel, 0, 4);
@@ -308,4 +322,81 @@ public class DisplayReclamation implements Initializable {
             Vbox.getChildren().add(titledPane);
         }
     }
+    @FXML
+    void refrechTournoisAction(ActionEvent event) {
+        loadReclamationData();
+        TFrecherchet.clear();
+        userid.clear();
+                email.clear();
+        date.clear();
+                reclamationI.clear();
+        object.clear();
+    }
+    private void advancedSearchReclamations() {
+        List<Reclamation> reclamationList = serviceReclamation.getAll();
+        System.out.println("Reclamation List: " + reclamationList);
+        String searchText = TFrecherchet.getText().trim().toLowerCase(); // Récupérez le texte de recherche
+        Vbox.getChildren().clear(); // Effacez les résultats précédents
+
+        // Parcourez la liste des réclamations et recherchez celles correspondant au critère de recherche
+        for (Reclamation reclamation : reclamationList) {
+            boolean reclamationSearch = false;
+            // Vérifiez si l'ID de la réclamation ou l'objet de la réclamation correspond au critère de recherche
+            if (String.valueOf(reclamation.getId_rec()).toLowerCase().contains(searchText) ||
+                    reclamation.getObject().toLowerCase().contains(searchText) || reclamation.getEmail().toLowerCase().contains(searchText)||  reclamation.getRec().toLowerCase().contains(searchText) ) {
+                reclamationSearch = true;
+            }
+
+            if (reclamationSearch) {
+                // Affichez les informations sur la réclamation
+                Label idLabel = new Label("ID: " + reclamation.getId_rec());
+                Label userIdLabel = new Label("UserID: " + reclamation.getId());
+                Label emailLabel = new Label("Email: " + reclamation.getEmail());
+                Label objectLabel = new Label("Object: " + reclamation.getObject());
+                Label recLabel = new Label("Rec: " + reclamation.getRec());
+                Label dateLabel = new Label("Date Rec: " + reclamation.getDate_rec());
+
+                GridPane gridPane = new GridPane();
+                gridPane.add(idLabel, 0, 0);
+                gridPane.add(userIdLabel, 0, 1);
+                gridPane.add(emailLabel, 0, 2);
+                gridPane.add(objectLabel, 0, 3);
+                gridPane.add(recLabel, 0, 4);
+                gridPane.add(dateLabel, 0, 5);
+
+                TitledPane titledPane = new TitledPane("Reclamation de " + reclamation.getEmail(), gridPane);
+                titledPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        selectedId = "" + reclamation.getId_rec();
+                        selectedUserId = "" + reclamation.getId();
+                        selectedEmail = reclamation.getEmail();
+                        selectedObject = reclamation.getObject();
+                        selectedRec = reclamation.getRec();
+                        selectedDateRec = String.valueOf(reclamation.getDate_rec());
+
+                        // Perform any action with the selected values
+                        System.out.println("Selected ID: " + selectedId);
+                        System.out.println("Selected UserID: " + selectedUserId);
+                        System.out.println("Selected Email: " + selectedEmail);
+                        System.out.println("Selected Object: " + selectedObject);
+                        System.out.println("Selected Rec: " + selectedRec);
+                        System.out.println("Selected Date Rec: " + selectedDateRec);
+
+                        id.setText(selectedId);
+                        userid.setText(selectedUserId);
+                        email.setText(selectedEmail);
+                        date.setText(selectedDateRec);
+                        reclamationI.setText(selectedRec);
+                        object.setText(selectedObject);
+                    }
+                });
+
+                Vbox.getChildren().add(titledPane);
+            }
+        }
+    }
+
+
+
 }

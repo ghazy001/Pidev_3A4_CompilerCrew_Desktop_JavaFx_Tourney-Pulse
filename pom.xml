@@ -34,6 +34,26 @@
         <artifactId>fontawesomefx-fontawesome</artifactId>
         <version>4.7.0-9.1.2</version>
     </dependency>
+    <!-- api bad word -->
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>2.17.0-rc1</version>
+    </dependency>
+    <!-- *********** -->
+
+    <!--  api notification -->
+    <dependency>
+        <groupId>org.controlsfx</groupId>
+        <artifactId>controlsfx</artifactId>
+        <version>11.1.2</version>
+        <type>jar</type>
+    </dependency>
+    <!-- ******************** -->
+
+
+
+
 </dependencies>
 <build>
 <plugins>

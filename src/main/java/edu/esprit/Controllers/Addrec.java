@@ -12,6 +12,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
 import java.net.URL;
@@ -75,6 +77,8 @@ public class Addrec implements Initializable {
             }
 
             this.sp.ajouter(new Reclamation(email,this.TFObjet.getText(), this.TFReclamation.getText(), today, id));
+
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setContentText("Ajoutee avec succes");

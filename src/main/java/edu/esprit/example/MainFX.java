@@ -5,8 +5,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+/*
+public class MainFX extends Application {
 
+    public static void main(String[] args) {
+        launch(args);
+    }
 
+    @Override
+    public void start(Stage primaryStage) {
+
+    }
+}*/
 
 public class MainFX extends Application {
     public MainFX() {
@@ -17,7 +27,7 @@ public class MainFX extends Application {
     }
 
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/DisplayReclamation.fxml"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/Addrec.fxml"));
         Parent root = (Parent)loader.load();
         Scene scene = new Scene(root);
         //stage.setScene(scene);

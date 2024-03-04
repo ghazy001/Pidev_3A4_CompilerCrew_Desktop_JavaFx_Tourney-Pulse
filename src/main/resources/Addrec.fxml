@@ -16,42 +16,42 @@
             <children>
                 <TextField fx:id="TFObjet" layoutX="335.0" layoutY="204.0" prefHeight="26.0" prefWidth="190.0" promptText="Objet" />
                 <Button layoutX="351.0" layoutY="397.0" mnemonicParsing="false" onAction="#ajouterReclamationAction" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: #9ACD32;" text="Ajouter" textFill="WHITE">
-               <font>
-                  <Font size="14.0" />
-               </font></Button>
+                    <font>
+                        <Font size="14.0" />
+                    </font></Button>
                 <Label layoutX="261.0" layoutY="197.0" prefHeight="26.0" prefWidth="55.0" />
                 <TextField fx:id="TFEmail" layoutX="336.0" layoutY="164.0" prefHeight="26.0" prefWidth="180.0" promptText="Email" />
                 <Label layoutX="198.0" layoutY="164.0" prefHeight="26.0" prefWidth="62.0" text="Email">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
+                    <font>
+                        <Font size="14.0" />
+                    </font></Label>
                 <Label layoutX="198.0" layoutY="204.0" prefHeight="26.0" prefWidth="62.0" text="Object">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
+                    <font>
+                        <Font size="14.0" />
+                    </font></Label>
                 <Label layoutX="198.0" layoutY="265.0" prefHeight="26.0" prefWidth="119.0" text="Reclamation">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
-            <TextArea fx:id="TFReclamation" layoutX="334.0" layoutY="248.0" prefHeight="115.0" prefWidth="200.0" promptText="Reclamation.." />
+                    <font>
+                        <Font size="14.0" />
+                    </font></Label>
+                <TextArea fx:id="TFReclamation" layoutX="334.0" layoutY="248.0" prefHeight="115.0" prefWidth="200.0" promptText="Reclamation.." />
             </children>
         </AnchorPane>
-      <Text layoutX="438.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Réclamation" wrappingWidth="417.2441711425781">
-         <font>
-            <Font size="42.0" />
-         </font>
-      </Text>
-      <AnchorPane prefHeight="656.0" prefWidth="174.0" style="-fx-background-color: #8C9C7C;">
-         <children>
-            <Button fx:id="message" layoutX="20.0" layoutY="315.0" mnemonicParsing="false" onAction="#message" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: #9ACD32;" text="Messages" />
-            <ImageView fitHeight="120.0" fitWidth="139.0" layoutX="27.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/421909257_266130739694870_1007709414835084119_n-removebg-preview.png" />
-               </image>
-            </ImageView>
+        <Text layoutX="438.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Réclamation" wrappingWidth="417.2441711425781">
+            <font>
+                <Font size="42.0" />
+            </font>
+        </Text>
+        <AnchorPane prefHeight="656.0" prefWidth="174.0" style="-fx-background-color: #8C9C7C;">
+            <children>
+                <Button fx:id="message" layoutX="20.0" layoutY="315.0" mnemonicParsing="false" onAction="#message" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: #9ACD32;" text="Messages" />
+                <ImageView fitHeight="120.0" fitWidth="139.0" layoutX="27.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@image/421909257_266130739694870_1007709414835084119_n-removebg-preview.png" />
+                    </image>
+                </ImageView>
                 <Button fx:id="navigate" layoutX="20.0" layoutY="238.0" mnemonicParsing="false" onAction="#navigatetoAfficherReclamationAction" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: #9ACD32;" text="Navigate" />
-            <Button layoutX="59.0" layoutY="548.0" mnemonicParsing="false" style="-fx-background-color: #9ACD32;" text="Log out" />
-         </children>
-      </AnchorPane>
+                <Button layoutX="59.0" layoutY="548.0" mnemonicParsing="false" style="-fx-background-color: #9ACD32;" text="Log out" />
+            </children>
+        </AnchorPane>
     </children>
 </AnchorPane>

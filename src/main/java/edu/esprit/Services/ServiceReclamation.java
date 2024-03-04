@@ -1,14 +1,15 @@
 package edu.esprit.Services;
 
 import edu.esprit.Utils.DataSource;
-import edu.esprit.entities.Messages;
 import edu.esprit.entities.Reclamation;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ServiceReclamation implements IService<Reclamation> {
 
@@ -34,14 +35,27 @@ public class ServiceReclamation implements IService<Reclamation> {
 
 
             st.executeUpdate();
+
+            Image icon = new Image("image/421909257_266130739694870_1007709414835084119_n-removebg-preview.png");
+            ImageView imageView = new ImageView(icon);
+            imageView.setFitWidth(140);
+            imageView.setFitHeight(140);
+
+            Notifications.create()
+                    .darkStyle()
+                    .title("Success")
+                    .text("Your action was successful!")
+                    .graphic(imageView)
+                    .hideAfter(Duration.seconds(5))
+                    .onAction(event -> {
+
+                        System.out.println("Notification clicked!");
+                    })
+                    .show();
             System.out.println("ajoutée avec succes.");
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-
-
-
-
     }
 }
 
@@ -64,10 +78,11 @@ public class ServiceReclamation implements IService<Reclamation> {
 
             prepare.executeUpdate();
 
-
             int rowsAffected = prepare.executeUpdate();
 
             if (rowsAffected > 0) {
+
+
                 System.out.println("Match with ID " + id_rec + " modified successfully.");
             } else {
                 System.out.println("Match with ID " + id_rec + " not found or failed to modify.");
@@ -91,6 +106,25 @@ public class ServiceReclamation implements IService<Reclamation> {
                 st.setInt(1, id_rec);
                 int rowsAffected = st.executeUpdate();
                 if (rowsAffected > 0) {
+                    Image icon = new Image("image/421909257_266130739694870_1007709414835084119_n-removebg-preview.png");
+                    ImageView imageView = new ImageView(icon);
+                    imageView.setFitWidth(140);
+                    imageView.setFitHeight(140);
+
+                    Notifications.create()
+                            .darkStyle()
+                            .title("Success")
+                            .text("delete was successful!")
+                            .graphic(imageView)
+                            .hideAfter(Duration.seconds(5))
+                            .onAction(event -> {
+
+                                System.out.println("Notification clicked!");
+                            })
+                            .show();
+                    System.out.println("supprimée avec succes.");
+
+
                     System.out.println("Réclamation supprimée avec succès !");
                 } else {
                     System.out.println("Aucune réclamation correspondant à l'id_rec spécifié n'a été trouvée.");

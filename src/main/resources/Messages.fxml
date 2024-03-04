@@ -14,7 +14,7 @@
       <AnchorPane prefHeight="656.0" prefWidth="174.0" style="-fx-background-color: #8C9C7C;">
          <children>
             <Button fx:id="navigate" layoutX="16.0" layoutY="199.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: #9ACD32;" text="Ajouter reclamation" />
-            <Button fx:id="back" layoutX="17.0" layoutY="315.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: #9ACD32;" text="back" />
+            <Button fx:id="message" layoutX="17.0" layoutY="315.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: #9ACD32;" text="Back" />
             <ImageView fitHeight="120.0" fitWidth="139.0" layoutX="27.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image/421909257_266130739694870_1007709414835084119_n-removebg-preview.png" />
@@ -22,7 +22,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <ScrollPane fx:id="scrollId" layoutX="175.0" layoutY="94.0" prefHeight="400.0" prefWidth="678.0">
+      <ScrollPane fx:id="scrollId" layoutX="192.0" layoutY="97.0" prefHeight="431.0" prefWidth="681.0">
         <content>
           <AnchorPane fx:id="listMessages" minHeight="0.0" minWidth="0.0" prefHeight="447.0" prefWidth="795.0" />
         </content>
@@ -37,8 +37,8 @@
             <Font size="21.0" />
          </font>
       </Text>
-      <TextField fx:id="messageContent" layoutX="176.0" layoutY="533.0" prefHeight="47.0" prefWidth="554.0" style="-fx-background-radius: 1000; -fx-border-radius: 1000; -fx-border-color: black;" />
-      <Button fx:id="btnAddMessage" layoutX="754.0" layoutY="537.0" mnemonicParsing="false" onAction="#handleAddMessage" prefHeight="33.0" prefWidth="87.0" style="-fx-background-color: #9ACD32;" text="Send" textFill="WHITE">
+      <TextField fx:id="messageContent" layoutX="204.0" layoutY="541.0" prefHeight="51.0" prefWidth="538.0" style="-fx-background-radius: 1000; -fx-border-radius: 1000; -fx-border-color: black;" />
+      <Button fx:id="btnAddMessage" layoutX="803.0" layoutY="547.0" mnemonicParsing="false" onAction="#handleAddMessage" prefHeight="33.0" prefWidth="82.0" style="-fx-background-color: #9ACD32;" text="Send" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>

@@ -1,5 +1,6 @@
 package edu.esprit.Controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import edu.esprit.Services.ServiceMessages;
@@ -26,23 +27,33 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.net.URL;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.*;
+import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.util.List;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 import java.io.IOException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.io.InputStream;
+import java.net.URL;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 public class MessageC implements Initializable {
     @FXML
     VBox Vbox;
     @FXML
-    TextField id,userid,email,date,object,reclamationI;
-    @FXML
+
     Button delete,update,navigate,message;
+
+   static String text;
 
     ServiceReclamation serviceReclamation = new ServiceReclamation();
 
@@ -68,7 +79,6 @@ public class MessageC implements Initializable {
     private Pane messageId;
 
 
-
     @FXML
     private Text objetRec;
 
@@ -89,7 +99,7 @@ public class MessageC implements Initializable {
     }
 
     public void loadReclamation(){
-        Reclamation reclamation=serviceReclamation.getReclamationById(255); // a changer dynamique
+        Reclamation reclamation=serviceReclamation.getReclamationById(266);
         objetRec.setText(reclamation.getObject());
         recText.setText(reclamation.getRec());
     }
@@ -100,31 +110,39 @@ public class MessageC implements Initializable {
         loadMessages();
     }
 
-
     private ServiceMessages messagesService = new ServiceMessages();
     @FXML
-    void handleAddMessage(ActionEvent event) {
-        System.out.println(rec_id+"   "+user_id);
+    public void handleAddMessage(ActionEvent event) {
+        System.out.println(rec_id + "   " + user_id);
 
-        String contentText=messageContent.getText();
-        if(contentText!=null && !contentText.isEmpty()){
-            messagesService.ajouter(new edu.esprit.entities.Messages(4,1,255,contentText,new Date(System.currentTimeMillis())));  //a changer dynamique
+        // Check for bad words
+        if (checkForBadWords()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Message contains inappropriate content!");
+            alert.show();
+            messageContent.clear();
+            return; // Exit the method if bad words are detected
+        }
+
+        String contentText = messageContent.getText();
+        if (contentText != null && !contentText.isEmpty()) {
+            messagesService.ajouter(new edu.esprit.entities.Messages(4, 1, 266, contentText, new Date(System.currentTimeMillis())));
             loadMessages();
-
-
+            messageContent.clear();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur!");
-            alert.setContentText("Message est vide!!");
-
+            alert.setTitle("Error!");
+            alert.setContentText("Message is empty!!");
+            alert.show();
         }
     }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
 loadReclamation();
         loadMessages();
 startRefreshingMessages();
+
         navigate.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -153,6 +171,10 @@ startRefreshingMessages();
 
 
 
+
+
+
+
     }
     public void startRefreshingMessages() {
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
@@ -165,7 +187,7 @@ startRefreshingMessages();
 
      public void loadMessages() {
 
-        List<Messages> messages = messagesService.getMessagesByReclamationId(255); // a changer dynamique
+        List<Messages> messages = messagesService.getMessagesByReclamationId(266);
         final double[] currentY = {0.0};
 
         Platform.runLater(() -> {
@@ -221,6 +243,63 @@ startRefreshingMessages();
 
         return pane;
     }
+
+
+
+
+    //  --------------------------api bad word -------------------------
+
+    public boolean checkForBadWords() {
+        try {
+            String apiKey = ""; // Replace with your API key
+            String text = messageContent.getText().trim();
+            String encodedText = URLEncoder.encode(text, StandardCharsets.UTF_8.toString());
+
+            // Initialize URL object with properly encoded text
+            URL url = new URL("https://api.api-ninjas.com/v1/profanityfilter?text=" + encodedText);
+
+            // Open connection
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            // Set request method
+            connection.setRequestMethod("GET");
+
+            // Set API key in the request header
+            connection.setRequestProperty("X-Api-Key", apiKey);
+
+            // Set accept header
+            connection.setRequestProperty("accept", "application/json");
+
+            // Get response code
+            int responseCode = connection.getResponseCode();
+
+            // Check if the request was successful
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                // Read response
+                try (InputStream responseStream = connection.getInputStream()) {
+                    ObjectMapper mapper = new ObjectMapper();
+                    JsonNode root = mapper.readTree(responseStream);
+
+                    // Extract censored word
+                    String censoredWord = root.get("censored").asText();
+
+                    System.out.println("Censored Word: " + censoredWord);
+
+                    // Check if censoredWord is not empty, indicating the presence of bad words
+                    return !censoredWord.isEmpty() && !censoredWord.equals(text); // Return true if censored word is found and not equal to the original text
+                }
+            } else {
+                // Handle unsuccessful response
+                throw new RuntimeException("Error: HTTP error code: " + responseCode);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Error connecting to API", e);
+        }
+    }
+
+
+
+
 
 
 }

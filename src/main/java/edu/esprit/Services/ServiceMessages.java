@@ -83,7 +83,8 @@ public class ServiceMessages implements IService<Messages> {
     public List<Messages> getMessagesByReclamationId(int reclamation_id) {
         try {
             List<Messages> messages = new ArrayList<>();
-
+            // Adjust the SQL query to join the messages table with the user table
+            // to fetch the sender's name and role along with the message details.
             String sql = "SELECT m.*, u.name , u.role FROM messages m " +
                     "JOIN user u ON m.sender_id = u.id WHERE m.reclamation_id = ?";
             PreparedStatement ps = cnx.prepareStatement(sql);
@@ -101,7 +102,7 @@ public class ServiceMessages implements IService<Messages> {
                 message.setReceiver_id(rs.getInt("receiver_id"));
                 message.setReclamation_id(rs.getInt("reclamation_id"));
                 message.setContent(rs.getString("content"));
-
+                // Set sender's name and role fetched from the user table
                 message.setName(rs.getString("name"));
                 message.setRole(rs.getString("role"));
                 messages.add(message);
