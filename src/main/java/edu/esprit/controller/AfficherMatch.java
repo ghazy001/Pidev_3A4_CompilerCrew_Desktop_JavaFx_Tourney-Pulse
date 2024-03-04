@@ -562,6 +562,13 @@ public class AfficherMatch implements Initializable {
     void refrechMatchAction(ActionEvent event) {
         loadData();
         TFrecherchem.clear();
+        TFnomm.clear();
+        TFdureem.clear();
+        TFtournois.clear();
+        TFequipe1.clear();
+        TFequipe2.clear();
+        DPdatem.setValue(null);
+        TFnomm.requestFocus();
     }
 
     private void advancedSearchMatch() {
@@ -595,6 +602,38 @@ public class AfficherMatch implements Initializable {
                 gridPane.add(ideLabel2, 0, 6);
 
                 TitledPane titledPane = new TitledPane("Match " + matchs.getId_match(), gridPane);
+
+                    titledPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent mouseEvent) {
+                            selectedIdm = "" + matchs.getId_match();
+                            selectedNomm = matchs.getNom_match();
+                            selectedDate = String.valueOf(matchs.getDate_match());
+                            selectedDuree = matchs.getDuree_match();
+                            selectedTournois = matchs.getTournois().getNom_tournois();
+                            selectedEquipe1 = matchs.getEquipe().getNom_equipe();
+                            selectedEquipe2 = matchs.getEquipe1().getNom_equipe();
+
+                            // Perform any action with the selected values
+                            System.out.println("Selected ID: " + selectedIdm);
+                            System.out.println("Selected Nom: " + selectedNomm);
+                            System.out.println("Selected Date: " + selectedDate);
+                            System.out.println("Selected Duree: " + selectedDuree);
+                            System.out.println("Selected Tournois: " + selectedTournois);
+                            System.out.println("Selected Equipe 1: " + selectedEquipe1);
+                            System.out.println("Selected Equipe 2: " + selectedEquipe2);
+
+
+                            TFnomm.setText(selectedNomm);
+                            LocalDate dateMatch = Date.valueOf(selectedDate).toLocalDate();
+                            DPdatem.setValue(dateMatch);
+                            TFdureem.setText(selectedDuree);
+                            TFtournois.setText(selectedTournois);
+                            TFequipe1.setText(selectedEquipe1);
+                            TFequipe2.setText(selectedEquipe2);
+
+                        }
+                    });
 
                 Vboxx.getChildren().add(titledPane);
             }

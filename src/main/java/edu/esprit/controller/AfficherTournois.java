@@ -576,6 +576,12 @@ public class AfficherTournois implements Initializable {
         void refrechTournoisAction(ActionEvent event) {
                 loadData();
                 TFrecherchet.clear();
+                TFnomt.clear();
+                TFstade.clear();
+                TFnbrmatch.clear();
+                DPdated.setValue(null);
+                DPdatef.setValue(null);
+                TFnomt.requestFocus();
 
         }
 
@@ -610,6 +616,35 @@ public class AfficherTournois implements Initializable {
                                 gridPane.add(datefLabel, 0, 5);
 
                                 TitledPane titledPane = new TitledPane("Tournois " + tournois.getId_tournois(), gridPane);
+
+                                titledPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                                        @Override
+                                        public void handle(MouseEvent mouseEvent) {
+                                                selectedIdt = "" + tournois.getId_tournois();
+                                                selectedNomt = tournois.getNom_tournois();
+                                                selectedStade = tournois.getStade();
+                                                selectedNombrem = String.valueOf(tournois.getNombre_match());
+                                                selectedDated = String.valueOf(tournois.getDate_debut());
+                                                selectedDatef = String.valueOf(tournois.getDate_fin());
+
+                                                // Perform any action with the selected values
+                                                System.out.println("Selected ID: " + selectedIdt);
+                                                System.out.println("Selected Nom: " + selectedNomt);
+                                                System.out.println("Selected Stade: " + selectedStade);
+                                                System.out.println("Selected Nombre Matchs: " + selectedNombrem);
+                                                System.out.println("Selected Date Debut: " + selectedDated);
+                                                System.out.println("Selected Date Fin: " + selectedDatef);
+
+                                                TFnomt.setText(selectedNomt);
+                                                TFstade.setText(selectedStade);
+                                                TFnbrmatch.setText(selectedNombrem);
+                                                LocalDate dateDebut = Date.valueOf(selectedDated).toLocalDate();
+                                                DPdated.setValue(dateDebut);
+                                                LocalDate dateFin = Date.valueOf(selectedDatef).toLocalDate();
+                                                DPdatef.setValue(dateFin);
+
+                                        }
+                                });
 
                                 Vbox.getChildren().add(titledPane);
                         }
