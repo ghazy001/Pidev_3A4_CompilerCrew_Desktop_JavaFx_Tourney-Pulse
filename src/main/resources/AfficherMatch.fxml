@@ -2,6 +2,7 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="1132.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controller.AfficherMatch">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="1208.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controller.AfficherMatch">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -193,24 +194,10 @@
                                     </ImageView>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="414.0" layoutY="7.0" prefHeight="636.0" prefWidth="490.0" style="-fx-background-color: #fff; -fx-background-radius: 8px;" styleClass="shadow" stylesheets="@Style/StyleSheet.css">
+                              <AnchorPane layoutX="414.0" layoutY="7.0" prefHeight="636.0" prefWidth="566.0" style="-fx-background-color: #fff; -fx-background-radius: 8px;" styleClass="shadow" stylesheets="@Style/StyleSheet.css">
                                  <children>
-                                    <VBox fx:id="Vboxx" layoutX="7.0" layoutY="51.0" prefHeight="575.0" prefWidth="479.0" styleClass="vbox" stylesheets="@Style/StyleSheet.css" />
-                                    <TextField fx:id="TFrecherchem" layoutX="130.0" layoutY="11.0" prefHeight="34.0" prefWidth="225.0" promptText="Search" />
-                                    <Button fx:id="Brecherchem" layoutX="364.0" layoutY="12.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="114.0" stylesheets="@Style/StyleSheet.css" text="Search" textFill="WHITE">
-                                       <font>
-                                          <Font name="System Bold" size="14.0" />
-                                       </font>
-                                       <styleClass>
-                                          <String fx:value="shadow" />
-                                          <String fx:value="btn" />
-                                       </styleClass>
-                                    </Button>
-                                    <ImageView fitHeight="27.0" fitWidth="24.0" layoutX="371.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@Image/chercher.png" />
-                                       </image>
-                                    </ImageView>
+                                    <VBox fx:id="Vboxx" layoutX="7.0" layoutY="51.0" prefHeight="575.0" prefWidth="552.0" styleClass="vbox" stylesheets="@Style/StyleSheet.css" />
+                                    <TextField fx:id="TFrecherchem" layoutX="130.0" layoutY="11.0" prefHeight="34.0" prefWidth="235.0" promptText="Search" />
                                     <Button layoutX="7.0" layoutY="10.0" mnemonicParsing="false" onAction="#refrechMatchAction" prefHeight="34.0" prefWidth="117.0" stylesheets="@Style/StyleSheet.css" text="Refrech" textFill="WHITE">
                                        <styleClass>
                                           <String fx:value="btn" />
@@ -225,6 +212,12 @@
                                           <Image url="@Image/rafraichir.png" />
                                        </image>
                                     </ImageView>
+                                    <ComboBox fx:id="CBmatch" layoutX="370.0" layoutY="10.0" prefHeight="34.0" prefWidth="183.0" stylesheets="@Style/StyleSheet.css">
+                                       <styleClass>
+                                          <String fx:value="btn" />
+                                          <String fx:value="shadow" />
+                                       </styleClass>
+                                    </ComboBox>
                                  </children>
                               </AnchorPane>
                            </children>

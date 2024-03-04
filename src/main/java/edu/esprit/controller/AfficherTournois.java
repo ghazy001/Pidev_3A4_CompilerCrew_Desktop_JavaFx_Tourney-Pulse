@@ -28,6 +28,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -41,7 +42,7 @@ public class AfficherTournois implements Initializable {
         private Button Bnavigatet;
 
         @FXML
-        private Button Brecherchet;
+        private ComboBox<String> CBtournois;
 
         @FXML
         private Button Bnavigatestats;
@@ -183,7 +184,7 @@ public class AfficherTournois implements Initializable {
 
                         for (Tournois tournois : tournoisList) {
                                 System.out.println("Adding tournois to TitledPane: " + tournois);
-                                // Create layout for each reclamation
+                                // Create layout for each tournois
                                 Label nomtLabel = new Label("Nom: " + tournois.getNom_tournois());
                                 Label stadeLabel = new Label("Nom Stade: " + tournois.getStade());
                                 Label nombremLabel = new Label("Nombre Match: " + tournois.getNombre_match());
@@ -329,7 +330,44 @@ public class AfficherTournois implements Initializable {
 
                         });
 
-                Brecherchet.setOnAction(event -> searchTournaments());
+                CBtournois.getItems().addAll("Nom Tournois", "Nombre Match", "Date Début", "Date Fin");
+                CBtournois.setValue("Nom Tournoi");
+                CBtournois.setOnAction(event -> {
+                        String selectedOption = CBtournois.getValue();
+                        // Trier les tournois en fonction de l'option sélectionnée dans le ComboBox
+                        if (selectedOption.equals("Nom Tournois")) {
+                                tournoisList.sort(Comparator.comparing(Tournois::getNom_tournois));
+                        } else if (selectedOption.equals("Date Début")) {
+                                tournoisList.sort(Comparator.comparing(Tournois::getDate_debut));
+                        } else if (selectedOption.equals("Date Fin")) {
+                                tournoisList.sort(Comparator.comparing(Tournois::getDate_fin));
+                        } else if (selectedOption.equals("Nombre Match")) {
+                                tournoisList.sort(Comparator.comparing(Tournois::getNombre_match));
+                        }
+
+                        // Afficher les tournois triés dans les TitledPane
+                        Vbox.getChildren().clear();
+                        for (Tournois tournois : tournoisList) {
+                                // Créer et ajouter les TitledPane avec les tournois triés
+                                Label nomtLabel = new Label("Nom: " + tournois.getNom_tournois());
+                                Label stadeLabel = new Label("Nom Stade: " + tournois.getStade());
+                                Label nombremLabel = new Label("Nombre Match: " + tournois.getNombre_match());
+                                Label datedLabel = new Label("Date Début: " + tournois.getDate_debut());
+                                Label datefLabel = new Label("Date Fin: " + tournois.getDate_fin());
+
+                                GridPane gridPane = new GridPane();
+                                gridPane.add(nomtLabel, 0, 1);
+                                gridPane.add(stadeLabel, 0, 2);
+                                gridPane.add(nombremLabel, 0, 3);
+                                gridPane.add(datedLabel, 0, 4);
+                                gridPane.add(datefLabel, 0, 5);
+
+                                TitledPane titledPane = new TitledPane("Tournois " + tournois.getId_tournois(), gridPane);
+                                Vbox.getChildren().add(titledPane);
+                        }
+                });
+
+                        TFrecherchet.setOnAction(event -> advancedSearchTournaments());
 
 
 
@@ -541,7 +579,7 @@ public class AfficherTournois implements Initializable {
 
         }
 
-        private void searchTournaments() {
+        private void advancedSearchTournaments() {
                 List<Tournois> tournoisList = serviceTournois.getAll();
                 System.out.println("Tournois List: " + tournoisList);
                 String searchText = TFrecherchet.getText().trim().toLowerCase(); // Récupérez le texte de recherche
@@ -549,8 +587,15 @@ public class AfficherTournois implements Initializable {
 
                 // Parcourez la liste des tournois et recherchez ceux correspondant au critère de recherche
                 for (Tournois tournois : tournoisList) {
-                        if (tournois.getNom_tournois().toLowerCase().contains(searchText) || tournois.getStade().toLowerCase().contains(searchText)) {
-                                // Si le nom du tournoi correspond au critère de recherche, affichez-le
+                        boolean tournoisSearch = false;
+                        // Vérifiez si le nom du tournoi ou le nom du stade correspond au critère de recherche
+                        if (tournois.getNom_tournois().toLowerCase().contains(searchText) ||
+                                tournois.getStade().toLowerCase().contains(searchText)) {
+                                tournoisSearch = true;
+                        }
+
+                        if (tournoisSearch) {
+                                // Affichez les informations sur le tournoi
                                 Label nomtLabel = new Label("Nom: " + tournois.getNom_tournois());
                                 Label stadeLabel = new Label("Nom Stade: " + tournois.getStade());
                                 Label nombremLabel = new Label("Nombre Match: " + tournois.getNombre_match());
@@ -579,7 +624,7 @@ public class AfficherTournois implements Initializable {
 
                 for (Tournois tournois : tournoisList) {
                         System.out.println("Adding tournois to TitledPane: " + tournois);
-                        // Create layout for each reclamation
+                        // Create layout for each tournois
                         Label nomtLabel = new Label("Nom: " + tournois.getNom_tournois());
                         Label stadeLabel = new Label("Nom Stade: " + tournois.getStade());
                         Label nombremLabel = new Label("Nombre Match: " + tournois.getNombre_match());

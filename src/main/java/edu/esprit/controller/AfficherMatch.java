@@ -15,7 +15,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -31,6 +30,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -43,7 +43,7 @@ public class AfficherMatch implements Initializable {
     private Button Bnavigatem;
 
     @FXML
-    private Button Brecherchem;
+    private ComboBox<String> CBmatch;
 
     @FXML
     private Button Bnavigatestats;
@@ -53,7 +53,6 @@ public class AfficherMatch implements Initializable {
 
     @FXML
     private Button Bnavigatemail;
-
 
     @FXML
     private DatePicker DPdatem;
@@ -75,12 +74,6 @@ public class AfficherMatch implements Initializable {
 
     @FXML
     private TextField TFtournois;
-
-    @FXML
-    private TextField cityInput;
-
-    @FXML
-    private Text weatherText;
 
     @FXML
     private VBox Vboxx;
@@ -186,7 +179,7 @@ public class AfficherMatch implements Initializable {
 
         for (Matchs matchs : matchsList) {
             System.out.println("Adding match to TitledPane: " + matchs);
-            // Create layout for each reclamation
+            // Create layout for each match
             Label nommLabel = new Label("Nom: " + matchs.getNom_match());
             Label dateLabel = new Label("Date: " + matchs.getDate_match());
             Label dureeLabel = new Label("Duree: " + matchs.getDuree_match());
@@ -332,7 +325,42 @@ public class AfficherMatch implements Initializable {
 
         });
 
-        Brecherchem.setOnAction(event -> searchTournaments());
+        CBmatch.getItems().addAll("Nom Matchs", "Date Match");
+        CBmatch.setValue("Nom Tournoi");
+        CBmatch.setOnAction(event -> {
+            String selectedOption = CBmatch.getValue();
+            // Trier les tournois en fonction de l'option sélectionnée dans le ComboBox
+            if (selectedOption.equals("Nom Matchs")) {
+                matchsList.sort(Comparator.comparing(Matchs::getNom_match));
+            } else if (selectedOption.equals("Date Match")) {
+                matchsList.sort(Comparator.comparing(Matchs::getDate_match));
+            }
+
+            // Afficher les tournois triés dans les TitledPane
+            Vboxx.getChildren().clear();
+            for (Matchs matchs : matchsList) {
+                // Créer et ajouter les TitledPane avec les matchs triés
+                Label nommLabel = new Label("Nom: " + matchs.getNom_match());
+                Label dateLabel = new Label("Date: " + matchs.getDate_match());
+                Label dureeLabel = new Label("Duree: " + matchs.getDuree_match());
+                Label idtLabel = new Label("Nom Tournois: " + matchs.getTournois().getNom_tournois());
+                Label ideLabel1 = new Label("Nom Equipe 1: " + (matchs.getEquipe().getNom_equipe() ));
+                Label ideLabel2 = new Label("Nom Equipe 2: " + (matchs.getEquipe1().getNom_equipe()));
+
+                GridPane gridPane = new GridPane();
+                gridPane.add(nommLabel, 0, 1);
+                gridPane.add(dateLabel, 0, 2);
+                gridPane.add(dureeLabel, 0, 3);
+                gridPane.add(idtLabel, 0, 4);
+                gridPane.add(ideLabel1, 0, 5);
+                gridPane.add(ideLabel2, 0, 6);
+
+                TitledPane titledPane = new TitledPane("Match " + matchs.getId_match(), gridPane);
+                Vboxx.getChildren().add(titledPane);
+            }
+        });
+
+        TFrecherchem.setOnAction(event -> advancedSearchMatch());
 
     }
 
@@ -536,22 +564,27 @@ public class AfficherMatch implements Initializable {
         TFrecherchem.clear();
     }
 
-    private void searchTournaments() {
+    private void advancedSearchMatch() {
         List<Matchs> matchsList = serviceMatch.getAll();
         System.out.println("Match List: " + matchsList);
         String searchText = TFrecherchem.getText().trim().toLowerCase(); // Récupérez le texte de recherche
         Vboxx.getChildren().clear(); // Effacez les résultats précédents
 
-        // Parcourez la liste des tournois et recherchez ceux correspondant au critère de recherche
+        // Parcourez la liste des matchs et recherchez ceux correspondant au critère de recherche
         for (Matchs matchs : matchsList) {
-            if (matchs.getNom_match().toLowerCase().contains(searchText)) {
-                // Si le nom du tournoi correspond au critère de recherche, affichez-le
+            boolean matchsSearch = false;
+            if (matchs.getNom_match().toLowerCase().contains(searchText) ||
+                    matchs.getTournois().getNom_tournois().toLowerCase().contains(searchText)) {
+                matchsSearch = true;
+                }
+                if(matchsSearch){
+                // Si les critères de recherche correspondent, affichez le match
                 Label nommLabel = new Label("Nom: " + matchs.getNom_match());
                 Label dateLabel = new Label("Date: " + matchs.getDate_match());
                 Label dureeLabel = new Label("Duree: " + matchs.getDuree_match());
                 Label idtLabel = new Label("Nom Tournois: " + matchs.getTournois().getNom_tournois());
-                Label ideLabel1 = new Label("Nom Equipe 1: " + (matchs.getEquipe().getNom_equipe() ));
-                Label ideLabel2 = new Label("Nom Equipe 2: " + (matchs.getEquipe1().getNom_equipe()));
+                Label ideLabel1 = new Label("Nom Equipe 1: " + matchs.getEquipe().getNom_equipe());
+                Label ideLabel2 = new Label("Nom Equipe 2: " + matchs.getEquipe1().getNom_equipe());
 
                 GridPane gridPane = new GridPane();
                 gridPane.add(nommLabel, 0, 1);
@@ -570,6 +603,7 @@ public class AfficherMatch implements Initializable {
 
 
 
+
     private void loadData() {
         Vboxx.getChildren().clear(); // Clear existing display
         List<Matchs> matchsList = serviceMatch.getAll();
@@ -577,7 +611,7 @@ public class AfficherMatch implements Initializable {
 
         for (Matchs matchs : matchsList) {
             System.out.println("Adding match to TitledPane: " + matchs);
-            // Create layout for each reclamation
+            // Create layout for each match
             Label nommLabel = new Label("Nom: " + matchs.getNom_match());
             Label dateLabel = new Label("Date: " + matchs.getDate_match());
             Label dureeLabel = new Label("Duree: " + matchs.getDuree_match());

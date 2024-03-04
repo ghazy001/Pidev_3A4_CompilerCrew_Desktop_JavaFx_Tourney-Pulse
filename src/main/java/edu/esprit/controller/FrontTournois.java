@@ -131,17 +131,19 @@ public class FrontTournois implements Initializable {
         }
         loadData();
 
-        Brecherchet.setOnAction(event -> searchTournaments());
+        TFrecherchet.setOnAction(event -> advancedSearchTournaments());
 
     }
 
     @FXML
     void refrechTournoisAction(ActionEvent event) {
         loadData();
+        LLafichet.setText(" ");
+        TFrecherchet.clear();
 
     }
 
-    private void searchTournaments() {
+    private void advancedSearchTournaments() {
         List<Tournois> tournoisList = serviceTournois.getAll();
         System.out.println("Tournois List: " + tournoisList);
         String searchText = TFrecherchet.getText().trim().toLowerCase(); // Récupérez le texte de recherche
@@ -149,23 +151,56 @@ public class FrontTournois implements Initializable {
 
         // Parcourez la liste des tournois et recherchez ceux correspondant au critère de recherche
         for (Tournois tournois : tournoisList) {
-            if (tournois.getNom_tournois().toLowerCase().contains(searchText) || tournois.getStade().toLowerCase().contains(searchText)) {
-                // Si le nom du tournoi correspond au critère de recherche, affichez-le
+            boolean tournoisSearch = false;
+            // Vérifiez si le nom du tournoi ou le nom du stade correspond au critère de recherche
+            if (tournois.getNom_tournois().toLowerCase().contains(searchText) ||
+                    tournois.getStade().toLowerCase().contains(searchText)) {
+                tournoisSearch = true;
+            }
+
+            if (tournoisSearch) {
+                // Affichez les informations sur le tournoi
                 Label nomtLabel = new Label("Nom: " + tournois.getNom_tournois());
-                Label addressLabel = new Label("Address: " + tournois.getStade());
+                Label stadeLabel = new Label("Nom Stade: " + tournois.getStade());
                 Label nombremLabel = new Label("Nombre Match: " + tournois.getNombre_match());
                 Label datedLabel = new Label("Date Debut: " + tournois.getDate_debut());
                 Label datefLabel = new Label("Date Fin: " + tournois.getDate_fin());
 
                 GridPane gridPane = new GridPane();
                 gridPane.add(nomtLabel, 0, 1);
-                gridPane.add(addressLabel, 0, 2);
+                gridPane.add(stadeLabel, 0, 2);
                 gridPane.add(nombremLabel, 0, 3);
                 gridPane.add(datedLabel, 0, 4);
                 gridPane.add(datefLabel, 0, 5);
 
                 TitledPane titledPane = new TitledPane("Tournois " + tournois.getId_tournois(), gridPane);
 
+                titledPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        if (tournois != null) {
+                            // Assurez-vous que LLafichet n'est pas null pour éviter les erreurs
+                            if (LLafichet != null) {
+                                // Récupérez les valeurs sélectionnées
+                                String selectedNomt = tournois.getNom_tournois();
+                                String selectedAddress = tournois.getStade();
+                                String selectedNombrem = String.valueOf(tournois.getNombre_match());
+                                String selectedDated = String.valueOf(tournois.getDate_debut());
+                                String selectedDatef = String.valueOf(tournois.getDate_fin());
+
+                                // Mettre à jour le Label avec les valeurs sélectionnées
+                                LLafichet.setText(
+                                        "Selected Nom: " + selectedNomt + "\n" +
+                                                "Selected Address: " + selectedAddress + "\n" +
+                                                "Selected Nombre Matchs: " + selectedNombrem + "\n" +
+                                                "Selected Date Debut: " + selectedDated + "\n" +
+                                                "Selected Date Fin: " + selectedDatef
+                                );
+                            }
+                        }
+
+                    }
+                });
 
                 Vbox.getChildren().add(titledPane);
             }
