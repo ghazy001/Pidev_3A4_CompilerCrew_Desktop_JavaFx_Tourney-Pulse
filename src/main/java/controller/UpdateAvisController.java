@@ -49,7 +49,7 @@ public class UpdateAvisController implements Initializable {
     @FXML
     private Button delete;
     @FXML
-    private Button home;
+    private Button home,btnEquipe;
     @FXML
     VBox myBox;
 
@@ -205,6 +205,25 @@ public class UpdateAvisController implements Initializable {
               }
           }
       });
+
+      //-------------------- go to equipe for admin ----------------
+
+        btnEquipe.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/DisplayEquipe.fxml"));
+                try {
+                    Parent root = loader.load();
+                    Stage stage = (Stage) home.getScene().getWindow();
+                    stage.setScene(new Scene(root));
+                    stage.setTitle("Gestion Equipe");
+                    stage.show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        });
 
 
 

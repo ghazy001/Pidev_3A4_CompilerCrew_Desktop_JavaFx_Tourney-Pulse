@@ -3,6 +3,7 @@ package controller;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -16,6 +17,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import okhttp3.OkHttpClient;
@@ -33,6 +36,12 @@ import java.util.ResourceBundle;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import java.io.IOException;
+
+
+import edu.cmu.sphinx.api.Configuration;
+import edu.cmu.sphinx.api.LiveSpeechRecognizer;
+import edu.cmu.sphinx.api.SpeechResult;
 import java.io.IOException;
 
 /*
@@ -69,6 +78,8 @@ public class HOMEController implements Initializable {
     Button facebook;
     @FXML
     Button chatgpt;
+    @FXML
+    ImageView assistance;
 
 
 
@@ -345,6 +356,17 @@ public class HOMEController implements Initializable {
             }
         });
 
+        //------------voice assistant -------------
+     assistance.setOnMouseClicked(new EventHandler<MouseEvent>() {
+         @Override
+         public void handle(MouseEvent mouseEvent) {
+             try {
+                 VoiceAI_Assistant();
+             } catch (Exception e) {
+                 throw new RuntimeException(e);
+             }
+         }
+     });
 
 
 
@@ -353,6 +375,56 @@ public class HOMEController implements Initializable {
 
 
 
+
+
+
+
+    }
+
+
+
+    public void VoiceAI_Assistant() throws Exception {
+        Configuration config = new Configuration();
+
+        config.setAcousticModelPath("resource:/edu/cmu/sphinx/models/en-us/en-us");
+        config.setDictionaryPath("src/main/resources/Voice/4580.dic");
+        config.setLanguageModelPath("src/main/resources/Voice/4580.lm");
+
+        LiveSpeechRecognizer speech = null;
+
+        try {
+            speech = new LiveSpeechRecognizer(config);
+            speech.startRecognition(true);
+
+            SpeechResult speechResult = null;
+
+            while ((speechResult = speech.getResult()) != null) {
+                String voiceCommand = speechResult.getHypothesis().trim();
+                System.out.println("Voice Command is " + voiceCommand);
+
+                if (voiceCommand.equalsIgnoreCase("Open Chat")) {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/chatgpt.fxml"));
+                        Parent root = loader.load();
+                        Stage stage = (Stage) date.getScene().getWindow();
+                        stage.setScene(new Scene(root));
+                        stage.setTitle("Tourney AI");
+                        stage.show();
+                        speech.stopRecognition();
+                    } catch (IOException e) {
+                        System.err.println("Error loading chatgpt.fxml: " + e.getMessage());
+                    } finally {
+                        // Stop recognition after executing the "Open Chat" command
+                      //
+                    }
+
+                } else if (voiceCommand.equalsIgnoreCase("Close chat")) {
+
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error initializing LiveSpeechRecognizer: " + e.getMessage());
+        }
     }
 
 

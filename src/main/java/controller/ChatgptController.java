@@ -72,7 +72,7 @@ public class ChatgptController implements Initializable {
 
 
 
-    private static final String API_KEY = "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";
+    private static final String API_KEY = "ur api key";
     private static final String GPT_MODEL = "gpt-3.5-turbo";
     private static final String API_URL = "https://api.openai.com/v1/chat/completions";
 

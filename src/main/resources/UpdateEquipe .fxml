@@ -45,6 +45,14 @@
                   <Insets left="40.0" top="26.0" />
                </VBox.margin>
             </Button>
+            <Button fx:id="btnAvis" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Avis">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets left="40.0" top="26.0" />
+               </VBox.margin>
+            </Button>
          </children>
       </VBox>
       <VBox layoutX="500.0" layoutY="-10.0" prefHeight="409.0" prefWidth="110.0" style="-fx-background-color: #c3cfb6;" />

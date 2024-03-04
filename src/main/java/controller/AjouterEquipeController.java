@@ -70,7 +70,7 @@ public class AjouterEquipeController implements Initializable {
     private String imagePath; // Add this line to store the image path
 
     public static final String ACCOUNT_SID = "AC4d1d41f7d616d4a60ac222a861f9a695";
-    public static final String AUTH_TOKEN = "8928380347ef9d1c77df60e9a6b2895f";
+    public static final String AUTH_TOKEN = "ur api key";
 
 
 

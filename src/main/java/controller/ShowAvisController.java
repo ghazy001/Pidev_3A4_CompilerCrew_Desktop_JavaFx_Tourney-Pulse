@@ -27,8 +27,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 /*
 *
@@ -69,9 +71,13 @@ public class ShowAvisController implements Initializable {
             return; // Handle the exception according to your needs
         }
 
+        // top rating b stream
+        List<AvisJoueur> sortedAvisList = avisList.stream()
+                .sorted(Comparator.comparing(AvisJoueur::getNote).reversed())
+                .collect(Collectors.toList());
 
         // Add data to the VBox
-        for (AvisJoueur avis : avisList) {
+        for (AvisJoueur avis : sortedAvisList) {
             TitledPane titledPane = new TitledPane();
             titledPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
 

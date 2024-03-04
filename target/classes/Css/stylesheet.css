@@ -292,6 +292,32 @@
     -fx-cursor: hand; /* Change cursor on hover */
     -fx-rotate: 5deg; /* Add a subtle rotation on hover */
 }
+#btnEquipe {
+
+    -fx-font-size: 11px;
+    -fx-font-family: 'Arial Black';
+    -fx-text-fill: #1F3D1C; /* Light Green */
+    -fx-font-weight: bold;
+    -fx-background-color: #c3cfb6; /* Light Green background */
+    -fx-background-radius: 8;
+    -fx-padding: 10px 20px;
+    -fx-border-width: 2;
+    -fx-border-color: #688a38; /* Olive Green border */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 1);
+    -fx-transition: transform 0.3s, background-color 0.3s, text-fill 0.3s, border-color 0.3s;
+}
+
+/* Styles for the Button with fx:id "myButton" when hovered */
+#btnEquipe:hover {
+    -fx-background-color: #688a38; /* Olive Green background on hover */
+    -fx-text-fill: #c3cfb6; /* Light Green text on hover */
+    -fx-border-color: #1F3D1C; /* Dark Green border on hover */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 1); /* Increase drop shadow on hover */
+    -fx-cursor: hand; /* Change cursor on hover */
+    -fx-rotate: 5deg; /* Add a subtle rotation on hover */
+}
+
+
 
 
 

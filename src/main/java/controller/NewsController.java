@@ -36,6 +36,8 @@ public class NewsController implements Initializable {
     private TableColumn<JsonNode, Integer> golasagiCol;
     @FXML
     private TableColumn<JsonNode, Integer> pointsCol;
+
+
     @FXML
     private ListView<String> List;
 
@@ -51,7 +53,7 @@ public class NewsController implements Initializable {
             Request request = new Request.Builder()
                     .url("https://heisenbug-premier-league-live-scores-v1.p.rapidapi.com/api/premierleague/table")
                     .get()
-                    .addHeader("X-RapidAPI-Key", "75127938d7msh51c5d5c4682346ep1183b9jsn567fbafe3aaf")
+                    .addHeader("X-RapidAPI-Key", "ur api key")
                     .addHeader("X-RapidAPI-Host", "heisenbug-premier-league-live-scores-v1.p.rapidapi.com")
                     .build();
 
@@ -159,7 +161,7 @@ public class NewsController implements Initializable {
             Request request = new Request.Builder()
                     .url("https://heisenbug-premier-league-live-scores-v1.p.rapidapi.com/api/premierleague/team?name=" + teamName)
                     .get()
-                    .addHeader("X-RapidAPI-Key", "75127938d7msh51c5d5c4682346ep1183b9jsn567fbafe3aaf")
+                    .addHeader("X-RapidAPI-Key", "ur api key")
                     .addHeader("X-RapidAPI-Host", "heisenbug-premier-league-live-scores-v1.p.rapidapi.com")
                     .build();
 

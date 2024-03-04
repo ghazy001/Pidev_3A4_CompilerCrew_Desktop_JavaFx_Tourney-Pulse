@@ -40,6 +40,10 @@ public class DisplayEquipeController implements Initializable {
 
     @FXML
     TextField searchbar;
+    @FXML
+    ComboBox comboBox;
+
+
 
 
 
@@ -63,6 +67,10 @@ public class DisplayEquipeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+
+
         //------------------------display------------------------
 
         gameList = FXCollections.observableList(ListEquipe);
@@ -94,13 +102,17 @@ public class DisplayEquipeController implements Initializable {
                     }
 
                     String team = "TEAM";
-                    String players = "PLAYERS :";
+                    String players = "squad size :";
                     String date = "DATE";
 
                     String text = "\n" + equipe.getNom() + "\n" +
                             players + jouersText.toString() +
                             "\n" + String.valueOf(equipe.getDateCreation());
-                    setText(text);
+
+                    String newText = "\n" + equipe.getNom() + "\n" +
+                            players + equipe.getJouers().size() +
+                            "\n" + String.valueOf(equipe.getDateCreation());
+                    setText(newText);
                     setGraphic(imageView);
                 }
             }
@@ -155,15 +167,64 @@ public class DisplayEquipeController implements Initializable {
 
 
 
+        //------------------------ ComboBox functionality ------------------------
+        // Inside the initialize method
 
-            //------------------------ ComboBox functionality ------------------------
 
-        }
+        comboBox.getItems().addAll("nom");
+        comboBox.setValue("nom");
+
+
+
+        comboBox.setOnAction(event -> {
+            String selectedOption = comboBox.getValue().toString();
+            if (selectedOption.equals("nom")) {
+
+
+                gameList.sort(Comparator.comparing(Equipe::getNom));
+
+
+                Mylist.getItems().setAll(gameList);
+            }
+
+
+        });
+
+
+
+
+
+
+
+
+
 
 
 
 
     }
+
+
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -41,7 +41,7 @@ public class UpdateEquipeController implements Initializable {
     @FXML
     ImageView image;
     @FXML
-    Button upload,update,delete,home,JoinTeam;
+    Button upload,update,delete,home,JoinTeam,btnAvis;
     @FXML
     TextField Nomequipe;
     @FXML
@@ -219,6 +219,25 @@ public class UpdateEquipeController implements Initializable {
             @Override
             public void handle(ActionEvent actionEvent) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/AffecterPlayers.fxml"));
+                try {
+                    Parent root = loader.load();
+                    Stage stage = (Stage) home.getScene().getWindow();
+                    stage.setScene(new Scene(root));
+                    stage.setTitle("Gestion Equipe");
+                    stage.show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        });
+
+        //-------------go to avis from admin -----------------
+
+        btnAvis.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowAvisPLayer.fxml"));
                 try {
                     Parent root = loader.load();
                     Stage stage = (Stage) home.getScene().getWindow();
