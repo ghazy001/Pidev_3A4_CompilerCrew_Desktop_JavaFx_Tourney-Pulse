@@ -15,20 +15,125 @@
 
 <AnchorPane prefHeight="509.0" prefWidth="799.0" style="-fx-background-color: #688a38;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UiadminController">
    <children>
-      <HBox layoutY="42.0" prefHeight="467.0" prefWidth="799.0" style="-fx-background-color: #c3cfb6;">
+      <HBox fx:id="chartContainer" layoutY="42.0" prefHeight="467.0" prefWidth="799.0" style="-fx-background-color: #c3cfb6;">
          <children>
-            <VBox prefHeight="451.0" prefWidth="151.0" style="-fx-background-color: #688a38;">
+            <VBox prefHeight="495.0" prefWidth="194.0" style="-fx-background-color: #688a38;">
                <children>
-                  <Button mnemonicParsing="false" style="-fx-background-color: #1f3d1c;" text="Dashboard" textFill="#c3cfb6">
+                  <ImageView fitHeight="118.0" fitWidth="136.0">
+                     <image>
+                        <Image url="@media/421909257_266130739694870_1007709414835084119_n-removebg-preview%20(1).png" />
+                     </image>
                      <VBox.margin>
-                        <Insets left="35.0" top="130.0" />
+                        <Insets left="10.0" />
                      </VBox.margin>
-                  </Button>
-                  <Button mnemonicParsing="false" style="-fx-background-color: #1f3d1c;" text="Users" textFill="#c3cfb6">
+                  </ImageView>
+                  <HBox prefHeight="30.0" prefWidth="151.0">
+                     <children>
+                        <Button fx:id="dashboardbtn" mnemonicParsing="false" onAction="#handleDashboardButton" style="-fx-background-color: #688a38;" text="Dashboard" textFill="#1f3d1c">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0">
+                                 <image>
+                                    <Image url="@media/icons8-dashboard-48.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
                      <VBox.margin>
-                        <Insets left="50.0" top="100.0" />
+                        <Insets left="10.0" top="20.0" />
                      </VBox.margin>
-                  </Button>
+                  </HBox>
+                  <HBox prefHeight="34.0" prefWidth="151.0">
+                     <children>
+                        <Button fx:id="feedback" mnemonicParsing="false" style="-fx-background-color: #688a38;" text="Feedback" textFill="#1f3d1c">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0">
+                                 <image>
+                                    <Image url="@media/icons8-feedback-24.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="10.0" top="20.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="37.0" prefWidth="151.0">
+                     <children>
+                        <Button fx:id="usersButton" mnemonicParsing="false" onAction="#handleUsersButton" prefHeight="27.0" prefWidth="76.0" style="-fx-background-color: #688a38;" text="Users" textFill="#1f3d1c">
+                           <graphic>
+                              <ImageView fitHeight="27.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@media/icons8-user-96.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="10.0" top="20.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="31.0" prefWidth="151.0">
+                     <children>
+                        <Button fx:id="playerrat" mnemonicParsing="false" style="-fx-background-color: #688a38;" text="Manage Stadium" textFill="#1f3d1c">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0">
+                                 <image>
+                                    <Image url="@media/icons8-soccer-player-48.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="10.0" top="20.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="41.0" prefWidth="151.0">
+                     <children>
+                        <Button fx:id="mngtourn" mnemonicParsing="false" style="-fx-background-color: #688a38;" text="Manage tournament" textFill="#1f3d1c">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0">
+                                 <image>
+                                    <Image url="@media/icons8-analytics-30.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="10.0" top="20.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="31.0" prefWidth="151.0">
+                     <children>
+                        <TextField fx:id="TFusername" alignment="CENTER" prefHeight="44.0" prefWidth="138.0" promptText="Userename" style="-fx-background-color: #688a38;">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </TextField>
+                        <Button fx:id="logoutbtn" mnemonicParsing="false" onAction="#logout" prefHeight="20.0" prefWidth="41.0" style="-fx-background-color: #688a38;">
+                           <graphic>
+                              <ImageView fx:id="logout" fitHeight="25.0" fitWidth="25.0">
+                                 <image>
+                                    <Image url="@media/icons8-logout-50.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="60.0" />
+                     </VBox.margin>
+                  </HBox>
                </children>
             </VBox>
             <ListView fx:id="listView" prefHeight="509.0" prefWidth="390.0" style="-fx-background-color: #c3cfb6; -fx-control-inner-background: #c3cfb6; -fx-text-fill: #1f3d1c;" />
@@ -125,7 +230,7 @@
                         <Insets right="5.0" top="10.0" />
                      </VBox.margin>
                   </ComboBox>
-                  <Button fx:id="savebtn" mnemonicParsing="false" onAction="#handleSave" prefHeight="25.0" prefWidth="68.0" style="-fx-background-color: #688a38;" text="Save " textFill="#c3cfb6">
+                  <Button fx:id="savebtn" mnemonicParsing="false" onAction="#handleSave" prefHeight="25.0" prefWidth="68.0"  text="Save " textFill="#c3cfb6">
                      <VBox.margin>
                         <Insets left="100.0" top="7.0" />
                      </VBox.margin>

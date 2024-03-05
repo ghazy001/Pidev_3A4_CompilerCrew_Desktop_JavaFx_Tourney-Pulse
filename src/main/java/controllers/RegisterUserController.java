@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import org.mindrot.jbcrypt.BCrypt;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -128,14 +129,16 @@ public class RegisterUserController {
                 throw new Exception("Please upload an image");
             }
 
+
             // Assuming you have a User class and set methods for first name, last name, etc.
             User user = new User();
+            String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
             user.setFirstname(firstName);
             user.setLastname(lastName);
             user.setEmail(email);
             user.setUsername(username);
             user.setNumber(number);
-            user.setPassword(password);
+            user.setPassword(hashedPassword);
             user.setRole("User");
 
             // Set the image file path

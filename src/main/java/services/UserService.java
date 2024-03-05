@@ -10,7 +10,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class UserService implements EService<User> {
@@ -54,7 +56,7 @@ public class UserService implements EService<User> {
             pst.setString(3, user.getEmail());
             pst.setString(4, user.getNumber());
             pst.setString(5, user.getRole());
-            pst.setString(6, user.getUsername()); // Add the username
+            pst.setString(6, user.getUsername());
             pst.setInt(7, user.getId());
 
             int rowsUpdated = pst.executeUpdate();
@@ -182,4 +184,21 @@ public class UserService implements EService<User> {
         }
         return otp;
     }
+    public Map<String, Integer> getRoleCounts() {
+        Map<String, Integer> roleCounts = new HashMap<>();
+        String query = "SELECT role, COUNT(*) AS count FROM user GROUP BY role";
+        try (Connection conn = MyConnection.getInstance().getCnx();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            while (rs.next()) {
+                String role = rs.getString("role");
+                int count = rs.getInt("count");
+                roleCounts.put(role, count);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return roleCounts;
+    }
+
 }
