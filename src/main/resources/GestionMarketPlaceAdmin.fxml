@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?package tn.Esprit?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.Esprit.controllers.MarketPlaceController">
+   <children>
+      <AnchorPane layoutX="232.0" layoutY="21.0" prefHeight="759.0" prefWidth="334.0" stylesheets="@style.css">
+         <styleClass>
+            <String fx:value="white-bg" />
+            <String fx:value="radius" />
+            <String fx:value="shadow" />
+         </styleClass>
+         <children>
+            <ImageView fx:id="imageViewA" fitHeight="150.0" fitWidth="200.0" layoutX="8.0" layoutY="603.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="56.0" layoutY="69.0" prefHeight="37.0" prefWidth="249.0" text="Ajouter une produit" textFill="#1e77bc">
+               <font>
+                  <Font name="Arial Black" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="button_addAvis" layoutX="85.0" layoutY="684.0" mnemonicParsing="false" onAction="#addAvisToMarketPlace" prefHeight="25.0" prefWidth="119.0" text="Add Avis" />
+            <Button fx:id="button_add" layoutX="86.0" layoutY="603.0" mnemonicParsing="false" onAction="#addMarketPlace" prefHeight="25.0" prefWidth="119.0" text="Add" />
+            <Button fx:id="button_delete" layoutX="151.0" layoutY="644.0" mnemonicParsing="false" onAction="#deleteMarketPlace" prefHeight="25.0" prefWidth="55.0" text="Delete" />
+            <Button fx:id="button_update" layoutX="85.0" layoutY="644.0" mnemonicParsing="false" onAction="#updateMarketPlace" text="Update" />
+            <Button fx:id="button_browse" layoutX="48.0" layoutY="490.0" mnemonicParsing="false" onAction="#handleImageSelection" prefHeight="25.0" prefWidth="119.0" text="Image" />
+
+            <Label layoutX="48.0" layoutY="138.0" prefHeight="17.0" prefWidth="130.0" text="Product Name" textFill="#17447a">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="48.0" layoutY="450.0" prefHeight="17.0" prefWidth="130.0" text="Select Image" textFill="#17447a">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tf_nameprod" layoutX="48.0" layoutY="163.0" prefHeight="25.0" prefWidth="238.0" />
+            <Label layoutX="48.0" layoutY="265.0" prefHeight="17.0" prefWidth="83.0" text="Description" textFill="#17447a">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tf_descriptionprod" layoutX="48.0" layoutY="290.0" prefHeight="107.0" prefWidth="238.0" />
+
+
+         </children>
+      </AnchorPane>
+      <Pane prefHeight="800.0" prefWidth="220.0">
+         <children>
+            <AnchorPane layoutX="10.0" layoutY="21.0" prefHeight="765.0" prefWidth="200.0" stylesheets="@style.css">
+               <styleClass>
+                  <String fx:value="radius" />
+                  <String fx:value="shadow" />
+                  <String fx:value="menu-bar" />
+               </styleClass>
+               <children>
+                  <Button layoutX="11.0" layoutY="288.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="168.0" styleClass="transparent" stylesheets="@style.css" text="Market Place">
+                     <font>
+                        <Font name="Arial Black" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </Pane>
+      <Pane layoutX="575.0" prefHeight="800.0" prefWidth="725.0">
+         <children>
+            <TableView fx:id="TableViewA" layoutX="27.0" layoutY="154.0" onMouseClicked="#getRecData" prefHeight="513.0" prefWidth="668.0" stylesheets="@style.css">
+               <columns>
+                  <TableColumn fx:id="col_nameprod" prefWidth="101.0" text="product Name" />
+                  <TableColumn fx:id="col_descriptionprod" prefWidth="149.0" text="Description" />
+                  <TableColumn fx:id="col_dateprod" prefWidth="183.0" text="Date">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="dateProd" />
+                     </cellValueFactory>
+                  </TableColumn>
+
+               </columns>
+               <styleClass>
+                  <String fx:value="column-header-background" />
+                  <String fx:value="column-header" />
+                  <String fx:value="table-view" />
+               </styleClass>
+            </TableView>
+            <Label layoutX="34.0" layoutY="83.0" prefHeight="37.0" prefWidth="249.0" text="Liste des produits" textFill="#1e77bc">
+
+               <font>
+                  <Font name="Arial Black" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="34.0" layoutY="13.0" prefHeight="37.0" prefWidth="549.0" text="Partie Admin" textFill="#1e77bc">
+
+               <font>
+                  <Font name="Arial Black" size="50.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

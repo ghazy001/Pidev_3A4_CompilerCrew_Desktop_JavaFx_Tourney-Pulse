@@ -1,0 +1,159 @@
+.search-box{
+    -fx-background-color:#FFFFFF;
+    -fx-background-radius: 100;
+}
+
+.transparent{
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+.search-button{
+    -fx-background-color: #828282;
+    -fx-background-radius: 30;
+}
+
+.right-bar{
+    -fx-background-color: #D3D3D3;
+}
+
+.shadow{
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1), 10.0 , 0.0 , 0.0 ,10.0);
+}
+
+.chosen-fruit-card{
+    -fx-background-color: #F16C31;
+    -fx-background-radius: 30;
+}
+
+.comboBox{
+    -fx-background-color: rgba(255,255,255,0.3);
+    -fx-background-radius: 30;
+}
+
+.comboBox1{
+    -fx-background-color: #80d3f7;
+    -fx-background-radius: 30;
+}
+
+.add-btn{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 100;
+}
+
+.free-delivery-card{
+    -fx-background-color: #D3D3D3;
+    -fx-background-radius: 30;
+}
+
+.shopping-online-card{
+    -fx-background-color: #BAEAC3;
+    -fx-background-radius: 30;
+}
+
+.fruit-item{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 30;
+}
+
+.white-bg{
+    -fx-background-color: #fff;
+}
+
+.radius{
+    -fx-background-radius: 10px;
+}
+
+.shadow{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5),5,0,0,0);
+}
+
+.table-view{
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-border-color: #1e77bc;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1.5px;
+}
+.table-view .column-header-background{
+    -fx-background-color: #ecf8ff;
+    -fx-background-insets: 0 0 0 0;
+}
+.table-view .column-header, .filter{
+    -fx-background-color: transparent;
+    -fx-cell-size: 40px;
+}
+
+/* Couleurs principales */
+.root {
+    -fx-background-color: #ffffff; /* Fond blanc */
+}
+
+.menu-bar {
+    -fx-background-color: #17447a; /* Bleu roi pour la barre de menu */
+}
+
+.menu-bar .button {
+    -fx-text-fill: #ffffff; /* Texte blanc pour les boutons du menu */
+}
+
+/* Couleurs secondaires */
+.menu-bar .button:hover {
+    -fx-background-color: #1b75bb; /* Bleu au survol */
+}
+
+.menu-bar .button:pressed {
+    -fx-background-color: #80d3f7; /* Bleu clair enfoncé */
+}
+
+.round-button {
+    -fx-background-radius: 50;
+    -fx-min-width: 230px;
+    -fx-min-height: 60px;
+    -fx-max-width: 230px;
+    -fx-max-height: 60px;
+    -fx-background-color: #17447a; /* Jaune */
+
+}
+.round-button .button {
+    -fx-text-fill: #ffffff; /* Bleu roi pour le texte */
+}
+/* Couleurs secondaires */
+.round-button .button:hover {
+    -fx-background-color: #1b75bb; /* Bleu au survol */
+}
+
+.round-button .button:pressed {
+    -fx-background-color: #80d3f7; /* Bleu clair enfoncé */
+}
+
+.round-buttonMenu {
+        -fx-background-radius: 30;
+        -fx-min-width: 100px;
+        -fx-min-height: 30px;
+        -fx-max-width: 100px;
+        -fx-max-height: 30px;
+        -fx-background-color: #17447a; /* Jaune */
+        -fx-text-fill: #ffffff; /* Bleu roi pour le texte */
+}
+.round-buttonMenu1 {
+    -fx-background-radius: 30;
+    -fx-min-width: 120px;
+    -fx-min-height: 30px;
+    -fx-max-width: 100px;
+    -fx-max-height: 30px;
+    -fx-background-color: #17447a; /* Jaune */
+    -fx-text-fill: #ffffff; /* Bleu roi pour le texte */
+    -fx-font-family: "Walkway Bold", sans-serif;
+}
+.round-buttonMenu1:hover {
+    -fx-background-color: #1b75bb; /* Bleu au survol */
+}
+
+.round-buttonMenu1:pressed {
+    -fx-background-color: #80d3f7; /* Bleu clair enfoncé */
+}
+
+
+
+
+

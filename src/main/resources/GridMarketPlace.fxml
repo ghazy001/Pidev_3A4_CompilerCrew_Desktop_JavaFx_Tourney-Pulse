@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.Esprit.controllers.MarketPlaceController">
+   <children>
+      <FlowPane fx:id="cardContainer" layoutX="120.0" layoutY="93.0" prefHeight="615.0" prefWidth="812.0" hgap="10" vgap="10">
+         <!-- Add cards dynamically based on data from the MarketPlace table -->
+      </FlowPane>
+   </children>
+   <fx:define>
+      <!-- Define an ImageView template that can be reused for each card -->
+      <ImageView fx:id="imageViewTemplate" fitHeight="200.0" fitWidth="200.0" preserveRatio="true"/>
+   </fx:define>
+</AnchorPane>
