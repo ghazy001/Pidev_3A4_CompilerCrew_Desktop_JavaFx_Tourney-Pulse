@@ -21,19 +21,20 @@ public class ServiceMarketPlace implements IService<MarketPlace> {
 
     @Override
     public void add(MarketPlace marketPlace) {
-        String query = "INSERT INTO marketplace (prodName, prodDescription, DateProd, image) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO marketplace (price,quantity,prodName, prodDescription, DateProd, image) VALUES (?, ?, ?, ?,?,?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-
-            preparedStatement.setString(1, marketPlace.getProdName());
-            preparedStatement.setString(2, marketPlace.getProdDescription());
-            preparedStatement.setTimestamp(3, marketPlace.getDateProd());
+            preparedStatement.setFloat(1, marketPlace.getPrice());
+            preparedStatement.setInt(2, marketPlace.getQuantity());
+            preparedStatement.setString(3, marketPlace.getProdName());
+            preparedStatement.setString(4, marketPlace.getProdDescription());
+            preparedStatement.setTimestamp(5, marketPlace.getDateProd());
 
             // Set the image
             if (marketPlace.getImage() != null) {
-                preparedStatement.setBinaryStream(4, new ByteArrayInputStream(marketPlace.getImage()));
+                preparedStatement.setBinaryStream(6, new ByteArrayInputStream(marketPlace.getImage()));
             } else {
-                preparedStatement.setNull(4, Types.BLOB);
+                preparedStatement.setNull(6, Types.BLOB);
             }
 
             preparedStatement.executeUpdate();
@@ -53,10 +54,12 @@ public class ServiceMarketPlace implements IService<MarketPlace> {
 
             while (resultSet.next()) {
                 marketPlaces.add(new MarketPlace(resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getTimestamp(4),
-                        resultSet.getBytes(5)));
+                        resultSet.getFloat(2),
+                        resultSet.getInt(3),
+                        resultSet.getString(4),
+                        resultSet.getString(5),
+                        resultSet.getTimestamp(6),
+                        resultSet.getBytes(7)));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -66,21 +69,23 @@ public class ServiceMarketPlace implements IService<MarketPlace> {
 
     @Override
     public void update(MarketPlace marketPlace) {
-        String query = "UPDATE marketplace SET ProdName=?, ProdDescription=?, DateProd=?, image=? WHERE idProd=?";
+        String query = "UPDATE marketplace SET Price=?, Quantity=?, ProdName=?, ProdDescription=?, DateProd=?, image=? WHERE idProd=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, marketPlace.getProdName());
-            preparedStatement.setString(2, marketPlace.getProdDescription());
-            preparedStatement.setTimestamp(3, marketPlace.getDateProd());
+            preparedStatement.setFloat(1, marketPlace.getPrice());
+            preparedStatement.setInt(2, marketPlace.getQuantity());
+            preparedStatement.setString(3, marketPlace.getProdName());
+            preparedStatement.setString(4, marketPlace.getProdDescription());
+            preparedStatement.setTimestamp(5, marketPlace.getDateProd());
 
             // Set the image
             if (marketPlace.getImage() != null) {
-                preparedStatement.setBinaryStream(4, new ByteArrayInputStream(marketPlace.getImage()));
+                preparedStatement.setBinaryStream(6, new ByteArrayInputStream(marketPlace.getImage()));
             } else {
-                preparedStatement.setNull(4, Types.BLOB);
+                preparedStatement.setNull(6, Types.BLOB);
             }
 
-            preparedStatement.setInt(5, marketPlace.getIdProd());
+            preparedStatement.setInt(7, marketPlace.getIdProd());
 
             int rows = preparedStatement.executeUpdate();
             if (rows > 0) {

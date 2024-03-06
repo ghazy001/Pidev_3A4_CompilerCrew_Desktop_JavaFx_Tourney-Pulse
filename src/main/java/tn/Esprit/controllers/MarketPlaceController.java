@@ -18,6 +18,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import tn.Esprit.models.MarketPlace;
@@ -64,6 +66,12 @@ public class MarketPlaceController {
 
     @FXML
     private TableColumn<MarketPlace, Integer> col_id_prod;
+    @FXML
+    private TableColumn<MarketPlace, Integer> col_quantity;
+    @FXML
+    private TableColumn<MarketPlace, Float> col_price;
+
+
 
     @FXML
     private TableColumn<MarketPlace, String> col_nameprod;
@@ -80,6 +88,11 @@ public class MarketPlaceController {
     @FXML
     private TextField tf_nameprod;
     @FXML
+    private TextField tf_quantity;
+    @FXML
+    private TextField tf_price;
+
+    @FXML
     private TableColumn<MarketPlace, Image> col_image;
     private FileChooser fileChooser;
     private String base64Image;
@@ -95,10 +108,10 @@ public class MarketPlaceController {
     public void initialize() {
         fileChooser = new FileChooser();
         fileChooser.setTitle("Select Image File");
-        showMarketPlace();
+        //showMarketPlace();
         //initializeImageColumn();
-        //ArrayList<MarketPlace> marketPlaces = sr.getAll();
-      //  initializeCards(marketPlaces);
+        ArrayList<MarketPlace> marketPlaces = sr.getAll();
+        initializeCards(marketPlaces);
     }
     private void initializeImageColumn() {
         col_image.setCellValueFactory(new PropertyValueFactory<>("image"));
@@ -133,6 +146,8 @@ public class MarketPlaceController {
         col_nameprod.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getProdName()));
         col_descriptionprod.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getProdDescription()));
         col_dateprod.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getDateProd()));
+        col_price.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPrice()));
+        col_quantity.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getQuantity()));
 
         // Check if the image column already exists
         boolean imageColumnExists = false;
@@ -197,27 +212,12 @@ public class MarketPlaceController {
 
         Label nameLabel = new Label(marketPlace.getProdName());
         nameLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
-        Label descriptionLabel = new Label(marketPlace.getProdDescription());
-        descriptionLabel.setWrapText(true);
-
-        card.setTop(nameLabel);
-        BorderPane.setMargin(nameLabel, new Insets(5, 0, 5, 10));
-
-        card.setCenter(descriptionLabel);
-        BorderPane.setMargin(descriptionLabel, new Insets(0, 0, 5, 10));
-
-        card.setOnMouseClicked(event -> handleCardClick(marketPlace));
 
         ImageView imageView = new ImageView();
         imageView.setFitWidth(200);
         imageView.setFitHeight(150); // Adjust the height as needed
 
         // Set the image if available
-       /* byte[] imageData = marketPlace.getImage();
-        if (imageData != null && imageData.length > 0) {
-            Image image = new Image(new ByteArrayInputStream(imageData));
-            imageView.setImage(image);
-        }*/
         byte[] imageData = marketPlace.getImage();
         if (imageData != null && imageData.length > 0) {
             InputStream inputStream = new ByteArrayInputStream(imageData);
@@ -225,12 +225,30 @@ public class MarketPlaceController {
             imageView.setImage(image);
         }
 
-        card.setBottom(imageView);
-        BorderPane.setAlignment(imageView, Pos.CENTER);
+        Label descriptionLabel = new Label("Description: " + marketPlace.getProdDescription());
+        descriptionLabel.setStyle("-fx-font-size: 12px;");
+
+        Label priceLabel = new Label("Price: " + marketPlace.getPrice());
+        priceLabel.setStyle("-fx-font-size: 12px;");
+
+        Separator separator = new Separator();
+
+        Button addToCartButton = new Button("Add to Shopping Cart");
+        addToCartButton.setOnAction(event -> addToCart(marketPlace)); // Define a method to handle adding to cart
+
+        VBox content = new VBox(nameLabel, imageView, descriptionLabel, priceLabel, separator, addToCartButton);
+        content.setAlignment(Pos.TOP_LEFT);
+        content.setSpacing(5);
+
+        card.setCenter(content);
 
         card.setOnMouseClicked(event -> handleCardClick(marketPlace));
 
         return card;
+    }
+
+    private void addToCart(MarketPlace marketPlace) {
+        // Logic to add the item to the shopping cart
     }
 
     private void handleCardClick(MarketPlace marketPlace) {
@@ -246,6 +264,8 @@ public class MarketPlaceController {
     void addMarketPlace(ActionEvent event) {
         String name = tf_nameprod.getText();
         String description = tf_descriptionprod.getText();
+        Float price= Float.valueOf(tf_price.getText());
+        Integer quantity= Integer.valueOf(String.valueOf(tf_quantity.getText()));
 
         if (name.isEmpty() || description.isEmpty() || imageData == null) { // Check for binary data instead of base64Image
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -259,11 +279,12 @@ public class MarketPlaceController {
         LocalDateTime currentDateTime = LocalDateTime.now();
         Timestamp currentTimestamp = Timestamp.valueOf(currentDateTime);
 
-        MarketPlace newMarketPlace = new MarketPlace(0, name, description, currentTimestamp, imageData);
+        MarketPlace newMarketPlace = new MarketPlace(0,price,quantity, name, description, currentTimestamp, imageData);
         sr.add(newMarketPlace);
 
         ArrayList<MarketPlace> marketPlaces = sr.getAll();
         //initializeCards(marketPlaces);
+        showMarketPlace();
     }
 
     @FXML
@@ -282,6 +303,8 @@ public class MarketPlaceController {
             selectedMarketPlace.setProdName(tf_nameprod.getText());
             selectedMarketPlace.setProdDescription(tf_descriptionprod.getText());
             selectedMarketPlace.setDateProd(Timestamp.valueOf(LocalDateTime.now()));
+            selectedMarketPlace.setPrice(Float.valueOf(tf_price.getText()));
+            selectedMarketPlace.setQuantity(Integer.valueOf(tf_quantity.getText()));
             sr.update(selectedMarketPlace);
             showMarketPlace();
         }
@@ -322,6 +345,8 @@ public class MarketPlaceController {
         if (selectedMarketPlace != null) {
             tf_nameprod.setText(selectedMarketPlace.getProdName());
             tf_descriptionprod.setText(selectedMarketPlace.getProdDescription());
+            tf_price.setText(String.valueOf(selectedMarketPlace.getPrice()));
+            tf_quantity.setText(String.valueOf(selectedMarketPlace.getQuantity()));
         }
     }
 

@@ -18,7 +18,7 @@ public class MainFx extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/GestionMarketPlaceAdmin.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/GridMarketPlace.fxml"));
             Parent root = fxmlLoader.load();
             scene = new Scene(root, 1311, 800);
             primaryStage.setTitle("MarketPlace");

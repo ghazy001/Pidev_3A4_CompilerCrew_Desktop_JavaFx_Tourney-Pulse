@@ -1,9 +1,39 @@
 package tn.Esprit.models;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 
 public class MarketPlace {
     private int idProd;
+    private float Price;
+    private int Quantity;
+
+    public MarketPlace(int idProd, float price, int quantity, String prodName, String prodDescription, Timestamp dateProd, byte[] image) {
+        this.idProd = idProd;
+        Price = price;
+        Quantity = quantity;
+        ProdName = prodName;
+        ProdDescription = prodDescription;
+        DateProd = dateProd;
+        this.image = image;
+    }
+
+    public float getPrice() {
+        return Price;
+    }
+
+    public void setPrice(float price) {
+        Price = price;
+    }
+
+    public int getQuantity() {
+        return Quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        Quantity = quantity;
+    }
+
     private String ProdName;
    
     private String ProdDescription;
@@ -88,21 +118,22 @@ public class MarketPlace {
         return DateProd;
     }
 
+    @Override
+    public String toString() {
+        return "MarketPlace{" +
+                "idProd=" + idProd +
+                ", Price=" + Price +
+                ", Quantity=" + Quantity +
+                ", ProdName='" + ProdName + '\'' +
+                ", ProdDescription='" + ProdDescription + '\'' +
+                ", DateProd=" + DateProd +
+                ", image=" + Arrays.toString(image) +
+                '}';
+    }
+
     public void setDateProd(Timestamp DateProd) {
         this.DateProd = DateProd;
     }
 
- 
 
-  
-
-    @Override
-    public String toString() {
-        return "MakretPlace{" +
-                "idProd=" + idProd +
-                ", ProdName='" + ProdName + '\'' +
-                ", ProdDescription='" + ProdDescription + '\'' +
-                ", DateProd=" + DateProd +
-                '}';
-    }
 }
