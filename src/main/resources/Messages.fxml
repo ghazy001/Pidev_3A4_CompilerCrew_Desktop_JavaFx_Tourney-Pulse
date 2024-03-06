@@ -38,7 +38,7 @@
          </font>
       </Text>
       <TextField fx:id="messageContent" layoutX="204.0" layoutY="541.0" prefHeight="51.0" prefWidth="538.0" style="-fx-background-radius: 1000; -fx-border-radius: 1000; -fx-border-color: black;" />
-      <Button fx:id="btnAddMessage" layoutX="803.0" layoutY="547.0" mnemonicParsing="false" onAction="#handleAddMessage" prefHeight="33.0" prefWidth="82.0" style="-fx-background-color: #9ACD32;" text="Send" textFill="WHITE">
+      <Button fx:id="btnAddMessage" layoutX="769.0" layoutY="547.0" mnemonicParsing="false" onAction="#handleAddMessage1" prefHeight="33.0" prefWidth="82.0" style="-fx-background-color: #9ACD32;" text="Send" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>

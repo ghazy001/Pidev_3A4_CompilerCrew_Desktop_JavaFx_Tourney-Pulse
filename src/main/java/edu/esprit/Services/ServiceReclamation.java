@@ -185,6 +185,29 @@ public class ServiceReclamation implements IService<Reclamation> {
         }
         return reclamation;
     }
+    public List<Reclamation> getReclamationsByUserId(int userId) {
+        List<Reclamation> userReclamations = new ArrayList<>();
+        String sql = "SELECT * FROM reclamation WHERE id = ?";
+        try {
+            PreparedStatement pst = cnx.prepareStatement(sql);
+            pst.setInt(1, userId);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Reclamation reclamation = new Reclamation();
+                reclamation.setId_rec(rs.getInt("id_rec"));
+                reclamation.setEmail(rs.getString("email"));
+                reclamation.setObject(rs.getString("object"));
+                reclamation.setReclamation(rs.getString("reclamation"));
+                reclamation.setDate_rec(rs.getDate("date_rec"));
+                reclamation.setId(rs.getInt("id"));
+                userReclamations.add(reclamation);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching Reclamations by User ID: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return userReclamations;
+    }
 
 /*
     @Override

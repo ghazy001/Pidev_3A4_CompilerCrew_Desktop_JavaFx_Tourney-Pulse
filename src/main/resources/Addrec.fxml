@@ -51,6 +51,7 @@
                 </ImageView>
                 <Button fx:id="navigate" layoutX="20.0" layoutY="238.0" mnemonicParsing="false" onAction="#navigatetoAfficherReclamationAction" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: #9ACD32;" text="Navigate" />
                 <Button layoutX="59.0" layoutY="548.0" mnemonicParsing="false" style="-fx-background-color: #9ACD32;" text="Log out" />
+            <Button fx:id="reclamation" layoutX="20.0" layoutY="414.0" mnemonicParsing="false" onAction="#handleMesRec" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: #9ACD32;" text="Mes reclamations" />
             </children>
         </AnchorPane>
     </children>

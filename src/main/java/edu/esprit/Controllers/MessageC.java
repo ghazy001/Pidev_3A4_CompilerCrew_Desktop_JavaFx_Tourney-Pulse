@@ -99,14 +99,18 @@ public class MessageC implements Initializable {
     }
 
     public void loadReclamation(){
-        Reclamation reclamation=serviceReclamation.getReclamationById(266);
-        objetRec.setText(reclamation.getObject());
-        recText.setText(reclamation.getRec());
+            Reclamation reclamation=serviceReclamation.getReclamationById(rec_id);
+            objetRec.setText(reclamation.getObject());
+            recText.setText(reclamation.getRec());
+
     }
 
     public void setRec_id(int rec_id) {
 
         this.rec_id = rec_id;
+        System.out.println("rec_id: " + rec_id); // Ajoutez cette ligne pour déboguer
+
+        loadReclamation();
         loadMessages();
     }
 
@@ -126,7 +130,7 @@ public class MessageC implements Initializable {
 
         String contentText = messageContent.getText();
         if (contentText != null && !contentText.isEmpty()) {
-            messagesService.ajouter(new edu.esprit.entities.Messages(4, 1, 266, contentText, new Date(System.currentTimeMillis())));
+            messagesService.ajouter(new edu.esprit.entities.Messages(4, 1, rec_id, contentText, new Date(System.currentTimeMillis())));
             loadMessages();
             messageContent.clear();
         } else {
@@ -138,16 +142,17 @@ public class MessageC implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-loadReclamation();
+        startRefreshingMessages();
         loadMessages();
-startRefreshingMessages();
+        startRefreshingMessages();
+
+
 
         navigate.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 try {
-                    Parent root = FXMLLoader.load(getClass().getResource("/Addrec.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("/MesRec.fxml"));
 
                     // Create a Scene with custom dimensions
                     Scene scene = new Scene(root, 800, 600); // Adjust width and height as needed
@@ -187,25 +192,27 @@ startRefreshingMessages();
 
      public void loadMessages() {
 
-        List<Messages> messages = messagesService.getMessagesByReclamationId(266);
-        final double[] currentY = {0.0};
+         if (rec_id != 0) {
+             List<Messages> messages = messagesService.getMessagesByReclamationId(rec_id);
+             final double[] currentY = {0.0};
 
-        Platform.runLater(() -> {
-            boolean nearBottom = isNearBottom(scrollId);
-            listMessages.getChildren().clear();
+             Platform.runLater(() -> {
+                 boolean nearBottom = isNearBottom(scrollId);
+                 listMessages.getChildren().clear();
 
-            for (Messages message : messages) {
-                Pane messagePane = createMessagePane(message);
-                messagePane.setLayoutY(currentY[0]);
-                listMessages.getChildren().add(messagePane);
-                currentY[0] += messagePane.getPrefHeight() + 10;
-            }
-            listMessages.setPrefHeight(currentY[0] + 20);
+                 for (Messages message : messages) {
+                     Pane messagePane = createMessagePane(message);
+                     messagePane.setLayoutY(currentY[0]);
+                     listMessages.getChildren().add(messagePane);
+                     currentY[0] += messagePane.getPrefHeight() + 10;
+                 }
+                 listMessages.setPrefHeight(currentY[0] + 20);
 
-            if (nearBottom) {
-                scrollId.setVvalue(1.0);
-            }
-        });
+                 if (nearBottom) {
+                     scrollId.setVvalue(1.0);
+                 }
+             });
+         }
 
 }
 
@@ -251,7 +258,7 @@ startRefreshingMessages();
 
     public boolean checkForBadWords() {
         try {
-            String apiKey = ""; // Replace with your API key
+            String apiKey = "peTUeliHK58PPnCnlPTUjQ==ioQcLLRKPDMEZdfA"; // Replace with your API key
             String text = messageContent.getText().trim();
             String encodedText = URLEncoder.encode(text, StandardCharsets.UTF_8.toString());
 

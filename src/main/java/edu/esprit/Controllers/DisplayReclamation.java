@@ -17,8 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
+
 import java.net.URL;
 import java.sql.Date;
 
@@ -42,8 +41,6 @@ public class DisplayReclamation implements Initializable {
     @FXML
     private TextField TFrecherchet;
 
-    @FXML
-    private TextField searchIdTextField;
 
     @FXML
     ServiceReclamation serviceReclamation = new ServiceReclamation();

@@ -126,6 +126,7 @@ public class Reclamation {
                 ", date_rec=" + date_rec +
                 ", reclamationsMs=" + reclamationsMs.toString() +
                 '}';
+
     }
 
     @Override

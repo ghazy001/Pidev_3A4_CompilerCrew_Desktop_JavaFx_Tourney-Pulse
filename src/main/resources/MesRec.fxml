@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="465.0" prefWidth="814.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.Controllers.MesRec">
+
+   <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="217.0" layoutY="48.0" prefHeight="378.0" prefWidth="380.0" xmlns:fx="http://javafx.com/fxml/1">
+      <content>
+         <VBox fx:id="vboxRec" prefHeight="267.0" prefWidth="378.0" spacing="10" />
+      </content>
+   </ScrollPane>
+   <Button fx:id="messageBtn" layoutX="649.0" layoutY="168.0" mnemonicParsing="false" onAction="#handleUpdate" prefHeight="26.0" prefWidth="89.0" style="-fx-background-color: #9ACD32;" text="Discussion" textFill="WHITE" />
+   <Button fx:id="message" layoutX="670.0" layoutY="386.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: #9ACD32;" text="Messages" textFill="WHITE" />
+   <AnchorPane prefHeight="656.0" prefWidth="174.0" style="-fx-background-color: #8C9C7C;">
+      <children>
+         <Button fx:id="navigate" layoutX="17.0" layoutY="314.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: #9ACD32;" text="Back" />
+         <Button fx:id="message1" layoutX="17.0" layoutY="243.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: #9ACD32;" text="Messages" />
+         <ImageView fitHeight="120.0" fitWidth="139.0" layoutX="27.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@image/421909257_266130739694870_1007709414835084119_n-removebg-preview.png" />
+            </image>
+         </ImageView>
+      </children>
+   </AnchorPane>
+</AnchorPane>

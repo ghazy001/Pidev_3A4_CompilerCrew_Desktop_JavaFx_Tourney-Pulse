@@ -37,7 +37,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.Executors;
@@ -94,7 +93,7 @@ public class MessagesController implements Initializable {
         loadMessages();
     }
 
-private ServiceReclamation serviceReclamation=new ServiceReclamation();
+    private ServiceReclamation serviceReclamation=new ServiceReclamation();
     private ServiceMessages messagesService = new ServiceMessages();
     public void loadReclamation(){
         Reclamation reclamation=serviceReclamation.getReclamationById(rec_id);
@@ -102,7 +101,7 @@ private ServiceReclamation serviceReclamation=new ServiceReclamation();
         recText.setText(reclamation.getRec());
     }
     @FXML
-    void handleAddMessage(ActionEvent event) {
+    void handleAddMessage1(ActionEvent event) {
         System.out.println(rec_id+"   "+user_id);
         // Check for bad words
         if (checkForBadWords()) {
@@ -216,7 +215,7 @@ private ServiceReclamation serviceReclamation=new ServiceReclamation();
 
         return pane;
     }
- @FXML
+    @FXML
     void handleBack(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/DisplayReclamation.fxml"));
@@ -242,7 +241,7 @@ private ServiceReclamation serviceReclamation=new ServiceReclamation();
 
     public boolean checkForBadWords() {
         try {
-            String apiKey = ""; // Replace with your API key
+            String apiKey = "peTUeliHK58PPnCnlPTUjQ==ioQcLLRKPDMEZdfA"; // Replace with your API key
             String text = messageContent.getText().trim();
             String encodedText = URLEncoder.encode(text, StandardCharsets.UTF_8.toString());
 

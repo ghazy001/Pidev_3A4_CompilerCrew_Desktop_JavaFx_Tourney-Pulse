@@ -91,6 +91,23 @@ public class Addrec implements Initializable {
         }
 
     }
+
+
+    @FXML
+    void handleMesRec(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/MesRec.fxml"));
+            Parent root = loader.load();
+            MesRec mesRecController = loader.getController(); // Récupérer l'instance du contrôleur
+            mesRecController.setUserId(4);
+            TFEmail.getScene().setRoot(root);
+        } catch (IOException var4) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Sorry");
+            alert.setTitle("Error");
+            alert.show();        }
+    }
+
     public void message(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/FrontMess.fxml"));

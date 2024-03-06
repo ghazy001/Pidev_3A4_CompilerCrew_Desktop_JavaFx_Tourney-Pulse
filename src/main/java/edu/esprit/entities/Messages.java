@@ -9,6 +9,7 @@ public class Messages {
     private Date date;
     private String name,role;
 
+
     public Messages(int id, String content, Date date) {
         this.id = id;
         this.content = content;
